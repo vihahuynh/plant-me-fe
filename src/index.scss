@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+}
+
+$color-primary-light: #ecf2e6;
+$color-primary: #448150;
+$color-primary-dark: #556a59;
+
+$color-grey-light: #eaedf3;
+$color-grey: #777776;
+$color-grey-dark: #3a3a3a;

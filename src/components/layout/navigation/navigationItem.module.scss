@@ -1,0 +1,30 @@
+@import "../../../index.scss";
+
+.navItem {
+  margin-right: 4rem;
+  a {
+    color: $color-grey;
+    font-size: 1.4rem;
+    text-decoration: none;
+  }
+
+  &::after {
+    content: "";
+    display: inherit;
+    width: 0;
+    height: 1px;
+    margin-top: 3px;
+    background-color: $color-primary;
+    transition: width 0.2s ease-out;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+
+  &:hover {
+    a {
+      color: $color-primary;
+    }
+  }
+}

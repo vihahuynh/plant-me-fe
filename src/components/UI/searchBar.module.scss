@@ -1,0 +1,26 @@
+@import "../../index.scss";
+
+.searchContainer {
+  position: relative;
+  margin-right: 2rem;
+}
+
+input {
+  border-radius: 10rem;
+  border: 1px solid $color-grey-light;
+  outline: none;
+  padding: 0.7rem 1.5rem;
+
+  &::placehlder {
+    color: $color-grey-light;
+  }
+}
+
+.icon {
+  position: absolute;
+  right: 1.5rem;
+  top: 0.75rem;
+  height: 1.5rem;
+  width: 1.5rem;
+  fill: $color-primary;
+}
