@@ -1,0 +1,9 @@
+.container {
+  margin: 5rem 10rem;
+
+  .blogsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}

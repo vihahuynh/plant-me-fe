@@ -2,7 +2,7 @@ export const products = [
   {
     id: 1,
     name: "Jade Plant Mini",
-    url: "/images/jade-plant-mini.png",
+    imageUrl: "/images/jade-plant-mini.png",
     price: 399,
     salePercent: 25,
     like: true,
@@ -10,7 +10,7 @@ export const products = [
   {
     id: 2,
     name: "Broken Heart Plant",
-    url: "/images/broken-heart-plant.png",
+    imageUrl: "/images/broken-heart-plant.png",
     price: 499,
     salePercent: 20,
     like: false,
@@ -18,7 +18,7 @@ export const products = [
   {
     id: 3,
     name: "Peperomia Variegated Plant",
-    url: "/images/peperomia-variegated-plant.png",
+    imageUrl: "/images/peperomia-variegated-plant.png",
     price: 399,
     salePercent: 25,
     like: false,
@@ -26,7 +26,7 @@ export const products = [
   {
     id: 4,
     name: "Aralia Variegated Mini Plant",
-    url: "/images/aralia-variegated-mini-plant.png",
+    imageUrl: "/images/aralia-variegated-mini-plant.png",
     price: 399,
     salePercent: 13,
     like: true,
@@ -56,24 +56,55 @@ export const subFeatures = [
     id: 1,
     title: "Fast Delivery",
     desc: "Orders above 500.000 VND",
-    url: "/images/fast-delivery.png",
+    imageUrl: "/images/fast-delivery.png",
   },
   {
     id: 2,
     title: "Plant Care Support",
     desc: "Complete guidance",
-    url: "/images/plant-care-support.png",
+    imageUrl: "/images/plant-care-support.png",
   },
   {
     id: 3,
     title: "Health Guarantee",
     desc: "30 days health guarantee",
-    url: "/images/health-guarantee.png",
+    imageUrl: "/images/health-guarantee.png",
   },
   {
     id: 4,
     title: "All Day Support",
     desc: "Quick support",
-    url: "/images/all-day-support.png",
+    imageUrl: "/images/all-day-support.png",
+  },
+];
+
+export const blogs = [
+  {
+    id: 1,
+    title: "Beginner's Guild To Maintain Indoor Plants",
+    publicDate: "10 January 2021",
+    imageUrl: "/images/blog-1.png",
+    url: "imageUrl",
+  },
+  {
+    id: 2,
+    title: "Buying Best For You Home Garden",
+    publicDate: "16 April 2021 ",
+    imageUrl: "/images/blog-2.png",
+    url: "imageUrl",
+  },
+  {
+    id: 3,
+    title: "Plant A New Tree Campaign",
+    publicDate: "5 June 2021",
+    imageUrl: "/images/blog-3.png",
+    url: "imageUrl",
+  },
+  {
+    id: 4,
+    title: "Know How To Take Care Of Your Plants",
+    publicDate: "29 October 2021",
+    imageUrl: "/images/blog-4.png",
+    url: "imageUrl",
   },
 ];

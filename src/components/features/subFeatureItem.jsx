@@ -4,7 +4,7 @@ const SubFeatureItem = ({ subFeature }) => {
   return (
     <div className={styles.container}>
       <div className={styles.imgContainer}>
-        <img src={subFeature.url} alt={subFeature.title} />
+        <img src={subFeature.imageUrl} alt={subFeature.title} />
       </div>
       <div>
         <h5 className={styles.title}>{subFeature.title}</h5>
