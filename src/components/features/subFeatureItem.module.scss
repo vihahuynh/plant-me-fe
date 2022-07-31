@@ -1,0 +1,19 @@
+@import "./../../index.scss";
+
+.container {
+  display: flex;
+  align-items: center;
+  .imgContainer {
+    img {
+      height: 10rem;
+    }
+  }
+  .title {
+    color: $color-grey-dark;
+    font-size: 1.6rem;
+  }
+  .desc {
+    font-size: 1rem;
+    color: $color-grey;
+  }
+}

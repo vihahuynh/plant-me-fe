@@ -1,5 +1,5 @@
 import styles from "./popularProducts.module.scss";
-import { products } from "./../data";
+import { products } from "../../data";
 
 import ProductItem from "./productItem";
 
