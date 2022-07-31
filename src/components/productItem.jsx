@@ -26,9 +26,11 @@ const ProductItem = ({ product }) => {
       <div className={styles.productDetails}>
         <p>{product.name}</p>
         <div className={styles.priceContainer}>
-          <span className={styles.price}>{product.price}</span>
-          <span className={styles.priceNet}>{netPrice}</span>
-          <span className={styles.salePercent}>{product.salePercent}% OFF</span>
+          <span className={styles.price}>{product.price}.000 &#x20ab;</span>
+          <span className={styles.priceNet}>{netPrice}.000 &#x20ab;</span>
+          <span className={styles.salePercent}>
+            (&minus;{product.salePercent}%)
+          </span>
         </div>
         <Button
           className={styles.buttonCustom}

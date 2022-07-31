@@ -7,10 +7,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2rem 1rem;
+  padding: 0 1rem 1rem;
   position: relative;
 
   .buttonCustom {
+    margin-top: 0.5rem;
     visibility: hidden;
     box-shadow: 0 2rem 2rem $color-grey-light;
     transition: all 0.3s ease;
@@ -56,7 +57,7 @@
   .imgContainer {
     padding: 1rem;
     width: 19vw;
-    min-height: 50vh;
+    min-height: 45vh;
     border-radius: 2rem;
     background-color: $color-primary-light;
     display: flex;
@@ -83,7 +84,7 @@
     .priceContainer {
       margin: 0.5rem 0;
       span {
-        font-size: 1.5rem;
+        font-size: 1.1rem;
         &:not(:last-child) {
           margin-right: 1rem;
         }
@@ -95,12 +96,12 @@
 
       .priceNet {
         color: $color-primary;
-        font-size: 2rem;
+        font-size: 1.8rem;
         font-weight: 600;
       }
 
       .salePercent {
-        color: lightpink;
+        color: palevioletred;
       }
     }
   }
