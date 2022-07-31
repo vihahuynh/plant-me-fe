@@ -12,9 +12,10 @@
   .descriptionContainer {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
 
     h1 {
-      line-height: 6rem;
+      line-height: 7rem;
       font-size: 6rem;
       font-weight: 400;
       color: $color-grey-dark;
@@ -27,24 +28,16 @@
     }
 
     p {
-      font-size: 2rem;
+      font-size: 1.7rem;
       color: $color-grey;
-    }
-
-    a {
-      align-self: flex-start;
-      text-decoration: none;
-      color: $color-primary-light;
-      background-color: $color-primary;
-      border-radius: 10rem;
-      font-size: 1.5rem;
-      padding: 1rem 3rem;
     }
   }
 
   img {
-    height: 80vh;
+    height: 85vh;
     border-radius: 5rem;
+    box-shadow: 0 1rem 3rem rgba($color-grey, 0.3);
+    margin-right: -7rem;
   }
 
   .description {
@@ -52,6 +45,7 @@
   }
 
   .contact {
+    margin-right: 2rem;
     list-style: none;
     li {
       transform: rotate(-90deg);

@@ -17,3 +17,10 @@ $color-primary-dark: #556a59;
 $color-grey-light: #eaedf3;
 $color-grey: #777776;
 $color-grey-dark: #3a3a3a;
+
+h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  color: $color-grey-dark;
+}
