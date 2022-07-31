@@ -1,4 +1,4 @@
 const Categories = () => {
   return <section></section>;
 };
-return Categories;
+export default Categories;

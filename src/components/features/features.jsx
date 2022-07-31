@@ -3,6 +3,7 @@ import MainFeatureItem from "./mainFeatureItem";
 import SubFeatureItem from "./subFeatureItem";
 
 import styles from "./features.module.scss";
+import Subcribe from "./subcribe";
 
 const Features = () => {
   return (
@@ -18,6 +19,7 @@ const Features = () => {
           <SubFeatureItem key={f.id} subFeature={f} />
         ))}
       </div>
+      <Subcribe />
     </section>
   );
 };
