@@ -1,0 +1,21 @@
+@import "./../../../index.scss";
+
+.container {
+  .title {
+    margin-bottom: 2rem;
+    color: $color-grey-dark;
+    font-size: 1.5rem;
+  }
+
+  .linkList {
+    list-style: none;
+    .linkItem {
+      margin-bottom: 0.5rem;
+      a {
+        color: $color-grey;
+        text-decoration: none;
+        font-size: 1.5rem;
+      }
+    }
+  }
+}

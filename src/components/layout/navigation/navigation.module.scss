@@ -2,10 +2,16 @@
 
 .nav {
   padding: 0 8rem;
-  height: 12vh;
+  height: 10vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  background-color: white;
+  z-index: 100;
 }
 
 .navList {

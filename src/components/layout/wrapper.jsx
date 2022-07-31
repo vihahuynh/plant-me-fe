@@ -1,3 +1,4 @@
+import Footer from "./footer/footer";
 import Navigation from "./navigation/navigation";
 
 const Wrapper = (props) => {
@@ -5,6 +6,7 @@ const Wrapper = (props) => {
     <>
       <Navigation />
       {props.children}
+      <Footer />
     </>
   );
 };

@@ -1,0 +1,26 @@
+@import "./../../../index.scss";
+
+.container {
+  height: 10vh;
+  background-color: $color-primary-light;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5rem;
+  padding: 0 10rem;
+  color: $color-grey;
+  font-size: 1.2rem;
+
+  .list {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+
+    li {
+      &:not(:last-child) {
+        margin-right: 4rem;
+      }
+      color: $color-grey;
+    }
+  }
+}

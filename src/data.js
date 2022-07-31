@@ -108,3 +108,24 @@ export const blogs = [
     url: "imageUrl",
   },
 ];
+
+export const helpLinks = [
+  { id: 1, text: "Privacy Policy", url: "" },
+  { id: 2, text: "Shipping & Delivery", url: "" },
+  { id: 3, text: "Refund Policy", url: "" },
+  { id: 4, text: "Track Your Order", url: "" },
+];
+
+export const categoryLinks = [
+  { id: 1, text: "Indoor Plants", url: "" },
+  { id: 2, text: "Outdoor Plants", url: "" },
+  { id: 3, text: "Pet Friendly", url: "" },
+  { id: 4, text: "Castus", url: "" },
+];
+
+export const supportLinks = [
+  { id: 1, text: "Feedback", url: "" },
+  { id: 2, text: "Contact Us", url: "" },
+  { id: 3, text: "Download App", url: "" },
+  { id: 4, text: "Terms Conditions", url: "" },
+];

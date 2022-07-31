@@ -1,0 +1,31 @@
+@import "./../../../index.scss";
+
+.container {
+  margin: 5rem 10rem 0;
+  display: flex;
+  justify-content: space-between;
+
+  p {
+    font-size: 1.5rem;
+    color: $color-grey;
+  }
+
+  .iconContainer {
+    margin-top: 2rem;
+    a {
+      margin-right: 2rem;
+      .icon {
+        height: 2rem;
+        width: 2rem;
+        fill: $color-primary;
+        transition: all 0.3s ease;
+      }
+
+      &:hover {
+        .icon {
+          transform: scale(1.2);
+        }
+      }
+    }
+  }
+}
