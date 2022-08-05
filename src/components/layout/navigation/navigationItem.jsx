@@ -1,11 +1,10 @@
 import styles from "./navigationItem.module.scss";
+import { Link } from "react-router-dom"
 
-console.log(styles);
-
-const NavigationItem = ({ title }) => {
+const NavigationItem = ({ url, title }) => {
   return (
     <li className={styles.navItem}>
-      <a href={title}>{title}</a>
+      <Link to={`/${url}`}>{title}</Link>
     </li>
   );
 };

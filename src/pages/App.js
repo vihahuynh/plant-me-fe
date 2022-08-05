@@ -1,16 +1,17 @@
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
-import Home from "./pages/home";
-import Blogs from "./pages/blogs";
-import About from "./pages/about";
-import Contact from "./pages/contact";
-import Shop from "./pages/shop";
+import Wrapper from "../components/layout/wrapper";
+import Home from "./home";
+import Blogs from "./Blogs";
+import About from "./About";
+import Contact from "./contact";
+import Shop from "./Shop";
 
 
 function App() {
   return (
-    <Router>
+    <Wrapper>
       <Switch>
         <Route exact path="/">
           <Home />
@@ -28,7 +29,7 @@ function App() {
           <Blogs />
         </Route>
       </Switch>
-    </Router>
+    </Wrapper>
   );
 }
 

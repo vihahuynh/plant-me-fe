@@ -13,11 +13,11 @@ const Navigation = () => {
       <div className={styles.subNav}>
         <Logo />
         <ul className={styles.navList}>
-          <NavigationItem title="Home" />
-          <NavigationItem title="Shop" />
-          <NavigationItem title="Blog" />
-          <NavigationItem title="About Us" />
-          <NavigationItem title="Contact" />
+          <NavigationItem url="" title="Home" />
+          <NavigationItem url="shop" title="Shop" />
+          <NavigationItem url="blogs" title="Blog" />
+          <NavigationItem url="about" title="About Us" />
+          <NavigationItem url="contact" title="Contact" />
         </ul>
       </div>
       <div className={styles.subNav}>
