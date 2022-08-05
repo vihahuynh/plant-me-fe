@@ -1,14 +1,17 @@
-import styles from "./popularProducts.module.scss";
+import styles from "./products.module.scss";
 import { products } from "../../data";
 
 import ProductItem from "./productItem";
 
-const PopularProducts = () => {
+const Products = ({
+  title = "Our Popular Products",
+  productsData = products,
+}) => {
   return (
     <section className={styles.container}>
-      <h2>Our Popular Products</h2>
+      <h2>{title}</h2>
       <div className={styles.productsContainer}>
-        {products.map((p) => (
+        {productsData.map((p) => (
           <ProductItem key={p.id} product={p} />
         ))}
       </div>
@@ -16,4 +19,4 @@ const PopularProducts = () => {
   );
 };
 
-export default PopularProducts;
+export default Products;

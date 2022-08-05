@@ -1,5 +1,5 @@
 import Header from "../components/header";
-import PopularProducts from "../components/products/popularProducts";
+import Products from "../components/products/products";
 import Features from "../components/features/features";
 import Blogs from "../components/blogs/blogs";
 import Categories from "../components/categories";
@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <Wrapper>
       <Header />
-      <PopularProducts />
+      <Products />
       <Categories />
       <Features />
       <Blogs />

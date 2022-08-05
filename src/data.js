@@ -129,3 +129,30 @@ export const supportLinks = [
   { id: 3, text: "Download App", url: "" },
   { id: 4, text: "Terms Conditions", url: "" },
 ];
+
+export const categoriesBanners = [
+  {
+    id: 1,
+    text: "Best For Beginners",
+    url: "",
+    imageUrl: "/images/best-for-beginners.png",
+  },
+  {
+    id: 2,
+    text: "All live plants",
+    url: "",
+    imageUrl: "/images/all-live-plants.png",
+  },
+  {
+    id: 3,
+    text: "Pots & Planters",
+    url: "",
+    imageUrl: "/images/pots-and-planters.png",
+  },
+  {
+    id: 4,
+    text: "Potting Supplies",
+    url: "",
+    imageUrl: "/images/potting-supplies.png",
+  },
+];
