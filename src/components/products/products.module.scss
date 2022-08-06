@@ -1,8 +1,9 @@
 .container {
-  padding: 8rem 10rem;
+  padding: 2rem 10rem;
 }
 
 .productsContainer {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }

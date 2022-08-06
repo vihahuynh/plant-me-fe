@@ -1,0 +1,50 @@
+@import "./../../index.scss";
+
+.container {
+  position: relative;
+}
+
+.pagesContainer {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+
+  span {
+    color: $color-primary;
+    font-size: 1.5rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  span.disabled {
+    color: lightgray;
+    cursor: not-allowed;
+  }
+
+  .pages {
+    margin: 0 2rem;
+    list-style: none;
+    display: flex;
+
+    li {
+      cursor: pointer;
+      height: 3rem;
+      width: 3rem;
+      margin: 0.5rem;
+      border-radius: 10rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      background-color: $color-primary-light;
+      color: $color-grey-dark;
+    }
+
+    li.current {
+      background-color: $color-primary !important;
+      color: white !important;
+    }
+  }
+}
