@@ -6,14 +6,14 @@ import Pagination from "../components/UI/pagination";
 import { products } from "../data";
 
 const Shop = () => {
-  const itemsPerPage = 12;
+  const itemsPerPage = 2;
   const [page, setPage] = useState(1);
-  const totalPages = Math.floor(products.length / itemsPerPage) + 1;
+  const totalPages = Math.ceil(products.length / itemsPerPage);
 
   const start = (page - 1) * itemsPerPage;
   const end =
     page + itemsPerPage < products.length
-      ? page + itemsPerPage
+      ? page + itemsPerPage - 1
       : products.length;
 
   return (
