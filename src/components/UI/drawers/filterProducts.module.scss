@@ -1,4 +1,4 @@
-@import "./../../index.scss";
+@import "./../../../index.scss";
 
 .container {
     background-color: $color-primary-light;
@@ -6,17 +6,18 @@
     height: 100vh;
     font-size: 1.4rem;
 
-
     .drawerHeader {
         display: flex;
         justify-content: space-between;
         align-items: center;
         background-color: $color-primary;
         padding: 2rem 2rem;
+        margin-bottom: 2rem;
 
         .title {
             color: $color-primary-light;
             font-size: 2rem;
+
         }
 
         .icon {

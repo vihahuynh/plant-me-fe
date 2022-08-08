@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Wrapper from "../components/layout/wrapper";
+import FilterProducts from "../components/UI/drawers/filterProducts";
+import SortProducts from "../components/UI/drawers/sortProducts";
 import Products from "../components/products/products";
-import SortProducts from "../components/products/sortProducts";
 import Pagination from "../components/UI/pagination";
 
 import { products } from "../data";
@@ -20,6 +21,7 @@ const Shop = () => {
   return (
     <Wrapper>
       <SortProducts />
+      <FilterProducts />
       <Products productsData={products.slice(start, end)} />
       <Pagination page={page} setPage={setPage} totalPages={totalPages} />
     </Wrapper>

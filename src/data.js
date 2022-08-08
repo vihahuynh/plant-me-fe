@@ -156,3 +156,163 @@ export const categoriesBanners = [
     imageUrl: "/images/potting-supplies.png",
   },
 ];
+
+export const sortOptions = [{
+  id: 1,
+  query: '?sort=name:des',
+  text: 'Name: A to Z'
+},
+{
+  id: 2,
+  query: '?sort=name:desc',
+  text: 'Name: Z to A'
+},
+{
+  id: 3,
+  query: '?sort=price:asc',
+  text: 'Price: Low to High'
+},
+{
+  id: 4,
+  query: '?sort=price:desc',
+  text: 'Price: High to Low'
+},
+{
+  id: 5,
+  query: '?sort=createdAt:desc',
+  text: 'New arrivals'
+},
+{
+  id: 6,
+  query: '?sort=rating:desc',
+  text: 'Highest rating'
+},
+{
+  id: 7,
+  query: '?sort=sold:desc',
+  text: 'Best sellers'
+},
+]
+
+export const filterOptions = [
+  {
+    id: 1,
+    text: 'Category',
+    type: 'checkbox',
+    subOptions: [
+      {
+        id: 1,
+        text: 'Test',
+        query: 'category=test'
+      }
+    ]
+  },
+  {
+    id: 2,
+    text: 'Ideal plants location',
+    type: 'checkbox',
+    subOptions: [
+      {
+        id: 1,
+        text: 'Windowsill Plants',
+        query: 'location=windowsill'
+      },
+      {
+        id: 2,
+        text: 'Shaded Balconies',
+        query: 'location=shaded-balconies'
+      },
+      {
+        id: 3,
+        text: 'Sunny Balconies',
+        query: 'location=sunny-balconies'
+      },
+      {
+        id: 4,
+        text: 'Living Room Tables',
+        query: 'location=living-room-tables'
+      },
+      {
+        id: 5,
+        text: 'Office Desk Plants',
+        query: 'location=office-desk'
+      },
+      {
+        id: 6,
+        text: 'Offices premises plants',
+        query: 'location=office-premises'
+      },
+    ]
+  },
+  {
+    id: 3,
+    text: 'Light',
+    type: 'checkbox',
+    subOptions: [
+      {
+        id: 1,
+        text: 'Low Light',
+        query: 'light=low-light'
+      },
+      {
+        id: 2,
+        text: 'Bright Indirect Light',
+        query: 'light=bright-indirect-light'
+      },
+      {
+        id: 3,
+        text: 'Direct Sunlight',
+        query: 'light=direct-sunlight'
+      }
+    ]
+  },
+  {
+    id: 4,
+    text: 'Pot Size',
+    type: 'checkbox',
+    subOptions: [
+      {
+        id: 1,
+        text: 'Small',
+        query: 'size=small'
+      },
+      {
+        id: 2,
+        text: 'Medium',
+        query: 'size=medium'
+      },
+      {
+        id: 3,
+        text: 'Large',
+        query: 'size=large'
+      }
+    ]
+  },
+  {
+    id: 5,
+    text: 'Water Schedule',
+    type: 'checkbox',
+    subOptions: [
+      {
+        id: 1,
+        text: 'Twice a week',
+        query: 'water-schedule=twice-a-week'
+      },
+      {
+        id: 2,
+        text: 'Every alternate day',
+        query: 'water-schedule=every-alternate-day'
+      },
+      {
+        id: 3,
+        text: 'Once a day',
+        query: 'water-schedule=once-a-day'
+      }
+      , {
+        id: 4,
+        text: 'Once a week',
+        query: 'water-schedule=once-a-week'
+      }
+    ]
+  },
+]

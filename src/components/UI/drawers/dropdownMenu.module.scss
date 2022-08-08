@@ -1,0 +1,46 @@
+@import "./../../../index.scss";
+
+.container {
+    color: $color-primary;
+    padding: 1rem 2rem;
+
+    .header {
+        font-size: 2rem;
+        display: flex;
+        justify-content: space-between;
+
+        .icon {
+            font-size: 3rem;
+            fill: $color-primary
+        }
+    }
+
+    .checkbox {
+        font-size: 1.6rem;
+        margin: .5rem 0;
+
+        label {
+            margin-left: 1.2rem;
+        }
+    }
+
+    .menuContainer {
+        position: relative;
+
+        .menu {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+            transition: all .3s ease;
+        }
+
+        .hidden {
+            position: absolute;
+            line-height: 0;
+            top: 0;
+            visibility: hidden;
+            opacity: 0;
+            transform: translateY(-100%);
+        }
+    }
+}

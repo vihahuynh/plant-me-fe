@@ -1,0 +1,56 @@
+@import "./../../../index.scss";
+
+.container {
+    background-color: $color-primary-light;
+    width: 20vw;
+    height: 100vh;
+    font-size: 1.4rem;
+
+
+    .drawerHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: $color-primary;
+        padding: 2rem 2rem;
+
+        .title {
+            color: $color-primary-light;
+            font-size: 2rem;
+        }
+
+        .icon {
+            font-size: 3rem;
+            fill: $color-primary-light ;
+        }
+
+
+    }
+
+
+
+    .list {
+        list-style: none;
+        padding: 1rem 0;
+
+        li {
+            background-color: white;
+            color: $color-grey-dark;
+            padding: 1.5rem;
+            margin: 1.2rem 2rem;
+            transition: all .3s ease;
+
+            &:hover {
+                background-color: $color-primary;
+                color: $color-primary-light;
+            }
+        }
+
+        li.curOption {
+            background-color: $color-primary;
+            color: $color-primary-light;
+        }
+
+
+    }
+}
