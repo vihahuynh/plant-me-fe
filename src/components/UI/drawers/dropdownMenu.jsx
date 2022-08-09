@@ -2,9 +2,21 @@ import { useState } from "react"
 
 import styles from './dropdownMenu.module.scss'
 
-const DropdownMenu = ({ item }) => {
+const DropdownMenu = ({ item, setFilters }) => {
     const [open, setOpen] = useState(false)
 
+    const onAddFilter = (option, subOption) => {
+        setFilters(prev => {
+            const filter = prev.get(option)
+            const newFilters = prev
+            if (!filter) {
+                newFilters.set(option, [subOption])
+            } else {
+                newFilters.set(option, filter.concat(subOption))
+            }
+            return newFilters
+        })
+    }
 
     return <div className={styles.container}>
         <div className={styles.header} onClick={() => setOpen(prev => !prev)}>
@@ -14,8 +26,15 @@ const DropdownMenu = ({ item }) => {
         <div className={open ? styles.menuContainer : `${styles.menuContainer} ${styles.hidden}`}>
             {item.subOptions.map(option =>
                 <div key={option.id} className={styles.checkbox}>
-                    <input className={styles.option} type="checkbox" id={option.query} name={option.query} value={option.query} />
-                    <label for={option.query}><span></span>{option.text}</label>
+                    <input
+                        className={styles.option}
+                        type="checkbox"
+                        id={option.query}
+                        name={option.query}
+                        value={option.query}
+                        onChange={() => onAddFilter(item.text, option.text)}
+                    />
+                    <label htmlFor={option.query}><span></span>{option.text}</label>
                 </div>
             )}
         </div>

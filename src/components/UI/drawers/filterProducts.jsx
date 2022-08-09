@@ -9,6 +9,9 @@ import DropdownMenu from './dropdownMenu';
 
 const FilterProducts = () => {
     const [open, setOpen] = useState(false)
+    const [filters, setFilters] = useState(new Map())
+
+    console.log(filters)
 
     return <div>
         <button onClick={() => setOpen(true)}>Filters</button>
@@ -20,9 +23,13 @@ const FilterProducts = () => {
             <div className={styles.container}>
                 <div className={styles.drawerHeader}>
                     <div className={styles.title}>Filter By</div>
+
                     <VscChromeClose className={styles.icon} onClick={() => setOpen(false)} />
                 </div>
-                {filterOptions.map(option => <DropdownMenu key={option.id} item={option} />)}
+                {filterOptions.map(option =>
+                    <DropdownMenu key={option.id} item={option} setFilters={setFilters} />
+                )}
+                <div className={styles.footer} onClick={() => setOpen(false)}>Apply Filters</div>
             </div>
         </Drawer>
     </div>

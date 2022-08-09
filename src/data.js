@@ -209,7 +209,7 @@ export const filterOptions = [
   },
   {
     id: 2,
-    text: 'Ideal plants location',
+    text: 'Ideal Plants Location',
     type: 'checkbox',
     subOptions: [
       {
