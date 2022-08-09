@@ -17,7 +17,8 @@ const DropdownMenu = ({ item }) => {
             {item.subOptions.map(option =>
                 <div key={option.id} className={styles.checkbox}>
                     <input type="checkbox" id={option.query} name={option.query} value={option.query} />
-                    <label for={option.query}>{option.text}</label>
+
+                    <label for={option.query}><span></span>{option.text}</label>
                 </div>
             )}
         </div>
