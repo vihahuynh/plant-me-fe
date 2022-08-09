@@ -6,6 +6,7 @@ import Blogs from "./pages/blogs";
 import About from "./pages/about";
 import Contact from "./pages/contact";
 import Shop from "./pages/shop";
+import Login from "./pages/login";
 
 
 function App() {
@@ -26,6 +27,9 @@ function App() {
         </Route>
         <Route path="/blogs">
           <Blogs />
+        </Route>
+        <Route path="/login">
+          <Login />
         </Route>
       </Switch>
     </Router>
