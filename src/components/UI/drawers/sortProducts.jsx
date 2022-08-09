@@ -5,13 +5,14 @@ import { sortOptions } from '../../../data';
 
 import styles from "./sortProducts.module.scss"
 import { VscChromeClose } from "react-icons/vsc/index"
+import { TbArrowsSort } from "react-icons/tb/index"
 
 const SortProducts = () => {
     const [open, setOpen] = useState(false)
     const [sort, setSort] = useState(null)
 
-    return <div>
-        <button onClick={() => setOpen(true)}>Sort</button>
+    return <>
+        <button onClick={() => setOpen(true)} className={styles.drawerBtn}><TbArrowsSort className={styles.icon} />Sort</button>
         <Drawer
             anchor="right"
             open={open}
@@ -36,7 +37,7 @@ const SortProducts = () => {
                 </ul>
             </div>
         </Drawer>
-    </div>
+    </>
 }
 
 export default SortProducts

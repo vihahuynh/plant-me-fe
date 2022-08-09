@@ -7,14 +7,16 @@ import { filterOptions } from '../../../data';
 import styles from "./filterProducts.module.scss"
 import DropdownMenu from './dropdownMenu';
 
+import { TbFilter } from "react-icons/tb/index"
+
 const FilterProducts = () => {
     const [open, setOpen] = useState(false)
     const [filters, setFilters] = useState(new Map())
 
     console.log(filters)
 
-    return <div>
-        <button onClick={() => setOpen(true)}>Filters</button>
+    return <>
+        <button onClick={() => setOpen(true)} className={styles.drawerBtn}><TbFilter className={styles.icon} /> Filters</button>
         <Drawer
             anchor="right"
             open={open}
@@ -32,7 +34,7 @@ const FilterProducts = () => {
                 <div className={styles.footer} onClick={() => setOpen(false)}>Apply Filters</div>
             </div>
         </Drawer>
-    </div>
+    </>
 }
 
 export default FilterProducts

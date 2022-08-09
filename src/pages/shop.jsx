@@ -7,6 +7,8 @@ import Pagination from "../components/UI/pagination";
 
 import { products } from "../data";
 
+import styles from "./shop.module.scss"
+
 const Shop = () => {
   const itemsPerPage = 2;
   const [page, setPage] = useState(1);
@@ -20,8 +22,10 @@ const Shop = () => {
 
   return (
     <Wrapper>
-      <SortProducts />
-      <FilterProducts />
+      <div className={styles.btnContainers}>
+        <div className={styles.btn}><SortProducts /></div>
+        <div className={styles.btn}><FilterProducts /></div>
+      </div>
       <Products productsData={products.slice(start, end)} />
       <Pagination page={page} setPage={setPage} totalPages={totalPages} />
     </Wrapper>

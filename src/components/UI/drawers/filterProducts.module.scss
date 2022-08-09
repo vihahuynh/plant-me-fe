@@ -1,5 +1,27 @@
 @import "./../../../index.scss";
 
+
+.drawerBtn {
+    cursor: pointer;
+    color: $color-primary-light;
+    font-size: 1.5rem;
+    margin: .5rem;
+    padding: .7rem 2rem;
+    background-color: $color-primary;
+    border-radius: 10rem;
+    border: none;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+
+    .icon {
+        height: 2rem;
+        width: 2rem;
+        fill: $color-primary-light;
+        margin-right: .5rem;
+    }
+}
+
 .container {
     background-color: $color-primary-light;
     width: 25vw;
@@ -36,7 +58,8 @@
 
         .icon {
             font-size: 3rem;
-            fill: $color-primary-light ;
+            fill: $color-primary-light;
+            cursor: pointer;
         }
 
 
@@ -65,7 +88,6 @@
             background-color: $color-primary;
             color: $color-primary-light;
         }
-
 
     }
 }
