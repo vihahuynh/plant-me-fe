@@ -1,6 +1,7 @@
 @import "./../../index.scss";
 
 .productContainer {
+  cursor: pointer;
   width: 19vw;
   border-radius: 2rem;
   display: flex;
@@ -12,6 +13,7 @@
   position: relative;
 
   .buttonCustom {
+    cursor: pointer;
     margin-top: 0.5rem;
     visibility: hidden;
     box-shadow: 0 2rem 2rem $color-grey-light;
