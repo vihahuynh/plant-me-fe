@@ -1,7 +1,11 @@
+import ImageCarousel from "../components/UI/imageCarousel";
+
 const ProductDetails = ({ id }) => {
-    return <div>
-
+  return (
+    <div>
+      <ImageCarousel />
     </div>
-}
+  );
+};
 
-export default ProductDetails
+export default ProductDetails;

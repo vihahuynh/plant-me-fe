@@ -8,6 +8,7 @@ import Contact from "./pages/contact";
 import Shop from "./pages/shop";
 import SignIn from "./pages/signIn";
 import SignUp from "./pages/signUp";
+import ProductDetails from "./pages/productDetails";
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
         </Route>
         <Route path="/about">
           <About />
+        </Route>
+        <Route path="/shop/details">
+          <ProductDetails />
         </Route>
         <Route path="/shop">
           <Shop />
