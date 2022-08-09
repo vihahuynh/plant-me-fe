@@ -7,12 +7,43 @@
     .header {
         font-size: 2rem;
         display: flex;
+        align-items: center;
         justify-content: space-between;
 
         .icon {
             font-size: 3rem;
             fill: $color-primary;
             transition: all .3;
+        }
+
+
+        .minus::after {
+            transform: rotate(-90deg);
+        }
+
+        span {
+            position: relative;
+
+            &::before {
+                position: absolute;
+                left: -.9rem;
+                content: "";
+                display: inline-block;
+                height: 2px;
+                width: 2rem;
+                background-color: $color-primary;
+            }
+
+            &::after {
+                position: absolute;
+                top: -.9rem;
+                content: "";
+                display: inline-block;
+                height: 2rem;
+                width: 2px;
+                background-color: $color-primary;
+                transition: all .3s;
+            }
         }
     }
 
@@ -22,10 +53,10 @@
 
         input {
             display: none;
+        }
 
-            &:checked~label span::after {
-                display: block;
-            }
+        .option:checked~label span::after {
+            display: block;
         }
 
         label {
@@ -34,10 +65,8 @@
         }
 
         span {
-
             border: 2px solid $color-primary;
             display: inline-block;
-
             height: 1.5rem;
             width: 1.5rem;
             position: relative;
