@@ -6,8 +6,8 @@ import Blogs from "./pages/blogs";
 import About from "./pages/about";
 import Contact from "./pages/contact";
 import Shop from "./pages/shop";
-import Login from "./pages/login";
-
+import SignIn from "./pages/signIn";
+import SignUp from "./pages/signUp";
 
 function App() {
   return (
@@ -28,8 +28,11 @@ function App() {
         <Route path="/blogs">
           <Blogs />
         </Route>
-        <Route path="/login">
-          <Login />
+        <Route path="/signin">
+          <SignIn />
+        </Route>
+        <Route path="/signup">
+          <SignUp />
         </Route>
       </Switch>
     </Router>

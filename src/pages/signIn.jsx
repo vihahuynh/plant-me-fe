@@ -3,26 +3,15 @@ import { Formik } from "formik";
 
 import styles from "./signIn.module.scss";
 
-const SignUp = () => (
+const SignIn = () => (
   <div className={styles.container}>
-    <img src="/images/blog-2.png" alt="plant-care" />
+    <img src="/images/blog-3.png" alt="plant-care" />
     <div className={styles.formContainer}>
-      <h2>Sign Up</h2>
+      <h2>Sign In</h2>
       <Formik
-        initialValues={{
-          username: "",
-          email: "",
-          password: "",
-          confirmPassword: "",
-        }}
+        initialValues={{ email: "", password: "" }}
         validate={(values) => {
           const errors = {};
-          if (!values.username) {
-            errors.username = "Username is required";
-          } else if (values.username?.length < 5) {
-            errors.username = "Username must contain at least 5 characters";
-          }
-
           if (!values.email) {
             errors.email = "Email address is required";
           } else if (
@@ -31,18 +20,7 @@ const SignUp = () => (
             errors.email = "Invalid email address";
           }
 
-          if (!values.confirmPassword) {
-            errors.confirmPassword = "Confirm password is required";
-          } else if (values.confirmPassword !== values.password) {
-            errors.confirmPassword = "Please enter the same value again.";
-          }
-
-          if (!values.password) {
-            errors.password = "Password is required";
-          } else if (values.password?.length < 8) {
-            errors.password = "Password must contain at least 8 characters";
-          }
-
+          if (!values.password) errors.password = "Password is required";
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
@@ -62,19 +40,6 @@ const SignUp = () => (
           isSubmitting,
         }) => (
           <form onSubmit={handleSubmit} className={styles.form}>
-            <div className={styles.inputContainer}>
-              <input
-                type="username"
-                name="username"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.username}
-                placeholder="Username"
-              />
-              <p className={styles.errors}>
-                {errors.username && touched.username && errors.username}
-              </p>
-            </div>
             <div className={styles.inputContainer}>
               <input
                 type="email"
@@ -101,28 +66,16 @@ const SignUp = () => (
                 {errors.password && touched.password && errors.password}
               </p>
             </div>
-            <div className={styles.inputContainer}>
-              <input
-                type="confirmPassword"
-                name="confirmPassword"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.confirmPassword}
-                placeholder="Confirm password"
-              />
-              <p className={styles.errors}>
-                {errors.confirmPassword &&
-                  touched.confirmPassword &&
-                  errors.confirmPassword}
-              </p>
-            </div>
             <button
               type="submit"
               disabled={isSubmitting}
               className={styles.btn}
             >
-              create account
+              Sign in
             </button>
+            <a className={styles.link} href="#">
+              Forgot password?
+            </a>
           </form>
         )}
       </Formik>
@@ -130,4 +83,4 @@ const SignUp = () => (
   </div>
 );
 
-export default SignUp;
+export default SignIn;
