@@ -10,12 +10,8 @@ const ProductDetails = ({ id }) => {
   return (
     <Wrapper>
       <div className={styles.container}>
-        <div>
-          <ImageCarousel images={plantDetails.images} />
-        </div>
-        <div>
-          <ProductInfo product={plantDetails} />
-        </div>
+        <ImageCarousel images={plantDetails.images} />
+        <ProductInfo product={plantDetails} />
       </div>
     </Wrapper>
   );

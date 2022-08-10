@@ -7,8 +7,7 @@ import Subcribe from "./subcribe";
 
 const Features = () => {
   return (
-    <section className={styles.container}>
-      <h2>Why People Choose Us?</h2>
+    <>
       <div className={styles.mainFeaturesContainer}>
         {mainFeatures.map((f) => (
           <MainFeatureItem key={f.id} mainFeature={f} />
@@ -19,8 +18,7 @@ const Features = () => {
           <SubFeatureItem key={f.id} subFeature={f} />
         ))}
       </div>
-      <Subcribe />
-    </section>
+      <Subcribe /></>
   );
 };
 
