@@ -7,7 +7,7 @@
 }
 
 .statisticContainer {
-    font-size: 1.6rem;
+    font-size: $default-font-size ;
     margin-top: 1rem;
 
     .statistic {
@@ -31,8 +31,8 @@
 
     .optionTitle {
         color: $color-primary;
-        font-size: 1.8rem;
-        margin-bottom: .5rem;
+        font-size: 2rem;
+        margin-bottom: 1rem;
     }
 
     .optionList {
@@ -40,7 +40,7 @@
         display: flex;
     }
 
-    .optionItem {
+    .sizeItem {
         color: $color-primary;
         font-size: 1.4rem;
         border: 1px solid $color-grey-light;
@@ -53,16 +53,29 @@
         &:not(:last-child) {
             margin-right: 1.5rem;
         }
-
-        // &:hover {
-        //     color: $color-primary;
-        //     border: 1px solid $color-primary;
-        // }
     }
 
-    .optionItem.active {
+    .sizeItem.active {
         color: $color-primary;
         border: 1px solid $color-primary;
+    }
+
+    .colorItem {
+        height: 2.5rem;
+        width: 2.5rem;
+        border-radius: 10rem;
+        outline-offset: 5px;
+        transition: all .3s;
+        margin-top: .5rem;
+        cursor: pointer;
+
+        &:not(:last-child) {
+            margin-right: 2.5rem;
+        }
+    }
+
+    .colorItem.active {
+        outline: 1px solid $color-grey-dark  !important;
     }
 
 }

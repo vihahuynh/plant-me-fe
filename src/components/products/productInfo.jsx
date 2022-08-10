@@ -23,7 +23,7 @@ const ProductInfo = ({ product }) => {
             <ul className={styles.optionList}>
                 {product?.size?.map(s =>
                     <li
-                        className={size !== s ? styles.optionItem : `${styles.optionItem} ${styles.active}`}
+                        className={size !== s ? styles.sizeItem : `${styles.sizeItem} ${styles.active}`}
                         key={s}
                         onClick={() => setSize(s)}
                     >
@@ -37,11 +37,15 @@ const ProductInfo = ({ product }) => {
             <ul className={styles.optionList}>
                 {product?.colors?.map(c =>
                     <li
-                        className={color !== c ? styles.optionItem : `${styles.optionItem} ${styles.active}`}
+                        style={{
+                            color: c,
+                            outline: `1px solid ${c}`,
+                            backgroundColor: c
+                        }}
+                        className={color !== c ? styles.colorItem : `${styles.colorItem} ${styles.active}`}
                         key={c}
                         onClick={() => setColor(c)}
                     >
-                        {c}
                     </li>
                 )}
             </ul>
