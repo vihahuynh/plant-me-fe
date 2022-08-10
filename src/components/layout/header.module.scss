@@ -1,4 +1,4 @@
-@import "../index.scss";
+@import "../../index.scss";
 
 .container {
   background-color: $color-primary-light;
@@ -47,6 +47,7 @@
   .contact {
     margin-right: 2rem;
     list-style: none;
+
     li {
       transform: rotate(-90deg);
       font-size: 1.5rem;
