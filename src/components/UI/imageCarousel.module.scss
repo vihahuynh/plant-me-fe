@@ -1,0 +1,22 @@
+@import "./../../index.scss";
+
+.container {
+    display: flex;
+}
+
+.slider-wrapper {
+    width: 30vw;
+}
+
+.slick-slide-image {
+    width: 95%;
+}
+
+.thumbnail-slider-wrap {
+    width: 10vw;
+    margin-right: 2rem;
+
+    img {
+        border: 2px solid $color-primary;
+    }
+}

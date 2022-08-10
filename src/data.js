@@ -316,3 +316,18 @@ export const filterOptions = [
     ]
   },
 ]
+
+export const plantDetails = {
+  images: [
+    { id: 1, imageUrl: "/images/details/jade-plant-mini.png" },
+    { id: 2, imageUrl: "/images/details/jade-plant-mini-2.png" },
+    { id: 3, imageUrl: "/images/details/jade-plant-mini-3.png" },
+    { id: 4, imageUrl: "/images/details/jade-plant-mini-4.png" },
+    { id: 5, imageUrl: "/images/details/jade-plant-mini-5.png" },
+    { id: 6, imageUrl: "/images/details/jade-plant-mini-6.png" },
+  ],
+  title: 'Jade Plant Mini',
+  price: "100.000",
+  size: "small"
+
+}
