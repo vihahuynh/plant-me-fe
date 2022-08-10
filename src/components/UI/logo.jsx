@@ -4,7 +4,7 @@ const Logo = () => {
   return (
     <div className={styles.logo}>
       <span>Plant</span>
-      <img src="/images/logo.png" alt="logo-a-plant" />
+      <img src="/favicon.ico" alt="logo-a-plant" />
       <span>me</span>
     </div>
   );

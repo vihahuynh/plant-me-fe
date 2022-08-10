@@ -1,9 +1,10 @@
 @import "./../../../index.scss";
 
 .container {
-  margin: 5rem 10rem 0;
+  padding: 5rem 10rem;
   display: flex;
   justify-content: space-between;
+  background-color: $color-primary-light;
 
   p {
     font-size: $default-font-size;

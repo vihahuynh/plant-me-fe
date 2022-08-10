@@ -26,8 +26,10 @@ const Shop = () => {
         <div className={styles.btn}><SortProducts /></div>
         <div className={styles.btn}><FilterProducts /></div>
       </div>
-      <Products productsData={products.slice(start, end)} />
-      <Pagination page={page} setPage={setPage} totalPages={totalPages} />
+      <div className={styles.container}>
+        <Products productsData={products.slice(start, end)} />
+        <Pagination page={page} setPage={setPage} totalPages={totalPages} />
+      </div>
     </Wrapper>
   );
 };

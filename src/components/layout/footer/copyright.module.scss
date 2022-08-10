@@ -2,13 +2,12 @@
 
 .container {
   height: 10vh;
-  background-color: $color-primary-light;
+  background-color: $color-primary-dark;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 5rem;
   padding: 0 10rem;
-  color: $color-grey;
+  color: $color-primary-light;
   font-size: 1.2rem;
 
   .list {
@@ -20,7 +19,8 @@
       &:not(:last-child) {
         margin-right: 4rem;
       }
-      color: $color-grey;
+
+      color: $color-primary-light;
     }
   }
 }
