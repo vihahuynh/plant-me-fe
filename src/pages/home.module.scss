@@ -4,8 +4,6 @@
     margin: 7rem 15rem 0;
 
     section {
-        &:not(:last-child) {
-            margin-bottom: 5rem;
-        }
+        margin-bottom: 5rem;
     }
 }
