@@ -6,14 +6,16 @@
   justify-content: space-between;
 
   p {
-    font-size: 1.5rem;
+    font-size: $default-font-size;
     color: $color-grey;
   }
 
   .iconContainer {
     margin-top: 2rem;
+
     a {
       margin-right: 2rem;
+
       .icon {
         height: 2rem;
         width: 2rem;

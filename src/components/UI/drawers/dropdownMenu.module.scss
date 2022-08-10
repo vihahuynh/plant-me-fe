@@ -5,14 +5,14 @@
     padding: 1rem 2rem;
 
     .header {
-        font-size: 2rem;
+        font-size: $small-title-font-size;
         display: flex;
         align-items: center;
         justify-content: space-between;
         cursor: pointer;
 
         .icon {
-            font-size: 3rem;
+            font-size: $medium-title-font-size;
             fill: $color-primary;
             transition: all .3;
         }

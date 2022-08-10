@@ -3,7 +3,7 @@
 .drawerBtn {
     cursor: pointer;
     color: $color-primary-light;
-    font-size: 1.5rem;
+    font-size: $default-font-size;
     margin: .5rem;
     padding: .7rem 2rem;
     background-color: $color-primary;
@@ -36,11 +36,11 @@
 
         .title {
             color: $color-primary-light;
-            font-size: 2rem;
+            font-size: $small-title-font-size;
         }
 
         .icon {
-            font-size: 3rem;
+            font-size: $medium-title-font-size;
             fill: $color-primary-light ;
             cursor: pointer;
         }

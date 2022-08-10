@@ -2,6 +2,7 @@
 
 .container {
   margin: 0 1rem 1rem;
+
   .image {
     width: 20vw;
   }
@@ -26,12 +27,12 @@
 
     .title {
       color: $color-grey-dark;
-      font-size: 2rem;
+      font-size: $small-title-font-size;
       transition: all 0.3s ease;
     }
 
     .icon {
-      font-size: 3rem;
+      font-size: $medium-title-font-size;
       margin-left: 1rem;
       fill: $color-grey-dark;
       transition: all 0.3s ease;

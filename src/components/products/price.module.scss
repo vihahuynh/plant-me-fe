@@ -31,7 +31,7 @@
     margin: 2rem 0;
 
     span {
-        font-size: 2rem;
+        font-size: $small-title-font-size;
 
         &:not(:last-child) {
             margin-right: 2rem;

@@ -16,13 +16,13 @@
 
   .title {
     color: $color-primary;
-    font-size: 2.2rem;
+    font-size: 2.5rem;
     margin-bottom: 1rem;
   }
 
   .desc {
     color: $color-grey;
-    font-size: 1.5rem;
+    font-size: $default-font-size;
     font-weight: 400;
   }
 }

@@ -1,4 +1,5 @@
 @import "./../../index.scss";
+
 .container {
   margin-bottom: 3rem;
   border-radius: 2rem;
@@ -19,6 +20,7 @@
     object-fit: cover;
     transform: scale(1.05);
   }
+
   .blogDetails {
     position: absolute;
     left: 5rem;
@@ -27,9 +29,10 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
     .title {
       color: white;
-      font-size: 3rem;
+      font-size: $medium-title-font-size;
       line-height: 4rem;
       margin: 1rem 2rem 1rem 0;
     }

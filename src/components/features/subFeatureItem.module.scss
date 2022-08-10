@@ -12,11 +12,11 @@
 
   .title {
     color: $color-grey-dark;
-    font-size: $default-font-size;
+    font-size: $small-title-font-size;
   }
 
   .desc {
-    font-size: 1rem;
+    font-size: $tiny-font-size;
     color: $color-grey;
   }
 }

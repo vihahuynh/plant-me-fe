@@ -1,7 +1,7 @@
-import styles from "./button.module.scss";
+import styles from "./linkButton.module.scss";
 
 const LinkButton = ({ text, size, url, className }) => {
-  const buttonClassName = `${styles[size]} ${className}`;
+  const buttonClassName = `${styles[size]} ${className || ""}`;
   return (
     <a className={buttonClassName} href={url}>
       {text}

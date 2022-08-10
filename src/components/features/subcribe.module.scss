@@ -11,9 +11,10 @@
   border-radius: 4rem;
 
   p {
-    font-size: 3rem;
+    font-size: $medium-title-font-size;
     font-weight: 700;
     color: $color-grey-dark;
+
     span {
       color: $color-primary;
     }
@@ -41,6 +42,7 @@
   .form {
     margin-top: 2rem;
     display: flex;
+
     input {
       width: 50%;
       margin-right: 1rem;
