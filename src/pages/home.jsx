@@ -2,7 +2,7 @@ import Header from "../components/layout/header";
 import Products from "../components/products/products";
 import Features from "../components/features/features";
 import Blogs from "../components/blogs/blogs";
-import Categories from "../components/categories";
+import Categories from "../components/categories/categories";
 import Wrapper from "../components/layout/wrapper";
 
 import styles from "./home.module.scss"
