@@ -73,7 +73,7 @@ const SignIn = () => (
             >
               Sign in
             </button>
-            <a className={styles.link} href="#">
+            <a className={styles.link} href="/#">
               Forgot password?
             </a>
           </form>

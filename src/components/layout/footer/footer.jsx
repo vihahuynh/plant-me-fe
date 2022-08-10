@@ -19,13 +19,13 @@ const Footer = () => {
           <p>We provide the best for plants</p>
           <p>and also provide best services.</p>
           <div className={styles.iconContainer}>
-            <a href="#">
+            <a href="/">
               <BsTwitter className={styles.icon} />
             </a>
-            <a href="#">
+            <a href="/">
               <BsFacebook className={styles.icon} />
             </a>
-            <a href="#">
+            <a href="/">
               <RiInstagramFill className={styles.icon} />
             </a>
           </div>

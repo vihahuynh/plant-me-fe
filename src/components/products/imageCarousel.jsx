@@ -49,7 +49,7 @@ const ImageCarousel = ({ images }) => {
                     {images.map((img) =>
 
                         <div className={styles["slick-slide"]} key={img.id}>
-                            <img className={styles["slick-slide-image"]} src={img.imageUrl} />
+                            <img className={styles["slick-slide-image"]} src={img.imageUrl} alt="plant" />
                         </div>
 
                     )}
@@ -66,7 +66,7 @@ const ImageCarousel = ({ images }) => {
                     {images.map((img) =>
 
                         <div className={styles["slick-img"]} key={img.id}>
-                            <img className={styles["slick-slide-image"]} src={img.imageUrl} />
+                            <img className={styles["slick-slide-image"]} src={img.imageUrl} alt="plant" />
                         </div>
 
                     )}
