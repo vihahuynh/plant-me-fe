@@ -1,6 +1,6 @@
 import styles from "./productItem.module.scss";
 import Button from "./../UI/button";
-import Price from "./../UI/price"
+import Price from "./price"
 
 import { BsSuitHeart, BsSuitHeartFill } from "react-icons/bs/index";
 

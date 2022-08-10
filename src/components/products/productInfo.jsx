@@ -1,5 +1,5 @@
 import Rating from '@mui/material/Rating';
-import Price from '../UI/price';
+import Price from './price';
 import styles from "./productInfo.module.scss"
 
 const ProductInfo = ({ product }) => {
