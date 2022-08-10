@@ -3,19 +3,12 @@ import { useState } from "react"
 import Rating from '@mui/material/Rating';
 import Price from './price';
 import styles from "./productInfo.module.scss"
-
-const Option = ({ option }) => {
-    const [isActive, setIsActive] = useState(false)
-    return <li
-        className={!isActive ? styles.optionItem : `${styles.optionItem} ${styles.active}`}
-        key={option}
-        onClick={() => setIsActive(prev => !prev)}
-    >
-        {option}
-    </li>
-}
+import Button from "./../UI/button";
 
 const ProductInfo = ({ product }) => {
+    const [size, setSize] = useState(null)
+    const [color, setColor] = useState(null)
+
     return <>
         <h3 className={styles.title}>{product.title}</h3>
         <div className={styles.statisticContainer}>
@@ -25,12 +18,38 @@ const ProductInfo = ({ product }) => {
             <span className={styles.statistic}>Sold: {product.soldCount}</span>
         </div>
         <Price price={product.price} salePercent={product.salePercent} size="big" />
-        <div className={styles.optionContainer}>
+        {!!product.size && <div className={styles.optionContainer}>
             <p className={styles.optionTitle}>Size</p>
             <ul className={styles.optionList}>
-                {product?.size?.map(s => <Option option={s} />)}
+                {product?.size?.map(s =>
+                    <li
+                        className={size !== s ? styles.optionItem : `${styles.optionItem} ${styles.active}`}
+                        key={s}
+                        onClick={() => setSize(s)}
+                    >
+                        {s}
+                    </li>
+                )}
             </ul>
+        </div>}
+        {!!product.colors && <div className={styles.optionContainer}>
+            <p className={styles.optionTitle}>Color</p>
+            <ul className={styles.optionList}>
+                {product?.colors?.map(c =>
+                    <li
+                        className={color !== c ? styles.optionItem : `${styles.optionItem} ${styles.active}`}
+                        key={c}
+                        onClick={() => setColor(c)}
+                    >
+                        {c}
+                    </li>
+                )}
+            </ul>
+        </div>}
+        <div>
+
         </div>
+        <Button text="Add to cart" size="large" className={styles.btn} />
     </>
 }
 

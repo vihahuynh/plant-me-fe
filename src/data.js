@@ -329,6 +329,7 @@ export const plantDetails = {
   ],
   title: 'Jade Plant Mini',
   size: ["small", "medium"],
+  // colors: ["cream", "blue", "green"],
   price: 399,
   salePercent: 25,
   rating: 4.3,

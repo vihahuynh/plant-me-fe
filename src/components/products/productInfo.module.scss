@@ -25,10 +25,14 @@
 }
 
 .optionContainer {
+    &:not(:last-child) {
+        margin-bottom: 3rem;
+    }
+
     .optionTitle {
         color: $color-primary;
         font-size: 1.8rem;
-        margin-bottom: 1rem;
+        margin-bottom: .5rem;
     }
 
     .optionList {
@@ -50,10 +54,10 @@
             margin-right: 1.5rem;
         }
 
-        &:hover {
-            color: $color-primary;
-            border: 1px solid $color-primary;
-        }
+        // &:hover {
+        //     color: $color-primary;
+        //     border: 1px solid $color-primary;
+        // }
     }
 
     .optionItem.active {
@@ -61,4 +65,8 @@
         border: 1px solid $color-primary;
     }
 
+}
+
+.btn {
+    text-transform: uppercase;
 }

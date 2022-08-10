@@ -1,23 +1,28 @@
 @import "./../../index.scss";
 
-.medium {
+button {
   display: block;
   text-decoration: none;
   color: $color-primary-light;
   background-color: $color-primary;
+  border: none;
+  cursor: pointer;
+}
+
+.medium {
   border-radius: 10rem;
   font-size: 1.5rem;
   padding: 1rem 3rem;
-  border: none;
 }
 
 .small {
-  display: block;
-  text-decoration: none;
-  color: $color-primary-light;
-  background-color: $color-primary;
   border-radius: 10rem;
   font-size: 1.2rem;
   padding: 0.7rem 2rem;
-  border: none;
+}
+
+.large {
+  border-radius: 10rem;
+  font-size: 2rem;
+  padding: 1.5rem 5rem;
 }
