@@ -318,6 +318,7 @@ export const filterOptions = [
 ]
 
 export const plantDetails = {
+  id: 1,
   images: [
     { id: 1, imageUrl: "/images/details/jade-plant-mini.png" },
     { id: 2, imageUrl: "/images/details/jade-plant-mini-2.png" },
@@ -328,6 +329,12 @@ export const plantDetails = {
   ],
   title: 'Jade Plant Mini',
   price: "100.000",
-  size: "small"
-
+  size: ["small"],
+  price: 399,
+  salePercent: 25,
+  rating: 4.3,
+  ratingCount: 173,
+  reviewCount: 33,
+  soldCount: 345,
+  about: 'Are you a sucker for succulents? The Crassula Green Mini will be your dream plant kid. One of the easiest houseplants to look after, the Crassula Green Mini boasts a lush foliage which beautifies any room. Also considered lucky as per Feng Shui for its coin like round plump leaves, so go on, bring some green home, the luck just tags along for free.'
 }

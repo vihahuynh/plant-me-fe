@@ -1,0 +1,28 @@
+@import "./../../index.scss";
+
+.priceContainer {
+    margin: 0.5rem 0;
+
+    span {
+        font-size: 1.1rem;
+
+        &:not(:last-child) {
+            margin-right: 1rem;
+        }
+    }
+
+    .price {
+        color: $color-grey;
+        text-decoration: line-through;
+    }
+
+    .priceNet {
+        color: $color-primary;
+        font-size: 1.8rem;
+        font-weight: 600;
+    }
+
+    .salePercent {
+        color: palevioletred;
+    }
+}

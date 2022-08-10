@@ -39,7 +39,6 @@ const ImageCarousel = ({ images }) => {
     };
 
     return (
-
         <div className={styles.container}>
             <div className={styles["thumbnail-slider-wrap"]}>
                 <Slider
