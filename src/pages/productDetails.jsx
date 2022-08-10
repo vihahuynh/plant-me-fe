@@ -11,7 +11,7 @@ const ProductDetails = ({ id }) => {
     <Wrapper>
       <div className={styles.container}>
         <ImageCarousel images={plantDetails.images} />
-        <ProductInfo product={plantDetails} />
+        <div><ProductInfo product={plantDetails} /></div>
       </div>
     </Wrapper>
   );

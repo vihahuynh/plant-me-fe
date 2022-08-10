@@ -1,6 +1,6 @@
 @import "./../../index.scss";
 
-.priceContainer {
+.priceSmallContainer {
     margin: 0.5rem 0;
 
     span {
@@ -19,6 +19,33 @@
     .priceNet {
         color: $color-primary;
         font-size: 1.8rem;
+        font-weight: 600;
+    }
+
+    .salePercent {
+        color: palevioletred;
+    }
+}
+
+.priceBigContainer {
+    margin: 2rem 0;
+
+    span {
+        font-size: 2rem;
+
+        &:not(:last-child) {
+            margin-right: 2rem;
+        }
+    }
+
+    .price {
+        color: $color-grey;
+        text-decoration: line-through;
+    }
+
+    .priceNet {
+        color: $color-primary;
+        font-size: 4rem;
         font-weight: 600;
     }
 
