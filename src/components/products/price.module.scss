@@ -1,55 +1,55 @@
 @import "./../../index.scss";
 
 .priceSmallContainer {
-    margin: 0.5rem 0;
+  margin: 0.5rem 0;
 
-    span {
-        font-size: 1.1rem;
+  span {
+    font-size: 1.1rem;
 
-        &:not(:last-child) {
-            margin-right: 1rem;
-        }
+    &:not(:last-child) {
+      margin-right: 1rem;
     }
+  }
 
-    .price {
-        color: $color-grey;
-        text-decoration: line-through;
-    }
+  .price {
+    color: $color-grey;
+    text-decoration: line-through;
+  }
 
-    .priceNet {
-        color: $color-primary;
-        font-size: 1.8rem;
-        font-weight: 600;
-    }
+  .priceNet {
+    color: $color-primary;
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
 
-    .salePercent {
-        color: palevioletred;
-    }
+  .salePercent {
+    color: palevioletred;
+  }
 }
 
 .priceBigContainer {
-    margin: 2rem 0;
+  margin: 2rem 0;
 
-    span {
-        font-size: $small-title-font-size;
+  span {
+    font-size: $default-font-size;
 
-        &:not(:last-child) {
-            margin-right: 2rem;
-        }
+    &:not(:last-child) {
+      margin-right: 2rem;
     }
+  }
 
-    .price {
-        color: $color-grey;
-        text-decoration: line-through;
-    }
+  .price {
+    color: $color-grey;
+    text-decoration: line-through;
+  }
 
-    .priceNet {
-        color: $color-primary;
-        font-size: 4rem;
-        font-weight: 600;
-    }
+  .priceNet {
+    color: $color-primary;
+    font-size: 2.5rem;
+    font-weight: 600;
+  }
 
-    .salePercent {
-        color: palevioletred;
-    }
+  .salePercent {
+    color: palevioletred;
+  }
 }
