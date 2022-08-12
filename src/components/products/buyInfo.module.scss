@@ -1,0 +1,104 @@
+@import "./../../index.scss";
+
+
+.title {
+  font-size: 4rem;
+  text-transform: uppercase;
+  color: $color-primary;
+}
+
+.statisticContainer {
+  font-size: $default-font-size ;
+  margin-top: 1rem;
+
+  .statistic {
+    color: $color-grey;
+
+    &:not(:first-child) {
+      padding-left: 2rem;
+    }
+
+    &:not(:last-child) {
+      padding-right: 2rem;
+      border-right: 1px solid $color-grey-light;
+    }
+  }
+}
+
+.optionContainer {
+  &:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+
+  .optionTitle {
+    color: $color-primary;
+    font-size: $small-title-font-size;
+    margin-bottom: 1rem;
+  }
+
+  .optionList {
+    list-style: none;
+    display: flex;
+  }
+
+  .sizeItem {
+    color: $color-primary;
+    font-size: 1.4rem;
+    border: 1px solid $color-grey-light;
+    border-radius: 3px;
+    padding: 1rem 2rem;
+    text-transform: capitalize;
+    transition: all .3s;
+    cursor: pointer;
+
+    &:not(:last-child) {
+      margin-right: 1.5rem;
+    }
+  }
+
+  .sizeItem.active {
+    color: $color-primary;
+    border: 1px solid $color-primary;
+  }
+
+  .colorItem {
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 10rem;
+    outline-offset: 5px;
+    transition: all .3s;
+    margin-top: .5rem;
+    cursor: pointer;
+
+    &:not(:last-child) {
+      margin-right: 2.5rem;
+    }
+  }
+
+  .colorItem.active {
+    outline: 1px solid $color-grey-dark  !important;
+  }
+
+}
+
+.btn {
+  text-transform: uppercase;
+}
+
+.quantityContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  .icon {
+    height: 3rem;
+    width: 3rem;
+    fill: $color-primary;
+  }
+
+  .quantityInput {
+    margin: 0 1rem;
+    border-radius: 3px;
+    width: 10rem;
+  }
+}

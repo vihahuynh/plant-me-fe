@@ -6,12 +6,13 @@
 
     .summary {
         // margin-left: 6rem;
-        margin-bottom: 6rem;
+        margin-bottom: 4rem;
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
 
         .ratingStatistics {
+
             width: 20rem;
             display: grid;
             grid-template-columns: 1fr 3fr;

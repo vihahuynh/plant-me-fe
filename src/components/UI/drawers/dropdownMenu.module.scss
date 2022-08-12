@@ -44,7 +44,7 @@
                 height: 2rem;
                 width: 2px;
                 background-color: $color-primary;
-                transition: all .3s;
+                transition: all .4s;
             }
         }
     }
@@ -94,18 +94,12 @@
     .menuContainer {
         margin-top: 1rem;
         margin-left: .5rem;
-        display: block;
-        visibility: visible;
-        opacity: 1;
-        transform: translateY(0);
-        transition: all .3s;
+        max-height: 0;
+        overflow: hidden;
+        transition: all .5s ease;
     }
 
-    .hidden {
-        position: absolute;
-        visibility: hidden;
-        opacity: 0;
-        transform: translateX(100%);
-        transition: none;
+    .active {
+        max-height: 100vh;
     }
 }

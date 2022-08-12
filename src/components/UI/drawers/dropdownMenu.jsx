@@ -23,7 +23,7 @@ const DropdownMenu = ({ item, setFilters }) => {
             <div>{item.text}</div>
             <span className={open ? styles.minus : ''}></span>
         </div>
-        <div className={open ? styles.menuContainer : `${styles.menuContainer} ${styles.hidden}`}>
+        <div className={!open ? styles.menuContainer : `${styles.menuContainer} ${styles.active}`}>
             {item.subOptions.map(option =>
                 <div key={option.id} className={styles.checkbox}>
                     <input
