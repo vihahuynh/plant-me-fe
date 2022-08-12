@@ -1,11 +1,11 @@
 import { useState } from "react";
 import Wrapper from "../components/layout/wrapper";
-import FilterProducts from "../components/UI/drawers/filterProducts";
-import SortProducts from "../components/UI/drawers/sortProducts";
 import Products from "../components/products/products";
 import Pagination from "../components/UI/pagination";
+import SortDrawer from "../components/UI/drawers/sortDrawer";
+import FilterDrawer from "../components/UI/drawers/filterDrawer";
 
-import { products } from "../data";
+import { products, plantsFilterOptions, plantsSortOptions } from "../data";
 
 import styles from "./shop.module.scss"
 
@@ -23,8 +23,8 @@ const Shop = () => {
   return (
     <Wrapper>
       <div className={styles.btnContainers}>
-        <div className={styles.btn}><SortProducts /></div>
-        <div className={styles.btn}><FilterProducts /></div>
+        <div className={styles.btn}><SortDrawer sortOptions={plantsSortOptions} /></div>
+        <div className={styles.btn}><FilterDrawer filterOptions={plantsFilterOptions} /></div>
       </div>
       <div className={styles.container}>
         <Products productsData={products.slice(start, end)} />

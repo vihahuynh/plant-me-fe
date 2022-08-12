@@ -157,7 +157,7 @@ export const categoriesBanners = [
   },
 ];
 
-export const sortOptions = [{
+export const plantsSortOptions = [{
   id: 1,
   query: '?sort=name:des',
   text: 'Name: A to Z'
@@ -194,7 +194,7 @@ export const sortOptions = [{
 },
 ]
 
-export const filterOptions = [
+export const plantsFilterOptions = [
   {
     id: 1,
     text: 'Category',
@@ -315,6 +315,86 @@ export const filterOptions = [
       }
     ]
   },
+]
+
+export const reviewsSortOptions = [
+  {
+    id: 1,
+    query: '?sort=createdAt:des',
+    text: 'Newest'
+  },
+  {
+    id: 2,
+    query: '?sort=rating:des',
+    text: 'Highest rating'
+  },
+  {
+    id: 3,
+    query: '?sort=rating:asc',
+    text: 'Lowest rating'
+  },
+  {
+    id: 4,
+    query: '?sort=like:des',
+    text: 'Most likes'
+  },
+  {
+    id: 5,
+    query: '?sort=dislike:des',
+    text: 'Most dislikes'
+  },
+]
+
+export const reviewsFilterOptions = [
+  {
+    id: 1,
+    text: 'Rating',
+    type: 'checkbox',
+    subOptions: [
+      {
+        id: 1,
+        text: '1',
+        query: 'rating=1'
+      },
+
+      {
+        id: 2,
+        text: '2',
+        query: 'rating=2'
+      },
+      {
+        id: 3,
+        text: '3',
+        query: 'rating=3'
+      },
+      {
+        id: 4,
+        text: '4',
+        query: 'rating=4'
+      },
+      {
+        id: 5,
+        text: '5',
+        query: 'rating=5'
+      },
+    ]
+  },
+  {
+    id: 2,
+    text: "Include images",
+    subOptions: [
+      {
+        id: 1,
+        text: "Yes",
+        query: 'image=yes'
+      },
+      {
+        id: 2,
+        text: "No",
+        query: 'image=no'
+      }
+    ]
+  }
 ]
 
 export const plantDetails = {

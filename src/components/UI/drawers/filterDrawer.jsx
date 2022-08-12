@@ -3,13 +3,12 @@ import { useState } from 'react';
 import Drawer from '@mui/material/Drawer';
 import { VscChromeClose } from "react-icons/vsc/index"
 
-import { filterOptions } from '../../../data';
-import styles from "./filterProducts.module.scss"
+import styles from "./filterDrawer.module.scss"
 import DropdownMenu from './dropdownMenu';
 
 import { TbFilter } from "react-icons/tb/index"
 
-const FilterProducts = () => {
+const FilterDrawer = ({ filterOptions }) => {
     const [open, setOpen] = useState(false)
     const [filters, setFilters] = useState(new Map())
 
@@ -37,4 +36,4 @@ const FilterProducts = () => {
     </>
 }
 
-export default FilterProducts
+export default FilterDrawer

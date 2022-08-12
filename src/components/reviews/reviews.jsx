@@ -1,9 +1,13 @@
 import { Rating } from "@mui/material";
 import { reviews } from "../../data";
-import ProgressBar from "../UI/progressBar";
-import ReviewItem from "./reviewItem";
 
 import styles from "./reviews.module.scss"
+
+import { reviewsSortOptions, reviewsFilterOptions } from "./../../data"
+import SortDrawer from "../UI/drawers/sortDrawer";
+import FilterDrawer from "../UI/drawers/filterDrawer";
+import ProgressBar from "../UI/progressBar";
+import ReviewItem from "./reviewItem";
 
 const Reviews = () => {
     const ratingStatistics = {
@@ -38,7 +42,8 @@ const Reviews = () => {
                 </ul>
             </div>
             <div className={styles.filters}>
-
+                <SortDrawer sortOptions={reviewsSortOptions} />
+                <FilterDrawer filterOptions={reviewsFilterOptions} />
             </div>
         </div>
         {reviews.map(review => <ReviewItem key={review.id} review={review} />)}

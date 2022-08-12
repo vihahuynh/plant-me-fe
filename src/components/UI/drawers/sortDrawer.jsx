@@ -1,13 +1,11 @@
 import Drawer from '@mui/material/Drawer';
 import { useState } from 'react';
 
-import { sortOptions } from '../../../data';
-
-import styles from "./sortProducts.module.scss"
+import styles from "./sortDrawer.module.scss"
 import { VscChromeClose } from "react-icons/vsc/index"
 import { TbArrowsSort } from "react-icons/tb/index"
 
-const SortProducts = () => {
+const SortDrawer = ({ sortOptions }) => {
     const [open, setOpen] = useState(false)
     const [sort, setSort] = useState(null)
 
@@ -40,4 +38,4 @@ const SortProducts = () => {
     </>
 }
 
-export default SortProducts
+export default SortDrawer
