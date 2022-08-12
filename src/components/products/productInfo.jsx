@@ -19,7 +19,7 @@ const ProductInfo = ({ product }) => {
   const onPlus = () => setQuantity((prev) => prev + 1);
 
   return (
-    <>
+    <div>
       <h3 className={styles.title}>{product.title}</h3>
       <div className={styles.statisticContainer}>
         <span className={styles.statistic}>
@@ -91,7 +91,7 @@ const ProductInfo = ({ product }) => {
         </span>
       </div>
       <Button text="Add to cart" size="medium" className={styles.btn} />
-    </>
+    </div>
   );
 };
 

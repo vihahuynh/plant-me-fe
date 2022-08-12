@@ -41,9 +41,9 @@ const Reviews = () => {
                 )}
                 </ul>
             </div>
-            <div className={styles.filters}>
-                <SortDrawer sortOptions={reviewsSortOptions} />
-                <FilterDrawer filterOptions={reviewsFilterOptions} />
+            <div className={styles.btnContainers}>
+                <div className={styles.btn}><SortDrawer sortOptions={reviewsSortOptions} /></div>
+                <div className={styles.btn}><FilterDrawer filterOptions={reviewsFilterOptions} /></div>
             </div>
         </div>
         {reviews.map(review => <ReviewItem key={review.id} review={review} />)}
