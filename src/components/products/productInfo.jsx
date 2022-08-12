@@ -25,7 +25,6 @@ const ProductInfo = ({ product }) => {
         <span className={styles.statistic}>
           <Rating name="read-only" value={product.rating} readOnly />
         </span>
-        <span className={styles.statistic}>{product.ratingCount} ratings</span>
         <span className={styles.statistic}>{product.reviewCount} reviews</span>
         <span className={styles.statistic}>Sold: {product.soldCount}</span>
       </div>

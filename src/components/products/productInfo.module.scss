@@ -1,24 +1,24 @@
 @import "./../../index.scss";
 
 .title {
-  font-size: 3rem;
+  font-size: 4rem;
   text-transform: uppercase;
   color: $color-primary;
 }
 
 .statisticContainer {
-  font-size: 1.2rem;
+  font-size: $default-font-size ;
   margin-top: 1rem;
 
   .statistic {
     color: $color-grey;
 
     &:not(:first-child) {
-      padding-left: 1rem;
+      padding-left: 2rem;
     }
 
     &:not(:last-child) {
-      padding-right: 1rem;
+      padding-right: 2rem;
       border-right: 1px solid $color-grey-light;
     }
   }
@@ -31,7 +31,7 @@
 
   .optionTitle {
     color: $color-primary;
-    font-size: $default-font-size;
+    font-size: $small-title-font-size;
     margin-bottom: 1rem;
   }
 
@@ -42,12 +42,12 @@
 
   .sizeItem {
     color: $color-primary;
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     border: 1px solid $color-grey-light;
     border-radius: 3px;
-    padding: 0.8rem 1.5rem;
+    padding: 1rem 2rem;
     text-transform: capitalize;
-    transition: all 0.3s;
+    transition: all .3s;
     cursor: pointer;
 
     &:not(:last-child) {
@@ -61,12 +61,12 @@
   }
 
   .colorItem {
-    height: 2rem;
-    width: 2rem;
+    height: 2.5rem;
+    width: 2.5rem;
     border-radius: 10rem;
     outline-offset: 5px;
-    transition: all 0.3s;
-    margin-top: 0.5rem;
+    transition: all .3s;
+    margin-top: .5rem;
     cursor: pointer;
 
     &:not(:last-child) {
@@ -75,8 +75,9 @@
   }
 
   .colorItem.active {
-    outline: 1px solid $color-grey-dark !important;
+    outline: 1px solid $color-grey-dark  !important;
   }
+
 }
 
 .btn {
