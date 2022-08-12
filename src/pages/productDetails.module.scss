@@ -5,6 +5,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   row-gap: 6rem;
+  column-gap: 3rem;
   // background-color: $color-primary-light;
 
   .images {
@@ -16,8 +17,9 @@
     grid-row: 1 / 2;
     grid-column: 2 / 3;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
   }
 
   .details {

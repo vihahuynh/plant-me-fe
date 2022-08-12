@@ -1,6 +1,5 @@
 @import "./../../index.scss";
 
-
 .title {
   font-size: 4rem;
   text-transform: uppercase;
@@ -8,7 +7,7 @@
 }
 
 .statisticContainer {
-  font-size: $default-font-size ;
+  font-size: $default-font-size;
   margin-top: 1rem;
 
   .statistic {
@@ -27,7 +26,7 @@
 
 .optionContainer {
   &:not(:last-child) {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
 
   .optionTitle {
@@ -48,7 +47,7 @@
     border-radius: 3px;
     padding: 1rem 2rem;
     text-transform: capitalize;
-    transition: all .3s;
+    transition: all 0.3s;
     cursor: pointer;
 
     &:not(:last-child) {
@@ -66,8 +65,8 @@
     width: 2.5rem;
     border-radius: 10rem;
     outline-offset: 5px;
-    transition: all .3s;
-    margin-top: .5rem;
+    transition: all 0.3s;
+    margin-top: 0.5rem;
     cursor: pointer;
 
     &:not(:last-child) {
@@ -76,9 +75,8 @@
   }
 
   .colorItem.active {
-    outline: 1px solid $color-grey-dark  !important;
+    outline: 1px solid $color-grey-dark !important;
   }
-
 }
 
 .btn {
@@ -99,6 +97,6 @@
   .quantityInput {
     margin: 0 1rem;
     border-radius: 3px;
-    width: 10rem;
+    width: 15rem;
   }
 }
