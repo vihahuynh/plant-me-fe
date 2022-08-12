@@ -338,3 +338,54 @@ export const plantDetails = {
   soldCount: 345,
   about: 'Are you a sucker for succulents? The Crassula Green Mini will be your dream plant kid. One of the easiest houseplants to look after, the Crassula Green Mini boasts a lush foliage which beautifies any room. Also considered lucky as per Feng Shui for its coin like round plump leaves, so go on, bring some green home, the luck just tags along for free.'
 }
+
+export const reviews = [
+  {
+    id: 1,
+    username: "nemohuynh",
+    rating: 5,
+    title: "Good plant",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    createdAt: "10-08-2022",
+    images: [],
+    avatarUrl: null,
+    like: 1,
+    dislike: 0
+  },
+  {
+    id: 2,
+    username: "damiangrey",
+    rating: 5,
+    title: "I love this plant, thanks.",
+    content: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    createdAt: "12-07-2022",
+    images: [],
+    avatarUrl: null,
+    like: 0,
+    dislike: 0
+  },
+  {
+    id: 3,
+    username: "nhinhu",
+    rating: 4,
+    title: "Just Ok",
+    content: "Neque convallis a cras semper auctor neque. Id faucibus nisl tincidunt eget. Nulla malesuada pellentesque elit eget. Sit amet nisl suscipit adipiscing. Leo in vitae turpis massa sed elementum tempus egestas sed. Dignissim suspendisse in est ante in nibh mauris cursus. Lectus nulla at volutpat diam ut venenatis tellus. Erat pellentesque adipiscing commodo elit. Lorem mollis aliquam ut porttitor leo a diam. Tortor at risus viverra adipiscing at.",
+    createdAt: "01-07-2022",
+    images: [],
+    avatarUrl: "https://img.lovepik.com/free_png/28/76/02/62e58PIC8PbC75cMsYe9c_PIC2018.png_300.png",
+    like: 1,
+    dislike: 3
+  },
+  {
+    id: 4,
+    username: "viha huynh",
+    rating: 5,
+    title: "Lorem ipsum dolor sit amet",
+    content: "Non tellus orci ac auctor. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere ac. Vestibulum sed arcu non odio euismod lacinia at quis. Pretium fusce id velit ut tortor pretium. Massa ultricies mi quis hendrerit dolor magna eget. Euismod lacinia at quis risus sed vulputate odio. Massa tincidunt dui ut ornare lectus sit amet est. Eget magna fermentum iaculis eu non diam phasellus. Cursus mattis molestie a iaculis. Vulputate odio ut enim blandit volutpat maecenas volutpat blandit. Vitae elementum curabitur vitae nunc sed velit.",
+    createdAt: "18-07-2022",
+    images: [],
+    avatarUrl: null,
+    like: 4,
+    dislike: 1
+  },
+]
