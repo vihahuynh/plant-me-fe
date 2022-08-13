@@ -81,22 +81,5 @@
 
 .btn {
   text-transform: uppercase;
-}
-
-.quantityContainer {
-  display: flex;
-  align-items: center;
-  margin-bottom: 2rem;
-
-  .icon {
-    height: 3rem;
-    width: 3rem;
-    fill: $color-primary;
-  }
-
-  .quantityInput {
-    margin: 0 1rem;
-    border-radius: 3px;
-    width: 15rem;
-  }
+  margin-top: 2rem;
 }

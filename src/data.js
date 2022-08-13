@@ -549,3 +549,27 @@ export const plantNotes = [
     text: "Arrives in a nursery grow pot nestled in your planter choice",
   },
 ];
+
+export const cart = [
+  {
+    id: 1,
+    productName: "Broken Heart Plant",
+    price: 45,
+    quantity: 2,
+    imageUrl: "/images/broken-heart-plant.png",
+  },
+  {
+    id: 2,
+    productName: "Jade Plant Mini",
+    price: 30,
+    quantity: 1,
+    imageUrl: "/images/jade-plant-mini.png",
+  },
+  {
+    id: 3,
+    productName: "Fittonia Green Plant (Nerve Plant)",
+    quantity: 1,
+    price: 54,
+    imageUrl: "/images/fittonia-green-plant.png",
+  },
+];

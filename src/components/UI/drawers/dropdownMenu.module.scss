@@ -1,105 +1,62 @@
 @import "./../../../index.scss";
 
 .container {
-    color: $color-primary;
-    padding: 1rem 2rem;
+  color: $color-primary;
+  padding: 1rem 2rem;
 
-    .header {
-        font-size: $small-title-font-size;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        cursor: pointer;
+  .header {
+    font-size: $small-title-font-size;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
 
-        .icon {
-            font-size: $medium-title-font-size;
-            fill: $color-primary;
-            transition: all .3;
-        }
-
-
-        .minus::after {
-            transform: rotate(-90deg);
-        }
-
-        span {
-            margin-right: 1.5rem;
-            position: relative;
-
-            &::before {
-                position: absolute;
-                left: -.9rem;
-                content: "";
-                display: inline-block;
-                height: 2px;
-                width: 2rem;
-                background-color: $color-primary;
-            }
-
-            &::after {
-                position: absolute;
-                top: -.9rem;
-                content: "";
-                display: inline-block;
-                height: 2rem;
-                width: 2px;
-                background-color: $color-primary;
-                transition: all .4s;
-            }
-        }
+    .icon {
+      font-size: $medium-title-font-size;
+      fill: $color-primary;
+      transition: all 0.3;
     }
 
-    .checkbox {
-        font-size: $default-font-size;
-        margin: .5rem 0;
-        cursor: pointer;
-
-        input {
-            display: none;
-        }
-
-        .option:checked~label span::after {
-            display: block;
-        }
-
-        label {
-            display: flex;
-            align-items: center;
-        }
-
-        span {
-            border: 2px solid $color-primary;
-            display: inline-block;
-            height: 1.5rem;
-            width: 1.5rem;
-            position: relative;
-            cursor: pointer;
-            margin-right: 1.2rem;
-
-            &::after {
-                content: '';
-                display: none;
-                position: absolute;
-                top: -1px;
-                left: .2rem;
-                width: .5rem;
-                height: .8rem;
-                border: solid $color-primary;
-                border-width: 0 2px 2px 0;
-                transform: rotate(45deg);
-            }
-        }
+    .minus::after {
+      transform: rotate(-90deg);
     }
 
-    .menuContainer {
-        margin-top: 1rem;
-        margin-left: .5rem;
-        max-height: 0;
-        overflow: hidden;
-        transition: all .5s ease;
-    }
+    span {
+      margin-right: 1.5rem;
+      position: relative;
 
-    .active {
-        max-height: 100vh;
+      &::before {
+        position: absolute;
+        left: -0.9rem;
+        content: "";
+        display: inline-block;
+        height: 2px;
+        width: 2rem;
+        background-color: $color-primary;
+      }
+
+      &::after {
+        position: absolute;
+        top: -0.9rem;
+        content: "";
+        display: inline-block;
+        height: 2rem;
+        width: 2px;
+        background-color: $color-primary;
+        transition: all 0.4s;
+      }
     }
+  }
+
+  .menuContainer {
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s ease;
+  }
+
+  .active {
+    max-height: 100vh;
+  }
 }
