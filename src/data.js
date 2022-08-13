@@ -441,6 +441,40 @@ export const plantDetails = {
       text: "Crassula Green Mini can be propagated by stem cuttings that can be rooted in water then transferred to a well-draining potting medium.",
     },
   ],
+  commonProblems: [
+    {
+      id: 1,
+      title: "Why is my Jade Plant turning yellow?",
+      text: "The Crassula or Jade is a succulent variety that need very little water and overwatering causes the leaves to yellow and drop. Check the soil, if it is damp wait for it to completely dry out before watering again.",
+    },
+    {
+      id: 2,
+      title: "Jade Plant leaves have white spots",
+      text: "White spots on the leaves of your Jade Plant are due to powdery mildew. Powdery mildew is formed when the plant is kept in unfavourable conditions like low light, excess humidity, and low temperatures. Spray your leaves with a mild mixture of baking soda and vinegar to get rid of the powdery mildew.",
+    },
+    {
+      id: 3,
+      title: "Why is my Jade Plant drooping?",
+      text: "Watering the Jade Plant too little or too much can make it droop. If your leaves are discolouring and dropping then it’s a classic case of overwatering and if the leaves are shrivelling up then it because of underwatering. Fix your watering schedule to stop your Jade Plant from drooping.",
+    },
+  ],
+  decorTips: [
+    {
+      id: 1,
+      title: "Light Requirements",
+      text: "Crassula Green Mini can grow well in bright to medium light. This plant grows best when it enjoys daily four hours of filtered sunlight.",
+    },
+    {
+      id: 2,
+      title: "Locations",
+      text: "The Jade Plant flourishes in bright light. Place your plant on sunny windowsills where it receives filtered light for at least four hours a day. It can also be grown outdoors in direct sun without any issue.",
+    },
+    {
+      id: 3,
+      title: "Styling/decor tip",
+      text: "The Jade Plant is a beautiful ornamental succulent which makes an excellent houseplant. You can pair the Jade Plant with a contrasting pot and place her by a window in your living room or in your bedroom to add a splash of green. The Jade Plant can also be grown outdoors in your balconies. It also looks lovely in hanging planters with stalks of leaves growing downwards.",
+    },
+  ],
   about:
     "Are you a sucker for succulents? The Crassula Green Mini will be your dream plant kid. One of the easiest houseplants to look after, the Crassula Green Mini boasts a lush foliage which beautifies any room. Also considered lucky as per Feng Shui for its coin like round plump leaves, so go on, bring some green home, the luck just tags along for free.",
 };
