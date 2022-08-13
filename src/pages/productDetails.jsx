@@ -8,6 +8,7 @@ import BuyInfo from "../components/products/buyInfo";
 import Reviews from "../components/reviews/reviews";
 import Products from "../components/products/products";
 import ProductInfo from "../components/products/productInfo";
+import Features from "../components/features/features";
 
 const ProductDetails = ({ id }) => {
   return (
@@ -26,8 +27,13 @@ const ProductDetails = ({ id }) => {
           <h2>Frequently Bought Together</h2>
           <Products />
         </div>
+
         <div className={styles.reviews}>
           <Reviews />
+        </div>
+        <div className={styles.features}>
+          <h2>Why People Choose Us?</h2>
+          <Features />
         </div>
       </div>
     </Wrapper>
