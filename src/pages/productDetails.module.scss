@@ -3,9 +3,9 @@
 .container {
   padding: 4rem 10rem;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1.8fr 1fr 1.3fr;
   row-gap: 6rem;
-  column-gap: 3rem;
+  column-gap: 4rem;
   // background-color: $color-primary-light;
 
   .images {

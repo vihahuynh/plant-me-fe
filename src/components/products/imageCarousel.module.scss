@@ -8,13 +8,37 @@
   width: 24vw;
 }
 
+.nextArrow,
+.prevArrow {
+  position: absolute;
+  display: inline-block;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  cursor: pointer;
+  z-index: 10;
+}
+.nextArrow {
+  left: 0;
+}
+
+.prevArrow {
+  right: 2rem;
+}
+
+.icon {
+  height: 5rem;
+  width: 5rem;
+  fill: $color-primary;
+}
+
 .slick-slide-image {
   width: 95%;
 }
 
 .thumbnail-slider-wrap {
   width: 8vw;
-  margin-right: 2rem;
+  margin-right: 3rem;
 
   img {
     border: 2px solid $color-primary;
