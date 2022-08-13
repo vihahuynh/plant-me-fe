@@ -42,15 +42,25 @@ const ProductInfo = ({ product }) => {
           ))}
         </div>
       </Accordion>
-      <Accordion title="Care Guide" active={true}>
-        <div className={styles.plantCare}>
-          {product.plantCare.map((item) => (
-            <div className={styles.plantCareItem} key={item.id}>
+      <Accordion title="Living Condition" active={false}>
+        <div className={styles.livingConditions}>
+          {product.livingConditions.map((item) => (
+            <div className={styles.condition} key={item.id}>
               {getIcon(item.title)}
               <div>
                 <h4>{item.title}</h4>
                 <p>{item.text}</p>
               </div>
+            </div>
+          ))}
+        </div>
+      </Accordion>
+      <Accordion title="Plant care" active={true}>
+        <div className={styles.plantCare}>
+          {product.plantCare.map((plantCareTip) => (
+            <div key={plantCareTip.id} className={styles.plantCareTip}>
+              <h4>{plantCareTip.title}: </h4>
+              <p>{plantCareTip.text}</p>
             </div>
           ))}
         </div>

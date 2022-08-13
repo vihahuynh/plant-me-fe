@@ -2,7 +2,7 @@
 
 .description {
   color: $color-grey;
-  margin: 1rem;
+  margin: 2rem;
 
   .about {
     margin-bottom: 1rem;
@@ -25,16 +25,11 @@
   }
 }
 
-.plantCare {
+.livingConditions {
   margin: 2rem;
   color: $color-grey;
 
-  h4 {
-    color: $color-primary;
-    font-weight: 600;
-  }
-
-  .plantCareItem {
+  .condition {
     display: flex;
     align-items: center;
     gap: 2rem;
@@ -45,8 +40,29 @@
   }
 }
 
+.plantCare {
+  margin: 2rem;
+  color: $color-grey;
+
+  .plantCareTip {
+    &:not(:last-child) {
+      margin-bottom: 1.5rem;
+    }
+
+    h4,
+    p {
+      display: inline;
+    }
+  }
+}
+
+h4 {
+  color: $color-primary-dark;
+  font-weight: 600;
+}
+
 .icon {
-  color: $color-primary;
+  color: $color-primary-dark;
   height: 2.5rem;
   width: 2.5rem;
 }

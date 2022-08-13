@@ -417,12 +417,29 @@ export const plantDetails = {
   ratingCount: 173,
   reviewCount: 33,
   soldCount: 345,
-  plantCare: [
+  livingConditions: [
     { id: 1, title: "Light", text: "Bright indirect sunlight" },
     { id: 2, title: "Watering", text: "Water twice a week" },
     { id: 3, title: "Where to grow", text: "Bright indoors" },
-    { id: 4, title: "Maintenace", text: "Temperamental" },
+    { id: 4, title: "Where to grow", text: "Temperamental" },
     { id: 5, title: "Special Feature", text: "Air purifying" },
+  ],
+  plantCare: [
+    {
+      id: 1,
+      title: "Fertilizer/ feed for the plant",
+      text: "Feed a balanced fertiliser, 0-20-10 or 5-10-5 ratio every 2 weeks. Don’t fertilise the plant in winter as it is a slow growing season.",
+    },
+    {
+      id: 2,
+      title: "Repotting",
+      text: "Repot your Jade Green every 2 to 3 years.",
+    },
+    {
+      id: 3,
+      title: "Propogation",
+      text: "Crassula Green Mini can be propagated by stem cuttings that can be rooted in water then transferred to a well-draining potting medium.",
+    },
   ],
   about:
     "Are you a sucker for succulents? The Crassula Green Mini will be your dream plant kid. One of the easiest houseplants to look after, the Crassula Green Mini boasts a lush foliage which beautifies any room. Also considered lucky as per Feng Shui for its coin like round plump leaves, so go on, bring some green home, the luck just tags along for free.",
