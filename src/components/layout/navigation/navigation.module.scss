@@ -30,3 +30,23 @@
   fill: $color-grey;
   margin-left: 1rem;
 }
+
+.cart {
+  display: inline-block;
+  position: relative;
+}
+
+.quantity {
+  position: absolute;
+  top: -1rem;
+  right: -1rem;
+  background-color: $color-primary;
+  color: $color-primary-light;
+  font-size: $default-font-size;
+  border-radius: 50%;
+  height: 2.5rem;
+  width: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

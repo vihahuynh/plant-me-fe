@@ -1,12 +1,21 @@
 import styles from "./productItem.module.scss";
 import Button from "./../UI/button";
-import Price from "./price"
+import Price from "./price";
 
+import { useDispatch } from "react-redux";
+import { cartActions } from "../../store";
 import { BsSuitHeart, BsSuitHeartFill } from "react-icons/bs/index";
 
 const ProductItem = ({ product }) => {
-  const addToCartHandler = (id) => {
-    console.log(id);
+  const dispatch = useDispatch();
+
+  const addToCartHandler = (product) => {
+    const cartItem = {
+      ...product,
+      quantity: 1,
+    };
+    console.log(cartItem);
+    dispatch(cartActions.addItem({ item: cartItem }));
   };
 
   return (
@@ -28,7 +37,7 @@ const ProductItem = ({ product }) => {
           className={styles.buttonCustom}
           text="Add to cart"
           size="medium"
-          onClick={() => addToCartHandler(product.id)}
+          onClick={() => addToCartHandler(product)}
         />
       </div>
     </div>
