@@ -1,16 +1,19 @@
 import styles from "./cart.module.scss";
 
-import { cart } from "./../../data";
 import CartItem from "./cartItem";
+import { useSelector } from "react-redux";
 
 const Cart = () => {
+  const cart = useSelector((state) => state.cart);
+  console.log(cart);
   return (
     <div>
       <div>
-        {cart.map((item) => (
+        {cart.items.map((item) => (
           <CartItem key={item.id} item={item} />
         ))}
       </div>
+      <div>Summary</div>
     </div>
   );
 };

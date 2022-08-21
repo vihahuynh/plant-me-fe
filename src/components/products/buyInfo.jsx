@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import { useDispatch } from "react-redux";
 
 import Rating from "@mui/material/Rating";
 import Price from "./price";
@@ -6,10 +7,26 @@ import styles from "./buyInfo.module.scss";
 import Button from "../UI/button";
 
 import QuantityInput from "../UI/quantityInput";
+import { cartActions } from "./../../store";
 
 const BuyInfo = ({ product }) => {
-  const [size, setSize] = useState(null);
-  const [color, setColor] = useState(null);
+  const [quantity, setQuantity] = useState(1);
+  const [size, setSize] = useState(product.size[0]);
+  const [color, setColor] = useState(product.colors[0]);
+
+  const dispatch = useDispatch();
+
+  const onUpdateQuantity = useCallback((quan) => setQuantity(quan), []);
+
+  const onAddToCart = () => {
+    const cartItem = {
+      ...product,
+      color,
+      size,
+      quantity,
+    };
+    dispatch(cartActions.addItem({ item: cartItem }));
+  };
 
   return (
     <>
@@ -78,8 +95,13 @@ const BuyInfo = ({ product }) => {
       </div>
 
       <div>
-        <QuantityInput quantity={1} />
-        <Button text="Add to cart" size="medium" className={styles.btn} />
+        <QuantityInput quantity={quantity} onChange={onUpdateQuantity} />
+        <Button
+          text="Add to cart"
+          size="medium"
+          className={styles.btn}
+          onClick={onAddToCart}
+        />
       </div>
     </>
   );

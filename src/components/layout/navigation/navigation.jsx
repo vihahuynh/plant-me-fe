@@ -8,6 +8,8 @@ import { BiCartAlt } from "react-icons/bi/index";
 import Logo from "../../UI/logo";
 import SearchBar from "../../UI/searchBar";
 
+import { Link } from "react-router-dom";
+
 const Navigation = () => {
   const cartQuantity = useSelector((state) => state.cart.quantity);
 
@@ -27,10 +29,10 @@ const Navigation = () => {
         <SearchBar />
         <div>
           <BiUserCircle className={styles.icon} />
-          <div className={styles.cart}>
+          <Link to="/cart" className={styles.cart}>
             <BiCartAlt className={styles.icon} />
             <span className={styles.quantity}>{cartQuantity}</span>
-          </div>
+          </Link>
         </div>
       </div>
     </div>

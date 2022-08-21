@@ -5,22 +5,19 @@ import {
   AiOutlinePlusCircle,
 } from "react-icons/ai/index";
 
-const QuantityInput = ({ quantity, setQuantity }) => {
-  const onMinus = () => setQuantity((prev) => (prev - 1 > 0 ? prev - 1 : 1));
-  const onPlus = () => setQuantity((prev) => prev + 1);
-
+const QuantityInput = ({ quantity, onChange }) => {
   return (
     <div className={styles.quantityContainer}>
-      <span onClick={onMinus}>
+      <span onClick={() => onChange(+quantity - 1)}>
         <AiOutlineMinusCircle className={styles.icon} />
       </span>
       <input
         className={styles.quantityInput}
-        type="number"
+        type="text"
         value={quantity}
-        onChange={(e) => setQuantity(+e.value.target)}
+        onChange={(e) => onChange(+e.value.target)}
       />
-      <span onClick={onPlus}>
+      <span onClick={() => onChange(+quantity + 1)}>
         <AiOutlinePlusCircle className={styles.icon} />
       </span>
     </div>
