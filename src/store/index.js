@@ -1,8 +1,9 @@
-import { createSlice, configureStore } from "@reduxjs/toolkit";
+import { createSlice, configureStore, current } from "@reduxjs/toolkit";
 
 const initCartState = {
   quantity: 0,
   items: [],
+  payment: 0,
 };
 
 const cartSlice = createSlice({
@@ -10,41 +11,44 @@ const cartSlice = createSlice({
   initialState: initCartState,
   reducers: {
     addItem(state, action) {
-      console.log("state: ", state);
-      const foundItem = state.items.find((item) => item.id === action.item.id);
+      const { payload } = action;
+      const foundItem = current(state).items.find(
+        (item) => item.id === payload.item.id
+      );
 
       if (foundItem) {
         const updateItem = {
-          ...foundItem,
-          quantity: foundItem.quantity + 1,
+          ...payload.item,
+          quantity: payload.item + 1,
         };
-        state.items = state.items.map((item) =>
-          item.id === updateItem.id ? updateItem : item
+        state.items = current(state).items.map((item) =>
+          item.id === payload.item.id ? updateItem : item
         );
       } else {
         state.quantity++;
-        state.items.push(action.item);
+        state.items.push(payload.item);
+        state.payment += payload.item.quantity * payload.item.price;
       }
     },
-    removeItem(state, id) {
-      const itemToRemove = state.items.find((item) => item.id === id);
-      if (itemToRemove.quantity === 1) {
-        return {
-          quantity: state.quantity--,
-          state: state.items.filter((item) => item !== id),
-        };
-      } else {
-        const updateItem = {
-          ...itemToRemove,
-          quantity: itemToRemove.quantity--,
-        };
-        return {
-          state: state.items.map((item) =>
-            item.id === id ? updateItem : item
-          ),
-        };
+
+    removeItem(state, action) {
+      const { payload } = action;
+      state.quantity--;
+      state.items = current(state).items.filter((item) => item !== payload.id);
+    },
+
+    updateItem(state, action) {
+      const { payload } = action;
+      const foundItem = current(state).items.find(
+        (item) => item.id === payload.item.id
+      );
+      if (foundItem) {
+        state.items = current(state).items.map((item) =>
+          item.id === payload.item.id ? payload.item : item
+        );
       }
     },
+
     clear() {
       return initCartState;
     },

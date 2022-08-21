@@ -14,7 +14,6 @@ const ProductItem = ({ product }) => {
       ...product,
       quantity: 1,
     };
-    console.log(cartItem);
     dispatch(cartActions.addItem({ item: cartItem }));
   };
 
