@@ -31,8 +31,12 @@ const CartItem = ({ item }) => {
 
   return (
     <div className={styles.container}>
-      <CheckBox name={item.productName} label="" />
-      <img src={item.imageUrl} alt={item.productName} />
+      <CheckBox
+        name={item.name}
+        value={item.id}
+        onChange={() => console.log(item.id)}
+      />
+      <img src={item.imageUrl} alt={item.name} />
       <Price price={item.price} />
       <QuantityInput
         quantity={item.quantity.toString()}

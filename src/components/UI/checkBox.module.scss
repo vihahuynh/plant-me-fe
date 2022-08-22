@@ -9,7 +9,7 @@
     display: none;
   }
 
-  .option:checked ~ label span::after {
+  .option:checked~label span::after {
     display: block;
   }
 
