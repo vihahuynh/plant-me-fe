@@ -17,6 +17,16 @@ const CartItem = ({ item }) => {
     dispatch(cartActions.removeItem({ id: item.id }));
   };
 
+  const onCheckout = () => {
+    const checkoutItem = {
+      ...item,
+      netPrice: Math.round(item.price - (item.price * item.salePercent / 100)),
+      isCheckout: !item.isCheckout
+    }
+
+    dispatch(cartActions.updateItem({ item: checkoutItem }))
+  }
+
   const onUpdateQuantity = (quan) => {
     if (quan > 0) {
       const cartItem = {
@@ -29,20 +39,26 @@ const CartItem = ({ item }) => {
     }
   };
 
+  const netPrice = Math.round(item.price - (item.price * item.salePercent / 100))
   return (
     <div className={styles.container}>
-      <CheckBox
-        name={item.name}
-        value={item.id}
-        onChange={() => console.log(item.id)}
-      />
-      <img src={item.imageUrl} alt={item.name} />
-      <Price price={item.price} />
-      <QuantityInput
-        quantity={item.quantity.toString()}
-        onChange={onUpdateQuantity}
-      />
-      <Price price={item.price * item.quantity} size="large" />
+      <div className={styles.itemInfo}>
+        <CheckBox
+          name={item.name}
+          value={item.id}
+          onChange={onCheckout}
+        />
+        <img src={item.imageUrl} alt={item.name} />
+        <p>{item.name}</p>
+      </div>
+      <div className={styles.quantity}>
+        <Price price={item.price} salePercent={item.salePercent} />
+        <QuantityInput
+          quantity={item.quantity.toString()}
+          onChange={onUpdateQuantity}
+        />
+        <Price price={netPrice * item.quantity} size="large" />
+      </div>
       <TbTrash className={styles.icon} onClick={onRemoveItem} />
     </div>
   );

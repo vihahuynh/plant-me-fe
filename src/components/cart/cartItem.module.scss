@@ -1,10 +1,31 @@
 .container {
+  width: 100%;
   display: flex;
   align-items: center;
-  column-gap: 6rem;
+  justify-content: space-between;
 
   img {
     width: 13rem;
+  }
+
+  .quantity,
+  .itemInfo {
+    display: flex;
+    align-items: center;
+  }
+
+  .itemInfo {
+    width: 35%;
+    gap: 1rem;
+
+    p {
+      width: 50%;
+    }
+  }
+
+  .quantity {
+    width: 55%;
+    gap: 2rem
   }
 
   .icon {

@@ -4,9 +4,22 @@
     display: grid;
     grid-template-columns: 2fr 1fr;
     font-size: $default-font-size;
+    gap: 10rem;
 
     .cart {
         grid-column: 1 / 2;
+
+        .cartHeader {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid $color-grey-light;
+            padding-bottom: 2rem;
+
+            .selectAll {
+                width: 90%;
+            }
+        }
     }
 
     .summary {
@@ -76,5 +89,12 @@
         .summarySubTitle {
             font-weight: 600;
         }
+    }
+
+    .icon {
+        height: 3rem;
+        width: 3rem;
+        color: darkred;
+        cursor: pointer;
     }
 }
