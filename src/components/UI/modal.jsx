@@ -1,5 +1,3 @@
-import { useState } from "react"
-
 import Button from "./../UI/button"
 
 import styles from "./modal.module.scss"

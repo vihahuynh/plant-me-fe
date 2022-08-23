@@ -9,6 +9,7 @@ import CheckBox from "../UI/checkBox";
 import LinkButton from '../UI/linkbutton'
 
 import { cartActions } from "../../store";
+import { messageActions } from "../../store";
 
 import { TbTrash } from "react-icons/tb/index";
 
@@ -16,10 +17,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import Modal from "../UI/modal";
 
+let delay;
+
 const Cart = () => {
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart);
   const [openModal, setOpenModal] = useState(false)
+
+  const onCloseModal = () => setOpenModal(false)
+  const onOpenModal = () => {
+    if (!cart.items.find(item => item.isCheckout)) {
+      clearTimeout(delay)
+      dispatch(messageActions.updateMessage({
+        message: 'Please select at least one item',
+        type: 'warning'
+      }))
+      delay = setTimeout(() => { dispatch(messageActions.clear()) }, 3000)
+    } else {
+      setOpenModal(true)
+    }
+  }
 
   const subTotal = cart.items
     .filter(item => item.isCheckout)
@@ -51,9 +68,6 @@ const Cart = () => {
     dispatch(cartActions.toggleCheckoutAll({ values: false }))
     setOpenModal(false)
   }
-
-  const onCloseModal = () => setOpenModal(false)
-  const onOpenModal = () => setOpenModal(true)
 
   if (cart.items.length > 0)
     return (

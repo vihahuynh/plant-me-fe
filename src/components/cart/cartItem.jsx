@@ -67,7 +67,7 @@ const CartItem = ({ item, checkoutAllItems }) => {
             checked={item.isCheckout}
             name={item.name}
             value={item.id}
-            onChange={onCheckout}
+            onChange={onCheckout || false}
           />
           <img src={item.imageUrl} alt={item.name} />
           <p>{item.name}</p>

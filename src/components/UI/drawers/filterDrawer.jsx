@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import Drawer from '@mui/material/Drawer';
 import { VscChromeClose } from "react-icons/vsc/index"
