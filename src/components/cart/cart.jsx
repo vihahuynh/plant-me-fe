@@ -9,21 +9,30 @@ import { cartActions } from "../../store";
 import { TbTrash } from "react-icons/tb/index";
 
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const Cart = () => {
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart);
+
   const subTotal = cart.items
     .filter(item => item.isCheckout)
     .reduce((total, item) => total + item.netPrice * item.quantity, 0)
 
-  const onCheckoutAllItems = () => {
+  useEffect(() => {
+    if (cart.items.filter(item => item.isCheckout).length === cart.items.length) {
+      dispatch(cartActions.toggleCheckoutAll({ value: true }))
+    }
+  }, [dispatch, cart.items])
+
+  const onSelectAllItems = () => {
     cart.items.forEach(item => {
       const cartItem = {
         ...item,
-        isCheckout: true
+        isCheckout: cart.checkoutAllItems ? false : true
       }
       dispatch(cartActions.updateItem({ item: cartItem }))
+      dispatch(cartActions.toggleCheckoutAll({ value: !cart.checkoutAllItems }))
     })
   }
 
@@ -32,19 +41,18 @@ const Cart = () => {
       dispatch(cartActions.removeItem({ id: item.id }))
     })
   }
-  console.log(subTotal)
-  console.log(cart)
+
   return (
     <div className={styles.container}>
       <div className={styles.cart}>
         <div className={styles.cartHeader}>
           <div className={styles.selectAll}>
-            <CheckBox name="all" value="" label="Select all items" onChange={onCheckoutAllItems} />
+            <CheckBox name="all" value="" label="Select all items" onChange={onSelectAllItems} checked={cart.checkoutAllItems} />
           </div>
           <TbTrash className={styles.icon} onClick={onDeleteCheckedItems} />
         </div>
         {cart.items.map((item) => (
-          <CartItem key={item.id} item={item} />
+          <CartItem key={item.id} item={item} checkoutAllItems={cart.checkoutAllItems} />
         ))}
       </div>
       <div className={styles.summary}>

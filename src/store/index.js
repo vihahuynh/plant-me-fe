@@ -3,7 +3,7 @@ import { createSlice, configureStore, current } from "@reduxjs/toolkit";
 const initCartState = {
   quantity: 0,
   items: [],
-  checkoutItems: []
+  checkoutAllItems: false
 };
 
 const cartSlice = createSlice({
@@ -59,6 +59,10 @@ const cartSlice = createSlice({
     clear() {
       return initCartState;
     },
+
+    toggleCheckoutAll(state, action) {
+      state.checkoutAllItems = action.payload.value
+    }
   },
 });
 

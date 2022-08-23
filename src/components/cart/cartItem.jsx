@@ -10,7 +10,7 @@ import { TbTrash } from "react-icons/tb/index";
 
 import { cartActions } from "../../store";
 
-const CartItem = ({ item }) => {
+const CartItem = ({ item, checkoutAllItems }) => {
   const dispatch = useDispatch();
 
   const onRemoveItem = () => {
@@ -23,8 +23,10 @@ const CartItem = ({ item }) => {
       netPrice: Math.round(item.price - (item.price * item.salePercent / 100)),
       isCheckout: !item.isCheckout
     }
-
     dispatch(cartActions.updateItem({ item: checkoutItem }))
+    if (!checkoutItem.isCheckout && checkoutAllItems) {
+      dispatch(cartActions.toggleCheckoutAll({ value: false }))
+    }
   }
 
   const onUpdateQuantity = (quan) => {
@@ -44,6 +46,7 @@ const CartItem = ({ item }) => {
     <div className={styles.container}>
       <div className={styles.itemInfo}>
         <CheckBox
+          checked={item.isCheckout}
           name={item.name}
           value={item.id}
           onChange={onCheckout}
