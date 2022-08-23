@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Drawer from '@mui/material/Drawer';
 import { VscChromeClose } from "react-icons/vsc/index"
@@ -8,11 +9,16 @@ import DropdownMenu from './dropdownMenu';
 
 import { TbFilter } from "react-icons/tb/index"
 
+import { filtersActions } from '../../../store';
+
 const FilterDrawer = ({ filterOptions }) => {
     const [open, setOpen] = useState(false)
-    const [filters, setFilters] = useState(new Map())
+    const dispatch = useDispatch()
 
-    console.log(filters)
+    const onApplyFilters = () => {
+        dispatch(filtersActions.applyFilter())
+        setOpen(false)
+    }
 
     return <>
         <button onClick={() => setOpen(true)} className={styles.drawerBtn}><TbFilter className={styles.icon} /> Filters</button>
@@ -28,9 +34,9 @@ const FilterDrawer = ({ filterOptions }) => {
                     <VscChromeClose className={styles.icon} onClick={() => setOpen(false)} />
                 </div>
                 {filterOptions.map(option =>
-                    <DropdownMenu key={option.id} item={option} setFilters={setFilters} />
+                    <DropdownMenu key={option.id} item={option} />
                 )}
-                <div className={styles.footer} onClick={() => setOpen(false)}>Apply Filters</div>
+                <div className={styles.footer} onClick={onApplyFilters}>Apply Filters</div>
             </div>
         </Drawer>
     </>
