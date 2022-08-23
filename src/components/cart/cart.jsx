@@ -38,7 +38,9 @@ const Cart = () => {
 
   const onDeleteCheckedItems = () => {
     cart.items.forEach(item => {
-      dispatch(cartActions.removeItem({ id: item.id }))
+      if (item.isCheckout) {
+        dispatch(cartActions.removeItem({ id: item.id }))
+      }
     })
     dispatch(cartActions.toggleCheckoutAll({ values: false }))
   }
