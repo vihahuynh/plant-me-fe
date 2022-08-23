@@ -97,4 +97,27 @@
         color: darkred;
         cursor: pointer;
     }
+
+    .infoBox {
+        color: $color-primary;
+        grid-column: 1 / -1;
+        width: 70%;
+        height: 45vh;
+        background-color: $color-primary-light;
+        border: 1px solid $color-grey-light;
+        border-radius: 3px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        p {
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            margin: 4rem auto 0;
+        }
+    }
 }

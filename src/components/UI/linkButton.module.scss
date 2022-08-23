@@ -1,6 +1,7 @@
 @import "./../../index.scss";
 
 .medium {
+  display: inline-block;
   align-self: flex-start;
   text-decoration: none;
   color: $color-primary-light;

@@ -3,6 +3,7 @@ import styles from "./cart.module.scss";
 import CartItem from "./cartItem";
 import Button from "./../UI/button"
 import CheckBox from "../UI/checkBox";
+import LinkButton from '../UI/linkbutton'
 
 import { cartActions } from "../../store";
 
@@ -45,54 +46,63 @@ const Cart = () => {
     dispatch(cartActions.toggleCheckoutAll({ values: false }))
   }
 
-  return (
-    <div className={styles.container}>
-      <div className={styles.cart}>
-        <div className={styles.cartHeader}>
-          <div className={styles.selectAll}>
-            <CheckBox name="all" value="" label="Select all items" onChange={onSelectAllItems} checked={cart.checkoutAllItems} />
+  if (cart.items.length > 0)
+    return (
+      <div className={styles.container}>
+        <div className={styles.cart}>
+          <div className={styles.cartHeader}>
+            <div className={styles.selectAll}>
+              <CheckBox name="all" value="" label="Select all items" onChange={onSelectAllItems} checked={cart.checkoutAllItems} />
+            </div>
+            <TbTrash className={styles.icon} onClick={onDeleteCheckedItems} />
           </div>
-          <TbTrash className={styles.icon} onClick={onDeleteCheckedItems} />
+          {cart.items.map((item) => (
+            <CartItem key={item.id} item={item} checkoutAllItems={cart.checkoutAllItems} />
+          ))}
         </div>
-        {cart.items.map((item) => (
-          <CartItem key={item.id} item={item} checkoutAllItems={cart.checkoutAllItems} />
-        ))}
-      </div>
-      <div className={styles.summary}>
-        <div className={styles.delivery}>
-          <Button text="Change" size="medium" className={styles.change} />
-          <h5>Delivery to</h5>
-          <div className={styles.userInfo}>
-            <p>Huynh Vi Ha</p>
-            <p>076 690 1516</p>
+        <div className={styles.summary}>
+          <div className={styles.delivery}>
+            <Button text="Change" size="medium" className={styles.change} />
+            <h5>Delivery to</h5>
+            <div className={styles.userInfo}>
+              <p>Huynh Vi Ha</p>
+              <p>076 690 1516</p>
+            </div>
+            <p className={styles.address}>168B Bai Say 01 06 tpchm</p>
           </div>
-          <p className={styles.address}>168B Bai Say 01 06 tpchm</p>
+          <div className={styles.orderSummary}>
+            <h5>
+              Order Summary
+            </h5>
+            <div className={styles.subTotal}>
+              <p className={styles.summarySubTitle}>Subtotal</p>
+              {subTotal
+                ? <p>{subTotal}.000 &#x20ab;</p>
+                : <p>0 &#x20ab;</p>}
+            </div>
+            <div className={styles.shipping}>
+              <p className={styles.summarySubTitle}>Shipping</p>
+              <p>0 &#x20ab;</p>
+            </div>
+            <div className={styles.total}>
+              <p className={styles.summarySubTitle}>Total</p>
+              {subTotal
+                ? <p className={styles.totalPrice}>{subTotal}.000 &#x20ab;</p>
+                : <p className={styles.totalPrice}>0 &#x20ab;</p>}
+            </div>
+          </div>
+          <Button borderRadius="square" text="CHECKOUT" size="large" />
         </div>
-        <div className={styles.orderSummary}>
-          <h5>
-            Order Summary
-          </h5>
-          <div className={styles.subTotal}>
-            <p className={styles.summarySubTitle}>Subtotal</p>
-            {subTotal
-              ? <p>{subTotal}.000 &#x20ab;</p>
-              : <p>0 &#x20ab;</p>}
-          </div>
-          <div className={styles.shipping}>
-            <p className={styles.summarySubTitle}>Shipping</p>
-            <p>0 &#x20ab;</p>
-          </div>
-          <div className={styles.total}>
-            <p className={styles.summarySubTitle}>Total</p>
-            {subTotal
-              ? <p className={styles.totalPrice}>{subTotal}.000 &#x20ab;</p>
-              : <p className={styles.totalPrice}>0 &#x20ab;</p>}
-          </div>
-        </div>
-        <Button borderRadius="square" text="CHECKOUT" size="large" />
-      </div>
-    </div >
-  );
+      </div >
+    );
+
+  return <div className={styles.container}>
+    <div className={styles.infoBox}>
+      <img src="./images/logo.png" alt="" />
+      <p>No items found</p>
+      <LinkButton text="Back to Shopping" size="medium" url="/shop" className={styles.btn} />
+    </div>
+  </div>
 };
 
 export default Cart;
