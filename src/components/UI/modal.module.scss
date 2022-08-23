@@ -1,0 +1,46 @@
+@import "./../../index.scss";
+
+.hidden {
+    display: none;
+}
+
+.layout {
+    width: 100vw;
+    height: 100vh;
+
+    font-size: $default-font-size;
+    background-color: rgba(0, 0, 0, .6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .modal {
+        padding: 3rem;
+        width: 25%;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        border-radius: 3px;
+
+        h5 {
+            font-size: 2rem;
+            color: $color-primary;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: $color-grey;
+        }
+    }
+
+    .buttonGroup {
+        margin-top: 5rem;
+        display: flex;
+        gap: 1rem;
+        align-self: flex-end;
+    }
+}
