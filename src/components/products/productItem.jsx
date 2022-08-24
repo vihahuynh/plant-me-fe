@@ -4,7 +4,7 @@ import Price from "./price";
 
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../store";
-import { messageActions } from "../../store";
+import { alertActions } from "../../store";
 import { BsSuitHeart, BsSuitHeartFill } from "react-icons/bs/index";
 let delay;
 
@@ -18,11 +18,11 @@ const ProductItem = ({ product }) => {
       quantity: 1,
     };
     dispatch(cartActions.addItem({ item: cartItem }));
-    dispatch(messageActions.updateMessage({
+    dispatch(alertActions.updateMessage({
       message: 'Product has been added to your cart',
       type: 'info'
     }))
-    delay = setTimeout(() => dispatch(messageActions.clear()), 3000)
+    delay = setTimeout(() => dispatch(alertActions.clear()), 3000)
   };
 
   return (

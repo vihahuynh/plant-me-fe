@@ -9,7 +9,7 @@ import CheckBox from "../UI/checkBox";
 import LinkButton from '../UI/linkbutton'
 
 import { cartActions } from "../../store";
-import { messageActions } from "../../store";
+import { alertActions } from "../../store";
 
 import { TbTrash } from "react-icons/tb/index";
 
@@ -28,11 +28,11 @@ const Cart = () => {
   const onOpenModal = () => {
     if (!cart.items.find(item => item.isCheckout)) {
       clearTimeout(delay)
-      dispatch(messageActions.updateMessage({
+      dispatch(alertActions.updateMessage({
         message: 'Please select at least one item',
         type: 'warning'
       }))
-      delay = setTimeout(() => { dispatch(messageActions.clear()) }, 3000)
+      delay = setTimeout(() => { dispatch(alertActions.clear()) }, 3000)
     } else {
       setOpenModal(true)
     }

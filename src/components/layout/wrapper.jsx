@@ -1,19 +1,19 @@
 import ReactDOM from "react-dom";
 import { useSelector } from "react-redux";
 
-import PopupMessage from "../UI/popupMessage";
+import Alert from "../UI/alert";
 import Footer from "./footer/footer";
 import Navigation from "./navigation/navigation";
 
 const Wrapper = (props) => {
-  const message = useSelector(state => state.message)
+  const alert = useSelector(state => state.alert)
 
   return (
     <>
       <Navigation />
       {ReactDOM.createPortal(
-        <PopupMessage message={message.message} type={message.type} />,
-        document.getElementById('message-root')
+        <Alert message={alert.message} type={alert.type} />,
+        document.getElementById('alert-root')
       )}
       {props.children}
       <Footer />

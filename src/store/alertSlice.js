@@ -5,8 +5,8 @@ const initState = {
     type: 'info'
 }
 
-const messageSlice = createSlice({
-    name: 'message',
+const alertSlice = createSlice({
+    name: 'alert',
     initialState: initState,
     reducers: {
         updateMessage(state, action) {
@@ -20,4 +20,4 @@ const messageSlice = createSlice({
     }
 })
 
-export default messageSlice
+export default alertSlice

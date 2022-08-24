@@ -1,6 +1,6 @@
-import styles from "./popupMessage.module.scss"
+import styles from "./alert.module.scss"
 
-const PopupMessage = ({ message, type = "info" }) => {
+const Alert = ({ message, type = "info" }) => {
     const messageBoxClasses = `${styles.messageBox} ${styles[type]}`
 
     if (!message) return null
@@ -10,4 +10,4 @@ const PopupMessage = ({ message, type = "info" }) => {
     </div>
 }
 
-export default PopupMessage
+export default Alert
