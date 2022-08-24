@@ -36,6 +36,7 @@ const CartItem = ({ item, checkoutAllItems }) => {
   }
 
   const onUpdateQuantity = (quan) => {
+    console.log(quan)
     if (quan > 0) {
       const cartItem = {
         ...item,

@@ -15,7 +15,7 @@ const QuantityInput = ({ quantity, onChange }) => {
         className={styles.quantityInput}
         type="text"
         value={quantity}
-        onChange={(e) => onChange(+e.value.target)}
+        onChange={(e) => onChange(e.target.value)}
       />
       <span onClick={() => onChange(+quantity + 1)}>
         <AiOutlinePlusCircle className={styles.icon} />

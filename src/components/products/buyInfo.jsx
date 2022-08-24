@@ -8,6 +8,9 @@ import Button from "../UI/button";
 
 import QuantityInput from "../UI/quantityInput";
 import { cartActions } from "./../../store";
+import { alertActions } from "./../../store";
+
+let delay;
 
 const BuyInfo = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
@@ -16,9 +19,10 @@ const BuyInfo = ({ product }) => {
 
   const dispatch = useDispatch();
 
-  const onUpdateQuantity = useCallback((quan) => setQuantity(quan), []);
+  const onUpdateQuantity = useCallback((quan) => setQuantity(+quan > 0 ? +quan : 1), []);
 
   const onAddToCart = () => {
+    clearTimeout(delay)
     const cartItem = {
       ...product,
       color,
@@ -26,6 +30,11 @@ const BuyInfo = ({ product }) => {
       quantity,
     };
     dispatch(cartActions.addItem({ item: cartItem }));
+    dispatch(alertActions.updateMessage({
+      message: 'Added to cart',
+      type: 'info'
+    }))
+    delay = setTimeout(() => dispatch(alertActions.clear()), 3000)
   };
 
   return (
