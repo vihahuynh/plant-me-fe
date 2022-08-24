@@ -36,7 +36,6 @@ const CartItem = ({ item, checkoutAllItems }) => {
   }
 
   const onUpdateQuantity = (quan) => {
-    console.log(quan)
     if (quan > 0) {
       const cartItem = {
         ...item,
@@ -65,10 +64,10 @@ const CartItem = ({ item, checkoutAllItems }) => {
       <div className={styles.container}>
         <div className={styles.itemInfo}>
           <CheckBox
-            checked={item.isCheckout}
+            checked={item.isCheckout || false}
             name={item.name}
             value={item.id}
-            onChange={onCheckout || false}
+            onChange={onCheckout}
           />
           <img src={item.imageUrl} alt={item.name} />
           <p>{item.name}</p>

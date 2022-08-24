@@ -52,6 +52,7 @@ const Cart = () => {
     cart.items.forEach(item => {
       const cartItem = {
         ...item,
+        netPrice: Math.round(item.price - (item.price * item.salePercent / 100)),
         isCheckout: cart.checkoutAllItems ? false : true
       }
       dispatch(cartActions.updateItem({ item: cartItem }))
@@ -88,7 +89,7 @@ const Cart = () => {
           <div className={styles.cart}>
             <div className={styles.cartHeader}>
               <div className={styles.selectAll}>
-                <CheckBox name="all" value="" label="Select all items" onChange={onSelectAllItems} checked={cart.checkoutAllItems} />
+                <CheckBox name="all" value="" label="Select all items" onChange={onSelectAllItems} checked={cart.checkoutAllItems || false} />
               </div>
               <TbTrash className={styles.icon} onClick={onOpenModal} />
             </div>
