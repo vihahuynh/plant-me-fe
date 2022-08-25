@@ -1,63 +1,62 @@
 @import "./../index.scss";
 
 .container {
-    text-align: center;
-}
-
-.decorateImg {
-    width: 100%;
-}
-
-section {
+  text-align: center;
+  section {
     padding: 4rem 30rem;
 
     h1 {
-        font-size: 4rem;
-        color: $color-primary;
-        margin-bottom: 2rem;
+      font-size: 4rem;
+      color: $color-primary;
+      margin-bottom: 2rem;
     }
 
     p {
-        font-size: 2rem;
-        color: $color-primary;
+      font-size: 2rem;
+      color: $color-primary;
     }
+  }
+}
+
+.decorateImg {
+  width: 100%;
 }
 
 .introduce {
-    background-color: #f7edee;
-    position: relative;
+  background-color: #f7edee;
+  position: relative;
 
-    img {
-        width: 100%;
-        margin-top: -8rem;
-    }
+  img {
+    width: 100%;
+    margin-top: -8rem;
+  }
 }
 
 .history {
-    background-color: $color-primary;
+  background-color: $color-primary;
 
-    h1,
-    p {
-        color: $color-primary-light;
-    }
+  h1,
+  p {
+    color: $color-primary-light;
+  }
 }
 
 .actions,
 .mission {
-    display: flex;
-    justify-content: space-between;
-    gap: 10rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 10rem;
 
-    p {
-        text-align: start;
-    }
+  p {
+    text-align: start;
+  }
 
-    img {
-        width: 60%;
-        border-radius: 3px;
-    }
+  img {
+    width: 60%;
+    border-radius: 3px;
+  }
 }
 
 .people {
-    background-color: $color-grey-light;
+  background-color: $color-grey-light;
 }
