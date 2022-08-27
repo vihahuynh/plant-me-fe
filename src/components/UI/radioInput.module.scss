@@ -1,0 +1,43 @@
+@import "./../../index.scss";
+
+.radioInput {
+  font-size: $default-font-size;
+  margin: 0.5rem 0;
+  cursor: pointer;
+
+  input {
+    display: none;
+    &:checked ~ label span::after {
+      display: block;
+    }
+  }
+
+  label {
+    display: flex;
+    align-items: center;
+  }
+
+  span {
+    display: inline-block;
+    height: 2.2rem;
+    width: 2.2rem;
+    border: 2px solid $color-primary;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    margin-right: 1.2rem;
+
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      height: 1.1rem;
+      width: 1.1rem;
+      border-radius: 50%;
+      background-color: $color-primary;
+      display: none;
+    }
+  }
+}

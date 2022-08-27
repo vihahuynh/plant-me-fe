@@ -5,7 +5,6 @@ const CheckBox = ({ name, value, onChange, label, checked }) => {
     <div className={styles.checkbox}>
       <input
         checked={checked}
-        className={styles.option}
         type="checkbox"
         id={name}
         name={name}

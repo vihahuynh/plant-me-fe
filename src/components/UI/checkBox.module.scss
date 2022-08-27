@@ -7,10 +7,14 @@
 
   input {
     display: none;
-  }
+    transition: all 0.3s;
 
-  .option:checked~label span::after {
-    display: block;
+    &:checked ~ label span {
+      background-color: $color-primary;
+      &::after {
+        display: block;
+      }
+    }
   }
 
   label {
@@ -20,9 +24,10 @@
 
   span {
     border: 2px solid $color-primary;
+    // background-color: $color-primary-light;
     display: inline-block;
-    height: 1.5rem;
-    width: 1.5rem;
+    height: 2rem;
+    width: 2rem;
     position: relative;
     cursor: pointer;
     margin-right: 1.2rem;
@@ -32,10 +37,10 @@
       display: none;
       position: absolute;
       top: -1px;
-      left: 0.2rem;
-      width: 0.5rem;
-      height: 0.8rem;
-      border: solid $color-primary;
+      left: 0.3rem;
+      width: 0.6rem;
+      height: 1.2rem;
+      border: solid $color-primary-light;
       border-width: 0 2px 2px 0;
       transform: rotate(45deg);
     }

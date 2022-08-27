@@ -1,28 +1,28 @@
 import { useState } from "react";
 import CheckBox from "../checkBox";
-import { filtersActions } from "./../../../store"
-import { useDispatch, useSelector } from "react-redux"
+import { filtersActions } from "./../../../store";
+import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./dropdownMenu.module.scss";
 
 const DropdownMenu = ({ item }) => {
-  const selectedFilters = useSelector(state => state.filters.selectedFilters)
+  const selectedFilters = useSelector((state) => state.filters.selectedFilters);
   const [open, setOpen] = useState(!!selectedFilters[item.text]);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const onAddFilter = (option, subOption) => {
-    const filter = selectedFilters[option]
-    const newFilters = { ...selectedFilters }
+    const filter = selectedFilters[option];
+    const newFilters = { ...selectedFilters };
     if (!filter) {
-      newFilters[option] = [subOption]
+      newFilters[option] = [subOption];
     } else {
       if (filter.includes(subOption)) {
-        newFilters[option] = filter.filter(f => f !== subOption)
+        newFilters[option] = filter.filter((f) => f !== subOption);
       } else {
-        newFilters[option] = filter.concat(subOption)
+        newFilters[option] = filter.concat(subOption);
       }
     }
-    dispatch(filtersActions.updateSelectFilters({ filters: newFilters }))
+    dispatch(filtersActions.updateSelectFilters({ filters: newFilters }));
   };
 
   return (
