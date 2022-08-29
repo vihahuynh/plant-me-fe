@@ -16,7 +16,8 @@ const filterSllice = createSlice({
             state.applyFilters = state.selectedFilters
         },
         clear(state) {
-            state = initState
+            state.selectedFilters = {}
+            // state.applyFilters = {}
         }
     }
 })

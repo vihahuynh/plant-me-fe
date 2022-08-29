@@ -10,11 +10,11 @@ const RadioInput = ({ name, value, onChange, label, checked }) => {
         value={value}
         onChange={onChange}
       />
-      <label for={value}>
+      <label htmlFor={value}>
         <span></span>
         {label}
       </label>
-    </div>
+    </div >
   );
 };
 

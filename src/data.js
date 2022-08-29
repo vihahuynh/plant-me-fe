@@ -248,7 +248,7 @@ export const plantsFilterOptions = [
   {
     id: 3,
     text: "Light",
-    type: "checkbox",
+    type: "radio",
     subOptions: [
       {
         id: 1,
@@ -262,6 +262,21 @@ export const plantsFilterOptions = [
       },
       {
         id: 3,
+        text: "Direct Sunlight",
+        query: "light=direct-sunlight",
+      },
+      {
+        id: 4,
+        text: "Low Light",
+        query: "light=low-light",
+      },
+      {
+        id: 5,
+        text: "Bright Indirect Light",
+        query: "light=bright-indirect-light",
+      },
+      {
+        id: 6,
         text: "Direct Sunlight",
         query: "light=direct-sunlight",
       },

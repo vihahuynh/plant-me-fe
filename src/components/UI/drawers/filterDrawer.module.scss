@@ -29,6 +29,55 @@
     font-size: 1.4rem;
     position: relative;
 
+    .filters {
+        height: 90vh;
+        overflow-y: scroll;
+        padding-bottom: 5rem;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    .filtersHeaderBox {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h5 {
+            font-size: 2rem;
+            color: $color-primary;
+        }
+
+        .clear {
+            color: darkred;
+            cursor: pointer;
+        }
+    }
+
+    .selectedFilters {
+        margin: 2rem;
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid $color-grey;
+    }
+
+    ul {
+        list-style: none;
+        margin: 1rem 0 1rem 1rem;
+
+        li {
+            color: $color-grey;
+            font-size: $default-font-size;
+            margin-bottom: .5rem;
+
+            .key {
+                font-weight: 600;
+                color: $color-primary;
+            }
+        }
+    }
+
     .footer {
         position: absolute;
         width: 100%;
@@ -64,8 +113,6 @@
 
 
     }
-
-
 
     .list {
         list-style: none;
