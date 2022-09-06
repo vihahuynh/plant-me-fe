@@ -1,4 +1,4 @@
-@import "./../../index.scss";
+@import "./../../index.module.scss";
 
 .container {
   height: 65vh;
@@ -21,9 +21,11 @@
     display: grid;
     grid-template-columns: 1fr 10fr;
     gap: 1rem;
+
     &:not(:last-child) {
       margin-bottom: 0.5rem;
     }
+
     .icon {
       grid-column: 1 / 2;
     }
@@ -52,6 +54,7 @@
 
   .plantCareTip,
   .decorTip {
+
     h4,
     p {
       display: inline;

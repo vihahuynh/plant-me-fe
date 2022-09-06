@@ -1,4 +1,4 @@
-@import "./../../index.scss";
+@import "./../../index.module.scss";
 
 .title {
   font-size: 4rem;
@@ -75,7 +75,7 @@
   }
 
   .colorItem.active {
-    outline: 1px solid $color-grey-dark !important;
+    outline: 1px solid $color-grey-dark  !important;
   }
 }
 
