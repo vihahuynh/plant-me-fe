@@ -82,8 +82,9 @@ const SignUp = () => {
         }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
+            onCreateUser(values)
             setSubmitting(false);
-          }, 400);
+          }, 500);
         }}
       >
         {({
@@ -154,9 +155,8 @@ const SignUp = () => {
             </div>
             <button
               type="submit"
-              disabled={isSubmitting}
-              className={styles.btn}
-              onClick={() => onCreateUser(values)}
+              className={!isSubmitting ? styles.btn : styles.disabledBtn}
+            // onClick={() => onCreateUser(values)}
             >
               create account
             </button>

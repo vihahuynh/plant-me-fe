@@ -55,6 +55,19 @@ html {
         padding: 1rem 3rem;
         text-transform: uppercase;
         font-size: $default-font-size;
+        cursor: pointer;
+      }
+
+      .disabledBtn {
+        align-self: center;
+        border: none;
+        border-radius: 10rem;
+        background-color: $color-grey;
+        color: $color-grey-dark;
+        padding: 1rem 3rem;
+        text-transform: uppercase;
+        font-size: $default-font-size;
+        cursor: not-allowed;
       }
 
       .errors {
@@ -72,4 +85,10 @@ html {
       }
     }
   }
+}
+
+.bigError {
+  color: darkred;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
 }

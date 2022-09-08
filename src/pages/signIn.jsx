@@ -1,86 +1,111 @@
 import React from "react";
 import { Formik } from "formik";
+import { useHistory } from "react-router-dom";
+import loginService from "../services/login";
 
 import styles from "./signIn.module.scss";
+import { useState } from "react";
 
-const SignIn = () => (
-  <div className={styles.container}>
-    <img src="/images/blog-3.png" alt="plant-care" />
-    <div className={styles.formContainer}>
-      <h2>Sign In</h2>
-      <Formik
-        initialValues={{ email: "", password: "" }}
-        validate={(values) => {
-          const errors = {};
-          if (!values.email) {
-            errors.email = "Email address is required";
-          } else if (
-            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-          ) {
-            errors.email = "Invalid email address";
-          }
+const SignIn = () => {
+  const [error, setError] = useState("")
+  const history = useHistory()
 
-          if (!values.password) errors.password = "Password is required";
-          return errors;
-        }}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
-        }}
-      >
-        {({
-          values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          isSubmitting,
-        }) => (
-          <form onSubmit={handleSubmit} className={styles.form}>
-            <div className={styles.inputContainer}>
-              <input
-                type="email"
-                name="email"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.email}
-                placeholder="Email address"
-              />
-              <p className={styles.errors}>
-                {errors.email && touched.email && errors.email}
-              </p>
-            </div>
-            <div className={styles.inputContainer}>
-              <input
-                type="password"
-                name="password"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.password}
-                placeholder="Password"
-              />
-              <p className={styles.errors}>
-                {errors.password && touched.password && errors.password}
-              </p>
-            </div>
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className={styles.btn}
-            >
-              Sign in
-            </button>
-            <a className={styles.link} href="/#">
-              Forgot password?
-            </a>
-          </form>
-        )}
-      </Formik>
+  const onLogin = async (values) => {
+    try {
+      const result = await loginService.login(values)
+      localStorage.setItem("loggedUser", JSON.stringify(result.data))
+      history.push("/")
+    } catch (err) {
+      const errorMessage = err?.response?.data?.error
+      setError(errorMessage || "")
+    }
+  }
+
+  return (
+    <div className={styles.container}>
+      <img src="/images/blog-3.png" alt="plant-care" />
+      <div className={styles.formContainer}>
+        <h2>Sign In</h2>
+        <p className={styles.bigError}>{!!error && error}</p>
+        <Formik
+          initialValues={{ loginData: "", password: "" }}
+          validate={(values) => {
+            const errors = {};
+            if (!values.loginData) {
+              errors.loginData = "Username/Email is required";
+            }
+            if (!values.password) {
+              errors.password = "Password is required";
+            } else if (values?.password?.length < 8) {
+              errors.password = "Password must contain at least 8 characters";
+            }
+            return errors;
+          }}
+          onSubmit={(values, { setSubmitting }) => {
+            setTimeout(() => {
+              onLogin(values)
+              setSubmitting(false);
+            }, 500);
+          }}
+        >
+          {({
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isSubmitting,
+          }) => (
+            <form onSubmit={handleSubmit} className={styles.form}>
+              <div className={styles.inputContainer}>
+                <input
+                  type="text"
+                  name="loginData"
+                  onChange={(e) => {
+                    handleChange(e)
+                    setError("")
+                  }}
+                  onBlur={handleBlur}
+                  value={values.loginData}
+                  placeholder="User/Email"
+                />
+                <p className={styles.errors}>
+                  {errors.loginData && touched.loginData && errors.loginData}
+                </p>
+              </div>
+              <div className={styles.inputContainer}>
+                <input
+                  type="password"
+                  name="password"
+                  onChange={(e) => {
+                    handleChange(e)
+                    setError("")
+                  }}
+                  onBlur={handleBlur}
+                  value={values.password}
+                  placeholder="Password"
+                />
+                <p className={styles.errors}>
+                  {errors.password && touched.password && errors.password}
+                </p>
+              </div>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className={!isSubmitting ? styles.btn : styles.disabledBtn}
+              >
+                Sign in
+              </button>
+              <a className={styles.link} href="/#">
+                Forgot password?
+              </a>
+            </form>
+          )}
+        </Formik>
+      </div>
     </div>
-  </div>
-);
+  );
+}
 
 export default SignIn;
