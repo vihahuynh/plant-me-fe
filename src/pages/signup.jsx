@@ -1,10 +1,45 @@
-import React from "react";
+
+import { useState } from "react";
 import { Formik } from "formik";
+import { useHistory } from "react-router-dom";
+import userService from './../services/users'
 
 import styles from "./signIn.module.scss";
+import { useEffect } from "react";
 
-const SignUp = () => (
-  <div className={styles.container}>
+const SignUp = () => {
+  const [users, setUsers] = useState([])
+  const history = useHistory()
+
+  useEffect(() => {
+    const fetchAllUsers = async () => {
+      try {
+        const result = await userService.getAll()
+        setUsers(result.data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    fetchAllUsers()
+  }, [])
+
+  const onCreateUser = async (values) => {
+    try {
+      const newUser = {
+        username: values.username,
+        email: values.email,
+        password: values.password
+      }
+      const result = await userService.create(newUser)
+      setUsers(prev => prev.concat(result?.data))
+      history.push("/signin")
+    } catch (err) {
+      const errorMessage = err?.response?.data?.error
+      console.log(errorMessage || "Something when wrong!")
+    }
+  }
+
+  return <div className={styles.container}>
     <img src="/images/blog-2.png" alt="plant-care" />
     <div className={styles.formContainer}>
       <h2>Sign Up</h2>
@@ -34,12 +69,12 @@ const SignUp = () => (
           if (!values.confirmPassword) {
             errors.confirmPassword = "Confirm password is required";
           } else if (values.confirmPassword !== values.password) {
-            errors.confirmPassword = "Please enter the same value again.";
+            errors.confirmPassword = "Please enter the same password.";
           }
 
           if (!values.password) {
             errors.password = "Password is required";
-          } else if (values.password?.length < 8) {
+          } else if (values?.password?.length < 8) {
             errors.password = "Password must contain at least 8 characters";
           }
 
@@ -47,7 +82,6 @@ const SignUp = () => (
         }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
           }, 400);
         }}
@@ -73,6 +107,7 @@ const SignUp = () => (
               />
               <p className={styles.errors}>
                 {errors.username && touched.username && errors.username}
+                {users.find(user => user.username === values.username) && "Username is already exists!"}
               </p>
             </div>
             <div className={styles.inputContainer}>
@@ -86,6 +121,7 @@ const SignUp = () => (
               />
               <p className={styles.errors}>
                 {errors.email && touched.email && errors.email}
+                {users.find(user => user.email === values.email) && "Email is already exists!"}
               </p>
             </div>
             <div className={styles.inputContainer}>
@@ -103,7 +139,7 @@ const SignUp = () => (
             </div>
             <div className={styles.inputContainer}>
               <input
-                type="confirmPassword"
+                type="password"
                 name="confirmPassword"
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -120,6 +156,7 @@ const SignUp = () => (
               type="submit"
               disabled={isSubmitting}
               className={styles.btn}
+              onClick={() => onCreateUser(values)}
             >
               create account
             </button>
@@ -128,6 +165,6 @@ const SignUp = () => (
       </Formik>
     </div>
   </div>
-);
+}
 
 export default SignUp;
