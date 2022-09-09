@@ -5,6 +5,7 @@ import { SketchPicker } from "react-color";
 import productService from "../../services/product";
 import { useEffect } from "react";
 import { MdCancel } from "react-icons/md/index";
+import InputGroup from "../UI/inputs/inputGroup/inputGroup";
 
 const NewProductForm = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -66,34 +67,24 @@ const NewProductForm = () => {
         }) => (
           <form onSubmit={handleSubmit} className={styles.form}>
             <div className={`${styles.inputContainer} ${styles.title}`}>
+              {/* <label htmlFor="title">Title</label> */}
               <input
+                id="tile"
                 type="text"
                 name="title"
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.title}
-                placeholder="Title"
+                placeholder="Title (Example: Castus)"
               />
               <p className={styles.errors}>
                 {errors.title && touched.title && errors.title}
               </p>
             </div>
-            <div className={`${styles.inputContainer} ${styles.about}`}>
-              <textarea
-                rows={5}
-                type="text"
-                name="about"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.about}
-                placeholder="About"
-              />
-              <p className={styles.errors}>
-                {errors.about && touched.about && errors.about}
-              </p>
-            </div>
             <div className={`${styles.inputContainer} ${styles.images}`}>
+              {/* <label htmlFor="images">Images</label> */}
               <input
+                id="images"
                 multiple
                 type="file"
                 accept="image/*"
@@ -101,24 +92,25 @@ const NewProductForm = () => {
                 onChange={(e) => (values.images = e.target.files)}
                 onBlur={handleBlur}
                 // value={values.images}
-                placeholder="Image"
+                // placeholder="Image"
               />
               <p className={styles.errors}>
                 {errors.files && touched.files && errors.files}
               </p>
             </div>
             <div className={`${styles.inputContainer} ${styles.size}`}>
+              {/* <label htmlFor="size">Size</label> */}
               <select
                 name="size"
                 id="size"
                 onChange={handleChange}
                 onBlur={handleBlur}
               >
-                <option value="XS">XS</option>
-                <option value="S">S</option>
-                <option value="M">M</option>
-                <option value="L">L</option>
-                <option value="XL">XL</option>
+                <option value="XS">Size: XS</option>
+                <option value="S">Size: S</option>
+                <option value="M">Size: M</option>
+                <option value="L">Size: L</option>
+                <option value="XL">Size: XL</option>
               </select>
               <p className={styles.errors}>
                 {errors.size && touched.size && errors.size}
@@ -128,13 +120,8 @@ const NewProductForm = () => {
               <SketchPicker
                 color={currentColor}
                 onChangeComplete={(color, _) => setCurrentColor(color.hex)}
-                // values.colors = [...new Set(values.colors.concat(color.hex))]
-                // setColors(prev => [...new Set(prev.concat(color.hex))])
-                // }
               />
               <div className={styles.colorsContainer}>
-                {/* <h5>Current color: </h5>
-                            <span style={{ backgroundColor: currentColor }}></span> */}
                 <div
                   className={styles.btn}
                   onClick={() => {
@@ -175,26 +162,30 @@ const NewProductForm = () => {
               </div>
             </div>
             <div className={`${styles.inputContainer} ${styles.price}`}>
+              {/* <label htmlFor="price">Price</label> */}
               <input
+                id="price"
                 type="text"
                 name="price"
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.price}
-                placeholder="Price"
+                placeholder="Price (Example: 50)"
               />
               <p className={styles.errors}>
                 {errors.price && touched.price && errors.price}
               </p>
             </div>
             <div className={`${styles.inputContainer} ${styles.salePercent}`}>
+              {/* <label htmlFor="sale-percent">Sale Percent</label> */}
               <input
+                id="sale-percent"
                 type="text"
                 name="salePercent"
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.salePercent}
-                placeholder="Sale Percent"
+                placeholder="Sale percent (Example: 15)"
               />
               <p className={styles.errors}>
                 {errors.salePercent &&
@@ -202,13 +193,32 @@ const NewProductForm = () => {
                   errors.salePercent}
               </p>
             </div>
-            <button
+            <div className={`${styles.inputContainer} ${styles.about}`}>
+              {/* <label htmlFor="about">About</label> */}
+              <textarea
+                id="about"
+                rows={6}
+                type="text"
+                name="about"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.about}
+                placeholder="About"
+              />
+              <p className={styles.errors}>
+                {errors.about && touched.about && errors.about}
+              </p>
+            </div>
+            <div className={styles.plantCare}>
+              <InputGroup inputTitle="Plant Care" />
+            </div>
+            {/* <button
               type="submit"
               disabled={isSubmitting}
               className={styles.btn}
             >
               Submit
-            </button>
+            </button> */}
           </form>
         )}
       </Formik>

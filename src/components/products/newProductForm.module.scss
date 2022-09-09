@@ -1,7 +1,7 @@
 @import "./../../index.module.scss";
 
 .formContainer {
-  padding: 10rem 15rem;
+  padding: 10rem 20rem;
   background-color: $color-primary-light;
 
   .form {
@@ -9,12 +9,20 @@
     display: grid;
     grid-template-columns: repeat(16, 1fr);
     column-gap: 3rem;
+    grid-template-rows: auto;
 
-    // .inputContainer {
-    //   &:not(:last-child) {
-    //     // margin-bottom: 1.5rem;
-    //   }
-    // }
+    .inputContainer {
+      // height: fit-content;
+      &:not(:last-child) {
+        margin-bottom: 0rem;
+      }
+    }
+
+    label {
+      color: $color-primary;
+      font-size: $default-font-size;
+      font-weight: bold;
+    }
 
     input,
     textarea,
@@ -41,13 +49,14 @@
     }
 
     input {
-      height: 4rem;
+      display: inline-block;
+      height: 5rem;
     }
 
     textarea,
     select {
       outline: none;
-      padding: 0.7rem 1.5rem;
+      padding: 1rem 1.5rem;
     }
 
     option {
@@ -141,7 +150,7 @@
 }
 
 .about {
-  grid-row: 2 / 3;
+  grid-row: 5 / 6;
   grid-column: 1 /11;
 }
 
@@ -165,11 +174,15 @@
 }
 
 .price {
-  grid-row: 5/6;
+  grid-row: 2/3;
   grid-column: 1/6;
 }
 
 .salePercent {
-  grid-row: 5/6;
+  grid-row: 2/3;
   grid-column: 6/11;
+}
+
+.plantCare {
+  grid-column: 1/5;
 }
