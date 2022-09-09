@@ -1,5 +1,5 @@
 import styles from "./productItem.module.scss";
-import Button from "./../UI/button";
+import Button from "../UI/buttons/button";
 import Price from "./price";
 
 import { useDispatch } from "react-redux";
@@ -12,17 +12,19 @@ const ProductItem = ({ product }) => {
   const dispatch = useDispatch();
 
   const addToCartHandler = (product) => {
-    clearTimeout(delay)
+    clearTimeout(delay);
     const cartItem = {
       ...product,
       quantity: 1,
     };
     dispatch(cartActions.addItem({ item: cartItem }));
-    dispatch(alertActions.updateMessage({
-      message: 'Product has been added to your cart',
-      type: 'info'
-    }))
-    delay = setTimeout(() => dispatch(alertActions.clear()), 3000)
+    dispatch(
+      alertActions.updateMessage({
+        message: "Product has been added to your cart",
+        type: "info",
+      })
+    );
+    delay = setTimeout(() => dispatch(alertActions.clear()), 3000);
   };
 
   return (

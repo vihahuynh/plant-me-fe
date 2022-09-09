@@ -4,9 +4,9 @@ import { useDispatch } from "react-redux";
 import Rating from "@mui/material/Rating";
 import Price from "./price";
 import styles from "./buyInfo.module.scss";
-import Button from "../UI/button";
+import Button from "../UI/buttons/button";
 
-import QuantityInput from "../UI/quantityInput";
+import QuantityInput from "../UI/inputs/quantityInput";
 import { cartActions } from "./../../store";
 import { alertActions } from "./../../store";
 
@@ -19,10 +19,13 @@ const BuyInfo = ({ product }) => {
 
   const dispatch = useDispatch();
 
-  const onUpdateQuantity = useCallback((quan) => setQuantity(+quan > 0 ? +quan : 1), []);
+  const onUpdateQuantity = useCallback(
+    (quan) => setQuantity(+quan > 0 ? +quan : 1),
+    []
+  );
 
   const onAddToCart = () => {
-    clearTimeout(delay)
+    clearTimeout(delay);
     const cartItem = {
       ...product,
       color,
@@ -30,11 +33,13 @@ const BuyInfo = ({ product }) => {
       quantity,
     };
     dispatch(cartActions.addItem({ item: cartItem }));
-    dispatch(alertActions.updateMessage({
-      message: 'Added to cart',
-      type: 'info'
-    }))
-    delay = setTimeout(() => dispatch(alertActions.clear()), 3000)
+    dispatch(
+      alertActions.updateMessage({
+        message: "Added to cart",
+        type: "info",
+      })
+    );
+    delay = setTimeout(() => dispatch(alertActions.clear()), 3000);
   };
 
   return (

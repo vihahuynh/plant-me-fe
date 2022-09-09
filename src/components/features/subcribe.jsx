@@ -1,4 +1,4 @@
-import Button from "../UI/button";
+import Button from "../UI/buttons/button";
 
 import styles from "./subcribe.module.scss";
 

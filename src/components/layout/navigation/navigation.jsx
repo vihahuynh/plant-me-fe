@@ -6,7 +6,7 @@ import { BiUserCircle } from "react-icons/bi/index";
 import { BiCartAlt } from "react-icons/bi/index";
 
 import Logo from "../../UI/logo";
-import SearchBar from "../../UI/searchBar";
+import SearchBar from "../../UI/inputs/searchBar";
 
 import { Link } from "react-router-dom";
 

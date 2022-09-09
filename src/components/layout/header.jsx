@@ -1,5 +1,5 @@
 import styles from "./header.module.scss";
-import LinkButton from "../UI/linkbutton";
+import LinkButton from "../UI/buttons/linkbutton";
 
 const Header = () => {
   return (

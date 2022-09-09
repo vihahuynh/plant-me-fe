@@ -1,4 +1,4 @@
-@import "./../../index.module.scss";
+@import "./../../../index.module.scss";
 
 .checkbox {
   font-size: $default-font-size;
@@ -9,7 +9,7 @@
     display: none;
     transition: all 0.3s;
 
-    &:checked~label span {
+    &:checked ~ label span {
       background-color: $color-primary;
 
       &::after {

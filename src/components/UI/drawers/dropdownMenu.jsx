@@ -1,6 +1,6 @@
 import { useState } from "react";
-import CheckBox from "../checkBox";
-import RadioInput from "../radioInput";
+import CheckBox from "../inputs/checkBox";
+import RadioInput from "../inputs/radioInput";
 import { filtersActions } from "./../../../store";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -21,16 +21,16 @@ const DropdownMenu = ({ item }) => {
         if (filter.includes(subOption)) {
           newFilters[option] = filter.filter((f) => f !== subOption);
           if (newFilters[option].length === 0) {
-            delete newFilters[option]
+            delete newFilters[option];
           }
         } else {
           newFilters[option] = filter.concat(subOption);
         }
       }
     } else if (item.type === "radio") {
-      newFilters[option] = subOption
+      newFilters[option] = subOption;
     }
-    console.log("newFilters: ", newFilters)
+    console.log("newFilters: ", newFilters);
     dispatch(filtersActions.updateSelectFilters({ filters: newFilters }));
   };
 
@@ -47,26 +47,30 @@ const DropdownMenu = ({ item }) => {
             : `${styles.menuContainer} ${styles.active}`
         }
       >
-        {item.type === "checkbox" && item.subOptions.map((option) => (
-          <CheckBox
-            key={option.id}
-            name={option.query}
-            value={option.query}
-            label={option.text}
-            checked={selectedFilters[item.text]?.includes(option.text) || false}
-            onChange={() => onAddFilter(item.text, option.text)}
-          />
-        ))}
-        {item.type === "radio" && item.subOptions.map((option) => (
-          <RadioInput
-            key={option.id}
-            name={item.text}
-            value={option.query}
-            label={option.text}
-            // checked={selectedFilters[item.text]?.includes(option.text) || false}
-            onChange={() => onAddFilter(item.text, option.text)}
-          />
-        ))}
+        {item.type === "checkbox" &&
+          item.subOptions.map((option) => (
+            <CheckBox
+              key={option.id}
+              name={option.query}
+              value={option.query}
+              label={option.text}
+              checked={
+                selectedFilters[item.text]?.includes(option.text) || false
+              }
+              onChange={() => onAddFilter(item.text, option.text)}
+            />
+          ))}
+        {item.type === "radio" &&
+          item.subOptions.map((option) => (
+            <RadioInput
+              key={option.id}
+              name={item.text}
+              value={option.query}
+              label={option.text}
+              // checked={selectedFilters[item.text]?.includes(option.text) || false}
+              onChange={() => onAddFilter(item.text, option.text)}
+            />
+          ))}
       </div>
     </div>
   );

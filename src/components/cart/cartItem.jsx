@@ -1,11 +1,11 @@
 import styles from "./cartItem.module.scss";
 import { useState } from "react";
-import ReactDOM from "react-dom"
+import ReactDOM from "react-dom";
 import { useDispatch } from "react-redux";
 
 import Price from "./../products/price";
-import QuantityInput from "../UI/quantityInput";
-import CheckBox from "../UI/checkBox";
+import QuantityInput from "../UI/inputs/quantityInput";
+import CheckBox from "../UI/inputs/checkBox";
 import Modal from "../UI/modal";
 
 import { TbTrash } from "react-icons/tb/index";
@@ -14,10 +14,10 @@ import { cartActions } from "../../store";
 
 const CartItem = ({ item, checkoutAllItems }) => {
   const dispatch = useDispatch();
-  const [openModal, setOpenModal] = useState(false)
+  const [openModal, setOpenModal] = useState(false);
 
-  const onCloseModal = () => setOpenModal(false)
-  const onOpenModal = () => setOpenModal(true)
+  const onCloseModal = () => setOpenModal(false);
+  const onOpenModal = () => setOpenModal(true);
 
   const onRemoveItem = () => {
     dispatch(cartActions.removeItem({ id: item.id }));
@@ -26,14 +26,14 @@ const CartItem = ({ item, checkoutAllItems }) => {
   const onCheckout = () => {
     const checkoutItem = {
       ...item,
-      netPrice: Math.round(item.price - (item.price * item.salePercent / 100)),
-      isCheckout: !item.isCheckout
-    }
-    dispatch(cartActions.updateItem({ item: checkoutItem }))
+      netPrice: Math.round(item.price - (item.price * item.salePercent) / 100),
+      isCheckout: !item.isCheckout,
+    };
+    dispatch(cartActions.updateItem({ item: checkoutItem }));
     if (!checkoutItem.isCheckout && checkoutAllItems) {
-      dispatch(cartActions.toggleCheckoutAll({ value: false }))
+      dispatch(cartActions.toggleCheckoutAll({ value: false }));
     }
-  }
+  };
 
   const onUpdateQuantity = (quan) => {
     if (quan > 0) {
@@ -43,11 +43,13 @@ const CartItem = ({ item, checkoutAllItems }) => {
       };
       dispatch(cartActions.updateItem({ item: cartItem }));
     } else if (quan === 0) {
-      onOpenModal()
+      onOpenModal();
     }
   };
 
-  const netPrice = Math.round(item.price - (item.price * item.salePercent / 100))
+  const netPrice = Math.round(
+    item.price - (item.price * item.salePercent) / 100
+  );
   return (
     <>
       {ReactDOM.createPortal(
@@ -59,7 +61,7 @@ const CartItem = ({ item, checkoutAllItems }) => {
           onCancel={onCloseModal}
           actionText="Delete"
         />,
-        document.getElementById('overlay-root')
+        document.getElementById("overlay-root")
       )}
       <div className={styles.container}>
         <div className={styles.itemInfo}>
@@ -81,7 +83,8 @@ const CartItem = ({ item, checkoutAllItems }) => {
           <Price price={netPrice * item.quantity} size="large" />
         </div>
         <TbTrash className={styles.icon} onClick={onOpenModal} />
-      </div></>
+      </div>
+    </>
   );
 };
 

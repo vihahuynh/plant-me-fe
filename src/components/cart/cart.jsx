@@ -1,12 +1,12 @@
-import { useState } from "react"
-import ReactDOM from 'react-dom';
+import { useState } from "react";
+import ReactDOM from "react-dom";
 
 import styles from "./cart.module.scss";
 
 import CartItem from "./cartItem";
-import Button from "./../UI/button"
-import CheckBox from "../UI/checkBox";
-import LinkButton from '../UI/linkbutton'
+import Button from "../UI/buttons/button";
+import CheckBox from "../UI/inputs/checkBox";
+import LinkButton from "../UI/buttons/linkbutton";
 
 import { cartActions } from "../../store";
 import { alertActions } from "../../store";
@@ -20,55 +20,65 @@ import Modal from "../UI/modal";
 let delay;
 
 const Cart = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-  const [openModal, setOpenModal] = useState(false)
+  const [openModal, setOpenModal] = useState(false);
 
-  const onCloseModal = () => setOpenModal(false)
+  const onCloseModal = () => setOpenModal(false);
   const onOpenModal = () => {
-    if (!cart.items.find(item => item.isCheckout)) {
-      clearTimeout(delay)
-      dispatch(alertActions.updateMessage({
-        message: 'Please select at least one item',
-        type: 'warning'
-      }))
-      delay = setTimeout(() => { dispatch(alertActions.clear()) }, 3000)
+    if (!cart.items.find((item) => item.isCheckout)) {
+      clearTimeout(delay);
+      dispatch(
+        alertActions.updateMessage({
+          message: "Please select at least one item",
+          type: "warning",
+        })
+      );
+      delay = setTimeout(() => {
+        dispatch(alertActions.clear());
+      }, 3000);
     } else {
-      setOpenModal(true)
+      setOpenModal(true);
     }
-  }
+  };
 
   const subTotal = cart.items
-    .filter(item => item.isCheckout)
-    .reduce((total, item) => total + item.netPrice * item.quantity, 0)
+    .filter((item) => item.isCheckout)
+    .reduce((total, item) => total + item.netPrice * item.quantity, 0);
 
   useEffect(() => {
-    if (cart.items.filter(item => item.isCheckout).length === cart.items.length) {
-      dispatch(cartActions.toggleCheckoutAll({ value: true }))
+    if (
+      cart.items.filter((item) => item.isCheckout).length === cart.items.length
+    ) {
+      dispatch(cartActions.toggleCheckoutAll({ value: true }));
     }
-  }, [dispatch, cart.items])
+  }, [dispatch, cart.items]);
 
   const onSelectAllItems = () => {
-    cart.items.forEach(item => {
+    cart.items.forEach((item) => {
       const cartItem = {
         ...item,
-        netPrice: Math.round(item.price - (item.price * item.salePercent / 100)),
-        isCheckout: cart.checkoutAllItems ? false : true
-      }
-      dispatch(cartActions.updateItem({ item: cartItem }))
-      dispatch(cartActions.toggleCheckoutAll({ value: !cart.checkoutAllItems }))
-    })
-  }
+        netPrice: Math.round(
+          item.price - (item.price * item.salePercent) / 100
+        ),
+        isCheckout: cart.checkoutAllItems ? false : true,
+      };
+      dispatch(cartActions.updateItem({ item: cartItem }));
+      dispatch(
+        cartActions.toggleCheckoutAll({ value: !cart.checkoutAllItems })
+      );
+    });
+  };
 
   const onDeleteCheckedItems = () => {
-    cart.items.forEach(item => {
+    cart.items.forEach((item) => {
       if (item.isCheckout) {
-        dispatch(cartActions.removeItem({ id: item.id }))
+        dispatch(cartActions.removeItem({ id: item.id }));
       }
-    })
-    dispatch(cartActions.toggleCheckoutAll({ values: false }))
-    setOpenModal(false)
-  }
+    });
+    dispatch(cartActions.toggleCheckoutAll({ values: false }));
+    setOpenModal(false);
+  };
 
   if (cart.items.length > 0)
     return (
@@ -82,19 +92,29 @@ const Cart = () => {
             onCancel={onCloseModal}
             actionText="Delete"
           />,
-          document.getElementById('overlay-root')
+          document.getElementById("overlay-root")
         )}
 
         <div className={styles.container}>
           <div className={styles.cart}>
             <div className={styles.cartHeader}>
               <div className={styles.selectAll}>
-                <CheckBox name="all" value="" label="Select all items" onChange={onSelectAllItems} checked={cart.checkoutAllItems || false} />
+                <CheckBox
+                  name="all"
+                  value=""
+                  label="Select all items"
+                  onChange={onSelectAllItems}
+                  checked={cart.checkoutAllItems || false}
+                />
               </div>
               <TbTrash className={styles.icon} onClick={onOpenModal} />
             </div>
             {cart.items.map((item) => (
-              <CartItem key={item.id} item={item} checkoutAllItems={cart.checkoutAllItems} />
+              <CartItem
+                key={item.id}
+                item={item}
+                checkoutAllItems={cart.checkoutAllItems}
+              />
             ))}
           </div>
           <div className={styles.summary}>
@@ -108,14 +128,10 @@ const Cart = () => {
               <p className={styles.address}>168B Bai Say 01 06 tpchm</p>
             </div>
             <div className={styles.orderSummary}>
-              <h5>
-                Order Summary
-              </h5>
+              <h5>Order Summary</h5>
               <div className={styles.subTotal}>
                 <p className={styles.summarySubTitle}>Subtotal</p>
-                {subTotal
-                  ? <p>{subTotal}.000 &#x20ab;</p>
-                  : <p>0 &#x20ab;</p>}
+                {subTotal ? <p>{subTotal}.000 &#x20ab;</p> : <p>0 &#x20ab;</p>}
               </div>
               <div className={styles.shipping}>
                 <p className={styles.summarySubTitle}>Shipping</p>
@@ -123,24 +139,33 @@ const Cart = () => {
               </div>
               <div className={styles.total}>
                 <p className={styles.summarySubTitle}>Total</p>
-                {subTotal
-                  ? <p className={styles.totalPrice}>{subTotal}.000 &#x20ab;</p>
-                  : <p className={styles.totalPrice}>0 &#x20ab;</p>}
+                {subTotal ? (
+                  <p className={styles.totalPrice}>{subTotal}.000 &#x20ab;</p>
+                ) : (
+                  <p className={styles.totalPrice}>0 &#x20ab;</p>
+                )}
               </div>
             </div>
             <Button borderRadius="square" text="CHECKOUT" size="large" />
           </div>
-        </div >
+        </div>
       </>
     );
 
-  return <div className={styles.container}>
-    <div className={styles.infoBox}>
-      <img src="./images/logo.png" alt="" />
-      <p>No items found</p>
-      <LinkButton text="Back to Shopping" size="medium" url="/shop" className={styles.btn} />
+  return (
+    <div className={styles.container}>
+      <div className={styles.infoBox}>
+        <img src="./images/logo.png" alt="" />
+        <p>No items found</p>
+        <LinkButton
+          text="Back to Shopping"
+          size="medium"
+          url="/shop"
+          className={styles.btn}
+        />
+      </div>
     </div>
-  </div>
+  );
 };
 
 export default Cart;

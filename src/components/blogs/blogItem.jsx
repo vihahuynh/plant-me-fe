@@ -1,4 +1,4 @@
-import LinkButton from "./../UI/linkbutton";
+import LinkButton from "./../UI/buttons/linkbutton";
 import styles from "./blogItem.module.scss";
 
 const BlogItem = ({ blog }) => {
