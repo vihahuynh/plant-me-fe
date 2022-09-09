@@ -66,6 +66,7 @@
             text-transform: uppercase;
             font-size: $default-font-size;
             grid-column: 1/5;
+            margin-bottom: 1rem;
         }
 
         .errors {
@@ -84,12 +85,26 @@
     }
 }
 
-.colorsList {
+.colorsContainer {
     width: 23rem;
-    list-style: none;
-    display: flex;
-    align-content: flex-start;
-    flex-wrap: wrap;
+
+    .colorsList {
+        list-style: none;
+        display: flex;
+        align-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    h5 {
+        color: $color-primary;
+        font-size: $default-font-size;
+    }
+
+    span {
+        width: 20rem;
+        height: 10rem;
+        border-radius: .5rem;
+    }
 
     .colorItem {
         width: 6rem;

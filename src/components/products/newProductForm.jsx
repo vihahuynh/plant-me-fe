@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import { Formik } from "formik";
 import styles from "./newProductForm.module.scss"
-import { PhotoshopPicker } from 'react-color';
+import { SketchPicker } from 'react-color';
 import productService from "../../services/product";
 import { useEffect } from "react";
 import { MdCancel } from "react-icons/md/index"
 
 const NewProductForm = () => {
     const [currentUser, setCurrentUser] = useState(null)
+    const [currentColor, setCurrentColor] = useState('#fff')
     const [colors, setColors] = useState([])
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('loggedUser'))
@@ -111,23 +112,39 @@ const NewProductForm = () => {
                         </p>
                     </div>
                     <div className={`${styles.inputContainer} ${styles.colors}`}>
-                        <PhotoshopPicker
-                            color={colors[colors.length - 1]}
-                            onChangeComplete={(color, _) => {
-                                values.colors = [...new Set(values.colors.concat(color.hex))]
-                                setColors(prev => [...new Set(prev.concat(color.hex))])
-                            }}
+                        <SketchPicker
+                            color={currentColor}
+                            onChangeComplete={(color, _) => setCurrentColor(color.hex)}
+                        // values.colors = [...new Set(values.colors.concat(color.hex))]
+                        // setColors(prev => [...new Set(prev.concat(color.hex))])
+                        // }
                         />
-                        <ul className={styles.colorsList}>
-                            {colors.map(c =>
-                                <li key={c} className={styles.colorItem} style={{ backgroundColor: c }} >
-                                    <MdCancel className={styles.deleteColorIcon} onClick={() => {
-                                        values.colors = values.colors.filter(color => color !== c)
-                                        setColors(values.colors.filter(color => color !== c))
-                                    }} />
-                                </li>
-                            )}
-                        </ul>
+                        <div className={styles.colorsContainer}>
+                            {/* <h5>Current color: </h5>
+                            <span style={{ backgroundColor: currentColor }}></span> */}
+                            <button
+                                className={styles.btn}
+                                onClick={() => {
+                                    values.colors = [...new Set(values.colors.concat(currentColor))]
+                                    setColors(prev => [...new Set(prev.concat(currentColor))])
+                                }}
+                            >
+                                Add color
+                            </button>
+                            <div>
+                                <h5>Chosen colors: </h5>
+                                <ul className={styles.colorsList}>
+                                    {colors.map(c =>
+                                        <li key={c} className={styles.colorItem} style={{ backgroundColor: c }} >
+                                            <MdCancel className={styles.deleteColorIcon} onClick={() => {
+                                                values.colors = values.colors.filter(color => color !== c)
+                                                setColors(values.colors.filter(color => color !== c))
+                                            }} />
+                                        </li>
+                                    )}
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     <div className={`${styles.inputContainer} ${styles.price}`}>
                         <input
