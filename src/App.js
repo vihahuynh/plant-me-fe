@@ -10,6 +10,7 @@ import SignIn from "./pages/signIn";
 import SignUp from "./pages/signUp";
 import ProductDetails from "./pages/productDetails";
 import CartPage from "./pages/cart";
+import NewProduct from "./pages/newProduct";
 
 const App = () => {
   return (
@@ -42,6 +43,10 @@ const App = () => {
         <Route path="/signup">
           <SignUp />
         </Route>
+        <Route path="/admin/products/new">
+          <NewProduct />
+        </Route>
+
       </Switch>
     </Router>
   );
