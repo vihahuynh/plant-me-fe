@@ -4,6 +4,10 @@
   padding: 10rem 20rem;
   background-color: $color-primary-light;
 
+  h2 {
+    color: $color-primary;
+  }
+
   .form {
     width: 100%;
     display: grid;
@@ -66,6 +70,7 @@
     }
 
     .btn {
+      margin-top: 3rem;
       cursor: pointer;
       display: inline-block;
       align-self: center;
@@ -165,7 +170,7 @@
 
   display: flex;
   gap: 2rem;
-  margin-bottom: 4rem;
+  // margin-bottom: 4rem;
 }
 
 .size {
@@ -183,6 +188,20 @@
   grid-column: 6/11;
 }
 
-.plantCare {
+// details
+
+.livingConditions {
   grid-column: 1/5;
+}
+
+.plantCare {
+  grid-column: 5 / 9;
+}
+
+.commonProblems {
+  grid-column: 9/13;
+}
+
+.decorTips {
+  grid-column: 13/17;
 }

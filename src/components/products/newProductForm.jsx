@@ -31,6 +31,7 @@ const NewProductForm = () => {
 
   return (
     <div className={styles.formContainer}>
+      <h2>New product</h2>
       <Formik
         initialValues={{
           images: [],
@@ -209,16 +210,25 @@ const NewProductForm = () => {
                 {errors.about && touched.about && errors.about}
               </p>
             </div>
+            <div className={styles.livingConditions}>
+              <InputGroup inputTitle="Living Conditions" />
+            </div>
             <div className={styles.plantCare}>
               <InputGroup inputTitle="Plant Care" />
             </div>
-            {/* <button
+            <div className={styles.commonProblems}>
+              <InputGroup inputTitle="Common Problems" />
+            </div>
+            <div className={styles.decorTips}>
+              <InputGroup inputTitle="Decor Tips" />
+            </div>
+            <button
               type="submit"
               disabled={isSubmitting}
               className={styles.btn}
             >
               Submit
-            </button> */}
+            </button>
           </form>
         )}
       </Formik>

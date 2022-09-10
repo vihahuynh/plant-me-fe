@@ -1,12 +1,12 @@
 import { useState } from "react";
 import styles from "./inputGroup.module.scss";
-import { TbTrash, TbEdit } from "react-icons/tb/index";
 import { RiSave3Line, RiCloseLine } from "react-icons/ri/index";
 import Button from "./../../buttons/button";
+import InputGroupItem from "./inputGroupItem";
 
 const InputGroup = ({ inputTitle }) => {
   const [items, setItems] = useState([]);
-  const [openForm, setOpenForm] = useState(false);
+  const [openForm, setOpenForm] = useState(true);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
@@ -30,28 +30,12 @@ const InputGroup = ({ inputTitle }) => {
     setTitle("");
   };
 
-  const handleDeleteItem = (id) => {
-    setItems((prev) => prev.filter((i) => i.id !== id));
-  };
-
   return (
     <div className={styles.container}>
       <h5>{inputTitle}</h5>
       <ul className={styles.itemList}>
         {items.map((i) => (
-          <li key={i.title} className={styles.item}>
-            <p>
-              <strong>{i.title}: </strong>
-              {i.content}
-            </p>
-            <div>
-              <TbEdit className={`${styles.icon} ${styles.iconBlue}`} />
-              <TbTrash
-                className={`${styles.icon} ${styles.iconRed}`}
-                onClick={() => handleDeleteItem(i.id)}
-              />
-            </div>
-          </li>
+          <InputGroupItem key={i.id} item={i} setItems={setItems} />
         ))}
       </ul>
       {openForm ? (

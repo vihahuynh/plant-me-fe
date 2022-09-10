@@ -1,16 +1,18 @@
 @import "./../../../../index.module.scss";
 
-.container {
-  margin-top: 5rem;
-  width: 100%;
+.item {
+  color: $color-grey-dark;
+  font-size: $default-font-size;
+  border-bottom: 1px solid lightgrey;
 
-  h5 {
-    color: $color-primary;
-    font-size: 2rem;
+  .itemTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 
-.formGroup {
+.formGroupItem {
   width: 100%;
   //   display: grid;
   //   grid-template-columns: repeat(16, 1fr);
@@ -100,11 +102,6 @@
     text-align: center;
     margin-top: 1rem;
   }
-}
-
-.itemList {
-  list-style: none;
-  margin-bottom: 1rem;
 }
 
 .icon {
