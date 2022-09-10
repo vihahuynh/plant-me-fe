@@ -1,7 +1,7 @@
 @import "./../../index.module.scss";
 
 .formContainer {
-  padding: 10rem 20rem;
+  padding: 10rem 10rem;
   background-color: $color-primary-light;
 
   h2 {
@@ -12,11 +12,47 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(16, 1fr);
-    column-gap: 3rem;
+    column-gap: 4rem;
     grid-template-rows: auto;
 
+    .fileInput {
+      height: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+
+      &::-webkit-file-upload-button {
+        opacity: 0;
+        margin-top: 0.5rem;
+        margin-right: 6rem;
+      }
+
+      &::before {
+        content: "Upload images";
+        font-size: $default-font-size;
+        display: inline-block;
+        position: absolute;
+        top: 50%;
+        left: 1.5rem;
+        transform: translateY(-50%);
+        background-color: $color-primary;
+        color: $color-primary-light;
+        padding: 0.5rem 1rem;
+        outline: none;
+        cursor: pointer;
+        border-radius: 3px;
+      }
+
+      &:hover::before {
+        border-color: $color-primary;
+      }
+
+      // color: transparent;
+    }
+
     .inputContainer {
-      // height: fit-content;
+      height: fit-content;
       &:not(:last-child) {
         margin-bottom: 0rem;
       }

@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Formik } from "formik";
-import styles from "./newProductForm.module.scss";
 import { SketchPicker } from "react-color";
 import productService from "../../services/product";
-import { useEffect } from "react";
-import { MdCancel } from "react-icons/md/index";
 import InputGroup from "../UI/inputs/inputGroup/inputGroup";
+
+import { MdCancel } from "react-icons/md/index";
+
+import styles from "./newProductForm.module.scss";
+import "./../../custom.scss";
 
 const NewProductForm = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -83,8 +85,8 @@ const NewProductForm = () => {
               </p>
             </div>
             <div className={`${styles.inputContainer} ${styles.images}`}>
-              {/* <label htmlFor="images">Images</label> */}
               <input
+                className={styles.fileInput}
                 id="images"
                 multiple
                 type="file"
@@ -92,15 +94,12 @@ const NewProductForm = () => {
                 name="image"
                 onChange={(e) => (values.images = e.target.files)}
                 onBlur={handleBlur}
-                // value={values.images}
-                // placeholder="Image"
               />
               <p className={styles.errors}>
                 {errors.files && touched.files && errors.files}
               </p>
             </div>
             <div className={`${styles.inputContainer} ${styles.size}`}>
-              {/* <label htmlFor="size">Size</label> */}
               <select
                 name="size"
                 id="size"
@@ -119,6 +118,7 @@ const NewProductForm = () => {
             </div>
             <div className={`${styles.inputContainer} ${styles.colors}`}>
               <SketchPicker
+                disableAlpha={true}
                 color={currentColor}
                 onChangeComplete={(color, _) => setCurrentColor(color.hex)}
               />
@@ -144,6 +144,7 @@ const NewProductForm = () => {
                         key={c}
                         className={styles.colorItem}
                         style={{ backgroundColor: c }}
+                        onClick={() => setCurrentColor(c)}
                       >
                         <MdCancel
                           className={styles.deleteColorIcon}

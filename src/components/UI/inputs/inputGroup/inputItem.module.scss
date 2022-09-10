@@ -1,18 +1,6 @@
 @import "./../../../../index.module.scss";
 
-.item {
-  color: $color-grey-dark;
-  font-size: $default-font-size;
-  border-bottom: 1px solid lightgrey;
-
-  .itemTitle {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-}
-
-.formGroupItem {
+.formItem {
   width: 100%;
   //   display: grid;
   //   grid-template-columns: repeat(16, 1fr);
@@ -67,40 +55,11 @@
     outline: none;
     padding: 0.7rem 1.5rem;
   }
-
-  option {
-    &:hover {
-      background-color: $color-primary;
-    }
-  }
-
-  .btn {
-    cursor: pointer;
-    display: inline-block;
-    align-self: center;
-    border: none;
-    border-radius: 10rem;
-    background-color: $color-primary;
-    color: $color-grey-light;
-    padding: 1rem 3rem;
-    text-transform: uppercase;
-    font-size: $default-font-size;
-    grid-column: 1/5;
-    margin-bottom: 1rem;
-  }
-
   .errors {
     margin-top: 3px;
     margin-left: 1.5rem;
     font-size: $tiny-font-size;
     color: darkred;
-  }
-
-  .link {
-    color: $color-primary-dark;
-    font-size: 1.2rem;
-    text-align: center;
-    margin-top: 1rem;
   }
 }
 
