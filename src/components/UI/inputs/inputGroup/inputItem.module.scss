@@ -5,17 +5,17 @@
   //   display: grid;
   //   grid-template-columns: repeat(16, 1fr);
   //   column-gap: 3rem;
+  h5 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    color: $color-primary;
+    font-size: $default-font-size;
+    margin-bottom: 0.5rem;
+  }
 
   .inputContainer {
-    h5 {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 1rem;
-      color: $color-primary;
-      font-size: $default-font-size;
-      margin-bottom: 0.5rem;
-    }
     &:not(:last-child) {
       margin-bottom: 1.5rem;
     }
@@ -31,7 +31,7 @@
     background-color: white;
     font-family: "Poppins", sans-serif;
     font-size: $default-font-size;
-    margin-bottom: 1rem;
+    // margin-bottom: 1rem;
 
     &:active,
     &:hover {
@@ -57,7 +57,6 @@
   }
   .errors {
     margin-top: 3px;
-    margin-left: 1.5rem;
     font-size: $tiny-font-size;
     color: darkred;
   }
