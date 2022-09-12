@@ -8,7 +8,7 @@ const BlogItem = ({ blog }) => {
       <div className={styles.blogDetails}>
         <span className={styles.publicDate}>{blog.publicDate}</span>
         <h5 className={styles.title}>{blog.title}</h5>
-        <LinkButton text="Read more" size="small" />
+        <LinkButton text="Read more" size="medium" />
       </div>
     </div>
   );
