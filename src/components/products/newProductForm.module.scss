@@ -53,8 +53,9 @@
 
     .inputContainer {
       height: fit-content;
+
       &:not(:last-child) {
-        margin-bottom: 0rem;
+        margin-bottom: 1rem;
       }
     }
 
@@ -99,11 +100,11 @@
       padding: 1rem 1.5rem;
     }
 
-    option {
-      &:hover {
-        background-color: $color-primary;
-      }
-    }
+    // option {
+    //   &:hover {
+    //     background-color: $color-primary;
+    //   }
+    // }
 
     .btn {
       margin-top: 3rem;

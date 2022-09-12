@@ -19,6 +19,7 @@ const NewProductForm = () => {
   }, []);
 
   const onAddNewProduct = async (values) => {
+    console.log(values)
     try {
       const formData = new FormData();
       for (const singleFile of values.images) {
@@ -50,6 +51,31 @@ const NewProductForm = () => {
         }}
         validate={(values) => {
           const errors = {};
+          if (!values.title) {
+            errors.title = "Title is required"
+          } else if (values.title.length < 5) {
+            errors.title = "Title must contains at least 5 characters"
+          }
+          if (!values.price) {
+            errors.price = "Price is required"
+          } else if (isNaN(values.price)) {
+            errors.price = "Invalid value"
+          }
+          if (values && isNaN(values?.salePercent)) {
+            errors.salePercent = "Invalid value"
+          }
+          if (!values.about) {
+            errors.about = "About is required"
+          }
+          if (!values.colors.length) {
+            errors.colors = "Colors is required"
+          }
+          if (!values.images.length) {
+            errors.images = "Images is required"
+          }
+          if (!values.size) {
+            errors.size = "Size is required"
+          }
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
@@ -78,7 +104,7 @@ const NewProductForm = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.title}
-                placeholder="Title (Example: Castus)"
+                placeholder="Title* (Example: Castus)"
               />
               <p className={styles.errors}>
                 {errors.title && touched.title && errors.title}
@@ -96,11 +122,12 @@ const NewProductForm = () => {
                 onBlur={handleBlur}
               />
               <p className={styles.errors}>
-                {errors.files && touched.files && errors.files}
+                {errors.images && touched.images && errors.images}
               </p>
             </div>
             <div className={`${styles.inputContainer} ${styles.size}`}>
               <select
+                multiple
                 name="size"
                 id="size"
                 onChange={handleChange}
@@ -122,6 +149,7 @@ const NewProductForm = () => {
                 color={currentColor}
                 onChangeComplete={(color, _) => setCurrentColor(color.hex)}
               />
+
               <div className={styles.colorsContainer}>
                 <div
                   className={styles.btn}
@@ -138,6 +166,9 @@ const NewProductForm = () => {
                 </div>
                 <div>
                   <h5>Chosen colors: </h5>
+                  <p className={styles.errors}>
+                    {!colors.length && errors.colors && touched.colors && errors.colors}
+                  </p>
                   <ul className={styles.colorsList}>
                     {colors.map((c) => (
                       <li
@@ -172,7 +203,7 @@ const NewProductForm = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.price}
-                placeholder="Price (Example: 50)"
+                placeholder="Price* (Example: 50)"
               />
               <p className={styles.errors}>
                 {errors.price && touched.price && errors.price}
@@ -205,7 +236,7 @@ const NewProductForm = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.about}
-                placeholder="About"
+                placeholder="About*"
               />
               <p className={styles.errors}>
                 {errors.about && touched.about && errors.about}
