@@ -14,10 +14,10 @@ const NewProductForm = () => {
   const [currentColor, setCurrentColor] = useState("#fff");
   const [colors, setColors] = useState([]);
 
-  const [livingConditions, setLivingConditions] = useState([])
-  const [commonProblems, setCommonProblems] = useState([])
-  const [decorTips, setDecorTips] = useState([])
-  const [plantCare, setPlantCare] = useState([])
+  const [livingConditions, setLivingConditions] = useState([]);
+  const [commonProblems, setCommonProblems] = useState([]);
+  const [decorTips, setDecorTips] = useState([]);
+  const [plantCare, setPlantCare] = useState([]);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("loggedUser"));
@@ -31,19 +31,23 @@ const NewProductForm = () => {
         livingConditions,
         decorTips,
         commonProblems,
-        plantCare
-      }
-      newProduct.salePercent = values.salePercent ? Number(values.salePercent) : 1
-      delete newProduct.images
+        plantCare,
+      };
+      newProduct.salePercent = values.salePercent
+        ? Number(values.salePercent)
+        : 1;
+      delete newProduct.images;
 
       const formData = new FormData();
       for (const singleFile of values.images) {
         formData.append("images", singleFile);
       }
-
-      formData.append("obj", JSON.stringify(newProduct))
-
-      await productService.create(formData, currentUser?.token);
+      formData.append("obj", JSON.stringify(newProduct));
+      const returnedProduct = await productService.create(
+        formData,
+        currentUser?.token
+      );
+      console.log(returnedProduct);
     } catch (err) {
       console.log(err);
     }
@@ -69,29 +73,29 @@ const NewProductForm = () => {
         validate={(values) => {
           const errors = {};
           if (!values.title) {
-            errors.title = "Title is required"
+            errors.title = "Title is required";
           } else if (values.title.length < 5) {
-            errors.title = "Title must contains at least 5 characters"
+            errors.title = "Title must contains at least 5 characters";
           }
           if (!values.price) {
-            errors.price = "Price is required"
+            errors.price = "Price is required";
           } else if (isNaN(values.price)) {
-            errors.price = "Invalid value"
+            errors.price = "Invalid value";
           }
           if (values && isNaN(values?.salePercent)) {
-            errors.salePercent = "Invalid value"
+            errors.salePercent = "Invalid value";
           }
           if (!values.about) {
-            errors.about = "About is required"
+            errors.about = "About is required";
           }
           if (!values.colors.length) {
-            errors.colors = "Colors is required"
+            errors.colors = "Colors is required";
           }
           if (!values.images.length) {
-            errors.images = "Images is required"
+            errors.images = "Images is required";
           }
           if (!values.size) {
-            errors.size = "Size is required"
+            errors.size = "Size is required";
           }
           return errors;
         }}
@@ -183,7 +187,10 @@ const NewProductForm = () => {
                 <div>
                   <h5>Chosen colors: </h5>
                   <p className={styles.colorErrors}>
-                    {!colors.length && errors.colors && touched.colors && errors.colors}
+                    {!colors.length &&
+                      errors.colors &&
+                      touched.colors &&
+                      errors.colors}
                   </p>
                   <ul className={styles.colorsList}>
                     {colors.map((c) => (
@@ -256,17 +263,33 @@ const NewProductForm = () => {
               </p>
             </div>
             <div className={styles.livingConditions}>
-              <InputGroup inputTitle="Living Conditions" items={livingConditions} setItems={setLivingConditions} />
+              <InputGroup
+                inputTitle="Living Conditions"
+                items={livingConditions}
+                setItems={setLivingConditions}
+              />
               {/* <p className={styles.errors}>{!livingConditions.length && "Living conditions is required"} </p> */}
             </div>
             <div className={styles.plantCare}>
-              <InputGroup inputTitle="Plant Care" items={plantCare} setItems={setPlantCare} />
+              <InputGroup
+                inputTitle="Plant Care"
+                items={plantCare}
+                setItems={setPlantCare}
+              />
             </div>
             <div className={styles.commonProblems}>
-              <InputGroup inputTitle="Common Problems" items={commonProblems} setItems={setCommonProblems} />
+              <InputGroup
+                inputTitle="Common Problems"
+                items={commonProblems}
+                setItems={setCommonProblems}
+              />
             </div>
             <div className={styles.decorTips}>
-              <InputGroup inputTitle="Decor Tips" items={decorTips} setItems={setDecorTips} />
+              <InputGroup
+                inputTitle="Decor Tips"
+                items={decorTips}
+                setItems={setDecorTips}
+              />
             </div>
             <button
               type="submit"

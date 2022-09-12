@@ -1,16 +1,21 @@
 import axios from "axios";
 
-const baseUrl = 'http://localhost:3001/api/products'
+const baseUrl = "http://localhost:3001/api/products";
 
 const getAll = () => {
-    return axios.get(baseUrl)
-}
+  return axios.get(baseUrl);
+};
 
 const create = (newObject, token) => {
-    console.log(token)
-    return axios.post(baseUrl, newObject, { headers: { Authorization: `bearer ${token}` } })
-}
+  return axios.post(baseUrl, newObject, {
+    headers: { Authorization: `bearer ${token}` },
+  });
+};
 
-const productService = { getAll, create }
+const get = (id) => {
+  return axios.get(`${baseUrl}/${id}`);
+};
 
-export default productService
+const productService = { getAll, create, get };
+
+export default productService;

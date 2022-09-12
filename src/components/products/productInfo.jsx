@@ -49,7 +49,7 @@ const ProductInfo = ({ product }) => {
               {getIcon(item.title)}
               <div>
                 <h4>{item.title}</h4>
-                <p>{item.text}</p>
+                <p>{item.content}</p>
               </div>
             </div>
           ))}
@@ -60,7 +60,7 @@ const ProductInfo = ({ product }) => {
           {product.plantCare.map((plantCareTip) => (
             <div key={plantCareTip.id} className={styles.plantCareTip}>
               <h4>{plantCareTip.title}: </h4>
-              <p>{plantCareTip.text}</p>
+              <p>{plantCareTip.content}</p>
             </div>
           ))}
         </div>
@@ -70,7 +70,7 @@ const ProductInfo = ({ product }) => {
           {product.commonProblems.map((problem) => (
             <div key={problem.id} className={styles.problem}>
               <h4>{problem.title}</h4>
-              <p>{problem.text}</p>
+              <p>{problem.content}</p>
             </div>
           ))}
         </div>
@@ -80,7 +80,7 @@ const ProductInfo = ({ product }) => {
           {product.decorTips.map((decorTip) => (
             <div key={decorTip.id} className={styles.decorTip}>
               <h4>{decorTip.title}: </h4>
-              <p>{decorTip.text}</p>
+              <p>{decorTip.content}</p>
             </div>
           ))}
         </div>
