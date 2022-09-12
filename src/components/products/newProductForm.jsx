@@ -25,13 +25,24 @@ const NewProductForm = () => {
   }, []);
 
   const onAddNewProduct = async (values) => {
-    console.log(values)
     try {
+      const newProduct = {
+        ...values,
+        livingConditions,
+        decorTips,
+        commonProblems,
+        plantCare
+      }
+      newProduct.salePercent = values.salePercent ? Number(values.salePercent) : 1
+      delete newProduct.images
+
       const formData = new FormData();
       for (const singleFile of values.images) {
         formData.append("images", singleFile);
       }
-      formData.append("title", "nemo");
+
+      formData.append("obj", JSON.stringify(newProduct))
+
       await productService.create(formData, currentUser?.token);
     } catch (err) {
       console.log(err);
@@ -102,7 +113,6 @@ const NewProductForm = () => {
         }) => (
           <form onSubmit={handleSubmit} className={styles.form}>
             <div className={`${styles.inputContainer} ${styles.title}`}>
-              {/* <label htmlFor="title">Title</label> */}
               <input
                 id="tile"
                 type="text"
@@ -172,7 +182,7 @@ const NewProductForm = () => {
                 </div>
                 <div>
                   <h5>Chosen colors: </h5>
-                  <p className={styles.errors}>
+                  <p className={styles.colorErrors}>
                     {!colors.length && errors.colors && touched.colors && errors.colors}
                   </p>
                   <ul className={styles.colorsList}>

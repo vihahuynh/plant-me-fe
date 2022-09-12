@@ -6,9 +6,9 @@ const getAll = () => {
     return axios.get(baseUrl)
 }
 
-const create = (formData, token) => {
+const create = (newObject, token) => {
     console.log(token)
-    return axios.post(baseUrl, formData, { headers: { Authorization: `bearer ${token}` } })
+    return axios.post(baseUrl, newObject, { headers: { Authorization: `bearer ${token}` } })
 }
 
 const productService = { getAll, create }
