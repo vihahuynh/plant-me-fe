@@ -39,7 +39,7 @@ const GroupItem = ({ item, setItems }) => {
         <>
           <div className={styles.itemTitle}>
             <strong>{item.title}: </strong>
-            <div>
+            <div className={styles.iconGroup}>
               <TbEdit
                 className={`${styles.icon} ${styles.iconBlue}`}
                 onClick={onEditItem}

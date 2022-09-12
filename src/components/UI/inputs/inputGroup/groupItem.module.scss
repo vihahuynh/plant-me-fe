@@ -1,6 +1,7 @@
 @import "./../../../../index.module.scss";
 
 .item {
+  padding: 1rem 0;
   color: $color-grey-dark;
   font-size: $default-font-size;
   border-bottom: 1px solid lightgrey;
@@ -10,6 +11,10 @@
     justify-content: space-between;
     align-items: center;
   }
+}
+
+.iconGroup {
+  flex-shrink: 0;
 }
 
 .icon {
@@ -22,13 +27,16 @@
 
 .iconBlue {
   color: deepskyblue;
+
   &:hover {
     background-color: deepskyblue;
     color: white;
   }
 }
+
 .iconRed {
   color: darkred;
+
   &:hover {
     background-color: darkred;
     color: white;
