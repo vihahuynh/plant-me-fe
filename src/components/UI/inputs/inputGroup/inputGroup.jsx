@@ -4,8 +4,8 @@ import Button from "./../../buttons/button";
 import GroupItem from "./groupItem";
 import InputItem from "./inputItem";
 
-const InputGroup = ({ inputTitle }) => {
-  const [items, setItems] = useState([]);
+const InputGroup = ({ inputTitle, items, setItems }) => {
+  // const [items, setItems] = useState([]);
   const [openForm, setOpenForm] = useState(true);
 
   const handleAddItem = (title, content) => {

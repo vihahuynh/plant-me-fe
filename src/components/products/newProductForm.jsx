@@ -13,6 +13,12 @@ const NewProductForm = () => {
   const [currentUser, setCurrentUser] = useState(null);
   const [currentColor, setCurrentColor] = useState("#fff");
   const [colors, setColors] = useState([]);
+
+  const [livingConditions, setLivingConditions] = useState([])
+  const [commonProblems, setCommonProblems] = useState([])
+  const [decorTips, setDecorTips] = useState([])
+  const [plantCare, setPlantCare] = useState([])
+
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("loggedUser"));
     setCurrentUser(user);
@@ -195,7 +201,6 @@ const NewProductForm = () => {
               </div>
             </div>
             <div className={`${styles.inputContainer} ${styles.price}`}>
-              {/* <label htmlFor="price">Price</label> */}
               <input
                 id="price"
                 type="text"
@@ -210,7 +215,6 @@ const NewProductForm = () => {
               </p>
             </div>
             <div className={`${styles.inputContainer} ${styles.salePercent}`}>
-              {/* <label htmlFor="sale-percent">Sale Percent</label> */}
               <input
                 id="sale-percent"
                 type="text"
@@ -227,7 +231,6 @@ const NewProductForm = () => {
               </p>
             </div>
             <div className={`${styles.inputContainer} ${styles.about}`}>
-              {/* <label htmlFor="about">About</label> */}
               <textarea
                 id="about"
                 rows={6}
@@ -243,16 +246,17 @@ const NewProductForm = () => {
               </p>
             </div>
             <div className={styles.livingConditions}>
-              <InputGroup inputTitle="Living Conditions" />
+              <InputGroup inputTitle="Living Conditions" items={livingConditions} setItems={setLivingConditions} />
+              {/* <p className={styles.errors}>{!livingConditions.length && "Living conditions is required"} </p> */}
             </div>
             <div className={styles.plantCare}>
-              <InputGroup inputTitle="Plant Care" />
+              <InputGroup inputTitle="Plant Care" items={plantCare} setItems={setPlantCare} />
             </div>
             <div className={styles.commonProblems}>
-              <InputGroup inputTitle="Common Problems" />
+              <InputGroup inputTitle="Common Problems" items={commonProblems} setItems={setCommonProblems} />
             </div>
             <div className={styles.decorTips}>
-              <InputGroup inputTitle="Decor Tips" />
+              <InputGroup inputTitle="Decor Tips" items={decorTips} setItems={setDecorTips} />
             </div>
             <button
               type="submit"
