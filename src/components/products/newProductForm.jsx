@@ -33,7 +33,7 @@ const NewProductForm = () => {
         commonProblems,
         plantCare
       }
-      newProduct.salePercent = values.salePercent ? Number(values.salePercent) : 1
+      newProduct.salePercent = values.salePercent ? Number(values.salePercent) : 0
       delete newProduct.images
 
       const formData = new FormData();

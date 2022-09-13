@@ -23,13 +23,13 @@ const reducer = (state, action) => {
 const InputItem = ({ item, inputTitle, onSave, onCancel }) => {
   const [titleState, dispatchTitle] = useReducer(reducer, {
     value: item.title,
-    isValid: false,
-    isTouched: false,
+    isValid: item.title ? true : false,
+    isTouched: item.title ? true : false,
   });
   const [contentState, dispatchContent] = useReducer(reducer, {
     value: item.content,
-    isValid: false,
-    isTouched: false,
+    isValid: item.content ? true : false,
+    isTouched: item.content ? true : false,
   });
 
   const handleChangeTitle = (e) =>
