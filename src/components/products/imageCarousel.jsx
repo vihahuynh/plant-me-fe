@@ -67,10 +67,10 @@ const ImageCarousel = ({ images }) => {
           ref={(slider) => setSlider2(slider)}
         >
           {images.map((img) => (
-            <div className={styles["slick-slide"]} key={img.id}>
+            <div className={styles["slick-slide"]} key={img}>
               <img
                 className={styles["slick-slide-image"]}
-                src={img.imageUrl}
+                src={img}
                 alt="plant"
               />
             </div>

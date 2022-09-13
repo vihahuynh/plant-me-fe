@@ -22,7 +22,7 @@ const App = () => {
         <Route path="/about">
           <About />
         </Route>
-        <Route path="/shop/details">
+        <Route path="/products/:id">
           <ProductDetails />
         </Route>
         <Route path="/shop">
@@ -46,7 +46,6 @@ const App = () => {
         <Route path="/admin/products/new">
           <NewProduct />
         </Route>
-
       </Switch>
     </Router>
   );
