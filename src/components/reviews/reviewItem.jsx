@@ -2,6 +2,7 @@ import { useState } from "react"
 
 import styles from "./reviewItem.module.scss"
 import Rating from "@mui/material/Rating";
+import Moment from "react-moment"
 
 
 import { AiTwotoneDislike, AiTwotoneLike } from "react-icons/ai/index"
@@ -23,7 +24,7 @@ const ReviewItem = ({ review }) => {
     return <div className={styles.container}>
         <img className={styles.avatar} src={review.avatarUrl || "/images/default-avatar.png"} alt="user" />
         <div className={styles.review}>
-            <h5>{review.username}</h5>
+            <h5>{review.user.username}</h5>
             <Rating className={styles.rating} name="read-only" value={review.rating} readOnly />
             <div className={styles.content}>
                 <h5>{review.title}</h5>
@@ -31,7 +32,7 @@ const ReviewItem = ({ review }) => {
             </div>
         </div>
         <div className={styles.left}>
-            <p>{review.createdAt}</p>
+            <Moment format="YYYY-MM-DD">{review.createdAt}</Moment>
             <div className={styles.isHelpful}>
                 {/* <p>Was this review helpful?</p> */}
                 <div className={styles.like}>
