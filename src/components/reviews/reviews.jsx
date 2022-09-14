@@ -8,8 +8,11 @@ import FilterDrawer from "../UI/drawers/filterDrawer";
 import ProgressBar from "../UI/progressBar";
 import ReviewItem from "./reviewItem";
 import ReviewForm from "./reviewForm";
+import { useState } from "react";
 
-const Reviews = ({ reviews }) => {
+const Reviews = ({ reviewsData, productId }) => {
+    const [reviews, setReviews] = useState(reviewsData)
+
     const ratingStatistics = {
         total: reviews.length,
         average: reviews.reduce((average, review) => {
@@ -24,7 +27,6 @@ const Reviews = ({ reviews }) => {
         ]
     }
 
-    console.log(ratingStatistics)
     return <div className={styles.container}>
         <h2>Reviews</h2>
         <div className={styles.summary}>
@@ -41,7 +43,7 @@ const Reviews = ({ reviews }) => {
                 )}
                 </ul>
             </div>
-            <ReviewForm />
+            <ReviewForm setReviews={setReviews} productId={productId} />
             <div className={styles.btnContainers}>
                 <div className={styles.btn}><SortDrawer sortOptions={reviewsSortOptions} /></div>
                 <div className={styles.btn}><FilterDrawer filterOptions={reviewsFilterOptions} /></div>

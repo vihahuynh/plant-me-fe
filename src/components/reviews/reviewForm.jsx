@@ -1,7 +1,37 @@
 import styles from "./reviewForm.module.scss"
 import { Formik } from "formik"
 
-const ReviewForm = () => {
+import reviewService from "../../services/review";
+import { useSelector } from "react-redux";
+
+const ReviewForm = ({ setReviews, productId }) => {
+    const authen = useSelector(state => state.authentication)
+
+    const onAddNewReview = async (values) => {
+        try {
+            const newReview = {
+                ...values,
+                productId,
+            }
+            delete newReview.images
+            console.log("newReview: ", newReview)
+
+            const formData = new FormData();
+            for (const singleFile of values.images) {
+                formData.append("images", singleFile);
+            }
+            formData.append("obj", JSON.stringify(newReview));
+            const returnReview = await reviewService.create(
+                formData,
+                authen?.user?.token
+            );
+            console.log(returnReview);
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <div className={styles.formContainer}>
             <h5>Enter your review</h5>
@@ -25,7 +55,7 @@ const ReviewForm = () => {
                 onSubmit={(values, { setSubmitting }) => {
                     setTimeout(() => {
                         console.log("values: ", values)
-                        // onAddNewProduct(values);
+                        onAddNewReview(values);
                         setSubmitting(false);
                     }, 400);
                 }}

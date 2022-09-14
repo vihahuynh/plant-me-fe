@@ -51,7 +51,7 @@ const ProductDetails = () => {
         </div> */}
 
         <div className={styles.reviews}>
-          <Reviews reviews={product.reviews} />
+          <Reviews reviewsData={product.reviews} productId={product.id} />
         </div>
         <div className={styles.features}>
           <h2>Why People Choose Us?</h2>
