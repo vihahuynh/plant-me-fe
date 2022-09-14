@@ -6,15 +6,17 @@ import Categories from "../components/categories/categories";
 import Wrapper from "../components/layout/wrapper";
 
 import styles from "./home.module.scss"
+import { useState } from "react";
 
 const Home = () => {
+  const [popolarProducts, setPopularProducts] = useState([])
   return (
     <Wrapper>
       <Header />
       <div className={styles.container}>
         <section>
           <h2>Popular Products</h2>
-          <Products />
+          <Products products={popolarProducts} />
         </section>
         <section>
           <h2>Shop By Categories</h2>

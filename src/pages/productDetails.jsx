@@ -45,10 +45,10 @@ const ProductDetails = () => {
         <div className={styles.details}>
           <ProductInfo product={product} />
         </div>
-        <div className={styles.similarProducts}>
+        {/* <div className={styles.similarProducts}>
           <h2>Frequently Bought Together</h2>
           <Products />
-        </div>
+        </div> */}
 
         <div className={styles.reviews}>
           <Reviews />

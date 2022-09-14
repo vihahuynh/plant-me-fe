@@ -32,6 +32,8 @@ const ProductItem = ({ product }) => {
     history.push(`/products/${product?.id}`)
   }
 
+  const imageUrl = product?.images?.find(img => img?.includes("eye")) || product?.images[0] || ""
+
   return (
     <div className={styles.productContainer} onClick={goToDetailsPage}>
       <div className={styles.iconContainer}>
@@ -42,7 +44,7 @@ const ProductItem = ({ product }) => {
         )}
       </div>
       <div className={styles.imgContainer}>
-        <img src={product.imageUrl} alt={product.name} />
+        <img src={imageUrl} alt={product.name} />
       </div>
       <div className={styles.productDetails}>
         <p>{product.name}</p>

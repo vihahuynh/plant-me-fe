@@ -86,7 +86,7 @@ const ImageCarousel = ({ images }) => {
             <div className={styles["slick-img"]} key={img}>
               <img
                 className={styles["slick-slide-image"]}
-                src={img.imageUrl}
+                src={img}
                 alt="plant"
               />
             </div>
