@@ -7,14 +7,18 @@ import { BiCartAlt } from "react-icons/bi/index";
 
 import Logo from "../../UI/logo";
 import SearchBar from "../../UI/inputs/searchBar";
+import Button from "../../UI/buttons/button"
 
 import { Link } from "react-router-dom";
 
 const Navigation = () => {
   const cartQuantity = useSelector((state) => state.cart.quantity);
+  const authen = useSelector(state => state.authentication)
+
+  console.log("authen: ", authen)
 
   return (
-    <div className={styles.nav}>
+    <nav className={styles.nav}>
       <div className={styles.subNav}>
         <Logo />
         <ul className={styles.navList}>
@@ -27,15 +31,21 @@ const Navigation = () => {
       </div>
       <div className={styles.subNav}>
         <SearchBar />
-        <div>
-          <BiUserCircle className={styles.icon} />
+        <div className={styles.subNav}>
           <Link to="/cart" className={styles.cart}>
             <BiCartAlt className={styles.icon} />
             <span className={styles.quantity}>{cartQuantity}</span>
           </Link>
+          {authen.isLoggedIn
+            ? <BiUserCircle className={styles.icon} />
+            : <>
+              <Link to="/signin"><Button className={styles.greenBtn} text="Sign in" size="small" borderRadius="square" /></Link>
+              <Link to="/signup"><Button className={styles.whiteBtn} text="Sign up" size="small" borderRadius="square" /></Link>
+            </>
+          }
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 

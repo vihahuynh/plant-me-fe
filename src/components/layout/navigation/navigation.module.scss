@@ -24,16 +24,28 @@
   align-items: center;
 }
 
+.greenBtn,
+.whiteBtn {
+  margin-left: 1em;
+  text-transform: uppercase;
+  border: 1px solid $color-primary;
+}
+
+.whiteBtn {
+  background-color: $color-primary-light;
+  color: $color-primary;
+}
+
 .icon {
   height: 3.5rem;
   width: 3.5rem;
   fill: $color-grey;
-  margin-left: 1rem;
 }
 
 .cart {
   display: inline-block;
   position: relative;
+  margin-right: 3rem;
 }
 
 .quantity {

@@ -2,18 +2,22 @@ import React from "react";
 import { Formik } from "formik";
 import { useHistory } from "react-router-dom";
 import loginService from "../services/login";
+import { authenticationActions } from "./../store/index"
 
 import styles from "./signIn.module.scss";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 const SignIn = () => {
   const [error, setError] = useState("")
   const history = useHistory()
+  const dispatch = useDispatch()
 
   const onLogin = async (values) => {
     try {
       const result = await loginService.login(values)
       localStorage.setItem("loggedUser", JSON.stringify(result.data))
+      dispatch(authenticationActions.login({ user: result.data }))
       history.push("/")
     } catch (err) {
       const errorMessage = err?.response?.data?.error
