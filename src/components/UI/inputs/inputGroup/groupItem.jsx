@@ -15,6 +15,7 @@ const GroupItem = ({ item, setItems }) => {
 
   const handleEditItem = (title, content) => {
     const updatedItem = {
+      id: item.id,
       title,
       content,
     };

@@ -45,7 +45,7 @@ const ProductInfo = ({ product }) => {
       <Accordion title="Living Condition">
         <div className={styles.livingConditions}>
           {product.livingConditions.map((item) => (
-            <div className={styles.condition} key={item.id}>
+            <div className={styles.condition} key={item.title}>
               {getIcon(item.title)}
               <div>
                 <h4>{item.title}</h4>
@@ -58,7 +58,7 @@ const ProductInfo = ({ product }) => {
       <Accordion title="Plant care">
         <div className={styles.plantCare}>
           {product.plantCare.map((plantCareTip) => (
-            <div key={plantCareTip.id} className={styles.plantCareTip}>
+            <div key={plantCareTip.title} className={styles.plantCareTip}>
               <h4>{plantCareTip.title}: </h4>
               <p>{plantCareTip.content}</p>
             </div>
@@ -68,7 +68,7 @@ const ProductInfo = ({ product }) => {
       <Accordion title="Common Problems">
         <div className={styles.commonProblems}>
           {product.commonProblems.map((problem) => (
-            <div key={problem.id} className={styles.problem}>
+            <div key={problem.title} className={styles.problem}>
               <h4>{problem.title}</h4>
               <p>{problem.content}</p>
             </div>
@@ -78,7 +78,7 @@ const ProductInfo = ({ product }) => {
       <Accordion title="Style and Decor">
         <div className={styles.decorTips}>
           {product.decorTips.map((decorTip) => (
-            <div key={decorTip.id} className={styles.decorTip}>
+            <div key={decorTip.title} className={styles.decorTip}>
               <h4>{decorTip.title}: </h4>
               <p>{decorTip.content}</p>
             </div>

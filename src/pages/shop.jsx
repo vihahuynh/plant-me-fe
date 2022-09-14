@@ -1,23 +1,40 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Wrapper from "../components/layout/wrapper";
 import Products from "../components/products/products";
 import Pagination from "../components/UI/pagination";
 import SortDrawer from "../components/UI/drawers/sortDrawer";
 import FilterDrawer from "../components/UI/drawers/filterDrawer";
 
-import { products, plantsFilterOptions, plantsSortOptions } from "../data";
+import productService from "../services/product";
+
+import { plantsFilterOptions, plantsSortOptions } from "../data";
 
 import styles from "./shop.module.scss"
 
 const Shop = () => {
-  const itemsPerPage = 2;
+  const [products, setProducts] = useState([])
+  const itemsPerPage = 4;
   const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const productsData = await productService.getAll()
+        setProducts(productsData.data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    fetchData()
+  }, [])
+
+
   const totalPages = Math.ceil(products.length / itemsPerPage);
 
   const start = (page - 1) * itemsPerPage;
   const end =
-    page + itemsPerPage < products.length
-      ? page + itemsPerPage - 1
+    page * itemsPerPage < products.length
+      ? page * itemsPerPage
       : products.length;
 
   return (
@@ -27,7 +44,7 @@ const Shop = () => {
         <div className={styles.btn}><FilterDrawer filterOptions={plantsFilterOptions} /></div>
       </div>
       <div className={styles.container}>
-        <Products productsData={products.slice(start, end)} />
+        <Products products={products.slice(start, end)} />
         <Pagination page={page} setPage={setPage} totalPages={totalPages} />
       </div>
     </Wrapper>

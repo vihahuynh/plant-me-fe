@@ -1,7 +1,7 @@
 import styles from "./productItem.module.scss";
 import Button from "../UI/buttons/button";
 import Price from "./price";
-
+import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../store";
 import { alertActions } from "../../store";
@@ -10,8 +10,9 @@ let delay;
 
 const ProductItem = ({ product }) => {
   const dispatch = useDispatch();
+  const history = useHistory()
 
-  const addToCartHandler = (product) => {
+  const addToCartHandler = () => {
     clearTimeout(delay);
     const cartItem = {
       ...product,
@@ -27,8 +28,12 @@ const ProductItem = ({ product }) => {
     delay = setTimeout(() => dispatch(alertActions.clear()), 3000);
   };
 
+  const goToDetailsPage = () => {
+    history.push(`/products/${product?.id}`)
+  }
+
   return (
-    <div className={styles.productContainer}>
+    <div className={styles.productContainer} onClick={goToDetailsPage}>
       <div className={styles.iconContainer}>
         {product.like ? (
           <BsSuitHeart className={styles.icon} />

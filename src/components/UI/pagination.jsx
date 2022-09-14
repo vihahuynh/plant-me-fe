@@ -2,7 +2,7 @@ import styles from "./pagination.module.scss";
 
 const Pagination = ({ page, setPage, totalPages }) => {
   const onNext = () =>
-    setPage((curPage) => (curPage === totalPages ? totalPages : curPage + 1));
+    setPage((curPage) => (curPage + 1 >= totalPages ? totalPages : curPage + 1));
 
   const onPrevious = () =>
     setPage((curPage) => (curPage === 1 ? 1 : curPage - 1));
@@ -10,7 +10,7 @@ const Pagination = ({ page, setPage, totalPages }) => {
   const showPages = () => {
     let start = page - 2 > 0 ? page - 2 : 1;
     let end = start + 4 < totalPages ? start + 4 : totalPages;
-    if (totalPages > 5 && end - start < 5) {
+    if (totalPages >= 5 && end - start < 5) {
       start = end - 4;
     }
     return Array.from(

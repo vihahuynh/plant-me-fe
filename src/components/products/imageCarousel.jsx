@@ -17,9 +17,8 @@ const ImageCarousel = ({ images }) => {
   const Arrow = ({ onClick, className, type }) => {
     return (
       <button
-        className={`${className} ${
-          type === "next" ? styles.nextArrow : styles.prevArrow
-        }`}
+        className={`${className} ${type === "next" ? styles.nextArrow : styles.prevArrow
+          }`}
         onClick={onClick}
       >
         {type === "next" ? (
@@ -84,7 +83,7 @@ const ImageCarousel = ({ images }) => {
           ref={(slider) => setSlider1(slider)}
         >
           {images.map((img) => (
-            <div className={styles["slick-img"]} key={img.id}>
+            <div className={styles["slick-img"]} key={img}>
               <img
                 className={styles["slick-slide-image"]}
                 src={img.imageUrl}

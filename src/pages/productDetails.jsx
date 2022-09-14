@@ -30,7 +30,7 @@ const ProductDetails = () => {
   }, [id]);
 
   if (!product) {
-    return <div>Product note found</div>;
+    return <div>Product not found</div>;
   }
 
   return (
