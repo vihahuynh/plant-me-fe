@@ -1,57 +1,82 @@
+import { useState, useEffect } from "react";
 import { Rating } from "@mui/material";
 
-import styles from "./reviews.module.scss"
+import styles from "./reviews.module.scss";
 
-import { reviewsSortOptions, reviewsFilterOptions } from "./../../data"
+import { reviewsSortOptions, reviewsFilterOptions } from "./../../data";
 import SortDrawer from "../UI/drawers/sortDrawer";
 import FilterDrawer from "../UI/drawers/filterDrawer";
 import ProgressBar from "../UI/progressBar";
 import ReviewItem from "./reviewItem";
-import ReviewForm from "./reviewForm";
-import { useState } from "react";
 
-const Reviews = ({ reviewsData, productId }) => {
-    const [reviews, setReviews] = useState(reviewsData)
+import reviewService from "../../services/review";
 
-    const ratingStatistics = {
-        total: reviews.length,
-        average: reviews.reduce((average, review) => {
-            return average + review.rating / reviews.length
-        }, 0),
-        count: [
-            reviews.filter(r => r.rating === 5).length,
-            reviews.filter(r => r.rating === 4).length,
-            reviews.filter(r => r.rating === 3).length,
-            reviews.filter(r => r.rating === 2).length,
-            reviews.filter(r => r.rating === 1).length,
-        ]
-    }
+const Reviews = ({ productId }) => {
+  const [reviews, setReviews] = useState([]);
+  useEffect(() => {
+    const fetchReviews = async () => {
+      const reviewsData = await reviewService.getAll({ productId });
+      setReviews(reviewsData.data);
+    };
+    fetchReviews();
+  }, [productId]);
+  const ratingStatistics = {
+    total: reviews.length,
+    average: reviews.reduce((average, review) => {
+      return average + review.rating / reviews.length;
+    }, 0),
+    count: [
+      reviews.filter((r) => r.rating === 5).length,
+      reviews.filter((r) => r.rating === 4).length,
+      reviews.filter((r) => r.rating === 3).length,
+      reviews.filter((r) => r.rating === 2).length,
+      reviews.filter((r) => r.rating === 1).length,
+    ],
+  };
 
-    return <div className={styles.container}>
-        <h2>Reviews</h2>
-        <div className={styles.summary}>
-            <div className={styles.ratingStatistics}>
-                <span className={styles.average}>{ratingStatistics.average}</span>
-                <Rating className={styles.averageStars} name="read-only" value={ratingStatistics.average} readOnly />
-                <p className={styles.total}>{ratingStatistics.total} reviews</p>
-                <ul className={styles.count}>{ratingStatistics.count.map((r, id) =>
-                    <li key={id}>
-                        <Rating name="read-only" value={5 - id} readOnly />
-                        <ProgressBar percent={r / ratingStatistics.total * 100} />
-                        <span>{r}</span>
-                    </li>
-                )}
-                </ul>
-            </div>
-            <ReviewForm setReviews={setReviews} productId={productId} />
-            <div className={styles.btnContainers}>
-                <div className={styles.btn}><SortDrawer sortOptions={reviewsSortOptions} /></div>
-                <div className={styles.btn}><FilterDrawer filterOptions={reviewsFilterOptions} /></div>
-            </div>
+  return (
+    <div className={styles.container}>
+      <h2>Reviews</h2>
+      <div className={styles.summary}>
+        <div className={styles.ratingStatistics}>
+          <span className={styles.average}>
+            {ratingStatistics.average.toFixed(1)}
+          </span>
+          <Rating
+            className={styles.averageStars}
+            name="read-only"
+            value={ratingStatistics.average}
+            readOnly
+          />
+          <p className={styles.total}>{ratingStatistics.total} reviews</p>
+          <ul className={styles.count}>
+            {ratingStatistics.count.map((r, id) => (
+              <li key={id}>
+                <Rating name="read-only" value={5 - id} readOnly />
+                <ProgressBar percent={(r / ratingStatistics.total) * 100} />
+                <span>{r}</span>
+              </li>
+            ))}
+          </ul>
         </div>
+        {/* <ReviewForm setReviews={setReviews} productId={productId} /> */}
+        {!!reviews.length && (
+          <div className={styles.btnContainers}>
+            <div className={styles.btn}>
+              <SortDrawer sortOptions={reviewsSortOptions} />
+            </div>
+            <div className={styles.btn}>
+              <FilterDrawer filterOptions={reviewsFilterOptions} />
+            </div>
+          </div>
+        )}
+      </div>
 
-        {reviews.map(review => <ReviewItem key={review.id} review={review} />)}
+      {reviews.map((review) => (
+        <ReviewItem key={review.id} review={review} />
+      ))}
     </div>
-}
+  );
+};
 
-export default Reviews
+export default Reviews;
