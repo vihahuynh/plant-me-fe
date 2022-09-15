@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Formik } from "formik";
 import { useHistory } from "react-router-dom";
-import userService from "../services/users";
+import userService from "../services/user";
 
 import styles from "./signIn.module.scss";
 import { useEffect } from "react";
@@ -158,7 +158,7 @@ const SignUp = () => {
               <button
                 type="submit"
                 className={!isSubmitting ? styles.btn : styles.disabledBtn}
-                // onClick={() => onCreateUser(values)}
+              // onClick={() => onCreateUser(values)}
               >
                 create account
               </button>

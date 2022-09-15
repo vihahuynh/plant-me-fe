@@ -1,28 +1,50 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./reviewItem.module.scss";
+
 import Rating from "@mui/material/Rating";
 import Moment from "react-moment";
 
 import { AiFillLike, AiOutlineLike } from "react-icons/ai/index";
 
 import reviewService from "../../services/review";
+import userService from "../../services/user";
+import { authenticationActions } from "./../../store"
+
 
 const ReviewItem = ({ review }) => {
-  const [wasLiked, setWasLiked] = useState(false);
+  const authen = useSelector(state => state.authentication)
+  const [wasLiked, setWasLiked] = useState(authen?.user?.likedReviews?.includes(review.id));
+  const [likeCount, setLikeCount] = useState(review.like)
+  const dispatch = useDispatch()
 
   const onLike = async () => {
     try {
-      const likedReview = { ...review, like: review.like++ };
-      await reviewService.update(likedReview);
+      const likedReview = { ...review, like: review.like + 1, createdBy: review.createdBy.id, product: review.product.id };
+      const currentUser = { ...authen?.user, likedReviews: authen?.user?.likedReviews?.concat(likedReview.id) }
+      await reviewService.update(review.id, likedReview);
+      await userService.update(currentUser.id, currentUser, currentUser.token)
+      dispatch(authenticationActions.update({ user: currentUser }))
+      setWasLiked(true)
+      setLikeCount(prev => prev + 1)
     } catch (err) {
       console.log(err);
     }
-    setWasLiked(true);
   };
 
-  const onUnLike = () => {
-    setWasLiked(false);
+  const onUnLike = async () => {
+    try {
+      const likedReview = { ...review, like: review.like - 1 >= 0 ? review.like - 1 : 0, createdBy: review.createdBy.id, product: review.product.id };
+      const currentUser = { ...authen?.user, likedReviews: authen?.user?.likedReviews?.filter(item => item !== likedReview.id) }
+      await reviewService.update(review.id, likedReview);
+      await userService.update(currentUser.id, currentUser, currentUser.token)
+      dispatch(authenticationActions.update({ user: currentUser }))
+      setWasLiked(false);
+      setLikeCount(prev => prev - 1 >= 0 ? prev - 1 : 0)
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -59,7 +81,7 @@ const ReviewItem = ({ review }) => {
             ) : (
               <AiOutlineLike className={styles.icon} onClick={onLike} />
             )}
-            <span>{review.like}</span>
+            <span>{likeCount}</span>
           </div>
         </div>
       </div>

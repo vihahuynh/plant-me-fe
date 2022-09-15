@@ -1,6 +1,5 @@
-import NavigationItem from "./navigationItem";
-import styles from "./navigation.module.scss";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { BiUserCircle } from "react-icons/bi/index";
 import { BiCartAlt } from "react-icons/bi/index";
@@ -8,14 +7,26 @@ import { BiCartAlt } from "react-icons/bi/index";
 import Logo from "../../UI/logo";
 import SearchBar from "../../UI/inputs/searchBar";
 import Button from "../../UI/buttons/button"
+import NavigationItem from "./navigationItem";
 
 import { Link } from "react-router-dom";
+
+
+import styles from "./navigation.module.scss";
+
+import { authenticationActions } from "../../../store";
 
 const Navigation = () => {
   const cartQuantity = useSelector((state) => state.cart.quantity);
   const authen = useSelector(state => state.authentication)
+  const dispatch = useDispatch()
 
-  console.log("authen: ", authen)
+  useEffect(() => {
+    const authenData = JSON.parse(localStorage.getItem("loggedUser"))
+    if (!authen.isLoggedIn && authenData?.username) {
+      dispatch(authenticationActions.login({ user: authenData }))
+    }
+  }, [authen.isLoggedIn, dispatch])
 
   return (
     <nav className={styles.nav}>

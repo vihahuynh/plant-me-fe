@@ -1,16 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+
 import { Formik } from "formik";
 import { SketchPicker } from "react-color";
-import productService from "../../services/product";
-import InputGroup from "../UI/inputs/inputGroup/inputGroup";
-
 import { MdCancel } from "react-icons/md/index";
 
+import productService from "../../services/product";
+import InputGroup from "../UI/inputs/inputGroup/inputGroup";
 import styles from "./newProductForm.module.scss";
 import "./../../custom.scss";
 
+
 const NewProductForm = () => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const authen = useSelector(state => state.authentication)
+
   const [currentColor, setCurrentColor] = useState("#fff");
   const [colors, setColors] = useState([]);
 
@@ -18,11 +21,6 @@ const NewProductForm = () => {
   const [commonProblems, setCommonProblems] = useState([]);
   const [decorTips, setDecorTips] = useState([]);
   const [plantCare, setPlantCare] = useState([]);
-
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("loggedUser"));
-    setCurrentUser(user);
-  }, []);
 
   const onAddNewProduct = async (values) => {
     try {
@@ -43,7 +41,7 @@ const NewProductForm = () => {
       formData.append("obj", JSON.stringify(newProduct));
       const returnedProduct = await productService.create(
         formData,
-        currentUser?.token
+        authen?.user?.token
       );
       console.log(returnedProduct);
     } catch (err) {

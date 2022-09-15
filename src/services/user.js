@@ -9,5 +9,11 @@ const getAll = () => {
     return axios.get(baseUrl)
 }
 
-const userService = { getAll, create }
+const update = (id, updateObject, token) => {
+    return axios.put(`${baseUrl}/${id}`, updateObject, {
+        headers: { Authorization: `bearer ${token}` },
+    })
+}
+
+const userService = { getAll, create, update }
 export default userService

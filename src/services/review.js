@@ -16,8 +16,8 @@ const create = (newObject, token) => {
   });
 };
 
-const update = (updatedObject) => {
-  return axios.put(baseUrl, updatedObject);
+const update = (id, updateObject) => {
+  return axios.put(`${baseUrl}/${id}`, updateObject);
 };
 
 const reviewService = { getAll, create, update };
