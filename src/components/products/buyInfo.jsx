@@ -24,6 +24,8 @@ const BuyInfo = ({ product }) => {
     []
   );
 
+  console.log(product)
+
   const onAddToCart = () => {
     clearTimeout(delay);
     const cartItem = {
@@ -42,16 +44,21 @@ const BuyInfo = ({ product }) => {
     delay = setTimeout(() => dispatch(alertActions.clear()), 3000);
   };
 
+  const rating = product?.reviews.reduce((averageRating, review) => {
+    averageRating += review.rating / product?.reviews.length
+    return averageRating
+  }, 0)
+
   return (
     <>
       <div>
         <h3 className={styles.title}>{product.title}</h3>
         <div className={styles.statisticContainer}>
           <span className={styles.statistic}>
-            <Rating name="read-only" value={product.rating} readOnly />
+            <Rating name="read-only" value={rating} readOnly />
           </span>
           <span className={styles.statistic}>
-            {product.reviewCount} reviews
+            {product.reviews.length} reviews
           </span>
           <span className={styles.statistic}>Sold: {product.soldCount}</span>
         </div>
