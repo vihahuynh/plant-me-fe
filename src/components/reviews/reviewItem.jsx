@@ -14,10 +14,11 @@ import { authenticationActions } from "./../../store"
 
 
 const ReviewItem = ({ review }) => {
-  const authen = useSelector(state => state.authentication)
-  const [wasLiked, setWasLiked] = useState(authen?.user?.likedReviews?.includes(review.id));
+  const authen = useSelector(state => state.authentication);
   const [likeCount, setLikeCount] = useState(review.like)
   const dispatch = useDispatch()
+
+  const wasLiked = authen?.user?.likedReviews?.includes(review.id)
 
   const onLike = async () => {
     try {
@@ -26,7 +27,6 @@ const ReviewItem = ({ review }) => {
       await reviewService.update(review.id, likedReview);
       await userService.update(currentUser.id, currentUser, currentUser.token)
       dispatch(authenticationActions.update({ user: currentUser }))
-      setWasLiked(true)
       setLikeCount(prev => prev + 1)
     } catch (err) {
       console.log(err);
@@ -40,7 +40,6 @@ const ReviewItem = ({ review }) => {
       await reviewService.update(review.id, likedReview);
       await userService.update(currentUser.id, currentUser, currentUser.token)
       dispatch(authenticationActions.update({ user: currentUser }))
-      setWasLiked(false);
       setLikeCount(prev => prev - 1 >= 0 ? prev - 1 : 0)
     } catch (err) {
       console.log(err);
