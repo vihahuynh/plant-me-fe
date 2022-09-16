@@ -28,7 +28,7 @@ const Cart = () => {
 
   const onCloseModal = () => setOpenModal(false);
   const onOpenModal = () => {
-    if (!cart.items.find((item) => item.isCheckout)) {
+    if (!cart?.items.find((item) => item.isCheckout)) {
       clearTimeout(delay);
       dispatch(
         alertActions.updateMessage({
@@ -73,7 +73,7 @@ const Cart = () => {
   };
 
   const onDeleteCheckedItems = () => {
-    cart.items.forEach((item) => {
+    cart?.items?.forEach((item) => {
       if (item.isCheckout) {
         dispatch(cartActions.removeItem({ id: item.id }));
       }

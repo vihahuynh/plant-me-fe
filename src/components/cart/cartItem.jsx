@@ -24,6 +24,7 @@ const CartItem = ({ item, checkoutAllItems }) => {
   };
 
   const onCheckout = () => {
+    console.log("meow");
     const checkoutItem = {
       ...item,
       netPrice: Math.round(item.price - (item.price * item.salePercent) / 100),
@@ -67,16 +68,11 @@ const CartItem = ({ item, checkoutAllItems }) => {
         <div className={styles.itemInfo}>
           <CheckBox
             checked={item.isCheckout || false}
-            name={item.name}
+            name={item.title}
             value={item.id}
             onChange={onCheckout}
           />
-          <img
-            src={
-              item.images.find((img) => img.includes("eye")) || item.images[0]
-            }
-            alt={item.name}
-          />
+          <img src={item.image} alt={item.name} />
           <p>{item.title}</p>
         </div>
         <div className={styles.quantity}>

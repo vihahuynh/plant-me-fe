@@ -24,15 +24,23 @@ const BuyInfo = ({ product }) => {
     []
   );
 
-  console.log(product)
-
   const onAddToCart = () => {
     clearTimeout(delay);
     const cartItem = {
-      ...product,
+      id: Date.now(),
+      title: product.title,
+      price: product.price,
+      salePercent: product.salePercent,
+      image:
+        product.images.filter((img) => img.includes("eye")) ||
+        product.images[0],
+      discount: Math.round(
+        product.price - (product.price * product.salePercent) / 100
+      ),
       color,
       size,
       quantity,
+      deliveryCharges: 10,
     };
     dispatch(cartActions.addItem({ item: cartItem }));
     dispatch(
@@ -45,9 +53,9 @@ const BuyInfo = ({ product }) => {
   };
 
   const rating = product?.reviews.reduce((averageRating, review) => {
-    averageRating += review.rating / product?.reviews.length
-    return averageRating
-  }, 0)
+    averageRating += review.rating / product?.reviews.length;
+    return averageRating;
+  }, 0);
 
   return (
     <>
