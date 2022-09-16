@@ -428,9 +428,8 @@ export const ordersSortOptions = [
     id: 3,
     query: "?sort=payment:asc",
     text: "Lowest payment",
-  }
+  },
 ];
-
 
 export const ordersFilterOptions = [
   {
@@ -465,7 +464,7 @@ export const ordersFilterOptions = [
         query: "status=cancelled",
       },
     ],
-  }
+  },
 ];
 
 export const plantNotes = [
@@ -511,20 +510,20 @@ export const orderHistory = [
   {
     id: 1,
     user: {
-      username: "Hanemo"
+      username: "Hanemo",
     },
     notification: [
       {
         id: 1,
 
         text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim, aliquid? Aliquam totam inventore dicta amet, illum quidem sit, eaque adipisci quos earum minus. Fugiat totam iste deleniti, quis provident ab.",
-        createdAt: "2022-08-12 12:00"
+        createdAt: "2022-08-12 12:00",
       },
       {
         id: 2,
         text: "Eaque adipisci quos earum minus.Fugiat totam iste deleniti, quis provident ab.",
-        createdAt: "2022-08-12 12:00"
-      }
+        createdAt: "2022-08-12 12:00",
+      },
     ],
     orders: [
       {
@@ -532,28 +531,25 @@ export const orderHistory = [
         product: {
           images: ["/images/fittonia-green-plant.png"],
           title: "Castus Meow Meow",
-          price: 45
+          price: 45,
+          quantity: 2,
+          discount: 5,
         },
-        quantity: 2,
-        discount: 5,
       },
       {
         id: 2,
         product: {
           images: ["/images/fittonia-green-plant.png"],
           title: "Lovely Rossy Dolly",
-          price: 70
+          price: 70,
+          quantity: 4,
+          discount: 15,
         },
-        quantity: 4,
-        discount: 15,
-      }
+      },
     ],
     address: "168B Bai Say Street ward 1 district 6 Ho Chi Minh city",
     phoneNumber: "0766901516",
     receiverName: "Huynh Vi Ha",
-    totalPayment: 156,
-    discount: 30,
-    netPayment: 146,
     paymentMethod: "COD",
     paymentStatus: "Successful",
     status: "Waiting for payment",
@@ -566,7 +562,7 @@ export const orderHistory = [
   {
     id: 2,
     user: {
-      username: "Damian"
+      username: "Damian",
     },
     orders: [
       {
@@ -574,7 +570,7 @@ export const orderHistory = [
         product: {
           images: ["/images/fittonia-green-plant.png"],
           title: "Super Cute Plant Ever",
-          price: 90
+          price: 90,
         },
         quantity: 1,
         discount: 10,
@@ -590,6 +586,6 @@ export const orderHistory = [
     paymentMethod: "COD",
     status: "Delivered",
     receivedDate: "2022-09-02",
-    createdAt: "2022-08-31"
-
-  }]
+    createdAt: "2022-08-31",
+  },
+];

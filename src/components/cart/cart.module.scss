@@ -1,123 +1,121 @@
 @import "./../../index.module.scss";
 
 .container {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    font-size: $default-font-size;
-    gap: 10rem;
+  display: grid;
+  grid-template-columns: 2fr 0.8fr;
+  font-size: $default-font-size;
+  gap: 10rem;
 
-    .cart {
-        grid-column: 1 / 2;
+  .cart {
+    grid-column: 1 / 2;
 
-        .cartHeader {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid $color-grey-light;
-            padding-bottom: 2rem;
+    .cartHeader {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid $color-grey-light;
+      padding-bottom: 2rem;
 
-            .selectAll {
-                width: 90%;
-            }
-        }
+      .selectAll {
+        width: 90%;
+      }
+    }
+  }
+
+  .summary {
+    grid-column: 2 / 3;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .delivery,
+    .orderSummary {
+      background-color: $color-primary-light;
+      padding: 2rem;
+      border-radius: 3px;
+      position: relative;
     }
 
-    .summary {
-        grid-column: 2 / 3;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-
-        .delivery,
-        .orderSummary {
-            background-color: $color-primary-light;
-            padding: 2rem;
-            border-radius: 3px;
-            position: relative;
-        }
-
-
-        .change {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-        }
-
-        h5 {
-            color: $color-primary;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .userInfo {
-            display: flex;
-            font-weight: 600;
-            color: #000;
-
-            p {
-                &:not(:last-child) {
-                    border-right: 1px solid $color-grey;
-                    padding-right: 1rem;
-                }
-
-                &:not(:first-child) {
-                    padding-left: 1rem;
-                }
-            }
-        }
-
-        .address {
-            color: $color-grey;
-            padding: 0;
-        }
-
-        .total,
-        .subTotal,
-        .shipping {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .totalPrice {
-            color: palevioletred;
-            font-size: 3rem;
-        }
-
-
-        .summarySubTitle {
-            font-weight: 600;
-        }
+    .change {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
     }
 
-    .icon {
-        height: 3rem;
-        width: 3rem;
-        color: darkred;
-        cursor: pointer;
+    h5 {
+      color: $color-primary;
+      font-size: 2rem;
+      margin-bottom: 1rem;
     }
 
-    .infoBox {
-        color: $color-primary;
-        grid-column: 1 / -1;
-        width: 70%;
-        height: 45vh;
-        background-color: $color-primary-light;
-        border: 1px solid $color-grey-light;
-        border-radius: 3px;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+    .userInfo {
+      display: flex;
+      font-weight: 600;
+      color: #000;
 
-        p {
-            margin-top: 1.5rem;
+      p {
+        &:not(:last-child) {
+          border-right: 1px solid $color-grey;
+          padding-right: 1rem;
         }
 
-        .btn {
-            margin: 4rem auto 0;
+        &:not(:first-child) {
+          padding-left: 1rem;
         }
+      }
     }
+
+    .address {
+      color: $color-grey;
+      padding: 0;
+    }
+
+    .total,
+    .subTotal,
+    .shipping {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .totalPrice {
+      color: palevioletred;
+      font-size: 3rem;
+    }
+
+    .summarySubTitle {
+      font-weight: 600;
+    }
+  }
+
+  .icon {
+    height: 3rem;
+    width: 3rem;
+    color: darkred;
+    cursor: pointer;
+  }
+
+  .infoBox {
+    color: $color-primary;
+    grid-column: 1 / -1;
+    width: 70%;
+    height: 45vh;
+    background-color: $color-primary-light;
+    border: 1px solid $color-grey-light;
+    border-radius: 3px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      margin-top: 1.5rem;
+    }
+
+    .btn {
+      margin: 4rem auto 0;
+    }
+  }
 }

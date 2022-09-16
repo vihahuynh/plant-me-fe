@@ -3,9 +3,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid lightgrey;
+  padding: 1rem 0;
 
   img {
-    width: 13rem;
+    width: 10rem;
   }
 
   .quantity,
@@ -15,7 +17,7 @@
   }
 
   .itemInfo {
-    width: 35%;
+    width: 30%;
     gap: 1rem;
 
     p {
@@ -25,7 +27,7 @@
 
   .quantity {
     width: 55%;
-    gap: 2rem
+    gap: 2rem;
   }
 
   .icon {

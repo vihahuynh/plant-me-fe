@@ -71,8 +71,13 @@ const CartItem = ({ item, checkoutAllItems }) => {
             value={item.id}
             onChange={onCheckout}
           />
-          <img src={item.imageUrl} alt={item.name} />
-          <p>{item.name}</p>
+          <img
+            src={
+              item.images.find((img) => img.includes("eye")) || item.images[0]
+            }
+            alt={item.name}
+          />
+          <p>{item.title}</p>
         </div>
         <div className={styles.quantity}>
           <Price price={item.price} salePercent={item.salePercent} />

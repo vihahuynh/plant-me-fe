@@ -24,6 +24,8 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const [openModal, setOpenModal] = useState(false);
 
+  console.log(cart);
+
   const onCloseModal = () => setOpenModal(false);
   const onOpenModal = () => {
     if (!cart.items.find((item) => item.isCheckout)) {
