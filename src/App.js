@@ -12,6 +12,7 @@ import ProductDetails from "./pages/productDetails";
 import CartPage from "./pages/cart";
 import NewProduct from "./pages/newProduct";
 import OrderHistory from "./pages/orderHistory";
+import OrderDetails from "./pages/orderDetails";
 
 const App = () => {
   return (
@@ -44,9 +45,13 @@ const App = () => {
         <Route path="/signup">
           <SignUp />
         </Route>
+        <Route path="/user/order-history/details">
+          <OrderDetails />
+        </Route>
         <Route path="/user/order-history">
           <OrderHistory />
         </Route>
+
         <Route path="/admin/products/new">
           <NewProduct />
         </Route>

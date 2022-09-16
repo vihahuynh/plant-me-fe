@@ -1,0 +1,143 @@
+@import "./../index.module.scss";
+
+.orderDetails {
+    color: $color-grey;
+    padding: 5rem 40rem;
+    background-color: $color-primary-light;
+    font-size: $default-font-size;
+}
+
+.orderDetailsHeader {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+
+    p {
+        margin-left: auto;
+        margin-right: 1rem;
+    }
+}
+
+.ordersTableHeader {
+    background-color: white;
+    border-radius: 0.5rem 0.5rem 0 0;
+
+    div {
+        display: grid;
+        grid-template-columns: 4fr 1fr 1fr 1fr 1fr;
+        padding: 2rem 2rem 1rem;
+        margin: 0 2rem;
+        border-bottom: 1px solid lightgrey;
+    }
+
+    // p {
+    //     &:first-child {
+    //         margin-left: 1rem;
+    //     }
+
+    //     color: $color-primary;
+    //     font-weight: 700;
+    // }
+}
+
+
+h5 {
+    font-weight: 500;
+    font-size: 2rem;
+    margin-bottom: .5rem;
+    color: $color-primary;
+}
+
+h4 {
+    font-size: 2.5rem;
+    font-weight: 500;
+
+    span {
+        font-weight: 700;
+    }
+}
+
+.boxes {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+
+    .subHeader {
+        width: 32%;
+    }
+
+    .box {
+        width: 32%;
+        background-color: white;
+        border-radius: 0.5rem;
+        padding: 2rem;
+        // padding-bottom: 0;
+        margin-bottom: 2rem;
+
+        p:not(:last-child) {
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+.notiList {
+    list-style: none;
+    margin-bottom: 2rem;
+
+    .notiItem {
+        display: flex;
+        // align-items: center;
+        column-gap: 8rem;
+        background-color: white;
+        border-radius: 0.5rem;
+        padding: 1rem 2rem;
+        margin-bottom: 1rem;
+
+        span {
+            flex-shrink: 0;
+        }
+    }
+}
+
+.paymentStatus {
+    color: orange;
+    font-style: italic;
+}
+
+.boldText {
+    font-weight: 700;
+    text-transform: uppercase;
+    color: gray;
+}
+
+.ordersList {
+    list-style: none;
+    width: 100%;
+    background-color: white;
+    // border-radius: 0.5rem;
+}
+
+.summary {
+    background-color: white;
+    border-radius: 0 0 0.5rem 0.5rem;
+    padding: 2.5rem 4rem 2rem;
+
+    p {
+        display: flex;
+        column-gap: 2rem;
+        justify-content: flex-end;
+        align-items: flex-end;
+        margin-bottom: .5rem;
+    }
+
+    span {
+        text-align: right;
+        width: 15rem;
+    }
+}
+
+.totalPayment {
+    font-size: 2rem;
+    font-weight: 600;
+    color: orange;
+}

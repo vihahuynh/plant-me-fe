@@ -513,6 +513,19 @@ export const orderHistory = [
     user: {
       username: "Hanemo"
     },
+    notification: [
+      {
+        id: 1,
+
+        text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim, aliquid? Aliquam totam inventore dicta amet, illum quidem sit, eaque adipisci quos earum minus. Fugiat totam iste deleniti, quis provident ab.",
+        createdAt: "2022-08-12 12:00"
+      },
+      {
+        id: 2,
+        text: "Eaque adipisci quos earum minus.Fugiat totam iste deleniti, quis provident ab.",
+        createdAt: "2022-08-12 12:00"
+      }
+    ],
     orders: [
       {
         id: 1,
@@ -539,14 +552,16 @@ export const orderHistory = [
     phoneNumber: "0766901516",
     receiverName: "Huynh Vi Ha",
     totalPayment: 156,
-    shipFee: 20,
     discount: 30,
     netPayment: 146,
     paymentMethod: "COD",
+    paymentStatus: "Successful",
     status: "Waiting for payment",
     receivedDate: "2022-10-01",
-    createdAt: "2022-09-29"
-
+    createdAt: "2022-09-29",
+    estimatedDeliveryDate: "2022-09-30",
+    deliveryMethod: "Delivery by Plantme",
+    deliveryCharges: 20,
   },
   {
     id: 2,
