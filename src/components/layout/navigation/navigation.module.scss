@@ -22,6 +22,7 @@
 .subNav {
   display: flex;
   align-items: center;
+  column-gap: 2rem;
 }
 
 .greenBtn,
@@ -43,9 +44,9 @@
 }
 
 .cart {
+  margin-top: .5rem;
   display: inline-block;
   position: relative;
-  margin-right: 3rem;
 }
 
 .quantity {

@@ -1,0 +1,41 @@
+@import "./../../index.module.scss";
+
+.item {
+    font-size: $default-font-size;
+    color: $color-grey-dark;
+    display: flex;
+    align-items: center;
+    column-gap: 3rem;
+    border-bottom: 1px solid lightgray;
+    padding: 1.5rem 1rem 1rem;
+}
+
+.imgContainer {
+    position: relative;
+}
+
+.quantity {
+    width: 3rem;
+    height: 3rem;
+    background-color: $color-primary-light;
+    color: $color-primary;
+    position: absolute;
+    right: 1px;
+    bottom: .8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem 0 .3rem 0;
+}
+
+.itemImg {
+    width: 8rem;
+    border-radius: 3px;
+    border: 1px solid lightgrey;
+}
+
+// .itemTitle {}
+
+.itemPrice {
+    margin-left: auto;
+}

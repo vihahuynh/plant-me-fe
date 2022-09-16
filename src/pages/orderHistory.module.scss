@@ -1,0 +1,32 @@
+@import "./../index.module.scss";
+
+.container {
+
+    padding: 5rem 45rem;
+    background-color: $color-primary-light;
+
+}
+
+.ordersList {
+    margin-top: 1rem;
+    list-style: none;
+}
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+        color: $color-primary;
+    }
+
+    .btnContainers {
+        // align-self: flex-end;
+
+        .btn {
+            display: inline-block;
+        }
+    }
+}

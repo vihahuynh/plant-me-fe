@@ -413,141 +413,59 @@ export const reviewsFilterOptions = [
   },
 ];
 
-export const plantDetails = {
-  id: 1,
-  images: [
-    { id: 1, imageUrl: "/images/details/jade-plant-mini.png" },
-    { id: 2, imageUrl: "/images/details/jade-plant-mini-2.png" },
-    { id: 3, imageUrl: "/images/details/jade-plant-mini-3.png" },
-    { id: 4, imageUrl: "/images/details/jade-plant-mini-4.png" },
-    { id: 5, imageUrl: "/images/details/jade-plant-mini-5.png" },
-    { id: 6, imageUrl: "/images/details/jade-plant-mini-6.png" },
-  ],
-  title: "Jade Plant Mini",
-  size: ["small", "medium"],
-  colors: ["salmon", "blue", "green"],
-  price: 399,
-  salePercent: 25,
-  rating: 4.3,
-  ratingCount: 173,
-  reviewCount: 33,
-  soldCount: 345,
-  livingConditions: [
-    { id: 1, title: "Light", text: "Bright indirect sunlight" },
-    { id: 2, title: "Watering", text: "Water twice a week" },
-    { id: 3, title: "Where to grow", text: "Bright indoors" },
-    { id: 4, title: "Where to grow", text: "Temperamental" },
-    { id: 5, title: "Special Feature", text: "Air purifying" },
-  ],
-  plantCare: [
-    {
-      id: 1,
-      title: "Fertilizer/ feed for the plant",
-      text: "Feed a balanced fertiliser, 0-20-10 or 5-10-5 ratio every 2 weeks. Don’t fertilise the plant in winter as it is a slow growing season.",
-    },
-    {
-      id: 2,
-      title: "Repotting",
-      text: "Repot your Jade Green every 2 to 3 years.",
-    },
-    {
-      id: 3,
-      title: "Propogation",
-      text: "Crassula Green Mini can be propagated by stem cuttings that can be rooted in water then transferred to a well-draining potting medium.",
-    },
-  ],
-  commonProblems: [
-    {
-      id: 1,
-      title: "Why is my Jade Plant turning yellow?",
-      text: "The Crassula or Jade is a succulent variety that need very little water and overwatering causes the leaves to yellow and drop. Check the soil, if it is damp wait for it to completely dry out before watering again.",
-    },
-    {
-      id: 2,
-      title: "Jade Plant leaves have white spots",
-      text: "White spots on the leaves of your Jade Plant are due to powdery mildew. Powdery mildew is formed when the plant is kept in unfavourable conditions like low light, excess humidity, and low temperatures. Spray your leaves with a mild mixture of baking soda and vinegar to get rid of the powdery mildew.",
-    },
-    {
-      id: 3,
-      title: "Why is my Jade Plant drooping?",
-      text: "Watering the Jade Plant too little or too much can make it droop. If your leaves are discolouring and dropping then it’s a classic case of overwatering and if the leaves are shrivelling up then it because of underwatering. Fix your watering schedule to stop your Jade Plant from drooping.",
-    },
-  ],
-  decorTips: [
-    {
-      id: 1,
-      title: "Light Requirements",
-      text: "Crassula Green Mini can grow well in bright to medium light. This plant grows best when it enjoys daily four hours of filtered sunlight.",
-    },
-    {
-      id: 2,
-      title: "Locations",
-      text: "The Jade Plant flourishes in bright light. Place your plant on sunny windowsills where it receives filtered light for at least four hours a day. It can also be grown outdoors in direct sun without any issue.",
-    },
-    {
-      id: 3,
-      title: "Styling/decor tip",
-      text: "The Jade Plant is a beautiful ornamental succulent which makes an excellent houseplant. You can pair the Jade Plant with a contrasting pot and place her by a window in your living room or in your bedroom to add a splash of green. The Jade Plant can also be grown outdoors in your balconies. It also looks lovely in hanging planters with stalks of leaves growing downwards.",
-    },
-  ],
-  about:
-    "Are you a sucker for succulents? The Crassula Green Mini will be your dream plant kid. One of the easiest houseplants to look after, the Crassula Green Mini boasts a lush foliage which beautifies any room. Also considered lucky as per Feng Shui for its coin like round plump leaves, so go on, bring some green home, the luck just tags along for free.",
-};
-
-export const reviews = [
+export const ordersSortOptions = [
   {
     id: 1,
-    username: "nemohuynh",
-    rating: 5,
-    title: "Good plant",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    createdAt: "10-08-2022",
-    images: [],
-    avatarUrl: null,
-    like: 1,
-    dislike: 0,
+    query: "?sort=createdAt:des",
+    text: "Newest",
   },
   {
     id: 2,
-    username: "damiangrey",
-    rating: 5,
-    title: "I love this plant, thanks.",
-    content:
-      "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    createdAt: "12-07-2022",
-    images: [],
-    avatarUrl: null,
-    like: 0,
-    dislike: 0,
+    query: "?sort=payment:des",
+    text: "Highest payment",
   },
   {
     id: 3,
-    username: "nhinhu",
-    rating: 4,
-    title: "Just Ok",
-    content:
-      "Neque convallis a cras semper auctor neque. Id faucibus nisl tincidunt eget. Nulla malesuada pellentesque elit eget. Sit amet nisl suscipit adipiscing. Leo in vitae turpis massa sed elementum tempus egestas sed. Dignissim suspendisse in est ante in nibh mauris cursus. Lectus nulla at volutpat diam ut venenatis tellus. Erat pellentesque adipiscing commodo elit. Lorem mollis aliquam ut porttitor leo a diam. Tortor at risus viverra adipiscing at.",
-    createdAt: "01-07-2022",
-    images: [],
-    avatarUrl:
-      "https://img.lovepik.com/free_png/28/76/02/62e58PIC8PbC75cMsYe9c_PIC2018.png_300.png",
-    like: 1,
-    dislike: 3,
-  },
+    query: "?sort=payment:asc",
+    text: "Lowest payment",
+  }
+];
+
+
+export const ordersFilterOptions = [
   {
-    id: 4,
-    username: "viha huynh",
-    rating: 5,
-    title: "Lorem ipsum dolor sit amet",
-    content:
-      "Non tellus orci ac auctor. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere ac. Vestibulum sed arcu non odio euismod lacinia at quis. Pretium fusce id velit ut tortor pretium. Massa ultricies mi quis hendrerit dolor magna eget. Euismod lacinia at quis risus sed vulputate odio. Massa tincidunt dui ut ornare lectus sit amet est. Eget magna fermentum iaculis eu non diam phasellus. Cursus mattis molestie a iaculis. Vulputate odio ut enim blandit volutpat maecenas volutpat blandit. Vitae elementum curabitur vitae nunc sed velit.",
-    createdAt: "18-07-2022",
-    images: [],
-    avatarUrl: null,
-    like: 4,
-    dislike: 1,
-  },
+    id: 1,
+    text: "Status",
+    type: "checkbox",
+    subOptions: [
+      {
+        id: 1,
+        text: "Waiting for payment",
+        query: "status=waiting-for-payment",
+      },
+
+      {
+        id: 2,
+        text: "Packed",
+        query: "status=packed",
+      },
+      {
+        id: 3,
+        text: "In transit",
+        query: "status=in-transit",
+      },
+      {
+        id: 4,
+        text: "Delivered",
+        query: "status=delivered",
+      },
+      {
+        id: 5,
+        text: "Cancelled",
+        query: "status=cancelled",
+      },
+    ],
+  }
 ];
 
 export const plantNotes = [
@@ -588,3 +506,75 @@ export const cart = [
     imageUrl: "/images/fittonia-green-plant.png",
   },
 ];
+
+export const orderHistory = [
+  {
+    id: 1,
+    user: {
+      username: "Hanemo"
+    },
+    orders: [
+      {
+        id: 1,
+        product: {
+          images: ["/images/fittonia-green-plant.png"],
+          title: "Castus Meow Meow",
+          price: 45
+        },
+        quantity: 2,
+        discount: 5,
+      },
+      {
+        id: 2,
+        product: {
+          images: ["/images/fittonia-green-plant.png"],
+          title: "Lovely Rossy Dolly",
+          price: 70
+        },
+        quantity: 4,
+        discount: 15,
+      }
+    ],
+    address: "168B Bai Say Street ward 1 district 6 Ho Chi Minh city",
+    phoneNumber: "0766901516",
+    receiverName: "Huynh Vi Ha",
+    totalPayment: 156,
+    shipFee: 20,
+    discount: 30,
+    netPayment: 146,
+    paymentMethod: "COD",
+    status: "Waiting for payment",
+    receivedDate: "2022-10-01",
+    createdAt: "2022-09-29"
+
+  },
+  {
+    id: 2,
+    user: {
+      username: "Damian"
+    },
+    orders: [
+      {
+        id: 1,
+        product: {
+          images: ["/images/fittonia-green-plant.png"],
+          title: "Super Cute Plant Ever",
+          price: 90
+        },
+        quantity: 1,
+        discount: 10,
+      },
+    ],
+    address: "168B Bai Say Street ward 1 district 6 Ho Chi Minh city",
+    phoneNumber: "0766901516",
+    receiverName: "Huynh Vi Ha",
+    totalPayment: 45,
+    shipFee: 20,
+    discount: 30,
+    netPayment: 26,
+    paymentMethod: "COD",
+    status: "Delivered",
+    receivedDate: "2022-09-02",
+    createdAt: "2022-08-31"
+
+  }]

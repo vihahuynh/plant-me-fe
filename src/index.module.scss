@@ -36,17 +36,6 @@ h2 {
   color: $color-grey-dark;
 }
 
-input {
-  border-radius: 10rem;
-  border: 1px solid $color-grey-light;
-  outline: none;
-  padding: 0.7rem 1.5rem;
-
-  &::placeholder {
-    color: rgba($color-grey, 0.5);
-  }
-}
-
 a {
   text-decoration: none;
 }

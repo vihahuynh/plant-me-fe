@@ -11,6 +11,7 @@ import SignUp from "./pages/signUp";
 import ProductDetails from "./pages/productDetails";
 import CartPage from "./pages/cart";
 import NewProduct from "./pages/newProduct";
+import OrderHistory from "./pages/orderHistory";
 
 const App = () => {
   return (
@@ -42,6 +43,9 @@ const App = () => {
         </Route>
         <Route path="/signup">
           <SignUp />
+        </Route>
+        <Route path="/user/order-history">
+          <OrderHistory />
         </Route>
         <Route path="/admin/products/new">
           <NewProduct />

@@ -1,13 +1,33 @@
 @import "./../../../index.module.scss";
 
-.medium {
+.customBtn {
   display: inline-block;
   align-self: flex-start;
   text-decoration: none;
   color: $color-primary-light;
   background-color: $color-primary;
+  cursor: pointer;
+}
+
+.square {
+  border-radius: 3px;
+}
+
+.circle {
   border-radius: 10rem;
+}
+
+.medium {
   font-size: $default-font-size;
   padding: 1rem 3rem;
-  cursor: pointer;
+}
+
+.small {
+  font-size: 1.2rem;
+  padding: 0.7rem 2rem;
+}
+
+.large {
+  font-size: $small-title-font-size;
+  padding: 1.5rem 5rem;
 }
