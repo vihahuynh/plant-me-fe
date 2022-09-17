@@ -1,0 +1,63 @@
+@import "./../../index.module.scss";
+
+.orderContainer {
+  padding: 2rem;
+  font-size: $default-font-size;
+  color: $color-grey-dark;
+  background-color: white;
+  // border: 1px solid lightgrey;
+
+  border-radius: 1rem;
+
+  &:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+}
+
+.orderHeader {
+  font-weight: 600;
+  color: $color-primary;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid lightgrey;
+
+  display: flex;
+  column-gap: 1rem;
+  align-items: center;
+  margin-left: 1rem;
+
+  .icon {
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+}
+
+.orderFooter {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.orderBtnGroup {
+  margin-top: 1rem;
+  display: flex;
+  column-gap: 1rem;
+}
+
+.orderBtn {
+  // font-size: $default-font-size;
+  background-color: $color-primary-light;
+  color: $color-primary;
+  border: 1px solid $color-primary;
+}
+
+.orderPaymentBox {
+  color: grey;
+}
+
+.orderPayment {
+  font-size: 2rem;
+  color: $color-primary;
+  font-weight: 700;
+}

@@ -503,24 +503,18 @@ export const orderHistory = [
     ],
     orders: [
       {
-        id: 1,
-        product: {
-          images: ["/images/fittonia-green-plant.png"],
-          title: "Castus Meow Meow",
-          price: 45,
-          quantity: 2,
-          discount: 5,
-        },
+        image: "/images/fittonia-green-plant.png",
+        title: "Castus Meow Meow",
+        price: 45,
+        quantity: 2,
+        discount: 5,
       },
       {
-        id: 2,
-        product: {
-          images: ["/images/fittonia-green-plant.png"],
-          title: "Lovely Rossy Dolly",
-          price: 70,
-          quantity: 4,
-          discount: 15,
-        },
+        image: "/images/fittonia-green-plant.png",
+        title: "Lovely Rossy Dolly",
+        price: 70,
+        quantity: 4,
+        discount: 15,
       },
     ],
     address: "168B Bai Say Street ward 1 district 6 Ho Chi Minh city",
@@ -542,12 +536,9 @@ export const orderHistory = [
     },
     orders: [
       {
-        id: 1,
-        product: {
-          images: ["/images/fittonia-green-plant.png"],
-          title: "Super Cute Plant Ever",
-          price: 90,
-        },
+        image: "/images/fittonia-green-plant.png",
+        title: "Super Cute Plant Ever",
+        price: 90,
         quantity: 1,
         discount: 10,
       },

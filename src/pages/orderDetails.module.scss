@@ -26,6 +26,7 @@
 .orderDetailsHeader {
   display: flex;
   flex-direction: column;
+  row-gap: 1rem;
   margin-bottom: 2rem;
 
   p {
@@ -34,7 +35,7 @@
   }
 }
 
-.ordersTableHeader {
+.orderTableHeader {
   background-color: white;
   border-radius: 0.5rem 0.5rem 0 0;
 
@@ -109,7 +110,7 @@
   color: gray;
 }
 
-.ordersList {
+.orderList {
   list-style: none;
   width: 100%;
   background-color: white;

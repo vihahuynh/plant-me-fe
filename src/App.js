@@ -45,13 +45,12 @@ const App = () => {
         <Route path="/signup">
           <SignUp />
         </Route>
-        <Route path="/user/order-history/details">
+        <Route path="/user/order-history/:id">
           <OrderDetails />
         </Route>
         <Route path="/user/order-history">
           <OrderHistory />
         </Route>
-
         <Route path="/admin/products/new">
           <NewProduct />
         </Route>
