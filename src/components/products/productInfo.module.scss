@@ -1,4 +1,4 @@
-@import "./../../index.module.scss";
+@import "./../../variable.scss";
 
 .container {
   height: 60vh;
@@ -54,7 +54,6 @@
 
   .plantCareTip,
   .decorTip {
-
     h4,
     p {
       display: inline;

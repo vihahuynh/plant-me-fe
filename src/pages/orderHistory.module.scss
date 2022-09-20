@@ -1,32 +1,29 @@
-@import "./../index.module.scss";
+@import "./../variable.scss";
 
 .container {
-
-    padding: 5rem 45rem;
-    background-color: $color-primary-light;
-
+  padding: 5rem 45rem;
+  background-color: $color-primary-light;
 }
 
 .ordersList {
-    margin-top: 1rem;
-    list-style: none;
+  margin-top: 1rem;
+  list-style: none;
 }
 
-
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    h2 {
-        color: $color-primary;
+  h2 {
+    color: $color-primary;
+  }
+
+  .btnContainers {
+    // align-self: flex-end;
+
+    .btn {
+      display: inline-block;
     }
-
-    .btnContainers {
-        // align-self: flex-end;
-
-        .btn {
-            display: inline-block;
-        }
-    }
+  }
 }

@@ -1,140 +1,135 @@
-@import "./../../../index.module.scss";
-
+@import "./../../../variable.scss";
 
 .drawerBtn {
-    cursor: pointer;
-    color: $color-primary-light;
-    font-size: $default-font-size;
-    margin: .5rem;
-    padding: .7rem 2rem;
-    background-color: $color-primary;
-    border-radius: 10rem;
-    border: none;
-    display: flex;
-    align-items: center;
-    text-transform: uppercase;
+  cursor: pointer;
+  color: $color-primary-light;
+  font-size: $default-font-size;
+  margin: 0.5rem;
+  padding: 0.7rem 2rem;
+  background-color: $color-primary;
+  border-radius: 10rem;
+  border: none;
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
 
-    .icon {
-        height: 2rem;
-        width: 2rem;
-        fill: $color-primary-light;
-        margin-right: .5rem;
-    }
+  .icon {
+    height: 2rem;
+    width: 2rem;
+    fill: $color-primary-light;
+    margin-right: 0.5rem;
+  }
 }
 
 .container {
-    background-color: $color-primary-light;
-    width: 25vw;
-    height: 100vh;
-    font-size: 1.4rem;
-    position: relative;
+  background-color: $color-primary-light;
+  width: 25vw;
+  height: 100vh;
+  font-size: 1.4rem;
+  position: relative;
 
-    .filters {
-        height: 90vh;
-        overflow-y: scroll;
-        padding-bottom: 5rem;
+  .filters {
+    height: 90vh;
+    overflow-y: scroll;
+    padding-bottom: 5rem;
 
-        &::-webkit-scrollbar {
-            display: none;
-        }
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .filtersHeaderBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h5 {
+      font-size: 2rem;
+      color: $color-primary;
     }
 
-    .filtersHeaderBox {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+    .clear {
+      color: darkred;
+      cursor: pointer;
+    }
+  }
 
-        h5 {
-            font-size: 2rem;
-            color: $color-primary;
-        }
+  .selectedFilters {
+    margin: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid $color-grey;
+  }
 
-        .clear {
-            color: darkred;
-            cursor: pointer;
-        }
+  ul {
+    list-style: none;
+    margin: 1rem 0 1rem 1rem;
+
+    li {
+      color: $color-grey;
+      font-size: $default-font-size;
+      margin-bottom: 0.5rem;
+
+      .key {
+        font-weight: 600;
+        color: $color-primary;
+      }
+    }
+  }
+
+  .footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    color: $color-primary-light;
+    background-color: $color-primary;
+    padding: 1rem 0;
+    margin-top: 2rem;
+    font-size: 1.75rem;
+    cursor: pointer;
+  }
+
+  .drawerHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $color-primary;
+    padding: 2rem;
+    margin-bottom: 2rem;
+
+    .title {
+      color: $color-primary-light;
+      font-size: $small-title-font-size;
     }
 
-    .selectedFilters {
-        margin: 2rem;
-        margin-bottom: 1rem;
-        padding-bottom: 1rem;
-        border-bottom: 1px solid $color-grey;
+    .icon {
+      font-size: $medium-title-font-size;
+      fill: $color-primary-light;
+      cursor: pointer;
     }
+  }
 
-    ul {
-        list-style: none;
-        margin: 1rem 0 1rem 1rem;
+  .list {
+    list-style: none;
+    padding: 1rem 0;
 
-        li {
-            color: $color-grey;
-            font-size: $default-font-size;
-            margin-bottom: .5rem;
+    li {
+      background-color: white;
+      color: $color-grey-dark;
+      padding: 1.5rem;
+      margin: 1.2rem 2rem;
+      transition: all 0.3s ease;
 
-            .key {
-                font-weight: 600;
-                color: $color-primary;
-            }
-        }
-    }
-
-    .footer {
-        position: absolute;
-        width: 100%;
-        bottom: 0;
-        text-align: center;
+      &:hover {
+        background-color: $color-primary;
         color: $color-primary-light;
-        background-color: $color-primary;
-        padding: 1rem 0;
-        margin-top: 2rem;
-        font-size: 1.75rem;
-        cursor: pointer;
+      }
     }
 
-    .drawerHeader {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: $color-primary;
-        padding: 2rem;
-        margin-bottom: 2rem;
-
-        .title {
-            color: $color-primary-light;
-            font-size: $small-title-font-size;
-
-        }
-
-        .icon {
-            font-size: $medium-title-font-size;
-            fill: $color-primary-light;
-            cursor: pointer;
-        }
-
-
+    li.curOption {
+      background-color: $color-primary;
+      color: $color-primary-light;
     }
-
-    .list {
-        list-style: none;
-        padding: 1rem 0;
-
-        li {
-            background-color: white;
-            color: $color-grey-dark;
-            padding: 1.5rem;
-            margin: 1.2rem 2rem;
-            transition: all .3s ease;
-
-            &:hover {
-                background-color: $color-primary;
-                color: $color-primary-light;
-            }
-        }
-
-        li.curOption {
-            background-color: $color-primary;
-            color: $color-primary-light;
-        }
-
-    }
+  }
 }

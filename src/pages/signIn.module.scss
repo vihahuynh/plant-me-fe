@@ -1,4 +1,4 @@
-@import "./../index.module.scss";
+@import "./../variable.scss";
 
 html {
   top: 0;
@@ -47,7 +47,6 @@ html {
         &:hover {
           border: 1px solid $color-primary;
         }
-
 
         &::placeholder {
           font-family: "Poppins", sans-serif;

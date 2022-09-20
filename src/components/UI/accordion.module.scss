@@ -1,47 +1,47 @@
-@import "./../../index.module.scss";
+@import "./../../variable.scss";
 
 .accordion {
-    font-size: $default-font-size;
+  font-size: $default-font-size;
 
-    .header {
-        color: $color-primary;
-        font-size: 2rem;
-        font-weight: 600;
-        padding: 1rem 2rem;
-        border-bottom: 1px solid $color-grey-light;
-        cursor: pointer;
-        transition: all .3s;
+  .header {
+    color: $color-primary;
+    font-size: 2rem;
+    font-weight: 600;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid $color-grey-light;
+    cursor: pointer;
+    transition: all 0.3s;
 
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-        .icon {
-            transition: all .3s;
-            height: 3rem;
-            width: 3rem;
-        }
-
-        &:hover {
-            // background-color: $color-primary-light;
-        }
+    .icon {
+      transition: all 0.3s;
+      height: 3rem;
+      width: 3rem;
     }
 
-    .header.active {
-        // background-color: $color-primary-light;
-
-        .icon {
-            transform: rotate(-90deg);
-        }
+    &:hover {
+      // background-color: $color-primary-light;
     }
+  }
 
-    .content {
-        max-height: 0;
-        overflow: hidden;
-        transition: all .5s;
-    }
+  .header.active {
+    // background-color: $color-primary-light;
 
-    .content.active {
-        max-height: 100vh;
+    .icon {
+      transform: rotate(-90deg);
     }
+  }
+
+  .content {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s;
+  }
+
+  .content.active {
+    max-height: 100vh;
+  }
 }

@@ -1,4 +1,4 @@
-@import "../../../index.module.scss";
+@import "../../../variable.scss";
 
 .nav {
   padding: 0 8rem;
@@ -44,7 +44,7 @@
 }
 
 .cart {
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   display: inline-block;
   position: relative;
 }
