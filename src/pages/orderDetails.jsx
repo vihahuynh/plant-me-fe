@@ -25,6 +25,18 @@ const OrderDetails = () => {
   if (authen.user?.id !== userId) return <p>Permission denied</p>;
   if (!order) return <p>No order found</p>;
 
+  const totalPayment = order.cart.reduce((result, item) => {
+    return result + item.price;
+  }, 0);
+
+  const totalDiscount = order.cart.reduce((result, item) => {
+    return result + item.discount;
+  }, 0);
+
+  const totalDeliveryCharges = order.cart.reduce((result, item) => {
+    return result + item.deliveryCharges || 10;
+  }, 0);
+
   return (
     <Wrapper>
       <div className={styles.orderDetails}>
@@ -86,22 +98,22 @@ const OrderDetails = () => {
           <div className={styles.summary}>
             <p>
               <span>Payment</span>
-              <span className={styles.boldText}>{order.totalPayment}.000</span>
+              <span className={styles.boldText}>{totalPayment}.000</span>
             </p>
             <p>
               <span>Delivery charges</span>
               <span className={styles.boldText}>
-                {order.deliveryCharges}.000
+                {totalDeliveryCharges}.000
               </span>
             </p>
             <p>
               <span>Discount</span>
-              <span className={styles.boldText}>{order.discount}.000</span>
+              <span className={styles.boldText}>{totalDiscount}.000</span>
             </p>
             <p>
               <span>Total</span>
               <span className={styles.totalPayment}>
-                {order.netPayment}.000
+                {totalPayment + totalDeliveryCharges - totalDiscount}.000
               </span>
             </p>
           </div>

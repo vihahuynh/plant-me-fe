@@ -30,6 +30,7 @@ const OrderHistory = () => {
 
   if (authen.user?.id !== userId) return <p>Permission denied</p>;
   if (!orders) return <p>No order found</p>;
+
   return (
     <Wrapper>
       <div className={styles.container}>

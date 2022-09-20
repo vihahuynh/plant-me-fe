@@ -27,7 +27,7 @@ const BuyInfo = ({ product }) => {
   const onAddToCart = () => {
     clearTimeout(delay);
     const cartItem = {
-      id: Date.now(),
+      id: product.id,
       title: product.title,
       price: product.price,
       salePercent: product.salePercent,
