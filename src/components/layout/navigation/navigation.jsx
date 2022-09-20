@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { BiUserCircle } from "react-icons/bi/index";
 import { BiCartAlt } from "react-icons/bi/index";
@@ -8,13 +8,27 @@ import SearchBar from "../../UI/inputs/searchBar";
 import Button from "../../UI/buttons/button";
 import NavigationItem from "./navigationItem";
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+
+import { authenticationActions } from "../../../store";
 
 import styles from "./navigation.module.scss";
 
 const Navigation = () => {
   const cartQuantity = useSelector((state) => state.cart.quantity);
   const authen = useSelector((state) => state.authentication);
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const logout = () => {
+    localStorage.removeItem("loggedUser");
+    dispatch(authenticationActions.logout());
+    history.push("/");
+  };
+
+  const toOrderHistory = () =>
+    history.push(`/user/${authen?.user?.id}/order-history`);
+
   return (
     <nav className={styles.nav}>
       <div className={styles.subNav}>
@@ -35,7 +49,14 @@ const Navigation = () => {
             <span className={styles.quantity}>{cartQuantity}</span>
           </Link>
           {authen.isLoggedIn ? (
-            <BiUserCircle className={styles.icon} />
+            <div className={styles.userMenuBox}>
+              <BiUserCircle className={styles.icon} />
+              <ul className={styles.userMenu}>
+                <li onClick={toOrderHistory}>My orders</li>
+                <li>My reviews</li>
+                <li onClick={logout}>Log out</li>
+              </ul>
+            </div>
           ) : (
             <>
               <Link to="/signin">
