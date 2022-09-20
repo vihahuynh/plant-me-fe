@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Moment from "react-moment";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import OrderDetailsItem from "../components/order/orderDetailsItem";
 import orderService from "../services/order";
@@ -10,16 +11,18 @@ import styles from "./orderDetails.module.scss";
 
 const OrderDetails = () => {
   const [order, setOrder] = useState(null);
-  const id = useParams().id;
+  const { userId, orderId } = useParams();
+  const authen = useSelector((state) => state.authentication);
 
   useEffect(() => {
     const fetchData = async () => {
-      const orderData = await orderService.get(id);
+      const orderData = await orderService.get(orderId, authen?.user?.token);
       setOrder(orderData.data);
     };
     fetchData();
-  }, [id]);
+  }, [orderId, authen?.user?.token]);
 
+  if (authen.user?.id !== userId) return <p>Permission denied</p>;
   if (!order) return <p>No order found</p>;
 
   return (
@@ -33,7 +36,6 @@ const OrderDetails = () => {
             Order date: <Moment format="YYYY-MM-DD">{order.createdAt}</Moment>
           </p>
         </div>
-
         <div>
           <h5>Notification: </h5>
           <ul className={styles.notiList}>

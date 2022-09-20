@@ -3,11 +3,15 @@ import axios from "axios";
 const baseUrl = "http://localhost:3001/api/reviews";
 
 const getAll = (query, sort) => {
-  let url = baseUrl;
+  let queryArr = [];
   if (query?.productId) {
-    url = `${url}?product=${query.productId}`;
+    queryArr = queryArr.concat(`product=${query.productId}`);
   }
-  return axios.get(url);
+  if (query?.userId) {
+    queryArr = queryArr.concat(`user=${query.userId}`);
+  }
+  const queryStr = queryArr.join("and");
+  return axios.get(`${baseUrl}?${queryStr}`);
 };
 
 const create = (newObject, token) => {

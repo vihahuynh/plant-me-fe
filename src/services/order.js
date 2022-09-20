@@ -1,12 +1,21 @@
 import axios from "axios";
 const baseUrl = "http://localhost:3001/api/orders";
 
-const getAll = () => {
-  return axios.get(baseUrl);
+const getAll = (query, sort, token) => {
+  let queryArr = [];
+  if (query?.userId) {
+    queryArr = queryArr.concat(`user=${query.userId}`);
+  }
+  const queryStr = queryArr.join("and");
+  return axios.get(`${baseUrl}?${queryStr}`, {
+    headers: { Authorization: `bearer ${token}` },
+  });
 };
 
-const get = (id) => {
-  return axios.get(`${baseUrl}/${id}`);
+const get = (id, token) => {
+  return axios.get(`${baseUrl}/${id}`, {
+    headers: { Authorization: `bearer ${token}` },
+  });
 };
 
 const create = (newObject, token) => {

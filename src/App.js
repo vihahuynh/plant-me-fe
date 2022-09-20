@@ -1,6 +1,9 @@
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import Home from "./pages/home";
 import Blogs from "./pages/blogs";
 import About from "./pages/about";
@@ -14,7 +17,18 @@ import NewProduct from "./pages/newProduct";
 import OrderHistory from "./pages/orderHistory";
 import OrderDetails from "./pages/orderDetails";
 
+import { authenticationActions } from "./store";
+
 const App = () => {
+  const authen = useSelector((state) => state.authentication);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const authenData = JSON.parse(localStorage.getItem("loggedUser"));
+    if (!authen.isLoggedIn && authenData?.username) {
+      dispatch(authenticationActions.login({ user: authenData }));
+    }
+  }, [authen.isLoggedIn, dispatch]);
+
   return (
     <Router>
       <Switch>
@@ -45,10 +59,10 @@ const App = () => {
         <Route path="/signup">
           <SignUp />
         </Route>
-        <Route path="/user/order-history/:id">
+        <Route path="/user/:userId/order-history/:orderId">
           <OrderDetails />
         </Route>
-        <Route path="/user/order-history">
+        <Route path="/user/:userId/order-history">
           <OrderHistory />
         </Route>
         <Route path="/admin/products/new">

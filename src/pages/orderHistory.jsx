@@ -8,18 +8,27 @@ import SortDrawer from "./../components/UI/drawers/sortDrawer";
 import orderService from "../services/order";
 
 import styles from "./orderHistory.module.scss";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const OrderHistory = () => {
   const [orders, setOrders] = useState([]);
+  const userId = useParams().userId;
+  const authen = useSelector((state) => state.authentication);
 
   useEffect(() => {
     const fetchData = async () => {
-      const ordersData = await orderService.getAll();
+      const ordersData = await orderService.getAll(
+        { userId },
+        undefined,
+        authen?.user?.token
+      );
       setOrders(ordersData.data);
     };
     fetchData();
-  }, []);
+  }, [userId, authen?.user?.token]);
 
+  if (authen.user?.id !== userId) return <p>Permission denied</p>;
   if (!orders) return <p>No order found</p>;
   return (
     <Wrapper>
@@ -40,7 +49,7 @@ const OrderHistory = () => {
         <SearchBar />
         <ul className={styles.ordersList}>
           {orders.map((order) => (
-            <Order key={order.id} order={order} />
+            <Order key={order.id} order={order} userId={userId} />
           ))}
         </ul>
       </div>
