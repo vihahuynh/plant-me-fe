@@ -16,6 +16,7 @@ import CartPage from "./pages/cart";
 import NewProduct from "./pages/newProduct";
 import OrderHistory from "./pages/orderHistory";
 import OrderDetails from "./pages/orderDetails";
+import NotificationHistory from "./pages/notificationHistory";
 
 import { authenticationActions } from "./store";
 
@@ -64,6 +65,9 @@ const App = () => {
         </Route>
         <Route path="/user/:userId/order-history">
           <OrderHistory />
+        </Route>
+        <Route path="/user/:userId/notification">
+          <NotificationHistory />
         </Route>
         <Route path="/admin/products/new">
           <NewProduct />

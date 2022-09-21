@@ -5,7 +5,7 @@ import { BiCartAlt } from "react-icons/bi/index";
 
 import Logo from "../../UI/logo";
 import SearchBar from "../../UI/inputs/searchBar";
-import Button from "../../UI/buttons/button";
+import LinkButton from "../../UI/buttons/linkbutton";
 import NavigationItem from "./navigationItem";
 
 import { Link, useHistory } from "react-router-dom";
@@ -25,9 +25,6 @@ const Navigation = () => {
     dispatch(authenticationActions.logout());
     history.push("/");
   };
-
-  const toOrderHistory = () =>
-    history.push(`/user/${authen?.user?.id}/order-history`);
 
   return (
     <nav className={styles.nav}>
@@ -52,29 +49,26 @@ const Navigation = () => {
             <div className={styles.userMenuBox}>
               <BiUserCircle className={styles.icon} />
               <ul className={styles.userMenu}>
-                <li onClick={toOrderHistory}>My orders</li>
+                <li><Link to={`/user/${authen?.user?.id}/order-history`}>My orders</Link></li>
                 <li>My reviews</li>
                 <li onClick={logout}>Log out</li>
               </ul>
             </div>
           ) : (
             <>
-              <Link to="/signin">
-                <Button
-                  className={styles.greenBtn}
-                  text="Sign in"
-                  size="small"
-                  borderRadius="square"
-                />
-              </Link>
-              <Link to="/signup">
-                <Button
-                  className={styles.whiteBtn}
-                  text="Sign up"
-                  size="small"
-                  borderRadius="square"
-                />
-              </Link>
+              <LinkButton
+                url="/signin"
+                text="Sign in"
+                size="small"
+                borderRadius="square"
+              />
+              <LinkButton
+                url="signup"
+                text="Sign up"
+                size="small"
+                type="light"
+                borderRadius="square"
+              />
             </>
           )}
         </div>

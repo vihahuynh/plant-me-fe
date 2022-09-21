@@ -18,15 +18,20 @@ const OrderHistory = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const ordersData = await orderService.getAll(
-        { userId },
-        undefined,
-        authen?.user?.token
-      );
-      setOrders(ordersData.data);
+      try {
+        if (!authen?.user) return
+        const ordersData = await orderService.getAll(
+          { userId },
+          undefined,
+          authen?.user?.token
+        );
+        setOrders(ordersData.data);
+      } catch (err) {
+        console.log(err)
+      }
     };
     fetchData();
-  }, [userId, authen?.user?.token]);
+  }, [userId, authen]);
 
   if (authen.user?.id !== userId) return <p>Permission denied</p>;
   if (!orders) return <p>No order found</p>;

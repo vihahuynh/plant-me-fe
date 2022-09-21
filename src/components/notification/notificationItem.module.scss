@@ -1,0 +1,53 @@
+@import "./../../variable.scss";
+
+.notiItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 4rem;
+
+    &:not(:last-child) {
+        border-bottom: 1px solid lightgrey;
+    }
+}
+
+.notiContent {
+    width: 60%;
+}
+
+.btnGroup {
+    width: 25%;
+    flex-shrink: 0;
+    display: flex;
+    column-gap: 1.5rem;
+    justify-content: flex-end;
+}
+
+.iconBox {
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon {
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+.iconGreen {
+    color: $color-primary-light;
+    background-color: $color-primary;
+}
+
+.iconBlue {
+    background-color: deepskyblue;
+    color: #ebf6fa;
+}
+
+.iconOrange {
+    color: lightyellow;
+    background-color: orange;
+}

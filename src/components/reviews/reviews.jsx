@@ -15,8 +15,12 @@ const Reviews = ({ productId }) => {
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
     const fetchReviews = async () => {
-      const reviewsData = await reviewService.getAll({ productId });
-      setReviews(reviewsData.data);
+      try {
+        const reviewsData = await reviewService.getAll({ productId });
+        setReviews(reviewsData.data);
+      } catch (err) {
+        console.log(err)
+      }
     };
     fetchReviews();
   }, [productId]);

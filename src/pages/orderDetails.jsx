@@ -16,11 +16,16 @@ const OrderDetails = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const orderData = await orderService.get(orderId, authen?.user?.token);
-      setOrder(orderData.data);
+      try {
+        if (!authen?.user) return
+        const orderData = await orderService.get(orderId, authen?.user?.token);
+        setOrder(orderData.data);
+      } catch (err) {
+        console.log(err)
+      }
     };
     fetchData();
-  }, [orderId, authen?.user?.token]);
+  }, [orderId, authen]);
 
   if (authen.user?.id !== userId) return <p>Permission denied</p>;
   if (!order) return <p>No order found</p>;

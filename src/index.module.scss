@@ -20,9 +20,10 @@ h2 {
   font-size: 3.5rem;
   font-weight: 700;
   margin-bottom: 3rem;
-  color: $color-grey-dark;
+  color: $color-primary;
 }
 
 a {
+  color: inherit;
   text-decoration: none;
 }

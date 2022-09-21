@@ -13,7 +13,7 @@ const Header = () => {
           <p>The best time to plant a tree was 20 years ago</p>
           <p>The second best time is today</p>
         </div>
-        <LinkButton text="Discover" size="medium" link="#" />
+        <LinkButton text="Discover" size="medium" url="/shop" />
       </div>
       <img src="/images/header-img.png" alt="large-snake-plant" />
       <ul className={styles.contact}>
