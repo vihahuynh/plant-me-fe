@@ -2,7 +2,7 @@
 
 .orderDetails {
   color: $color-grey;
-  padding: 5rem 40rem;
+  padding: 5rem 30rem;
   background-color: $color-primary-light;
   font-size: $default-font-size;
 
@@ -93,7 +93,7 @@
     padding: 1rem 2rem;
     margin-bottom: 1rem;
 
-    span {
+    time {
       flex-shrink: 0;
     }
   }

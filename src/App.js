@@ -19,6 +19,7 @@ import OrderDetails from "./pages/orderDetails";
 import NotificationHistory from "./pages/notificationHistory";
 
 import { authenticationActions } from "./store";
+import FavoriteProducts from "./pages/favoriteProducts";
 
 const App = () => {
   const authen = useSelector((state) => state.authentication);
@@ -68,6 +69,9 @@ const App = () => {
         </Route>
         <Route path="/user/:userId/notification">
           <NotificationHistory />
+        </Route>
+        <Route path="/user/:userId/favorite-products">
+          <FavoriteProducts />
         </Route>
         <Route path="/admin/products/new">
           <NewProduct />

@@ -17,11 +17,11 @@ const OrderDetails = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (!authen?.user) return
+        if (!authen?.user) return;
         const orderData = await orderService.get(orderId, authen?.user?.token);
         setOrder(orderData.data);
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     };
     fetchData();
@@ -58,8 +58,8 @@ const OrderDetails = () => {
           <ul className={styles.notiList}>
             {order.notification.map((noti) => (
               <li key={noti.id} className={styles.notiItem}>
-                <span>{noti.createdAt}</span>
-                <p>{noti.text}</p>
+                <Moment format="YYYY-MM-DD">{noti.createdAt}</Moment>
+                <p>{noti.content}</p>
               </li>
             ))}
           </ul>
@@ -76,8 +76,11 @@ const OrderDetails = () => {
             <p>Phone number: {order.phoneNumber}</p>
           </div>
           <div className={styles.box}>
-            <p>Estimated delivery date: {order.estimatedDeliveryDate}</p>
-            <p>Delivery by: {order.deliveryMethod}</p>
+            <p>
+              Estimated delivery date:{" "}
+              <Moment format="YYYY-MM-DD">{order.estimatedDeliveryDate}</Moment>
+            </p>
+            <p>{order.deliveryMethod}</p>
             <p>Delivery charges: {order.deliveryCharges}.000</p>
           </div>
           <div className={styles.box}>

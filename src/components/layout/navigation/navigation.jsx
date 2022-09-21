@@ -64,6 +64,11 @@ const Navigation = () => {
                     My notification
                   </Link>
                 </li>
+                <li>
+                  <Link to={`/user/${authen?.user?.id}/favorite-products`}>
+                    Favorite products
+                  </Link>
+                </li>
                 <li onClick={logout}>Log out</li>
               </ul>
             </div>
