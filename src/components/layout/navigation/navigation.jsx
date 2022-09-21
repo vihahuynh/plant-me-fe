@@ -49,8 +49,21 @@ const Navigation = () => {
             <div className={styles.userMenuBox}>
               <BiUserCircle className={styles.icon} />
               <ul className={styles.userMenu}>
-                <li><Link to={`/user/${authen?.user?.id}/order-history`}>My orders</Link></li>
-                <li>My reviews</li>
+                <li>
+                  <Link to={`/user/${authen?.user?.id}/order-history`}>
+                    My orders
+                  </Link>
+                </li>
+                <li>
+                  <Link to={`/user/${authen?.user?.id}/reviews`}>
+                    My reviews
+                  </Link>
+                </li>
+                <li>
+                  <Link to={`/user/${authen?.user?.id}/notification`}>
+                    My notification
+                  </Link>
+                </li>
                 <li onClick={logout}>Log out</li>
               </ul>
             </div>
