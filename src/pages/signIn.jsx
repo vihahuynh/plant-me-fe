@@ -16,7 +16,10 @@ const SignIn = () => {
   const onLogin = async (values) => {
     try {
       const result = await loginService.login(values)
-      localStorage.setItem("loggedUser", JSON.stringify(result.data))
+      localStorage.setItem("loggedUser", JSON.stringify({
+        isLoggedIn: !!result.data,
+        user: result.data
+      }))
       dispatch(authenticationActions.login({ user: result.data }))
       history.push("/")
     } catch (err) {

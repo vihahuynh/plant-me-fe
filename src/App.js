@@ -25,10 +25,10 @@ const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     const authenData = JSON.parse(localStorage.getItem("loggedUser"));
-    if (!authen.isLoggedIn && authenData?.username) {
-      dispatch(authenticationActions.login({ user: authenData }));
+    if (!authen.isLoggedIn && authenData?.user?.id) {
+      dispatch(authenticationActions.login({ user: authenData.user }));
     }
-  }, [authen.isLoggedIn, dispatch]);
+  }, [authen.isLoggedIn, dispatch, authen]);
 
   return (
     <Router>
