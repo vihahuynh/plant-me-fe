@@ -24,6 +24,7 @@ const ReviewItem = ({ review }) => {
     try {
       const likedReview = { ...review, like: review.like + 1, createdBy: review.createdBy.id, product: review.product.id };
       const currentUser = { ...authen?.user, likedReviews: authen?.user?.likedReviews?.concat(likedReview.id) }
+      
       await reviewService.update(review.id, likedReview);
       await userService.update(currentUser.id, currentUser, currentUser.token)
       dispatch(authenticationActions.update({ user: currentUser }))

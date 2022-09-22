@@ -1,4 +1,5 @@
 import axios from "axios";
+import jwt from "jsonwebtoken"
 
 const baseUrl = 'http://localhost:3001/api/login'
 
@@ -6,6 +7,16 @@ const login = (data) => {
     return axios.post(baseUrl, data)
 }
 
-const loginService = { login }
+const isExpiredToken = (token) => {
+    const decodedToken = jwt.decode(token, { complete: true })
+    const now = new Date()
+
+    if (decodedToken.exp < now.getTime()) {
+        return true
+    }
+    return false
+}
+
+const loginService = { login, isExpiredToken }
 
 export default loginService
