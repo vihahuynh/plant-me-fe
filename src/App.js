@@ -21,15 +21,15 @@ import NotificationHistory from "./pages/notificationHistory";
 import { authenticationActions } from "./store";
 import FavoriteProducts from "./pages/favoriteProducts";
 
-import loginService from "./services/login";
+// import loginService from "./services/login";
 
 const App = () => {
   const authen = useSelector((state) => state.authentication);
   const dispatch = useDispatch();
   useEffect(() => {
     const authenData = JSON.parse(localStorage.getItem("loggedUser"));
-    const isExpiredToken = authenData?.token ? loginService.isExpiredToken(authenData?.token) : true
-    if (!isExpiredToken && !authen.isLoggedIn && authenData?.user?.id) {
+    // const isExpiredToken = authenData?.token ? loginService.isExpiredToken(authenData?.token) : true
+    if (!authen.isLoggedIn && authenData?.user?.id) {
       dispatch(authenticationActions.login({ user: authenData.user }));
     }
   }, [authen.isLoggedIn, dispatch, authen]);

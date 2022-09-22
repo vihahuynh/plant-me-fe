@@ -73,7 +73,11 @@ const CartItem = ({ item, checkoutAllItems }) => {
             onChange={onCheckout}
           />
           <img src={item.image} alt={item.name} />
-          <p>{item.title}</p>
+          <div>
+            <p>{item.title}</p>
+            <span>Size: {item.size}</span>
+            <span>Color: {item.color}</span>
+          </div>
         </div>
         <div className={styles.quantity}>
           <Price price={item.price} salePercent={item.salePercent} />
