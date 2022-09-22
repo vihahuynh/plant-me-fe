@@ -15,11 +15,12 @@ import ProductDetails from "./pages/productDetails";
 import CartPage from "./pages/cart";
 // admin page
 import NewProduct from "./pages/admin/newProduct";
-//user page
+// user page
 import OrderHistory from "./pages/user/orderHistory";
 import OrderDetails from "./pages/user/orderDetails";
 import NotificationHistory from "./pages/user/notificationHistory";
 import FavoriteProducts from "./pages/user/favoriteProducts";
+import ReviewHistory from "./pages/user/reviewHistory";
 
 import { authenticationActions } from "./store";
 
@@ -77,6 +78,9 @@ const App = () => {
         </Route>
         <Route path="/user/:userId/favorite-products">
           <FavoriteProducts />
+        </Route>
+        <Route path="/user/:userId/reviews">
+          <ReviewHistory />
         </Route>
         <Route path="/admin/products/new">
           <NewProduct />
