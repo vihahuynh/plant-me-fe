@@ -2,9 +2,9 @@
 
 .container {
   display: grid;
-  grid-template-columns: 2fr 0.8fr;
+  grid-template-columns: 2fr 0.7fr;
   font-size: $default-font-size;
-  gap: 10rem;
+  gap: 6rem;
 
   .cart {
     grid-column: 1 / 2;
@@ -41,6 +41,11 @@
       position: absolute;
       top: 2rem;
       right: 2rem;
+    }
+
+    .checkoutBtn {
+      align-self: stretch;
+      text-align: center;
     }
 
     h5 {

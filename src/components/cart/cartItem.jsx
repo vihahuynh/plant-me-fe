@@ -20,11 +20,10 @@ const CartItem = ({ item, checkoutAllItems }) => {
   const onOpenModal = () => setOpenModal(true);
 
   const onRemoveItem = () => {
-    dispatch(cartActions.removeItem({ id: item.id }));
+    dispatch(cartActions.removeItem({ item }));
   };
 
   const onCheckout = () => {
-    console.log("meow");
     const checkoutItem = {
       ...item,
       netPrice: Math.round(item.price - (item.price * item.salePercent) / 100),
@@ -68,15 +67,21 @@ const CartItem = ({ item, checkoutAllItems }) => {
         <div className={styles.itemInfo}>
           <CheckBox
             checked={item.isCheckout || false}
-            name={item.title}
-            value={item.id}
+            name={`${item.id}-${item.size}-${item.color}`}
+            value={`${item.id}-${item.size}-${item.color}`}
             onChange={onCheckout}
           />
           <img src={item.image} alt={item.name} />
           <div>
             <p>{item.title}</p>
-            <span>Size: {item.size}</span>
-            <span>Color: {item.color}</span>
+            <div>Size: {item.size}</div>
+            <div>
+              Color:
+              <span
+                className={styles.color}
+                style={{ backgroundColor: item.color }}
+              ></span>
+            </div>
           </div>
         </div>
         <div className={styles.quantity}>
@@ -85,7 +90,9 @@ const CartItem = ({ item, checkoutAllItems }) => {
             quantity={item.quantity.toString()}
             onChange={onUpdateQuantity}
           />
-          <Price price={netPrice * item.quantity} size="large" />
+          <div className={styles.totalPrice}>
+            <Price price={netPrice * item.quantity} />
+          </div>
         </div>
         <TbTrash className={styles.icon} onClick={onOpenModal} />
       </div>

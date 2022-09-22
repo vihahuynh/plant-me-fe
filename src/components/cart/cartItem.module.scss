@@ -4,8 +4,9 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   border-bottom: 1px solid $color-grey-light;
+  column-gap: 5rem;
   padding: 1rem 0;
 
   img {
@@ -19,17 +20,38 @@
   }
 
   .itemInfo {
-    width: 30%;
+    // width: 35%;
     gap: 1rem;
+    margin-right: auto;
 
     p {
-      width: 50%;
+      font-weight: 500;
+      // width: 50%;
+    }
+
+    .color {
+      margin-left: 1rem;
+      margin-bottom: -2px;
+      display: inline-block;
+      border-radius: 50%;
+      width: 2rem;
+      height: 2rem;
+      border: 1px solid $color-grey-dark;
     }
   }
 
   .quantity {
     width: 55%;
-    gap: 2rem;
+    gap: 3rem;
+    display: flex;
+    justify-content: flex-end;
+    flex-shrink: 0;
+
+    .totalPrice {
+      width: 20%;
+      display: flex;
+      justify-content: flex-end;
+    }
   }
 
   .icon {

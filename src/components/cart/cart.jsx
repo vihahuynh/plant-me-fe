@@ -73,11 +73,7 @@ const Cart = () => {
   };
 
   const onDeleteCheckedItems = () => {
-    cart?.items?.forEach((item) => {
-      if (item.isCheckout) {
-        dispatch(cartActions.removeItem({ id: item.id }));
-      }
-    });
+    dispatch(cartActions.clear());
     dispatch(cartActions.toggleCheckoutAll({ values: false }));
     setOpenModal(false);
   };
@@ -113,7 +109,7 @@ const Cart = () => {
             </div>
             {cart.items.map((item) => (
               <CartItem
-                key={item.id}
+                key={`${item.id}-${item.size}-${item.color}`}
                 item={item}
                 checkoutAllItems={cart.checkoutAllItems}
               />
@@ -121,7 +117,7 @@ const Cart = () => {
           </div>
           <div className={styles.summary}>
             <div className={styles.delivery}>
-              <Button text="Change" size="medium" className={styles.change} />
+              <Button text="Change" size="small" className={styles.change} />
               <h5>Delivery to</h5>
               <div className={styles.userInfo}>
                 <p>Huynh Vi Ha</p>
@@ -148,7 +144,12 @@ const Cart = () => {
                 )}
               </div>
             </div>
-            <Button borderRadius="square" text="CHECKOUT" size="large" />
+            <Button
+              borderRadius="square"
+              text="CHECKOUT"
+              size="large"
+              className={styles.checkoutBtn}
+            />
           </div>
         </div>
       </>
