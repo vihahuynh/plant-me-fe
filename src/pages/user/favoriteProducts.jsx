@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import productService from "../services/product";
+import productService from "../../services/product";
 
-import Products from "./../components/products/products";
-import Wrapper from "../components/layout/wrapper";
+import Products from "./../../components/products/products";
+import Wrapper from "../../components/layout/wrapper";
 
 const FavoriteProducts = () => {
   const authen = useSelector((state) => state.authentication);

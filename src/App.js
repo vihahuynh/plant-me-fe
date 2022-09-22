@@ -13,13 +13,15 @@ import SignIn from "./pages/signIn";
 import SignUp from "./pages/signUp";
 import ProductDetails from "./pages/productDetails";
 import CartPage from "./pages/cart";
-import NewProduct from "./pages/newProduct";
-import OrderHistory from "./pages/orderHistory";
-import OrderDetails from "./pages/orderDetails";
-import NotificationHistory from "./pages/notificationHistory";
+// admin page
+import NewProduct from "./pages/admin/newProduct";
+//user page
+import OrderHistory from "./pages/user/orderHistory";
+import OrderDetails from "./pages/user/orderDetails";
+import NotificationHistory from "./pages/user/notificationHistory";
+import FavoriteProducts from "./pages/user/favoriteProducts";
 
 import { authenticationActions } from "./store";
-import FavoriteProducts from "./pages/favoriteProducts";
 
 // import loginService from "./services/login";
 

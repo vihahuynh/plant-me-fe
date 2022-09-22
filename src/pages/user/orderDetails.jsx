@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import Moment from "react-moment";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import OrderDetailsItem from "../components/order/orderDetailsItem";
-import orderService from "../services/order";
+import OrderDetailsItem from "../../components/order/orderDetailsItem";
+import orderService from "../../services/order";
 
-import Wrapper from "./../components/layout/wrapper";
+import Wrapper from "./../../components/layout/wrapper";
 
 import styles from "./orderDetails.module.scss";
 

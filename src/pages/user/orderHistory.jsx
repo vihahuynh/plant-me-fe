@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { ordersFilterOptions, ordersSortOptions } from "../data";
-import Order from "../components/order/order";
-import Wrapper from "../components/layout/wrapper";
-import SearchBar from "../components/UI/inputs/searchBar";
-import FilterDrawer from "./../components/UI/drawers/filterDrawer";
-import SortDrawer from "./../components/UI/drawers/sortDrawer";
-import orderService from "../services/order";
+import { ordersFilterOptions, ordersSortOptions } from "../../data";
+import Order from "../../components/order/order";
+import Wrapper from "../../components/layout/wrapper";
+import SearchBar from "../../components/UI/inputs/searchBar";
+import FilterDrawer from "./../../components/UI/drawers/filterDrawer";
+import SortDrawer from "./../../components/UI/drawers/sortDrawer";
+import orderService from "../../services/order";
 
 import styles from "./orderHistory.module.scss";
 import { useParams } from "react-router-dom";
@@ -19,7 +19,7 @@ const OrderHistory = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (!authen?.user) return
+        if (!authen?.user) return;
         const ordersData = await orderService.getAll(
           { userId },
           undefined,
@@ -27,7 +27,7 @@ const OrderHistory = () => {
         );
         setOrders(ordersData.data);
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     };
     fetchData();
