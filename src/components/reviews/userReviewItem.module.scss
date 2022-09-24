@@ -1,0 +1,48 @@
+@import "./../../variable.scss";
+
+.userReviewItem {
+  display: flex;
+  column-gap: 4rem;
+  font-size: $default-font-size;
+  background-color: white;
+  margin: 2rem;
+  padding: 2rem 4rem;
+  border-radius: 1rem;
+  color: $color-grey-dark;
+
+  img {
+    width: 10rem;
+  }
+
+  h5 {
+    font-size: $default-font-size;
+    // color: $color-primary;
+  }
+}
+
+.productTitle {
+  color: $color-primary;
+}
+
+.reviewContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.rating {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.iconBox {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  height: 2.5rem;
+  width: 2.5rem;
+  fill: $color-primary;
+  margin-right: 0.5rem;
+}
