@@ -12,7 +12,7 @@ import { TbTrash } from "react-icons/tb/index";
 
 import { cartActions } from "../../store";
 
-const CartItem = ({ item, checkoutAllItems }) => {
+const CartItem = ({ item, checkoutAllItems, isShowCheckbox = true }) => {
   const dispatch = useDispatch();
   const [openModal, setOpenModal] = useState(false);
 
@@ -65,12 +65,14 @@ const CartItem = ({ item, checkoutAllItems }) => {
       )}
       <div className={styles.container}>
         <div className={styles.itemInfo}>
-          <CheckBox
-            checked={item.isCheckout || false}
-            name={`${item.id}-${item.size}-${item.color}`}
-            value={`${item.id}-${item.size}-${item.color}`}
-            onChange={onCheckout}
-          />
+          {isShowCheckbox && (
+            <CheckBox
+              checked={item.isCheckout || false}
+              name={`${item.id}-${item.size}-${item.color}`}
+              value={`${item.id}-${item.size}-${item.color}`}
+              onChange={onCheckout}
+            />
+          )}
           <img src={item.image} alt={item.name} />
           <div>
             <p>{item.title}</p>

@@ -23,6 +23,7 @@ import FavoriteProducts from "./pages/user/favoriteProducts";
 import ReviewHistory from "./pages/user/reviewHistory";
 
 import { authenticationActions } from "./store";
+import Checkout from "./pages/checkout";
 
 // import loginService from "./services/login";
 
@@ -54,6 +55,9 @@ const App = () => {
         </Route>
         <Route path="/cart">
           <CartPage />
+        </Route>
+        <Route path="/checkout">
+          <Checkout />
         </Route>
         <Route path="/contact">
           <Contact />

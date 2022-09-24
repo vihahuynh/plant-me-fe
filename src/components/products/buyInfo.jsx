@@ -32,11 +32,8 @@ const BuyInfo = ({ product }) => {
       price: product.price,
       salePercent: product.salePercent,
       image:
-        product.images.filter((img) => img.includes("eye")) ||
-        product.images[0],
-      discount: Math.round(
-        product.price - (product.price * product.salePercent) / 100
-      ),
+        product.images.find((img) => img.includes("eye")) || product.images[0],
+      discount: Math.round((product.price * product.salePercent) / 100),
       color,
       size,
       quantity,
