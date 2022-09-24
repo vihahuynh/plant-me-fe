@@ -7,8 +7,18 @@ const OrderItem = ({ order }) => {
         <img className={styles.itemImg} src={order.image} alt="" />
         <span className={styles.quantity}>x{order.quantity}</span>
       </div>
-      <p className={styles.itemTitle}>{order.title}</p>
-      <p className={styles.itemPrice}>{order.price}.000</p>
+      <div>
+        <p className={styles.itemTitle}>{order.title}</p>
+        <div>Size: {order.size}</div>
+        <div>
+          Color:
+          <span
+            className={styles.color}
+            style={{ backgroundColor: order.color }}
+          />
+        </div>
+      </div>
+      <p className={styles.itemPrice}>{order.price}.000 &#x20ab;</p>
     </li>
   );
 };

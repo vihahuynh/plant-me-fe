@@ -58,7 +58,7 @@ const Order = ({ order, userId }) => {
         <p className={styles.orderPaymentBox}>
           Total payment:{" "}
           <span className={styles.orderPayment}>
-            {totalPayment + totalDeliveryCharges - totalDiscount}.000
+            {totalPayment + totalDeliveryCharges - totalDiscount}.000 &#x20ab;
           </span>
         </p>
         <div className={styles.orderBtnGroup}>

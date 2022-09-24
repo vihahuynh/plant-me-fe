@@ -82,7 +82,7 @@ const CartItem = ({ item, checkoutAllItems, isShowCheckbox = true }) => {
               <span
                 className={styles.color}
                 style={{ backgroundColor: item.color }}
-              ></span>
+              />
             </div>
           </div>
         </div>

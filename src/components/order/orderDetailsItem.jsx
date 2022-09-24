@@ -11,6 +11,14 @@ const OrderDetailsItem = ({ order }) => {
           <div>
             <p className={styles.boldTitle}>{order.title}</p>
             <p>ID: #{order.id}</p>
+            <div>Size: {order.size}</div>
+            <div>
+              Color:
+              <span
+                className={styles.color}
+                style={{ backgroundColor: order.color }}
+              />
+            </div>
             <div className={styles.orderBtnGroup}>
               <ButtonLink
                 text="Write review"
@@ -28,10 +36,10 @@ const OrderDetailsItem = ({ order }) => {
           </div>
         </div>
       </div>
-      <div>{order.price}.000</div>
+      <div>{order.price}.000 &#x20ab;</div>
       <div>{order.quantity}</div>
-      <div>{order.discount}.000</div>
-      <div>{order.price * order.quantity - order.discount}.000</div>
+      <div>{order.discount}.000 &#x20ab;</div>
+      <div>{order.price * order.quantity - order.discount}.000 &#x20ab;</div>
     </li>
   );
 };

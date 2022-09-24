@@ -36,7 +36,7 @@ const CartSummary = ({ title, onClick }) => {
           {subTotal ? (
             <p className={styles.totalPrice}>{subTotal}.000 &#x20ab;</p>
           ) : (
-            <p className={styles.totalPrice}>0 &#x20ab;</p>
+            <p className={styles.totalPrice}>.000 &#x20ab;</p>
           )}
         </div>
       </div>

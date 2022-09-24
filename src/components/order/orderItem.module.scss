@@ -34,7 +34,20 @@
   border: 1px solid lightgrey;
 }
 
-// .itemTitle {}
+.color {
+  margin-left: 1rem;
+  margin-bottom: -2px;
+  display: inline-block;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid $color-grey-dark;
+}
+
+.itemTitle {
+  font-weight: 600;
+  color: $color-primary;
+}
 
 .itemPrice {
   margin-left: auto;

@@ -81,7 +81,7 @@ const OrderDetails = () => {
               <Moment format="YYYY-MM-DD">{order.estimatedDeliveryDate}</Moment>
             </p>
             <p>{order.deliveryMethod}</p>
-            <p>Delivery charges: {order.deliveryCharges}.000</p>
+            <p>Delivery charges: {order.deliveryCharges}.000 &#x20ab;</p>
           </div>
           <div className={styles.box}>
             <p>{order.paymentMethod}</p>
@@ -106,22 +106,27 @@ const OrderDetails = () => {
           <div className={styles.summary}>
             <p>
               <span>Payment</span>
-              <span className={styles.boldText}>{totalPayment}.000</span>
+              <span className={styles.boldText}>
+                {totalPayment}.000 &#x20ab;
+              </span>
             </p>
             <p>
               <span>Delivery charges</span>
               <span className={styles.boldText}>
-                {totalDeliveryCharges}.000
+                {totalDeliveryCharges}.000 &#x20ab;
               </span>
             </p>
             <p>
               <span>Discount</span>
-              <span className={styles.boldText}>{totalDiscount}.000</span>
+              <span className={styles.boldText}>
+                {totalDiscount}.000 &#x20ab;
+              </span>
             </p>
             <p>
               <span>Total</span>
               <span className={styles.totalPayment}>
                 {totalPayment + totalDeliveryCharges - totalDiscount}.000
+                &#x20ab;
               </span>
             </p>
           </div>

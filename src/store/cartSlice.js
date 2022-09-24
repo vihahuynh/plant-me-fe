@@ -77,6 +77,12 @@ const cartSlice = createSlice({
       }
     },
 
+    clearCheckoutItems(state) {
+      state.items = current(state).items.filter((item) => !item.isCheckout);
+      state.quantity = state.items.length;
+      state.checkoutAllItems = false;
+    },
+
     clear() {
       return initCartState;
     },

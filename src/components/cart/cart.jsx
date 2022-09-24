@@ -68,6 +68,10 @@ const Cart = ({ isShowCheckBox = true }) => {
     setOpenModal(false);
   };
 
+  const showItems = isShowCheckBox
+    ? cart.items
+    : cart.items.filter((item) => item.isCheckout);
+
   return (
     <>
       {ReactDOM.createPortal(
@@ -96,7 +100,7 @@ const Cart = ({ isShowCheckBox = true }) => {
             <TbTrash className={styles.icon} onClick={onOpenModal} />
           </div>
         )}
-        {cart.items.map((item) => (
+        {showItems.map((item) => (
           <CartItem
             key={`${item.id}-${item.size}-${item.color}`}
             item={item}

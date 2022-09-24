@@ -34,7 +34,7 @@ const Checkout = () => {
         authen?.user?.token
       );
       console.log("your order: ", returnedOrder);
-      dispatch(cartActions.clear());
+      dispatch(cartActions.clearCheckoutItems());
     } catch (err) {
       console.log(err);
     }
