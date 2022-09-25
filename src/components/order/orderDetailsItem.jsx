@@ -1,6 +1,6 @@
 import styles from "./orderDetailsItem.module.scss";
 
-import ButtonLink from "./../UI/buttons/linkbutton";
+import LinkButton from "./../UI/buttons/linkbutton";
 
 const OrderDetailsItem = ({ order }) => {
   return (
@@ -20,13 +20,13 @@ const OrderDetailsItem = ({ order }) => {
               />
             </div>
             <div className={styles.orderBtnGroup}>
-              <ButtonLink
+              <LinkButton
                 text="Write review"
                 size="small"
                 borderRadius="square"
                 theme="light"
               />
-              <ButtonLink
+              <LinkButton
                 text="Buy again"
                 size="small"
                 borderRadius="square"

@@ -1,5 +1,5 @@
 import OrderItem from "./orderItem";
-import ButtonLink from "../UI/buttons/linkbutton";
+import LinkButton from "../UI/buttons/linkbutton";
 
 import styles from "./order.module.scss";
 
@@ -62,13 +62,13 @@ const Order = ({ order, userId }) => {
           </span>
         </p>
         <div className={styles.orderBtnGroup}>
-          <ButtonLink
+          <LinkButton
             text="Buy again"
             size="small"
             borderRadius="square"
             theme="light"
           />
-          <ButtonLink
+          <LinkButton
             text="View details"
             size="small"
             borderRadius="square"

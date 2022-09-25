@@ -84,7 +84,7 @@ const Navigation = () => {
                 url="signup"
                 text="Sign up"
                 size="small"
-                type="light"
+                theme="light"
                 borderRadius="square"
               />
             </>

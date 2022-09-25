@@ -76,7 +76,7 @@ const NotificationItem = ({ item, setNotification }) => {
             item.url || `/user/${authen?.user?.id}/order-history/${item.order}`
           }
           size="small"
-          type="light"
+          theme="light"
         />
         <Button
           text="Delete"
