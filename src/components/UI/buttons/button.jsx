@@ -7,7 +7,7 @@ const Button = ({
   onClick,
   className,
   borderRadius = "circle",
-  theme,
+  theme = "primary",
 }) => {
   const buttonClassName = `${styles.customBtn} ${styles[size]} ${className} ${styles[borderRadius]} ${styles[theme]}`;
 
