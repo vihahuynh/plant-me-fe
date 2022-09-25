@@ -88,13 +88,13 @@ const ReviewForm = ({ onSave, onCancel, rating }) => {
             </div>
             <div className={styles.buttonGroup}>
               <Button
-                btnType="submit"
+                type="submit"
                 text="Save"
                 size="medium"
                 borderRadius="square"
               />
               <Button
-                type="light"
+                theme="light"
                 text="Cancel"
                 size="medium"
                 borderRadius="square"

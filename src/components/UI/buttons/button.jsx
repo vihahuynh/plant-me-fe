@@ -1,18 +1,18 @@
 import styles from "./button.module.scss";
 
 const Button = ({
-  btnType,
+  type,
   text,
   size,
   onClick,
   className,
   borderRadius = "circle",
-  type = "primary",
+  theme,
 }) => {
-  const buttonClassName = `${styles.customBtn} ${styles[size]} ${className} ${styles[borderRadius]} ${styles[type]}`;
+  const buttonClassName = `${styles.customBtn} ${styles[size]} ${className} ${styles[borderRadius]} ${styles[theme]}`;
 
   return (
-    <button className={buttonClassName} onClick={onClick} type={btnType}>
+    <button className={buttonClassName} onClick={onClick} type={type}>
       {text}
     </button>
   );

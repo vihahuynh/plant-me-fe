@@ -24,13 +24,13 @@ const OrderDetailsItem = ({ order }) => {
                 text="Write review"
                 size="small"
                 borderRadius="square"
-                type="light"
+                theme="light"
               />
               <ButtonLink
                 text="Buy again"
                 size="small"
                 borderRadius="square"
-                type="light"
+                theme="light"
               />
             </div>
           </div>

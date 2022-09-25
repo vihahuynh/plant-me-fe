@@ -6,11 +6,11 @@ const LinkButton = ({
   url,
   borderRadius = "circle",
   className,
-  type = "primary",
+  theme = "primary",
 }) => {
   const buttonClassName = `${styles.customBtn} ${styles[size]} ${
     styles[borderRadius]
-  } ${className || ""} ${styles[type]}`;
+  } ${className || ""} ${styles[theme]}`;
   return (
     <a className={buttonClassName} href={url}>
       {text}

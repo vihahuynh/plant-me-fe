@@ -65,7 +65,7 @@ const NotificationItem = ({ item, setNotification }) => {
             text="Mark as read"
             borderRadius="square"
             size="small"
-            type="blue"
+            theme="blue"
             onClick={() => onUpdateNoti("read")}
           />
         )}
@@ -82,7 +82,7 @@ const NotificationItem = ({ item, setNotification }) => {
           text="Delete"
           borderRadius="square"
           size="small"
-          type="red"
+          theme="red"
           onClick={() => onUpdateNoti("delete")}
         />
       </div>

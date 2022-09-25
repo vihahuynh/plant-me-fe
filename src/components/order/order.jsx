@@ -66,13 +66,13 @@ const Order = ({ order, userId }) => {
             text="Buy again"
             size="small"
             borderRadius="square"
-            type="light"
+            theme="light"
           />
           <ButtonLink
             text="View details"
             size="small"
             borderRadius="square"
-            type="light"
+            theme="light"
             url={`/user/${userId}/order-history/${order.id}`}
           />
         </div>
