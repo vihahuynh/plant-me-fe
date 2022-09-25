@@ -26,6 +26,7 @@ const ProductToReview = ({ product, setReviews, setProducts }) => {
         ...values,
         rating: rating,
         productId: product.id,
+        createdBy: authen?.user?.id,
       };
       delete newReview.images;
 
@@ -50,9 +51,14 @@ const ProductToReview = ({ product, setReviews, setProducts }) => {
     onCloseModal();
   };
 
+  const onCancel = () => {
+    onCloseModal();
+    setRating(0);
+  };
+
   return (
     <div className={styles["slick-slide"]} key={product.id}>
-      <div className={styles.productBox}>
+      <div className={styles.productBox} onClick={onOpenModal}>
         <img className={styles.productImg} src={product.image} alt="plant" />
         <div className={styles.productBoxLeft}>
           <h5>{product.title}</h5>
@@ -60,10 +66,11 @@ const ProductToReview = ({ product, setReviews, setProducts }) => {
             className={styles.rating}
             name="read-only"
             value={rating}
-            onChange={(_, newValue) => {
-              setRating(newValue);
-              onOpenModal();
-            }}
+            readOnly
+            // onChange={(_, newValue) => {
+            //   setRating(newValue);
+            //   onOpenModal();
+            // }}
           />
         </div>
       </div>
@@ -91,7 +98,7 @@ const ProductToReview = ({ product, setReviews, setProducts }) => {
           </div>
           <ReviewForm
             onSave={onAddNewReview}
-            onCancel={onCloseModal}
+            onCancel={onCancel}
             rating={rating}
           />
         </Modal>,
