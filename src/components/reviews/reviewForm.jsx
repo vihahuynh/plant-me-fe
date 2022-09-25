@@ -1,44 +1,15 @@
 import styles from "./reviewForm.module.scss";
 import { Formik } from "formik";
+import Button from "./../UI/buttons/button";
 
-import reviewService from "../../services/review";
-import { useSelector } from "react-redux";
-
-const ReviewForm = ({ productId }) => {
-  const authen = useSelector((state) => state.authentication);
-
-  const onAddNewReview = async (values) => {
-    try {
-      const newReview = {
-        ...values,
-        productId,
-      };
-      delete newReview.images;
-      console.log("newReview: ", newReview);
-
-      const formData = new FormData();
-      for (const singleFile of values.images) {
-        formData.append("images", singleFile);
-      }
-      formData.append("obj", JSON.stringify(newReview));
-      const returnReview = await reviewService.create(
-        formData,
-        authen?.user?.token
-      );
-      console.log(returnReview);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+const ReviewForm = ({ onSave, onCancel, rating }) => {
   return (
     <div className={styles.formContainer}>
-      <h5>Enter your review</h5>
       <Formik
         initialValues={{
           title: "",
           content: "",
-          rating: 5,
+          rating: rating,
           images: [],
         }}
         validate={(values) => {
@@ -56,8 +27,7 @@ const ReviewForm = ({ productId }) => {
         }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            console.log("values: ", values);
-            onAddNewReview(values);
+            onSave(values);
             setSubmitting(false);
           }, 400);
         }}
@@ -116,13 +86,21 @@ const ReviewForm = ({ productId }) => {
                 {errors.content && touched.content && errors.content}
               </p>
             </div>
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className={styles.btn}
-            >
-              + Add
-            </button>
+            <div className={styles.buttonGroup}>
+              <Button
+                btnType="submit"
+                text="Save"
+                size="medium"
+                borderRadius="square"
+              />
+              <Button
+                type="light"
+                text="Cancel"
+                size="medium"
+                borderRadius="square"
+                onClick={onCancel}
+              />
+            </div>
           </form>
         )}
       </Formik>

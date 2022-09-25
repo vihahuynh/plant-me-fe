@@ -1,7 +1,8 @@
 @import "./../../variable.scss";
 
 .formContainer {
-  width: 50%;
+  margin-top: 4rem;
+  width: 100%;
   position: relative;
 
   h5 {
@@ -132,4 +133,11 @@
       margin-top: 1rem;
     }
   }
+}
+
+.buttonGroup {
+  margin-top: 5rem;
+  display: flex;
+  gap: 1rem;
+  align-self: flex-end;
 }

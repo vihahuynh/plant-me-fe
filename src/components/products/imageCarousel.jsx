@@ -6,29 +6,13 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styles from "./imageCarousel.module.scss";
 
-import { RiArrowRightSLine, RiArrowLeftSLine } from "react-icons/ri/index";
+import Arrow from "../UI/arrow";
 
 const ImageCarousel = ({ images }) => {
   const [nav1, setNav1] = useState(null);
   const [nav2, setNav2] = useState(null);
   const [slider1, setSlider1] = useState(null);
   const [slider2, setSlider2] = useState(null);
-
-  const Arrow = ({ onClick, className, type }) => {
-    return (
-      <button
-        className={`${className} ${type === "next" ? styles.nextArrow : styles.prevArrow
-          }`}
-        onClick={onClick}
-      >
-        {type === "next" ? (
-          <RiArrowLeftSLine className={styles.icon} />
-        ) : (
-          <RiArrowRightSLine className={styles.icon} />
-        )}
-      </button>
-    );
-  };
 
   useEffect(() => {
     setNav1(slider1);

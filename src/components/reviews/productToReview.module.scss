@@ -1,0 +1,37 @@
+@import "./../../variable.scss";
+
+.productBox {
+  width: 90%;
+  display: flex;
+  column-gap: 3rem;
+
+  background-color: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  margin: 2rem;
+}
+
+.productBoxSmall {
+  width: 90%;
+  display: flex;
+  column-gap: 3rem;
+}
+
+.productBoxLeft {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  h5 {
+    color: $color-primary;
+    font-size: $default-font-size;
+  }
+}
+
+.productImg {
+  width: 8rem;
+}
+
+.rating {
+  font-size: 4rem !important;
+}

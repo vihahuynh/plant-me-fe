@@ -20,7 +20,6 @@
 
   .modal {
     padding: 3rem;
-    width: 25%;
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -43,4 +42,16 @@
     gap: 1rem;
     align-self: flex-end;
   }
+}
+
+.large {
+  width: 60%;
+}
+
+.medium {
+  width: 40%;
+}
+
+.small {
+  width: 25%;
 }

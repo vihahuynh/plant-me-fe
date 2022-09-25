@@ -1,6 +1,7 @@
 @import "./../../../variable.scss";
 
 .customBtn {
+  outline: none;
   display: inline-block;
   align-self: flex-start;
   text-decoration: none;
@@ -33,14 +34,8 @@
 .primary {
   color: $color-primary-light;
   background-color: $color-primary;
-}
-
-.light {
-  color: $color-primary;
-  background-color: $color-primary-light;
   border: 1px solid $color-primary;
 }
-
 
 .light {
   color: $color-primary;

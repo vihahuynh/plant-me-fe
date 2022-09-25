@@ -1,22 +1,20 @@
 import styles from "./button.module.scss";
 
 const Button = ({
+  btnType,
   text,
   size,
   onClick,
   className,
   borderRadius = "circle",
-  type = "primary"
+  type = "primary",
 }) => {
   const buttonClassName = `${styles.customBtn} ${styles[size]} ${className} ${styles[borderRadius]} ${styles[type]}`;
-  const customOnClick = (e) => {
-    e.preventDefault()
-    onClick()
-  }
+
   return (
-    <a href="/" className={buttonClassName} onClick={customOnClick}>
+    <button className={buttonClassName} onClick={onClick} type={btnType}>
       {text}
-    </a>
+    </button>
   );
 };
 

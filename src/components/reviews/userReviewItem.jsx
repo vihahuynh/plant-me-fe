@@ -10,8 +10,9 @@ const UserReviewItem = ({ item }) => {
     <div className={styles.userReviewItem}>
       <img
         src={
-          item.product.images.find((img) => img.includes("eye")) ||
-          item.product.images[0]
+          item.product?.images?.find((img) => img.includes("eye")) ||
+          item.product?.images?.[0] ||
+          item.product?.image
         }
         alt=""
       />
@@ -36,7 +37,7 @@ const UserReviewItem = ({ item }) => {
 
       <div>
         {!!item.images.length &&
-          item.images.map((img) => <img src={img} alt="" />)}
+          item.images.map((img) => <img key={img} src={img} alt="" />)}
       </div>
     </div>
   );
