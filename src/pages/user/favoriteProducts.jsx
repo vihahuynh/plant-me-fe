@@ -7,6 +7,9 @@ import productService from "../../services/product";
 import Products from "./../../components/products/products";
 import Wrapper from "../../components/layout/wrapper";
 
+import styles from "./favoriteProducts.module.scss";
+import UserLeftMenu from "../../components/layout/userLetfMenu/userLeftMenu";
+
 const FavoriteProducts = () => {
   const authen = useSelector((state) => state.authentication);
   const [products, setProducts] = useState([]);
@@ -35,9 +38,12 @@ const FavoriteProducts = () => {
 
   return (
     <Wrapper>
-      <div>
-        <h2>My favorite products</h2>
-        <Products products={products} />
+      <div className={styles.main}>
+        <UserLeftMenu />
+        <div>
+          <h2>My favorite products</h2>
+          <Products products={products} />
+        </div>
       </div>
     </Wrapper>
   );

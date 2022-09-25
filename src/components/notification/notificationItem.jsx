@@ -54,7 +54,7 @@ const NotificationItem = ({ item, setNotification }) => {
   return (
     <li
       className={styles.notiItem}
-      style={{ backgroundColor: item.isRead ? "#fff" : "#f2f2f2" }}
+      style={{ backgroundColor: item.isRead ? "#ecf2e6" : "#fff" }}
     >
       <Moment format="YYYY-MM-DD">{item.createdAt}</Moment>
       {getIcon(item.type)}

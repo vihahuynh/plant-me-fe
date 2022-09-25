@@ -1,8 +1,16 @@
 @import "./../../variable.scss";
 
-.container {
-  padding: 5rem 30rem;
+.main {
+  padding: 5rem 10rem;
+  display: flex;
+  column-gap: 4rem;
   background-color: $color-primary-light;
+}
+
+.container {
+  width: 100%;
+  padding: 2rem;
+  // background-color: $color-primary-light;
 }
 
 .ordersList {

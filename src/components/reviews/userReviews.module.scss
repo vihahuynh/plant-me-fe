@@ -1,16 +1,11 @@
 @import "./../../variable.scss";
 
 .container {
-  padding: 5rem 10rem;
   font-size: $default-font-size;
-  background-color: $color-primary-light;
+  width: calc(100% - 20rem - 15rem);
 
   h3 {
     font-size: 2.5rem;
     color: $color-primary;
   }
 }
-
-// .userReviewsList {
-//   background-color: $color-primary-light;
-// }

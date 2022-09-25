@@ -22,10 +22,9 @@ const UserReviews = () => {
 
   const settings = {
     className: "center",
-    // centerMode: true,
     arrow: true,
-    slidesToShow: products.length < 3 ? products.length : 3,
-    slidesToScroll: products.length < 3 ? products.length : 3,
+    slidesToShow: products.length < 2 ? products.length : 2,
+    slidesToScroll: products.length < 2 ? products.length : 2,
     speed: 500,
     nextArrow: <Arrow type="prev" />,
     prevArrow: <Arrow type="next" />,

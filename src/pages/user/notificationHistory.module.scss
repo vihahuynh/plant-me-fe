@@ -1,0 +1,8 @@
+@import "./../../variable.scss";
+
+.main {
+  background-color: $color-primary-light;
+  padding: 5rem 10rem;
+  display: flex;
+  column-gap: 4rem;
+}

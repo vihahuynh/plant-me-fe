@@ -10,6 +10,7 @@ import orderService from "../../services/order";
 import styles from "./orderHistory.module.scss";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import UserLeftMenu from "../../components/layout/userLetfMenu/userLeftMenu";
 
 const OrderHistory = () => {
   const [orders, setOrders] = useState([]);
@@ -38,26 +39,29 @@ const OrderHistory = () => {
 
   return (
     <Wrapper>
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <h2>My Orders</h2>
-          {!!orders.length && (
-            <div className={styles.btnContainers}>
-              <div className={styles.btn}>
-                <SortDrawer sortOptions={ordersSortOptions} />
+      <div className={styles.main}>
+        <UserLeftMenu />
+        <div className={styles.container}>
+          <div className={styles.header}>
+            <h2>My Orders</h2>
+            {!!orders.length && (
+              <div className={styles.btnContainers}>
+                <div className={styles.btn}>
+                  <SortDrawer sortOptions={ordersSortOptions} />
+                </div>
+                <div className={styles.btn}>
+                  <FilterDrawer filterOptions={ordersFilterOptions} />
+                </div>
               </div>
-              <div className={styles.btn}>
-                <FilterDrawer filterOptions={ordersFilterOptions} />
-              </div>
-            </div>
-          )}
+            )}
+          </div>
+          <SearchBar />
+          <ul className={styles.ordersList}>
+            {orders.map((order) => (
+              <Order key={order.id} order={order} userId={userId} />
+            ))}
+          </ul>
         </div>
-        <SearchBar />
-        <ul className={styles.ordersList}>
-          {orders.map((order) => (
-            <Order key={order.id} order={order} userId={userId} />
-          ))}
-        </ul>
       </div>
     </Wrapper>
   );

@@ -1,9 +1,15 @@
 @import "./../../variable.scss";
 
-.orderDetails {
-  color: $color-grey;
-  padding: 5rem 30rem;
+.main {
+  padding: 5rem 10rem;
+  display: flex;
+  column-gap: 4rem;
   background-color: $color-primary-light;
+}
+
+.orderDetails {
+  width: 200%;
+  color: $color-grey;
   font-size: $default-font-size;
 
   h5 {
