@@ -21,6 +21,7 @@ import OrderDetails from "./pages/user/orderDetails";
 import NotificationHistory from "./pages/user/notificationHistory";
 import FavoriteProducts from "./pages/user/favoriteProducts";
 import ReviewHistory from "./pages/user/reviewHistory";
+import Account from "./pages/user/account";
 
 import { authenticationActions } from "./store";
 import Checkout from "./pages/checkout";
@@ -70,6 +71,9 @@ const App = () => {
         </Route>
         <Route path="/signup">
           <SignUp />
+        </Route>
+        <Route exact path="/user/:userId">
+          <Account />
         </Route>
         <Route path="/user/:userId/order-history/:orderId">
           <OrderDetails />

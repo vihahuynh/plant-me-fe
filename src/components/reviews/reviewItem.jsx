@@ -24,7 +24,7 @@ const ReviewItem = ({ review }) => {
     try {
       const likedReview = { ...review, like: review.like + 1, createdBy: review.createdBy.id, product: review.product.id };
       const currentUser = { ...authen?.user, likedReviews: authen?.user?.likedReviews?.concat(likedReview.id) }
-      
+
       await reviewService.update(review.id, likedReview);
       await userService.update(currentUser.id, currentUser, currentUser.token)
       dispatch(authenticationActions.update({ user: currentUser }))
@@ -51,7 +51,7 @@ const ReviewItem = ({ review }) => {
     <div className={styles.container}>
       <img
         className={styles.avatar}
-        src={review.avatarUrl || "/images/default-avatar.png"}
+        src={review.user.avatarUrl || "/images/default-avatar.png"}
         alt="user"
       />
       <div className={styles.review}>

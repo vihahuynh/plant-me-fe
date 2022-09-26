@@ -50,8 +50,8 @@ const Order = ({ order, userId }) => {
         <p>{order.status}</p>
       </div>
       <ul>
-        {order?.cart?.map((order) => (
-          <OrderItem key={order.id} order={order} />
+        {order?.cart?.map((orderItem) => (
+          <OrderItem key={`${orderItem.id}-${orderItem.color}-${orderItem.size}`} order={orderItem} />
         ))}
       </ul>
       <div className={styles.orderFooter}>
