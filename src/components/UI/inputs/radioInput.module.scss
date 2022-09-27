@@ -6,9 +6,9 @@
   cursor: pointer;
 
   input {
-    display: none;
+    display: none !important;
 
-    &:checked ~ label span::after {
+    &:checked~label span::after {
       display: block;
     }
   }

@@ -2,7 +2,6 @@
 
 .container {
   width: 30rem;
-  //   background-color: $color-primary-light;
   border-radius: 3px;
   font-size: $default-font-size;
   flex-shrink: 0;
@@ -11,7 +10,8 @@
 
   h3 {
     margin-left: 4rem;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
+    color: $color-primary;
   }
 }
 
@@ -24,6 +24,7 @@
     display: flex;
     padding: 1.2rem 4rem;
   }
+
   border-radius: 3px;
   color: $color-primary;
 
@@ -43,4 +44,13 @@
   .icon {
     color: $color-primary-light;
   }
+}
+
+.avatarImg {
+  margin-left: 4rem;
+  margin-bottom: 1rem;
+  height: 10rem;
+  width: 10rem;
+  border-radius: 50%;
+  border: 2px solid $color-primary;
 }

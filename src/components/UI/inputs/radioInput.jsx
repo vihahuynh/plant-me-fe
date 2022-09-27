@@ -6,9 +6,10 @@ const RadioInput = ({ name, value, onChange, label, checked }) => {
       <input
         type="radio"
         id={value}
-        name="name"
+        name={name}
         value={value}
         onChange={onChange}
+        checked={checked}
       />
       <label htmlFor={value}>
         <span></span>

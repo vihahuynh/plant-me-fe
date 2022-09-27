@@ -16,9 +16,28 @@
 }
 
 .avatarPreview {
+  height: 20rem;
+  width: 20rem;
   border: 2px solid $color-primary;
   border-radius: 50%;
   overflow: hidden;
+}
+
+.avatar {
+  position: relative;
+}
+
+.editAvatarIcon {
+  height: 4rem;
+  width: 4rem;
+  position: absolute;
+  padding: .5rem;
+  bottom: 1rem;
+  right: 1rem;
+  border-radius: 50%;
+  background-color: $color-primary;
+  color: $color-primary-light;
+  cursor: pointer;
 }
 
 .formContainer {
@@ -156,9 +175,15 @@
   }
 }
 
-.buttonGroup {
-  margin-top: 2rem;
-  display: flex;
-  gap: 1rem;
-  align-self: flex-end;
+// .buttonGroup {
+//   margin-top: 2rem;
+//   display: flex;
+//   gap: 1rem;
+//   align-self: flex-end;
+// }
+
+.submittingBtn {
+  background-color: $color-grey;
+  border-color: $color-grey-dark;
+  cursor: not-allowed;
 }
