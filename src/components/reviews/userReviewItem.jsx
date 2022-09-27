@@ -33,11 +33,10 @@ const UserReviewItem = ({ item }) => {
           <AiOutlineLike className={styles.icon} />
           <span>{item.like}</span>
         </div>
-      </div>
-
-      <div>
-        {!!item.images.length &&
-          item.images.map((img) => <img key={img} src={img} alt="" />)}
+        <div>
+          {!!item.images.length &&
+            item.images.map((img) => <img key={img} src={img} alt="" />)}
+        </div>
       </div>
     </div>
   );

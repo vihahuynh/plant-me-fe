@@ -10,25 +10,32 @@ import { AiFillLike, AiOutlineLike } from "react-icons/ai/index";
 
 import reviewService from "../../services/review";
 import userService from "../../services/user";
-import { authenticationActions } from "./../../store"
-
+import { authenticationActions } from "./../../store";
 
 const ReviewItem = ({ review }) => {
-  const authen = useSelector(state => state.authentication);
-  const [likeCount, setLikeCount] = useState(review.like)
-  const dispatch = useDispatch()
+  const authen = useSelector((state) => state.authentication);
+  const [likeCount, setLikeCount] = useState(review.like);
+  const dispatch = useDispatch();
 
-  const wasLiked = authen?.user?.likedReviews?.includes(review.id)
+  const wasLiked = authen?.user?.likedReviews?.includes(review.id);
 
   const onLike = async () => {
     try {
-      const likedReview = { ...review, like: review.like + 1, createdBy: review.createdBy.id, product: review.product.id };
-      const currentUser = { ...authen?.user, likedReviews: authen?.user?.likedReviews?.concat(likedReview.id) }
+      const likedReview = {
+        ...review,
+        like: review.like + 1,
+        createdBy: review.createdBy.id,
+        product: review.product.id,
+      };
+      const currentUser = {
+        ...authen?.user,
+        likedReviews: authen?.user?.likedReviews?.concat(likedReview.id),
+      };
 
       await reviewService.update(review.id, likedReview);
-      await userService.update(currentUser.id, currentUser, currentUser.token)
-      dispatch(authenticationActions.update({ user: currentUser }))
-      setLikeCount(prev => prev + 1)
+      await userService.update(currentUser.id, currentUser, currentUser.token);
+      dispatch(authenticationActions.update({ user: currentUser }));
+      setLikeCount((prev) => prev + 1);
     } catch (err) {
       console.log(err);
     }
@@ -36,12 +43,22 @@ const ReviewItem = ({ review }) => {
 
   const onUnLike = async () => {
     try {
-      const likedReview = { ...review, like: review.like - 1 >= 0 ? review.like - 1 : 0, createdBy: review.createdBy.id, product: review.product.id };
-      const currentUser = { ...authen?.user, likedReviews: authen?.user?.likedReviews?.filter(item => item !== likedReview.id) }
+      const likedReview = {
+        ...review,
+        like: review.like - 1 >= 0 ? review.like - 1 : 0,
+        createdBy: review.createdBy.id,
+        product: review.product.id,
+      };
+      const currentUser = {
+        ...authen?.user,
+        likedReviews: authen?.user?.likedReviews?.filter(
+          (item) => item !== likedReview.id
+        ),
+      };
       await reviewService.update(review.id, likedReview);
-      await userService.update(currentUser.id, currentUser, currentUser.token)
-      dispatch(authenticationActions.update({ user: currentUser }))
-      setLikeCount(prev => prev - 1 >= 0 ? prev - 1 : 0)
+      await userService.update(currentUser.id, currentUser, currentUser.token);
+      dispatch(authenticationActions.update({ user: currentUser }));
+      setLikeCount((prev) => (prev - 1 >= 0 ? prev - 1 : 0));
     } catch (err) {
       console.log(err);
     }
@@ -51,7 +68,7 @@ const ReviewItem = ({ review }) => {
     <div className={styles.container}>
       <img
         className={styles.avatar}
-        src={review.user.avatarUrl || "/images/default-avatar.png"}
+        src={review?.createdBy?.avatarUrl || "/images/default-avatar.png"}
         alt="user"
       />
       <div className={styles.review}>
