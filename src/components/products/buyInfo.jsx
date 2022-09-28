@@ -14,18 +14,36 @@ let delay;
 
 const BuyInfo = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
-  const [size, setSize] = useState(product.size[0]);
-  const [color, setColor] = useState(product.colors[0]);
+  const [size, setSize] = useState(null);
+  const [color, setColor] = useState(null)
+
+  const allColors = [... new Set(product?.stocks?.map(s => s.color))]
+  const allSizes = [... new Set(product?.stocks?.map(s => s.size))]
+
+  const [availableColors, setAvailableColors] = useState(allColors)
+  const [availableSizes, setAvailableSizes] = useState(allSizes)
+  const [availableQuantity, setAvailableQuantity] = useState(0)
 
   const dispatch = useDispatch();
 
-  const onUpdateQuantity = useCallback(
-    (quan) => setQuantity(+quan > 0 ? +quan : 1),
-    []
-  );
+  const onUpdateQuantity = (quan) => {
+    if (+quan > 0 && +quan <= availableQuantity) setQuantity(+quan)
+    else if (+quan <= 0) setQuantity(1)
+    else setQuantity(availableQuantity)
+  }
 
   const onAddToCart = () => {
     clearTimeout(delay);
+    if (!color || !size) {
+      dispatch(alertActions.updateMessage({ message: "Please choose color and size!", type: "warning" }))
+      delay = setTimeout(() => dispatch(alertActions.clear()), 3000);
+      return
+    }
+    if (quantity > availableQuantity) {
+      dispatch(alertActions.updateMessage({ message: `Only ${availableQuantity} products available!`, type: "warning" }))
+      delay = setTimeout(() => dispatch(alertActions.clear()), 3000);
+      return
+    }
     const cartItem = {
       id: product.id,
       title: product.title,
@@ -54,6 +72,21 @@ const BuyInfo = ({ product }) => {
     return averageRating;
   }, 0);
 
+
+  const onUpdateColor = (inputColor) => {
+    const stockHaveColor = product.stocks.filter(s => s.color === inputColor)
+    setAvailableSizes(stockHaveColor.filter(s => s.quantity).map(s => s.size))
+    setAvailableQuantity(product.stocks.find(s => s.color === inputColor && s.size === size)?.quantity ?? 0)
+    setColor(inputColor)
+  }
+
+  const onUpdateSize = (inputSize) => {
+    const stocksHaveSize = product.stocks.filter(s => s.size === inputSize)
+    setAvailableColors(stocksHaveSize.filter(s => s.quantity).map(s => s.color))
+    setAvailableQuantity(product.stocks.find(s => s.color === color && s.size === inputSize)?.quantity ?? 0)
+    setSize(inputSize)
+  }
+
   return (
     <>
       <div>
@@ -73,55 +106,57 @@ const BuyInfo = ({ product }) => {
           size="big"
         />
       </div>
-
       <div>
-        {!!product.size && (
-          <div className={styles.optionContainer}>
-            <p className={styles.optionTitle}>Size</p>
-            <ul className={styles.optionList}>
-              {product?.size?.map((s) => (
+        <div className={styles.optionContainer}>
+          <p className={styles.optionTitle}>Size</p>
+          <ul className={styles.optionList}>
+            {allSizes?.map((s) => {
+              const sizeClassNames = `${styles.sizeItem} ${size === s ? styles.active : ""} ${!availableSizes.includes(s) ? styles.unavailable : ""}`
+              return (
                 <li
-                  className={
-                    size !== s
-                      ? styles.sizeItem
-                      : `${styles.sizeItem} ${styles.active}`
-                  }
+                  className={sizeClassNames}
                   key={s}
-                  onClick={() => setSize(s)}
+                  onClick={() => onUpdateSize(s)}
                 >
                   {s}
                 </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {!!product.colors && (
-          <div className={styles.optionContainer}>
-            <p className={styles.optionTitle}>Color</p>
-            <ul className={styles.optionList}>
-              {product?.colors?.map((c) => (
+              )
+            })}
+          </ul>
+        </div>
+        <div className={styles.optionContainer}>
+          <p className={styles.optionTitle}>Color</p>
+          <ul className={styles.optionList}>
+            {allColors.map((c) => {
+              const normalStyle = {
+                outline: `1px solid ${c}`,
+                backgroundColor: c,
+              }
+              const unavailableStyles = {
+                outline: '1px solid #eaedf3',
+                backgroundColor: '#eaedf3',
+                cursor: 'not-allowed'
+              }
+              // const colorClassNames = `${styles.colorItem} ${color === c ? styles.active : ""} ${!availableColors.includes(c) ? styles.unavailable : ""}`
+              return (
                 <li
-                  style={{
-                    color: c,
-                    outline: `1px solid ${c}`,
-                    backgroundColor: c,
-                  }}
+                  style={!availableColors.includes(c) ? unavailableStyles : normalStyle}
                   className={
                     color !== c
                       ? styles.colorItem
                       : `${styles.colorItem} ${styles.active}`
                   }
                   key={c}
-                  onClick={() => setColor(c)}
+                  onClick={() => onUpdateColor(c)}
                 ></li>
-              ))}
-            </ul>
-          </div>
-        )}
+              )
+            })}
+          </ul>
+        </div>
       </div>
-
       <div>
-        <QuantityInput quantity={quantity} onChange={onUpdateQuantity} />
+        <p className={styles.quantityAvailable}>{availableQuantity ? `${availableQuantity} products available` : <span>	&nbsp;</span>}</p>
+        <QuantityInput quantity={quantity} onChange={onUpdateQuantity} disabled={!availableQuantity} />
         <Button
           text="Add to cart"
           size="medium"

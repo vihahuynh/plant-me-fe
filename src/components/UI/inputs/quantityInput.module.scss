@@ -16,3 +16,11 @@
     width: 10rem;
   }
 }
+
+.disabled {
+  cursor: not-allowed;
+
+  .icon {
+    fill: $color-grey-light;
+  }
+}

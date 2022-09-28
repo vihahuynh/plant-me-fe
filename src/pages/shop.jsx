@@ -28,14 +28,15 @@ const Shop = () => {
     fetchData()
   }, [])
 
+  const productsToDisplay = products.filter(p => !!p.stocks.length)
 
-  const totalPages = Math.ceil(products.length / itemsPerPage);
+  const totalPages = Math.ceil(productsToDisplay.length / itemsPerPage);
 
   const start = (page - 1) * itemsPerPage;
   const end =
-    page * itemsPerPage < products.length
+    page * itemsPerPage < productsToDisplay.length
       ? page * itemsPerPage
-      : products.length;
+      : productsToDisplay.length;
 
   return (
     <Wrapper>
@@ -44,7 +45,7 @@ const Shop = () => {
         <div className={styles.btn}><FilterDrawer filterOptions={plantsFilterOptions} /></div>
       </div>
       <div className={styles.container}>
-        <Products products={products.slice(start, end)} />
+        <Products products={productsToDisplay.slice(start, end)} />
         <Pagination page={page} setPage={setPage} totalPages={totalPages} />
       </div>
     </Wrapper>

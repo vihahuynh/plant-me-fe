@@ -75,11 +75,25 @@
   }
 
   .colorItem.active {
-    outline: 1px solid $color-grey-dark !important;
+    outline: 1px solid $color-grey-dark  !important;
   }
 }
 
 .btn {
   text-transform: uppercase;
   margin-top: 2rem;
+}
+
+.unavailable {
+  background-color: $color-grey-light  !important;
+  color: lightgray !important;
+  // border-color: $color-grey-dark  !important;
+  cursor: not-allowed !important;
+}
+
+.quantityAvailable {
+  font-size: 1.4rem;
+  color: $color-grey;
+  margin-bottom: 1.5rem;
+  color: palevioletred
 }

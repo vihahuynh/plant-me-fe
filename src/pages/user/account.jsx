@@ -24,7 +24,7 @@ const Account = () => {
     const dispatch = useDispatch()
     const [isEditAvatar, setIsEditAvatar] = useState(false)
     const authen = useSelector((state) => state.authentication);
-    const image = authen?.user?.avatarUrl
+    const image = authen?.user?.avatarUrl || "/images/default-avatar.png"
     const [previewImg, setPreviewImg] = useState(null);
     const [gender, setGender] = useState("")
 
