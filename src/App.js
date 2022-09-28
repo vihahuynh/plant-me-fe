@@ -13,6 +13,8 @@ import SignIn from "./pages/signIn";
 import SignUp from "./pages/signUp";
 import ProductDetails from "./pages/productDetails";
 import CartPage from "./pages/cart";
+import Checkout from "./pages/checkout";
+
 // admin page
 import NewProduct from "./pages/admin/newProduct";
 import AdminProducts from "./pages/admin/products";
@@ -23,11 +25,9 @@ import NotificationHistory from "./pages/user/notificationHistory";
 import FavoriteProducts from "./pages/user/favoriteProducts";
 import ReviewHistory from "./pages/user/reviewHistory";
 import Account from "./pages/user/account";
+import UpdateProductForm from "./components/products/productUpdateForm";
 
 import { authenticationActions } from "./store";
-import Checkout from "./pages/checkout";
-
-// import loginService from "./services/login";
 
 const App = () => {
   const authen = useSelector((state) => state.authentication);
@@ -94,8 +94,11 @@ const App = () => {
         <Route path="/admin/products/new">
           <NewProduct />
         </Route>
-        <Route path="/admin/products">
+        <Route exact path="/admin/products">
           <AdminProducts />
+        </Route>
+        <Route path="/admin/products/:id">
+          <UpdateProductForm />
         </Route>
       </Switch>
     </Router>

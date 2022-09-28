@@ -12,10 +12,16 @@ const create = (newObject, token) => {
   });
 };
 
+const update = (id, updateObject, token) => {
+  return axios.patch(`${baseUrl}/${id}`, updateObject, {
+    headers: { Authorization: `bearer ${token}` },
+  });
+};
+
 const get = (id) => {
   return axios.get(`${baseUrl}/${id}`);
 };
 
-const productService = { getAll, create, get };
+const productService = { getAll, create, get, update };
 
 export default productService;
