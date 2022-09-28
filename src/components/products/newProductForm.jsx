@@ -2,8 +2,6 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 import { Formik } from "formik";
-import { SketchPicker } from "react-color";
-import { MdCancel } from "react-icons/md/index";
 
 import productService from "../../services/product";
 import InputGroup from "../UI/inputs/inputGroup/inputGroup";
@@ -13,9 +11,6 @@ import "./../../custom.scss";
 
 const NewProductForm = () => {
   const authen = useSelector(state => state.authentication)
-
-  const [currentColor, setCurrentColor] = useState("#fff");
-  const [colors, setColors] = useState([]);
 
   const [livingConditions, setLivingConditions] = useState([]);
   const [commonProblems, setCommonProblems] = useState([]);
@@ -57,8 +52,6 @@ const NewProductForm = () => {
           images: [],
           title: "",
           about: "",
-          size: [],
-          colors: [],
           price: "",
           salePercent: "",
           livingConditions: [],
@@ -84,14 +77,8 @@ const NewProductForm = () => {
           if (!values.about) {
             errors.about = "About is required";
           }
-          if (!values.colors.length) {
-            errors.colors = "Colors is required";
-          }
           if (!values.images.length) {
             errors.images = "Images is required";
-          }
-          if (!values.size) {
-            errors.size = "Size is required";
           }
           return errors;
         }}
@@ -140,78 +127,6 @@ const NewProductForm = () => {
               <p className={styles.errors}>
                 {errors.images && touched.images && errors.images}
               </p>
-            </div>
-            <div className={`${styles.inputContainer} ${styles.size}`}>
-              <select
-                multiple
-                name="size"
-                id="size"
-                onChange={handleChange}
-                onBlur={handleBlur}
-              >
-                <option value="XS">Size: XS</option>
-                <option value="S">Size: S</option>
-                <option value="M">Size: M</option>
-                <option value="L">Size: L</option>
-                <option value="XL">Size: XL</option>
-              </select>
-              <p className={styles.errors}>
-                {errors.size && touched.size && errors.size}
-              </p>
-            </div>
-            <div className={`${styles.inputContainer} ${styles.colors}`}>
-              <SketchPicker
-                disableAlpha={true}
-                color={currentColor}
-                onChangeComplete={(color, _) => setCurrentColor(color.hex)}
-              />
-
-              <div className={styles.colorsContainer}>
-                <div
-                  className={styles.btn}
-                  onClick={() => {
-                    values.colors = [
-                      ...new Set(values.colors.concat(currentColor)),
-                    ];
-                    setColors((prev) => [
-                      ...new Set(prev.concat(currentColor)),
-                    ]);
-                  }}
-                >
-                  Add color
-                </div>
-                <div>
-                  <h5>Chosen colors: </h5>
-                  <p className={styles.colorErrors}>
-                    {!colors.length &&
-                      errors.colors &&
-                      touched.colors &&
-                      errors.colors}
-                  </p>
-                  <ul className={styles.colorsList}>
-                    {colors.map((c) => (
-                      <li
-                        key={c}
-                        className={styles.colorItem}
-                        style={{ backgroundColor: c }}
-                        onClick={() => setCurrentColor(c)}
-                      >
-                        <MdCancel
-                          className={styles.deleteColorIcon}
-                          onClick={() => {
-                            values.colors = values.colors.filter(
-                              (color) => color !== c
-                            );
-                            setColors(
-                              values.colors.filter((color) => color !== c)
-                            );
-                          }}
-                        />
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
             </div>
             <div className={`${styles.inputContainer} ${styles.price}`}>
               <input
@@ -264,7 +179,6 @@ const NewProductForm = () => {
                 items={livingConditions}
                 setItems={setLivingConditions}
               />
-              {/* <p className={styles.errors}>{!livingConditions.length && "Living conditions is required"} </p> */}
             </div>
             <div className={styles.plantCare}>
               <InputGroup

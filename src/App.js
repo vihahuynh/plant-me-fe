@@ -15,6 +15,7 @@ import ProductDetails from "./pages/productDetails";
 import CartPage from "./pages/cart";
 // admin page
 import NewProduct from "./pages/admin/newProduct";
+import AdminProducts from "./pages/admin/products";
 // user page
 import OrderHistory from "./pages/user/orderHistory";
 import OrderDetails from "./pages/user/orderDetails";
@@ -92,6 +93,9 @@ const App = () => {
         </Route>
         <Route path="/admin/products/new">
           <NewProduct />
+        </Route>
+        <Route path="/admin/products">
+          <AdminProducts />
         </Route>
       </Switch>
     </Router>
