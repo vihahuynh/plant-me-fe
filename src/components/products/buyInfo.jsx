@@ -40,7 +40,8 @@ const BuyInfo = ({ product }) => {
       return
     }
     if (quantity > availableQuantity) {
-      dispatch(alertActions.updateMessage({ message: `Only ${availableQuantity} products available!`, type: "warning" }))
+      const message = availableQuantity ? `Only ${availableQuantity} products available!` : 'Out of stock'
+      dispatch(alertActions.updateMessage({ message, type: "warning" }))
       delay = setTimeout(() => dispatch(alertActions.clear()), 3000);
       return
     }
@@ -75,14 +76,14 @@ const BuyInfo = ({ product }) => {
 
   const onUpdateColor = (inputColor) => {
     const stockHaveColor = product.stocks.filter(s => s.color === inputColor)
-    setAvailableSizes(stockHaveColor.filter(s => s.quantity).map(s => s.size))
+    setAvailableSizes(stockHaveColor.map(s => s.size))
     setAvailableQuantity(product.stocks.find(s => s.color === inputColor && s.size === size)?.quantity ?? 0)
     setColor(inputColor)
   }
 
   const onUpdateSize = (inputSize) => {
     const stocksHaveSize = product.stocks.filter(s => s.size === inputSize)
-    setAvailableColors(stocksHaveSize.filter(s => s.quantity).map(s => s.color))
+    setAvailableColors(stocksHaveSize.map(s => s.color))
     setAvailableQuantity(product.stocks.find(s => s.color === color && s.size === inputSize)?.quantity ?? 0)
     setSize(inputSize)
   }
@@ -155,7 +156,10 @@ const BuyInfo = ({ product }) => {
         </div>
       </div>
       <div>
-        <p className={styles.quantityAvailable}>{availableQuantity ? `${availableQuantity} products available` : <span>	&nbsp;</span>}</p>
+        {availableQuantity
+          ? <p className={styles.quantityAvailable}>{availableQuantity} products available</p>
+          : <p className={styles.quantityAvailable}>{color && size && !availableQuantity ? 'Out of stock' : <span>	&nbsp;</span>}</p>
+        }
         <QuantityInput quantity={quantity} onChange={onUpdateQuantity} disabled={!availableQuantity} />
         <Button
           text="Add to cart"
