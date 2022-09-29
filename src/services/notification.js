@@ -10,7 +10,7 @@ const getAll = (query, sort, token) => {
   if (query?.orderId) {
     queryArr = queryArr.concat(`order=${query.orderId}`);
   }
-  const queryStr = queryArr.join("and");
+  const queryStr = queryArr.join("&");
   return axios.get(`${baseUrl}?${queryStr}`, {
     headers: { Authorization: `bearer ${token}` },
   });

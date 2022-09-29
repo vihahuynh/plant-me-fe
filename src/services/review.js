@@ -10,7 +10,7 @@ const getAll = (query, sort) => {
   if (query?.userId) {
     queryArr = queryArr.concat(`user=${query.userId}`);
   }
-  const queryStr = queryArr.join("and");
+  const queryStr = queryArr.join("&");
   return axios.get(`${baseUrl}?${queryStr}`);
 };
 

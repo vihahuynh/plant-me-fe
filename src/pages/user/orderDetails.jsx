@@ -4,21 +4,42 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import UserLeftMenu from "../../components/layout/userLetfMenu/userLeftMenu";
 import OrderDetailsItem from "../../components/order/orderDetailsItem";
-import Button from "./../../components/UI/buttons/button"
+import Button from "./../../components/UI/buttons/button";
 import Wrapper from "./../../components/layout/wrapper";
 
 import orderService from "../../services/order";
 
 import styles from "./orderDetails.module.scss";
+import stockService from "../../services/stock";
 
 const OrderDetails = () => {
+  const authen = useSelector((state) => state.authentication);
   const [order, setOrder] = useState(null);
   const { userId, orderId } = useParams();
-  const authen = useSelector((state) => state.authentication);
 
   const onCancelOrder = async () => {
-
-  }
+    const orderToUpdate = {
+      status: "Cancelled",
+    };
+    const updatedOder = await orderService.update(
+      order.id,
+      orderToUpdate,
+      authen?.user?.token
+    );
+    setOrder(updatedOder.data);
+    for (let item of order.cart) {
+      const stock = await stockService.getAll({
+        color: item.color,
+        size: item.size,
+        productId: item.id,
+      });
+      const stockToUpdate = stock?.data?.[0];
+      if (stockToUpdate) {
+        stockToUpdate.quantity = stockToUpdate.quantity + item.quantity;
+        await stockService.update(stockToUpdate.id, stockToUpdate);
+      }
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -139,13 +160,19 @@ const OrderDetails = () => {
                   &#x20ab;
                 </span>
               </p>
-              {(order.status === 'Waiting for payment' || order.status === 'Confirm')
-                && <div className={styles.cancelBtn}>
-                  <Button text="Cancel order" size="small" borderRadius="square" theme="red" />
+              {(order.status === "Waiting for payment" ||
+                order.status === "Confirm") && (
+                <div className={styles.cancelBtn}>
+                  <Button
+                    text="Cancel order"
+                    size="small"
+                    borderRadius="square"
+                    theme="red"
+                    onClick={onCancelOrder}
+                  />
                 </div>
-              }
+              )}
             </div>
-
           </div>
         </div>
       </div>

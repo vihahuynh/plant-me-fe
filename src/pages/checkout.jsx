@@ -28,6 +28,7 @@ const Checkout = () => {
         estimatedDeliveryDate: Date.now(),
         deliveryMethod: "meow",
         deliveryCharges: 20,
+        user: authen?.user?.id,
       };
 
       const returnedOrder = await orderService.create(
@@ -40,9 +41,9 @@ const Checkout = () => {
       for (let item of items) {
         const stockToUpdate = {
           ...item.stock,
-          quantity: item.stock?.quantity - item.quantity
-        }
-        await stockSerice.update(stockToUpdate.id, stockToUpdate)
+          quantity: item.stock?.quantity - item.quantity,
+        };
+        await stockSerice.update(stockToUpdate.id, stockToUpdate);
       }
     } catch (err) {
       console.log(err);

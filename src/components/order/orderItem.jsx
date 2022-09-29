@@ -1,7 +1,6 @@
 import styles from "./orderItem.module.scss";
 
 const OrderItem = ({ order }) => {
-  console.log(order)
   return (
     <li className={styles.item}>
       <div className={styles.imgContainer}>
@@ -19,7 +18,9 @@ const OrderItem = ({ order }) => {
           />
         </div>
       </div>
-      <p className={styles.itemPrice}>{order.price * order.quantity}.000 &#x20ab;</p>
+      <p className={styles.itemPrice}>
+        {order.price * order.quantity}.000 &#x20ab;
+      </p>
     </li>
   );
 };
