@@ -9,6 +9,7 @@ import LinkButton from "../components/UI/buttons/linkbutton";
 import { cartActions } from "../store";
 
 import styles from "./checkout.module.scss";
+import stockSerice from "../services/stock";
 
 const Checkout = () => {
   const cart = useSelector((state) => state.cart);
@@ -35,6 +36,14 @@ const Checkout = () => {
       );
       console.log("your order: ", returnedOrder);
       dispatch(cartActions.clearCheckoutItems());
+
+      for (let item of items) {
+        const stockToUpdate = {
+          ...item.stock,
+          quantity: item.stock?.quantity - item.quantity
+        }
+        await stockSerice.update(stockToUpdate.id, stockToUpdate)
+      }
     } catch (err) {
       console.log(err);
     }
