@@ -16,6 +16,10 @@ const OrderDetails = () => {
   const { userId, orderId } = useParams();
   const authen = useSelector((state) => state.authentication);
 
+  const onCancelOrder = async () => {
+
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
