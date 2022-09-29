@@ -249,8 +249,10 @@
 .imgs {
   margin: 1rem 0;
 }
+
 .img {
   height: 10rem;
+
   &:not(:last-child) {
     margin-right: 1.5rem;
   }

@@ -8,8 +8,9 @@ const Button = ({
   className,
   borderRadius = "circle",
   theme = "primary",
+  disabled = false
 }) => {
-  const buttonClassName = `${styles.customBtn} ${styles[size]} ${className} ${styles[borderRadius]} ${styles[theme]}`;
+  const buttonClassName = `${styles.customBtn} ${styles[size]} ${className} ${styles[borderRadius]} ${styles[theme]} ${disabled ? styles.disabled : ""}`;
 
   return (
     <button className={buttonClassName} onClick={onClick} type={type}>

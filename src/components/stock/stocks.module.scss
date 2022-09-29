@@ -1,0 +1,71 @@
+@import "./../../variable.scss";
+
+.container {
+    position: relative;
+    margin: 5rem 10rem 15rem;
+}
+
+.table {
+    font-size: $default-font-size;
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    min-width: 50rem;
+}
+
+.tableHeader {
+    display: table-header-group;
+}
+
+.tableRow {
+    color: inherit;
+    display: table-row;
+    vertical-align: middle;
+    outline: 0;
+
+    td {
+        line-height: 1.5;
+        display: table-cell;
+        vertical-align: inherit;
+        border-bottom: 1px solid $color-grey-light;
+        text-align: start;
+        padding: .5rem $default-font-size;
+        color: $color-grey;
+        -webkit-flex-direction: row-reverse;
+        -ms-flex-direction: row-reverse;
+        flex-direction: row-reverse;
+    }
+}
+
+.tableHeader,
+.tableRow {
+    th {
+        line-height: 1.5rem;
+        display: table-cell;
+        vertical-align: inherit;
+        border-bottom: 1px solid $color-grey-light;
+        text-align: left;
+        padding: 1rem $default-font-size;
+        color: $color-primary
+    }
+}
+
+.color {
+    margin-top: .7rem;
+    display: inline-block;
+    height: 3rem;
+    width: 7rem;
+    border-radius: 3px;
+}
+
+.btnGroup {
+    display: flex;
+    column-gap: 1.5rem;
+}
+
+.addBtn {
+    position: absolute;
+    top: 1rem;
+    right: 10rem;
+}
