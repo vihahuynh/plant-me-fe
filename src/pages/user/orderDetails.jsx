@@ -32,7 +32,7 @@ const OrderDetails = () => {
   if (!order) return <p>No order found</p>;
 
   const totalPayment = order.cart.reduce((result, item) => {
-    return result + item.price;
+    return result + item.price * item.quantity;
   }, 0);
 
   const totalDiscount = order.cart.reduce((result, item) => {

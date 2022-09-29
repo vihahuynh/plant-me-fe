@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import Rating from "@mui/material/Rating";
@@ -17,8 +17,8 @@ const BuyInfo = ({ product }) => {
   const [size, setSize] = useState(null);
   const [color, setColor] = useState(null)
 
-  const allColors = [... new Set(product?.stocks?.map(s => s.color))]
-  const allSizes = [... new Set(product?.stocks?.map(s => s.size))]
+  const allColors = [...new Set(product?.stocks?.map(s => s.color))]
+  const allSizes = [...new Set(product?.stocks?.map(s => s.size))]
 
   const [availableColors, setAvailableColors] = useState(allColors)
   const [availableSizes, setAvailableSizes] = useState(allSizes)

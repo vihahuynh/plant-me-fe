@@ -7,7 +7,7 @@ import ImageCarousel from "../components/products/imageCarousel";
 import styles from "./productDetails.module.scss";
 import BuyInfo from "../components/products/buyInfo";
 import Reviews from "../components/reviews/reviews";
-import Products from "../components/products/products";
+// import Products from "../components/products/products";
 import ProductInfo from "../components/products/productInfo";
 import Features from "../components/features/features";
 import productService from "../services/product";

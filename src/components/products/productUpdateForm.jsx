@@ -7,11 +7,9 @@ import { Formik } from "formik";
 import productService from "../../services/product";
 import InputGroup from "../UI/inputs/inputGroup/inputGroup";
 import Stocks from "../stock/stocks";
-import StockForm from "../stock/stockForm";
 
 import styles from "./productUpdateForm.module.scss";
 import "./../../custom.scss";
-import { Button } from "@mui/material";
 
 const UpdateProductForm = () => {
   const { id } = useParams();
