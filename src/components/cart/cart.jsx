@@ -18,9 +18,9 @@ let delay;
 const Cart = ({ isShowCheckBox = true }) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-  const authen = useSelector((state) => state.authentication)
+  const authen = useSelector((state) => state.authentication);
   const [openModal, setOpenModal] = useState(false);
-  // const [checkoutAllItems, setCheckoutAllItem] = useState(cart.checkoutAllItems || false)
+  const [disabledItem, setDisabledItems] = useState([]);
 
   const onCloseModal = () => setOpenModal(false);
   const onOpenModal = () => {
@@ -43,42 +43,56 @@ const Cart = ({ isShowCheckBox = true }) => {
   useEffect(() => {
     const updateCart = async () => {
       try {
-        await dispatch(toggleCheckoutAll({ cart, value: true, token: authen?.user?.token })).unwrap();
+        await dispatch(
+          toggleCheckoutAll({ cart, value: true, token: authen?.user?.token })
+        ).unwrap();
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
-    }
+    };
     if (
       cart.items.filter((item) => item.isCheckout).length === cart.items.length
     ) {
-      updateCart()
+      updateCart();
     }
   }, [dispatch, cart, authen?.user?.token]);
 
   const onSelectAllItems = async () => {
-    const isCheckout = !cart.checkoutAllItems
+    const isCheckout = !cart.checkoutAllItems;
     const cartToUpdate = {
       ...cart,
-      items: cart.items.map(i => { return { ...i, isCheckout, } }),
-      checkoutAllItems: isCheckout
-    }
+      items: cart.items.map((i) => {
+        return {
+          ...i,
+          isCheckout: disabledItem.includes(i._id) ? false : isCheckout,
+        };
+      }),
+      checkoutAllItems: isCheckout,
+    };
     // setCheckoutAllItem(cartToUpdate.checkoutAllItems)
     // await dispatch(
     //   toggleCheckoutAll({ cart, value: isCheckout, token: authen?.user?.token })
     // ).unwrap()
 
-    await Promise.all(cart.items.map(async item => {
-      const cartItem = {
-        ...item,
-        netPrice: Math.round(
-          item.price - (item.price * item.salePercent) / 100
-        ),
-        isCheckout,
-      };
-      await dispatch(updateItem({ cart: cartToUpdate, item: cartItem, token: authen?.user?.token })).unwrap();
-    }))
-  }
-
+    await Promise.all(
+      cart.items.map(async (item) => {
+        const cartItem = {
+          ...item,
+          netPrice: Math.round(
+            item.price - (item.price * item.salePercent) / 100
+          ),
+          isCheckout: disabledItem.includes(item._id) ? false : isCheckout,
+        };
+        await dispatch(
+          updateItem({
+            cart: cartToUpdate,
+            item: cartItem,
+            token: authen?.user?.token,
+          })
+        ).unwrap();
+      })
+    );
+  };
 
   const onDeleteCheckedItems = async () => {
     await dispatch(clear({ cart, token: authen?.user?.token })).unwrap();
@@ -89,7 +103,6 @@ const Cart = ({ isShowCheckBox = true }) => {
     ? cart.items
     : cart.items.filter((item) => item.isCheckout);
 
-  // console.log(cart.items)
   return (
     <>
       {ReactDOM.createPortal(
@@ -124,6 +137,7 @@ const Cart = ({ isShowCheckBox = true }) => {
             item={item}
             checkoutAllItems={cart.checkoutAllItems}
             isShowCheckbox={isShowCheckBox}
+            setDisabledItems={setDisabledItems}
           />
         ))}
       </div>

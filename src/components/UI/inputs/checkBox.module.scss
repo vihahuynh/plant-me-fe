@@ -47,3 +47,10 @@
     }
   }
 }
+
+.checkbox.disabled {
+  span {
+    cursor: not-allowed;
+    border-color: $color-grey-light;
+  }
+}

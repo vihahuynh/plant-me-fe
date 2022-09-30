@@ -13,40 +13,51 @@ import { alertActions } from "./../../store";
 let delay;
 
 const BuyInfo = ({ product }) => {
-  const cart = useSelector(state => state.cart)
-  const authen = useSelector(state => state.authentication)
+  const cart = useSelector((state) => state.cart);
+  const authen = useSelector((state) => state.authentication);
 
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState(null);
-  const [color, setColor] = useState(null)
+  const [color, setColor] = useState(null);
 
-  const allColors = [...new Set(product?.stocks?.map(s => s.color))]
-  const allSizes = [...new Set(product?.stocks?.map(s => s.size))]
+  const allColors = [...new Set(product?.stocks?.map((s) => s.color))];
+  const allSizes = [...new Set(product?.stocks?.map((s) => s.size))];
 
-  const [availableColors, setAvailableColors] = useState(allColors)
-  const [availableSizes, setAvailableSizes] = useState(allSizes)
-  const [availableQuantity, setAvailableQuantity] = useState(0)
+  const [availableColors, setAvailableColors] = useState(allColors);
+  const [availableSizes, setAvailableSizes] = useState(allSizes);
+  const [availableQuantity, setAvailableQuantity] = useState(0);
 
   const dispatch = useDispatch();
 
   const onUpdateQuantity = (quan) => {
-    if (+quan > 0 && +quan <= availableQuantity) setQuantity(+quan)
-    else if (+quan <= 0) setQuantity(1)
-    else setQuantity(availableQuantity)
-  }
+    if (+quan > 0 && +quan <= availableQuantity) setQuantity(+quan);
+    else if (+quan <= 0) setQuantity(1);
+    else setQuantity(availableQuantity);
+  };
 
   const onAddToCart = async () => {
     clearTimeout(delay);
     if (!color || !size) {
-      dispatch(alertActions.updateMessage({ message: "Please choose color and size!", type: "warning" }))
+      dispatch(
+        alertActions.updateMessage({
+          message: "Please choose color and size!",
+          type: "warning",
+        })
+      );
       delay = setTimeout(() => dispatch(alertActions.clear()), 3000);
-      return
+      return;
     }
-    if ((quantity > availableQuantity) || !availableColors.includes(color) || !availableSizes.includes(size)) {
-      const message = availableQuantity ? `Only ${availableQuantity} products available!` : 'Out of stock'
-      dispatch(alertActions.updateMessage({ message, type: "warning" }))
+    if (
+      quantity > availableQuantity ||
+      !availableColors.includes(color) ||
+      !availableSizes.includes(size)
+    ) {
+      const message = availableQuantity
+        ? `Only ${availableQuantity} products available!`
+        : "Out of stock";
+      dispatch(alertActions.updateMessage({ message, type: "warning" }));
       delay = setTimeout(() => dispatch(alertActions.clear()), 3000);
-      return
+      return;
     }
     const cartItem = {
       product: product.id,
@@ -61,9 +72,12 @@ const BuyInfo = ({ product }) => {
       quantity,
       deliveryCharges: 10,
       isCheckout: false,
-      stock: product.stocks.find(s => s.color === color && s.size === size)?.id
+      stock: product.stocks.find((s) => s.color === color && s.size === size)
+        ?.id,
     };
-    await dispatch(addItem({ cart, item: cartItem, token: authen?.user?.token })).unwrap()
+    await dispatch(
+      addItem({ cart, item: cartItem, token: authen?.user?.token })
+    ).unwrap();
     dispatch(
       alertActions.updateMessage({
         message: "Added to cart",
@@ -78,22 +92,39 @@ const BuyInfo = ({ product }) => {
     return averageRating;
   }, 0);
 
-
   const onUpdateColor = (inputColor) => {
-    const quantityInCart = cart.items.find(item => item.color === inputColor && item.size === size && item.product === product.id)?.quantity ?? 0
-    const stockHaveColor = product.stocks.filter(s => s.color === inputColor)
-    setAvailableSizes(stockHaveColor.map(s => s.size))
-    setAvailableQuantity(product.stocks.find(s => s.color === inputColor && s.size === size)?.quantity - quantityInCart ?? 0)
-    setColor(inputColor)
-  }
+    const quantityInCart =
+      cart.items.find(
+        (item) =>
+          item.color === inputColor &&
+          item.size === size &&
+          item.product === product.id
+      )?.quantity ?? 0;
+    const stockHaveColor = product.stocks.filter((s) => s.color === inputColor);
+    setAvailableSizes(stockHaveColor.map((s) => s.size));
+    setAvailableQuantity(
+      product.stocks.find((s) => s.color === inputColor && s.size === size)
+        ?.quantity - quantityInCart ?? 0
+    );
+    setColor(inputColor);
+  };
 
   const onUpdateSize = (inputSize) => {
-    const quantityInCart = cart.items.find(item => item.color === color && item.size === inputSize && item.product === product.id)?.quantity ?? 0
-    const stocksHaveSize = product.stocks.filter(s => s.size === inputSize)
-    setAvailableColors(stocksHaveSize.map(s => s.color))
-    setAvailableQuantity(product.stocks.find(s => s.color === color && s.size === inputSize)?.quantity - quantityInCart ?? 0)
-    setSize(inputSize)
-  }
+    const quantityInCart =
+      cart.items.find(
+        (item) =>
+          item.color === color &&
+          item.size === inputSize &&
+          item.product === product.id
+      )?.quantity ?? 0;
+    const stocksHaveSize = product.stocks.filter((s) => s.size === inputSize);
+    setAvailableColors(stocksHaveSize.map((s) => s.color));
+    setAvailableQuantity(
+      product.stocks.find((s) => s.color === color && s.size === inputSize)
+        ?.quantity - quantityInCart ?? 0
+    );
+    setSize(inputSize);
+  };
 
   return (
     <>
@@ -119,7 +150,9 @@ const BuyInfo = ({ product }) => {
           <p className={styles.optionTitle}>Size</p>
           <ul className={styles.optionList}>
             {allSizes?.map((s) => {
-              const sizeClassNames = `${styles.sizeItem} ${size === s ? styles.active : ""} ${!availableSizes.includes(s) ? styles.unavailable : ""}`
+              const sizeClassNames = `${styles.sizeItem} ${
+                size === s ? styles.active : ""
+              } ${!availableSizes.includes(s) ? styles.unavailable : ""}`;
               return (
                 <li
                   className={sizeClassNames}
@@ -128,7 +161,7 @@ const BuyInfo = ({ product }) => {
                 >
                   {s}
                 </li>
-              )
+              );
             })}
           </ul>
         </div>
@@ -139,16 +172,20 @@ const BuyInfo = ({ product }) => {
               const normalStyle = {
                 outline: `1px solid ${c}`,
                 backgroundColor: c,
-              }
+              };
               const unavailableStyles = {
-                outline: '1px solid #eaedf3',
-                backgroundColor: '#eaedf3',
-                cursor: 'not-allowed'
-              }
+                outline: "1px solid #eaedf3",
+                backgroundColor: "#eaedf3",
+                cursor: "not-allowed",
+              };
               // const colorClassNames = `${styles.colorItem} ${color === c ? styles.active : ""} ${!availableColors.includes(c) ? styles.unavailable : ""}`
               return (
                 <li
-                  style={!availableColors.includes(c) ? unavailableStyles : normalStyle}
+                  style={
+                    !availableColors.includes(c)
+                      ? unavailableStyles
+                      : normalStyle
+                  }
                   className={
                     color !== c
                       ? styles.colorItem
@@ -157,17 +194,34 @@ const BuyInfo = ({ product }) => {
                   key={c}
                   onClick={() => onUpdateColor(c)}
                 ></li>
-              )
+              );
             })}
           </ul>
         </div>
       </div>
       <div>
-        {availableQuantity
-          ? <p className={styles.quantityAvailable}>{availableQuantity <= quantity ? `${availableQuantity} products available` : <span>	&nbsp;</span>}</p>
-          : <p className={styles.quantityAvailable}>{color && size && !availableQuantity ? 'Out of stock' : <span>	&nbsp;</span>}</p>
-        }
-        <QuantityInput quantity={quantity} onChange={onUpdateQuantity} disabled={!availableQuantity} />
+        {availableQuantity ? (
+          <p className={styles.quantityAvailable}>
+            {availableQuantity <= quantity ? (
+              `${availableQuantity} products available`
+            ) : (
+              <span> &nbsp;</span>
+            )}
+          </p>
+        ) : (
+          <p className={styles.quantityAvailable}>
+            {color && size && !availableQuantity ? (
+              "Out of stock"
+            ) : (
+              <span> &nbsp;</span>
+            )}
+          </p>
+        )}
+        <QuantityInput
+          quantity={quantity}
+          onChange={onUpdateQuantity}
+          disabled={!availableQuantity}
+        />
         <Button
           text="Add to cart"
           size="medium"
