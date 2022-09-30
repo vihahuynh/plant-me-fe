@@ -40,7 +40,6 @@ const Checkout = () => {
 
       for (let item of items) {
         const stock = await stockService.get(item.stock)
-        console.log(stock)
         const stockToUpdate = {
           ...stock.data,
           quantity: stock.data?.quantity - item.quantity,
