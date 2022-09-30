@@ -1,7 +1,7 @@
 import styles from "./cartItem.module.scss";
 import { useState } from "react";
 import ReactDOM from "react-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Price from "./../products/price";
 import QuantityInput from "../UI/inputs/quantityInput";
@@ -9,39 +9,41 @@ import CheckBox from "../UI/inputs/checkBox";
 import Modal from "../UI/modal";
 
 import { TbTrash } from "react-icons/tb/index";
-
-import { cartActions } from "../../store";
+import { removeItem, updateItem, toggleCheckoutAll } from "../../store/cartSlice";
 
 const CartItem = ({ item, checkoutAllItems, isShowCheckbox = true }) => {
+  const cart = useSelector(state => state.cart)
+  const authen = useSelector(state => state.authentication)
+
   const dispatch = useDispatch();
   const [openModal, setOpenModal] = useState(false);
 
   const onCloseModal = () => setOpenModal(false);
   const onOpenModal = () => setOpenModal(true);
 
-  const onRemoveItem = () => {
-    dispatch(cartActions.removeItem({ item }));
+  const onRemoveItem = async () => {
+    await dispatch(removeItem({ cart, item, token: authen?.user?.token })).unwrap()
   };
 
-  const onCheckout = () => {
+  const onCheckout = async () => {
     const checkoutItem = {
       ...item,
       netPrice: Math.round(item.price - (item.price * item.salePercent) / 100),
       isCheckout: !item.isCheckout,
     };
-    dispatch(cartActions.updateItem({ item: checkoutItem }));
+    await dispatch(updateItem({ cart, item: checkoutItem, token: authen?.user?.token })).unwrap()
     if (!checkoutItem.isCheckout && checkoutAllItems) {
-      dispatch(cartActions.toggleCheckoutAll({ value: false }));
+      await dispatch(toggleCheckoutAll({ cart, value: false, token: authen?.user?.token })).unwrap();
     }
   };
 
-  const onUpdateQuantity = (quan) => {
+  const onUpdateQuantity = async (quan) => {
     if (quan > 0) {
       const cartItem = {
         ...item,
         quantity: +quan,
       };
-      dispatch(cartActions.updateItem({ item: cartItem }));
+      await dispatch(updateItem({ cart, item: cartItem, token: authen?.user?.token })).unwrap();
     } else if (quan === 0) {
       onOpenModal();
     }

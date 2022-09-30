@@ -6,7 +6,7 @@ import Cart from "../components/cart/cart";
 import CartSummary from "../components/cart/cartSummary";
 import LinkButton from "../components/UI/buttons/linkbutton";
 
-import { cartActions } from "../store";
+import { clearCheckoutItems } from "../store/cartSlice";
 
 import styles from "./checkout.module.scss";
 import stockSerice from "../services/stock";
@@ -36,7 +36,7 @@ const Checkout = () => {
         authen?.user?.token
       );
       console.log("your order: ", returnedOrder);
-      dispatch(cartActions.clearCheckoutItems());
+      await dispatch(clearCheckoutItems({ cart, token: authen?.user?.token }));
 
       for (let item of items) {
         const stockToUpdate = {

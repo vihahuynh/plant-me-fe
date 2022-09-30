@@ -27,7 +27,8 @@ import ReviewHistory from "./pages/user/reviewHistory";
 import Account from "./pages/user/account";
 import UpdateProductForm from "./components/products/productUpdateForm";
 
-import { authenticationActions } from "./store";
+import { authenticationActions, cartActions } from "./store";
+import cartService from "./services/cart";
 
 const App = () => {
   const authen = useSelector((state) => state.authentication);
@@ -39,6 +40,20 @@ const App = () => {
       dispatch(authenticationActions.login({ user: authenData.user }));
     }
   }, [authen.isLoggedIn, dispatch, authen]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const cartData = await cartService.get(authen?.user?.cart, authen?.user?.token)
+        dispatch(cartActions.updateCart({ cart: cartData.data }))
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    if (authen?.user) {
+      fetchData()
+    }
+  }, [authen?.user, dispatch])
 
   return (
     <Router>

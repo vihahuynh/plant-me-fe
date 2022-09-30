@@ -8,8 +8,8 @@ import CartItem from "./cartItem";
 import CheckBox from "../UI/inputs/checkBox";
 import Modal from "../UI/modal";
 
-import { cartActions } from "../../store";
 import { alertActions } from "../../store";
+import { updateItem, toggleCheckoutAll, clear } from "../../store/cartSlice";
 
 import { TbTrash } from "react-icons/tb/index";
 
@@ -18,7 +18,9 @@ let delay;
 const Cart = ({ isShowCheckBox = true }) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  const authen = useSelector((state) => state.authentication)
   const [openModal, setOpenModal] = useState(false);
+  // const [checkoutAllItems, setCheckoutAllItem] = useState(cart.checkoutAllItems || false)
 
   const onCloseModal = () => setOpenModal(false);
   const onOpenModal = () => {
@@ -39,32 +41,47 @@ const Cart = ({ isShowCheckBox = true }) => {
   };
 
   useEffect(() => {
+    const updateCart = async () => {
+      try {
+        await dispatch(toggleCheckoutAll({ cart, value: true, token: authen?.user?.token })).unwrap();
+      } catch (err) {
+        console.log(err)
+      }
+    }
     if (
       cart.items.filter((item) => item.isCheckout).length === cart.items.length
     ) {
-      dispatch(cartActions.toggleCheckoutAll({ value: true }));
+      updateCart()
     }
-  }, [dispatch, cart.items]);
+  }, [dispatch, cart, authen?.user?.token]);
 
-  const onSelectAllItems = () => {
-    cart.items.forEach((item) => {
+  const onSelectAllItems = async () => {
+    const isCheckout = !cart.checkoutAllItems
+    const cartToUpdate = {
+      ...cart,
+      items: cart.items.map(i => { return { ...i, isCheckout, } }),
+      checkoutAllItems: isCheckout
+    }
+    // setCheckoutAllItem(cartToUpdate.checkoutAllItems)
+    // await dispatch(
+    //   toggleCheckoutAll({ cart, value: isCheckout, token: authen?.user?.token })
+    // ).unwrap()
+
+    await Promise.all(cart.items.map(async item => {
       const cartItem = {
         ...item,
         netPrice: Math.round(
           item.price - (item.price * item.salePercent) / 100
         ),
-        isCheckout: cart.checkoutAllItems ? false : true,
+        isCheckout,
       };
-      dispatch(cartActions.updateItem({ item: cartItem }));
-      dispatch(
-        cartActions.toggleCheckoutAll({ value: !cart.checkoutAllItems })
-      );
-    });
-  };
+      await dispatch(updateItem({ cart: cartToUpdate, item: cartItem, token: authen?.user?.token })).unwrap();
+    }))
+  }
 
-  const onDeleteCheckedItems = () => {
-    dispatch(cartActions.clear());
-    dispatch(cartActions.toggleCheckoutAll({ values: false }));
+
+  const onDeleteCheckedItems = async () => {
+    await dispatch(clear({ cart, token: authen?.user?.token })).unwrap();
     setOpenModal(false);
   };
 
@@ -72,6 +89,7 @@ const Cart = ({ isShowCheckBox = true }) => {
     ? cart.items
     : cart.items.filter((item) => item.isCheckout);
 
+  // console.log(cart.items)
   return (
     <>
       {ReactDOM.createPortal(

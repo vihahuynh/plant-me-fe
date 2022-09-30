@@ -1,6 +1,9 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import cartService from "./../services/cart"
 
 const initCartState = {
+  id: null,
+  cart: null,
   quantity: 0,
   items: [],
   checkoutAllItems: false,
@@ -10,87 +13,139 @@ const cartSlice = createSlice({
   name: "cart",
   initialState: initCartState,
   reducers: {
-    addItem(state, action) {
-      const { payload } = action;
-      state.checkoutAllItems = false;
-      const foundItem = current(state).items.find(
-        (item) =>
-          item.id === payload.item.id &&
-          item.size === payload.item.size &&
-          item.color === payload.item.color
-      );
-
-      if (foundItem) {
-        const updateItem = {
-          ...payload.item,
-          quantity: foundItem.quantity + payload.item.quantity,
-        };
-        state.items = current(state).items.map((item) =>
-          item.id === payload.item.id &&
-          item.size === payload.item.size &&
-          item.color === payload.item.color
-            ? updateItem
-            : item
-        );
-      } else {
-        state.quantity++;
-        state.items.push(payload.item);
-      }
+    updateCart(state, action) {
+      const { checkoutAllItems, user, id, quantity, items } = action.payload.cart
+      state.checkoutAllItems = checkoutAllItems
+      state.items = items
+      state.id = id
+      state.user = user
+      state.quantity = quantity
     },
 
-    removeItem(state, action) {
-      const { payload } = action;
-
-      const foundItem = current(state).items.find(
-        (item) =>
-          item.id === payload.item.id &&
-          item.size === payload.item.size &&
-          item.color === payload.item.color
-      );
-      if (foundItem) {
-        state.quantity--;
-        state.items = current(state).items.filter(
-          (item) =>
-            item.id !== payload.item.id ||
-            item.size !== payload.item.size ||
-            item.color !== payload.item.color
-        );
-      }
-    },
-
-    updateItem(state, action) {
-      const { payload } = action;
-      const foundItem = current(state).items.find(
-        (item) =>
-          item.id === payload.item.id &&
-          item.size === payload.item.size &&
-          item.color === payload.item.color
-      );
-      if (foundItem) {
-        state.items = current(state).items.map((item) =>
-          item.id === payload.item.id &&
-          item.size === payload.item.size &&
-          item.color === payload.item.color
-            ? payload.item
-            : item
-        );
-      }
-    },
-
-    clearCheckoutItems(state) {
-      state.items = current(state).items.filter((item) => !item.isCheckout);
-      state.quantity = state.items.length;
-      state.checkoutAllItems = false;
-    },
-
-    clear() {
-      return initCartState;
-    },
-
-    toggleCheckoutAll(state, action) {
-      state.checkoutAllItems = action.payload.value;
+    clear(state) {
+      state.items = []
+      state.quantity = 0
+      state.checkoutAllItems = false
     },
   },
+  extraReducers(builder) {
+    builder.addCase(addItem.fulfilled, (state, action) => {
+      const { checkoutAllItems, items, quantity } = action.payload
+      state.checkoutAllItems = checkoutAllItems
+      state.items = items
+      state.quantity = quantity
+    })
+    builder.addCase(removeItem.fulfilled, (state, action) => {
+      const { checkoutAllItems, items, quantity } = action.payload
+      state.checkoutAllItems = checkoutAllItems
+      state.items = items
+      state.quantity = quantity
+    })
+    builder.addCase(updateItem.fulfilled, (state, action) => {
+      const { checkoutAllItems, items, quantity } = action.payload
+      state.checkoutAllItems = checkoutAllItems
+      state.items = items
+      state.quantity = quantity
+    })
+    builder.addCase(clearCheckoutItems.fulfilled, (state, action) => {
+      const { checkoutAllItems, items, quantity } = action.payload
+      state.checkoutAllItems = checkoutAllItems
+      state.items = items
+      state.quantity = quantity
+    })
+    builder.addCase(clear.fulfilled, (state, action) => {
+      const { checkoutAllItems, items, quantity } = action.payload
+      state.checkoutAllItems = checkoutAllItems
+      state.items = items
+      state.quantity = quantity
+    })
+    builder.addCase(toggleCheckoutAll.fulfilled, (state, action) => {
+      const { checkoutAllItems } = action.payload
+      state.checkoutAllItems = checkoutAllItems
+    })
+  }
+
 });
+
+export const addItem = createAsyncThunk(
+  'cart/addItem',
+  async ({ cart, item, token }) => {
+    const cartToUpdate = { ...cart, checkoutAllItems: false }
+    const foundItem = cartToUpdate.items.find(
+      (i) => i.stock === item.stock
+    );
+
+    if (foundItem) {
+      const updateItem = {
+        ...item,
+        quantity: foundItem.quantity + item.quantity,
+      };
+      cartToUpdate.items = cartToUpdate.items.map((i) =>
+        i.stock === item.stock
+          ? updateItem
+          : i
+      );
+    } else {
+      cartToUpdate.quantity = cartToUpdate.quantity + 1;
+      cartToUpdate.items = cartToUpdate.items.concat(item);
+    }
+    const updatedCart = await cartService.update(cart.id, cartToUpdate, token)
+    return updatedCart.data
+  }
+)
+
+export const removeItem = createAsyncThunk('cart/removeItem', async ({ cart, item, token }) => {
+  const cartToUpdate = { ...cart }
+  const foundItem = cartToUpdate.items.find(
+    (i) => i.stock === item.stock
+  );
+  if (foundItem) {
+    cartToUpdate.quantity = cartToUpdate.quantity - 1;
+    cartToUpdate.items = cartToUpdate.items.filter(
+      (i) => i.stock !== item.stock
+    );
+  }
+  const updatedCart = await cartService.update(cart.id, cartToUpdate, token)
+  return updatedCart.data
+})
+
+export const updateItem = createAsyncThunk('cart/updateItem', async ({ cart, item, token }) => {
+  const cartToUpdate = { ...cart }
+  const foundItem = cartToUpdate.items.find(
+    (i) => i.stock === item.stock
+  );
+  if (foundItem) {
+    cartToUpdate.items = cartToUpdate.items.map((i) => i.stock === item.stock
+      ? item
+      : i
+    );
+  }
+  const updatedCart = await cartService.update(cart.id, cartToUpdate, token)
+  return updatedCart.data
+})
+
+export const toggleCheckoutAll = createAsyncThunk('cart/toggleCheckoutAll', async ({ cart, value, token }) => {
+  const updatedCart = await cartService.update(cart.id, { ...cart, checkoutAllItems: value }, token)
+  return updatedCart.data
+})
+
+export const clearCheckoutItems = createAsyncThunk('cart/clearCheckoutItems', async ({ cart, token }) => {
+  const cartToUpdate = { ...cart, checkoutAllItems: false }
+  cartToUpdate.items = cartToUpdate.items.filter((i) => !i.isCheckout);
+  cartToUpdate.quantity = cartToUpdate.items.length;
+  const updatedCart = await cartService.update(cart.id, cartToUpdate, token)
+  return updatedCart.data
+})
+
+export const clear = createAsyncThunk('cart/clear', async ({ cart, token }) => {
+  const cartToUpdate = {
+    ...cart,
+    items: [],
+    quantity: 0,
+    checkoutAllItems: false
+  }
+  const updatedCart = await cartService.update(cart.id, cartToUpdate, token)
+  return updatedCart.data
+})
 
 export default cartSlice;

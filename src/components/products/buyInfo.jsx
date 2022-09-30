@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Rating from "@mui/material/Rating";
 import Price from "./price";
@@ -7,12 +7,15 @@ import styles from "./buyInfo.module.scss";
 import Button from "../UI/buttons/button";
 
 import QuantityInput from "../UI/inputs/quantityInput";
-import { cartActions } from "./../../store";
+import { addItem } from "../../store/cartSlice";
 import { alertActions } from "./../../store";
 
 let delay;
 
 const BuyInfo = ({ product }) => {
+  const cart = useSelector(state => state.cart)
+  const authen = useSelector(state => state.authentication)
+
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState(null);
   const [color, setColor] = useState(null)
@@ -32,7 +35,7 @@ const BuyInfo = ({ product }) => {
     else setQuantity(availableQuantity)
   }
 
-  const onAddToCart = () => {
+  const onAddToCart = async () => {
     clearTimeout(delay);
     if (!color || !size) {
       dispatch(alertActions.updateMessage({ message: "Please choose color and size!", type: "warning" }))
@@ -57,9 +60,11 @@ const BuyInfo = ({ product }) => {
       size,
       quantity,
       deliveryCharges: 10,
-      stock: product.stocks.find(s => s.color === color && s.size === size)
+      isCheckout: false,
+      stock: product.stocks.find(s => s.color === color && s.size === size).id
     };
-    dispatch(cartActions.addItem({ item: cartItem }));
+    console.log(cart)
+    await dispatch(addItem({ cart, item: cartItem, token: authen?.user?.token })).unwrap()
     dispatch(
       alertActions.updateMessage({
         message: "Added to cart",
