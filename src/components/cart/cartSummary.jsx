@@ -8,7 +8,7 @@ const CartSummary = ({ title, onClick }) => {
 
   const subTotal = cart.items
     .filter((item) => item.isCheckout)
-    .reduce((total, item) => total + item.netPrice * item.quantity, 0);
+    .reduce((total, item) => total + ((item.price - Math.round(item.salePercent * item.price / 100)) * item.quantity), 0);
 
   return (
     <div className={styles.summary}>
@@ -36,7 +36,7 @@ const CartSummary = ({ title, onClick }) => {
           {subTotal ? (
             <p className={styles.totalPrice}>{subTotal}.000 &#x20ab;</p>
           ) : (
-            <p className={styles.totalPrice}>.000 &#x20ab;</p>
+            <p className={styles.totalPrice}>0 &#x20ab;</p>
           )}
         </div>
       </div>

@@ -9,7 +9,7 @@ import LinkButton from "../components/UI/buttons/linkbutton";
 import { clearCheckoutItems } from "../store/cartSlice";
 
 import styles from "./checkout.module.scss";
-import stockSerice from "../services/stock";
+import stockService from "../services/stock";
 
 const Checkout = () => {
   const cart = useSelector((state) => state.cart);
@@ -36,14 +36,16 @@ const Checkout = () => {
         authen?.user?.token
       );
       console.log("your order: ", returnedOrder);
-      await dispatch(clearCheckoutItems({ cart, token: authen?.user?.token }));
+      await dispatch(clearCheckoutItems({ cart, token: authen?.user?.token })).unwrap();
 
       for (let item of items) {
+        const stock = await stockService.get(item.stock)
+        console.log(stock)
         const stockToUpdate = {
-          ...item.stock,
-          quantity: item.stock?.quantity - item.quantity,
+          ...stock.data,
+          quantity: stock.data?.quantity - item.quantity,
         };
-        await stockSerice.update(stockToUpdate.id, stockToUpdate);
+        await stockService.update(stockToUpdate.id, stockToUpdate);
       }
     } catch (err) {
       console.log(err);

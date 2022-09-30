@@ -42,14 +42,14 @@ const BuyInfo = ({ product }) => {
       delay = setTimeout(() => dispatch(alertActions.clear()), 3000);
       return
     }
-    if (quantity > availableQuantity) {
+    if ((quantity > availableQuantity) || !availableColors.includes(color) || !availableSizes.includes(size)) {
       const message = availableQuantity ? `Only ${availableQuantity} products available!` : 'Out of stock'
       dispatch(alertActions.updateMessage({ message, type: "warning" }))
       delay = setTimeout(() => dispatch(alertActions.clear()), 3000);
       return
     }
     const cartItem = {
-      id: product.id,
+      product: product.id,
       title: product.title,
       price: product.price,
       salePercent: product.salePercent,
@@ -61,9 +61,8 @@ const BuyInfo = ({ product }) => {
       quantity,
       deliveryCharges: 10,
       isCheckout: false,
-      stock: product.stocks.find(s => s.color === color && s.size === size).id
+      stock: product.stocks.find(s => s.color === color && s.size === size)?.id
     };
-    console.log(cart)
     await dispatch(addItem({ cart, item: cartItem, token: authen?.user?.token })).unwrap()
     dispatch(
       alertActions.updateMessage({
@@ -81,16 +80,18 @@ const BuyInfo = ({ product }) => {
 
 
   const onUpdateColor = (inputColor) => {
+    const quantityInCart = cart.items.find(item => item.color === inputColor && item.size === size && item.product === product.id)?.quantity ?? 0
     const stockHaveColor = product.stocks.filter(s => s.color === inputColor)
     setAvailableSizes(stockHaveColor.map(s => s.size))
-    setAvailableQuantity(product.stocks.find(s => s.color === inputColor && s.size === size)?.quantity ?? 0)
+    setAvailableQuantity(product.stocks.find(s => s.color === inputColor && s.size === size)?.quantity - quantityInCart ?? 0)
     setColor(inputColor)
   }
 
   const onUpdateSize = (inputSize) => {
+    const quantityInCart = cart.items.find(item => item.color === color && item.size === inputSize && item.product === product.id)?.quantity ?? 0
     const stocksHaveSize = product.stocks.filter(s => s.size === inputSize)
     setAvailableColors(stocksHaveSize.map(s => s.color))
-    setAvailableQuantity(product.stocks.find(s => s.color === color && s.size === inputSize)?.quantity ?? 0)
+    setAvailableQuantity(product.stocks.find(s => s.color === color && s.size === inputSize)?.quantity - quantityInCart ?? 0)
     setSize(inputSize)
   }
 
@@ -163,7 +164,7 @@ const BuyInfo = ({ product }) => {
       </div>
       <div>
         {availableQuantity
-          ? <p className={styles.quantityAvailable}>{availableQuantity} products available</p>
+          ? <p className={styles.quantityAvailable}>{availableQuantity <= quantity ? `${availableQuantity} products available` : <span>	&nbsp;</span>}</p>
           : <p className={styles.quantityAvailable}>{color && size && !availableQuantity ? 'Out of stock' : <span>	&nbsp;</span>}</p>
         }
         <QuantityInput quantity={quantity} onChange={onUpdateQuantity} disabled={!availableQuantity} />
