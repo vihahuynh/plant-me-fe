@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import ReactDOM from "react-dom"
 import Moment from "react-moment";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -6,6 +7,7 @@ import UserLeftMenu from "../../components/layout/userLetfMenu/userLeftMenu";
 import OrderDetailsItem from "../../components/order/orderDetailsItem";
 import Button from "./../../components/UI/buttons/button";
 import Wrapper from "./../../components/layout/wrapper";
+import Modal from "./../../components/UI/modal"
 
 import orderService from "../../services/order";
 
@@ -15,7 +17,11 @@ import stockService from "../../services/stock";
 const OrderDetails = () => {
   const authen = useSelector((state) => state.authentication);
   const [order, setOrder] = useState(null);
+  const [isOpenCancelModal, setIsOpenCancelModal] = useState(false)
   const { userId, orderId } = useParams();
+
+  const onOpenCancelModal = () => setIsOpenCancelModal(true)
+  const onCloseCancelModal = () => setIsOpenCancelModal(false)
 
   const onCancelOrder = async () => {
     const orderToUpdate = {
@@ -39,6 +45,7 @@ const OrderDetails = () => {
         await stockService.update(stockToUpdate.id, stockToUpdate);
       }
     }
+    onCloseCancelModal()
   };
 
   useEffect(() => {
@@ -162,20 +169,33 @@ const OrderDetails = () => {
               </p>
               {(order.status === "Waiting for payment" ||
                 order.status === "Confirm") && (
-                <div className={styles.cancelBtn}>
-                  <Button
-                    text="Cancel order"
-                    size="small"
-                    borderRadius="square"
-                    theme="red"
-                    onClick={onCancelOrder}
-                  />
-                </div>
-              )}
+                  <div className={styles.cancelBtn}>
+                    <Button
+                      text="Cancel order"
+                      size="small"
+                      borderRadius="square"
+                      theme="red"
+                      onClick={onOpenCancelModal}
+                    />
+                  </div>
+                )}
             </div>
           </div>
         </div>
       </div>
+      {
+        ReactDOM.createPortal(
+          <Modal
+            isOpen={isOpenCancelModal}
+            title="Cancel order"
+            message="Are you sure you want to cancel the order?"
+            actionText="Yes"
+            onConfirm={onCancelOrder}
+            onCancel={onCloseCancelModal}
+          />,
+          document.getElementById("overlay-root")
+        )
+      }
     </Wrapper>
   );
 };
