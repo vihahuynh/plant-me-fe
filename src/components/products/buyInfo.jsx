@@ -9,7 +9,6 @@ import Button from "../UI/buttons/button";
 import QuantityInput from "../UI/inputs/quantityInput";
 import { cartActions } from "./../../store";
 import { alertActions } from "./../../store";
-import { products } from "../../data";
 
 let delay;
 
