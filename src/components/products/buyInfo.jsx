@@ -126,6 +126,11 @@ const BuyInfo = ({ product }) => {
     setSize(inputSize);
   };
 
+  const sold = product?.stocks.reduce((result, stock) => {
+    result = result + (stock?.sold || 0);
+    return result;
+  }, 0);
+
   return (
     <>
       <div>
@@ -137,7 +142,7 @@ const BuyInfo = ({ product }) => {
           <span className={styles.statistic}>
             {product.reviews.length} reviews
           </span>
-          <span className={styles.statistic}>Sold: {product.soldCount}</span>
+          <span className={styles.statistic}>Sold: {sold}</span>
         </div>
         <Price
           price={product.price}
@@ -200,7 +205,7 @@ const BuyInfo = ({ product }) => {
         </div>
       </div>
       <div>
-        {availableQuantity ? (
+        {availableQuantity > 0 ? (
           <p className={styles.quantityAvailable}>
             {availableQuantity <= quantity ? (
               `${availableQuantity} products available`
@@ -210,11 +215,7 @@ const BuyInfo = ({ product }) => {
           </p>
         ) : (
           <p className={styles.quantityAvailable}>
-            {color && size && !availableQuantity ? (
-              "Out of stock"
-            ) : (
-              <span> &nbsp;</span>
-            )}
+            {color && size ? "Out of stock" : <span> &nbsp;</span>}
           </p>
         )}
         <QuantityInput

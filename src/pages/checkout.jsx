@@ -36,13 +36,16 @@ const Checkout = () => {
         authen?.user?.token
       );
       console.log("your order: ", returnedOrder);
-      await dispatch(clearCheckoutItems({ cart, token: authen?.user?.token })).unwrap();
+      await dispatch(
+        clearCheckoutItems({ cart, token: authen?.user?.token })
+      ).unwrap();
 
       for (let item of items) {
-        const stock = await stockService.get(item.stock)
+        const stock = await stockService.get(item.stock);
         const stockToUpdate = {
           ...stock.data,
           quantity: stock.data?.quantity - item.quantity,
+          sold: stock.data?.sold + item.quantity,
         };
         await stockService.update(stockToUpdate.id, stockToUpdate);
       }
