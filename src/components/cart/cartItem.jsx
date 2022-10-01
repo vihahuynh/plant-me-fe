@@ -46,7 +46,7 @@ const CartItem = ({
   }, [item]);
 
   useEffect(() => {
-    if (stock?.quantity < item?.quantity) {
+    if (stock?.quantity === 0 || stock?.quantity < item?.quantity) {
       setDisabledItems((prev) => [...new Set(prev.concat(item._id))]);
     }
   }, [stock, item, setDisabledItems]);
@@ -114,7 +114,9 @@ const CartItem = ({
               name={`${item.id}-${item.size}-${item.color}`}
               value={`${item.id}-${item.size}-${item.color}`}
               onChange={onCheckout}
-              disabled={stock?.quantity < item?.quantity}
+              disabled={
+                stock?.quantity === 0 || stock?.quantity < item?.quantity
+              }
             />
           )}
           <img src={item.image} alt={item.name} />
@@ -133,10 +135,10 @@ const CartItem = ({
         <div className={styles.quantity}>
           <Price price={item.price} salePercent={item.salePercent} />
           <div>
-            {stock?.quantity === 0 && (
+            {stock?.quantity <= 0 && (
               <p className={styles.availableQuantity}>Out of stock</p>
             )}
-            {stock?.quantity <= item.quantity && stock?.quantity !== 0 && (
+            {stock?.quantity <= item.quantity && stock?.quantity > 0 && (
               <p className={styles.availableQuantity}>
                 {stock.quantity} products available
               </p>

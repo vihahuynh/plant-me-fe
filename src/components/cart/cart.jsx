@@ -69,10 +69,6 @@ const Cart = ({ isShowCheckBox = true }) => {
       }),
       checkoutAllItems: isCheckout,
     };
-    // setCheckoutAllItem(cartToUpdate.checkoutAllItems)
-    // await dispatch(
-    //   toggleCheckoutAll({ cart, value: isCheckout, token: authen?.user?.token })
-    // ).unwrap()
 
     await Promise.all(
       cart.items.map(async (item) => {

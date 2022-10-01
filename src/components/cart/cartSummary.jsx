@@ -3,12 +3,18 @@ import styles from "./cartSummary.module.scss";
 import Button from "./../UI/buttons/button";
 import { useSelector } from "react-redux";
 
-const CartSummary = ({ title, onClick }) => {
+const CartSummary = ({ title, onClick, disabled = false }) => {
   const cart = useSelector((state) => state.cart);
 
   const subTotal = cart.items
     .filter((item) => item.isCheckout)
-    .reduce((total, item) => total + ((item.price - Math.round(item.salePercent * item.price / 100)) * item.quantity), 0);
+    .reduce(
+      (total, item) =>
+        total +
+        (item.price - Math.round((item.salePercent * item.price) / 100)) *
+          item.quantity,
+      0
+    );
 
   return (
     <div className={styles.summary}>
@@ -45,7 +51,10 @@ const CartSummary = ({ title, onClick }) => {
         text={title}
         size="large"
         className={styles.checkoutBtn}
-        onClick={onClick}
+        onClick={() => {
+          if (!disabled) onClick();
+        }}
+        disabled={disabled}
       />
     </div>
   );
