@@ -155,9 +155,8 @@ const BuyInfo = ({ product }) => {
           <p className={styles.optionTitle}>Size</p>
           <ul className={styles.optionList}>
             {allSizes?.map((s) => {
-              const sizeClassNames = `${styles.sizeItem} ${
-                size === s ? styles.active : ""
-              } ${!availableSizes.includes(s) ? styles.unavailable : ""}`;
+              const sizeClassNames = `${styles.sizeItem} ${size === s ? styles.active : ""
+                } ${!availableSizes.includes(s) ? styles.unavailable : ""}`;
               return (
                 <li
                   className={sizeClassNames}
@@ -183,7 +182,6 @@ const BuyInfo = ({ product }) => {
                 backgroundColor: "#eaedf3",
                 cursor: "not-allowed",
               };
-              // const colorClassNames = `${styles.colorItem} ${color === c ? styles.active : ""} ${!availableColors.includes(c) ? styles.unavailable : ""}`
               return (
                 <li
                   style={
