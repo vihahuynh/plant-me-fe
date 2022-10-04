@@ -17,6 +17,15 @@ const DeliveryAddress = () => {
     const onOpenAddressForm = () => setIsShowForm(true)
     const onCloseAddressForm = () => setIsShowForm(false)
 
+    const onChangeDefaultAddress = async (addressToUpdate) => {
+        const defaultAddress = addresses.find(a => a.isDefault)
+        await addressService.update(defaultAddress.id, { ...defaultAddress, isDefault: false }, authen?.user?.token)
+        await addressService.update(addressToUpdate.id, { ...addressToUpdate, isDefault: true }, authen?.user?.token)
+        setAddresses(prev => prev
+            .map(a => a.isDefault ? { ...a, isDefault: false } : a)
+            .map(a => a.id === addressToUpdate.id ? { ...addressToUpdate, isDefault: true } : a))
+    }
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -39,7 +48,7 @@ const DeliveryAddress = () => {
                 }
                 <ul className={styles.addressList}>
                     {addresses.map(address =>
-                        <AddressItem address={address} setAddresses={setAddresses} />
+                        <AddressItem address={address} setAddresses={setAddresses} onChangeDefaultAddress={onChangeDefaultAddress} />
                     )}
                 </ul>
             </div>

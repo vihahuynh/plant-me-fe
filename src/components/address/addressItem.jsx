@@ -10,7 +10,7 @@ import { CgCheckO } from "react-icons/cg"
 
 import styles from "./addressItem.module.scss"
 
-const AddressItem = ({ address, setAddresses }) => {
+const AddressItem = ({ address, setAddresses, onChangeDefaultAddress }) => {
     const authen = useSelector(state => state.authentication)
     const [showEditForm, setShowEditForm] = useState(false)
     const [showConfirmDelete, setShowConfirmDelete] = useState(false)
@@ -32,6 +32,7 @@ const AddressItem = ({ address, setAddresses }) => {
     return <li className={styles.addressItem
     }>
         <div className={styles.btnGroup}>
+            {!address.isDefault && <Button text="Set as default" borderRadius="square" size="small" theme="light" onClick={() => onChangeDefaultAddress(address)} />}
             <Button text="Edit" borderRadius="square" size="small" theme="blue" onClick={onOpenEditAddress} />
             {!address.isDefault && <Button text="Delete" borderRadius="square" size="small" theme="red" onClick={onOpenConfirmBox} />}
         </div>
