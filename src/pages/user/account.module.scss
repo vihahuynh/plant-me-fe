@@ -42,7 +42,7 @@
 
 .formContainer {
   margin-top: 4rem;
-  width: calc(100% - 50rem);
+  flex: 1;
   position: relative;
 
   h5 {
@@ -186,4 +186,9 @@
   background-color: $color-grey;
   border-color: $color-grey-dark;
   cursor: not-allowed;
+}
+
+.radioGroup {
+  display: flex;
+  column-gap: 6rem;
 }

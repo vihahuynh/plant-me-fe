@@ -26,6 +26,7 @@ import FavoriteProducts from "./pages/user/favoriteProducts";
 import ReviewHistory from "./pages/user/reviewHistory";
 import Account from "./pages/user/account";
 import UpdateProductForm from "./components/products/productUpdateForm";
+import DeliveryAddress from "./pages/user/deliveryAddress";
 
 import { authenticationActions, cartActions } from "./store";
 import cartService from "./services/cart";
@@ -102,6 +103,9 @@ const App = () => {
         </Route>
         <Route path="/user/:userId/favorite-products">
           <FavoriteProducts />
+        </Route>
+        <Route path="/user/:userId/address">
+          <DeliveryAddress />
         </Route>
         <Route path="/user/:userId/reviews">
           <ReviewHistory />

@@ -26,7 +26,7 @@ const StockForm = ({ stock, productId, onCancel, setStocks }) => {
                 size: currentSize,
                 quantity: values.quantity
             }
-            const updatedStock = await stockSerice.update(stock?.id, stockToUpdate)
+            const updatedStock = await stockSerice.update(stock?.id, stockToUpdate, authen)
             setStocks(prev => prev.map(item => item.id !== stock.id ? item : updatedStock.data))
 
         } catch (err) {

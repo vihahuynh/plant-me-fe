@@ -192,7 +192,7 @@ const Account = () => {
                                             errors.phoneNumber}
                                     </p>
                                 </div>
-                                <div className={styles.inputContainer}>
+                                <div className={`${styles.inputContainer} ${styles.radioGroup}`}>
                                     <RadioInput
                                         key="female"
                                         name="gender"
