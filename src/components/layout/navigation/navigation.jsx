@@ -50,18 +50,23 @@ const Navigation = () => {
               <BiUserCircle className={styles.icon} />
               <ul className={styles.userMenu}>
                 <li>
+                  <Link to={`/user/${authen?.user?.id}`}>
+                    Account info
+                  </Link>
+                </li>
+                <li>
                   <Link to={`/user/${authen?.user?.id}/order-history`}>
-                    My orders
+                    Orders
                   </Link>
                 </li>
                 <li>
                   <Link to={`/user/${authen?.user?.id}/reviews`}>
-                    My reviews
+                    Reviews
                   </Link>
                 </li>
                 <li>
                   <Link to={`/user/${authen?.user?.id}/notification`}>
-                    My notification
+                    Notification
                   </Link>
                 </li>
                 <li>

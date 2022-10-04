@@ -7,7 +7,9 @@ import {
   FaHeart,
   FaStarHalfAlt,
   FaShoppingCart,
+  FaAddressBook
 } from "react-icons/fa";
+
 import { BsBellFill } from "react-icons/bs";
 
 const UserLeftMenu = () => {
@@ -23,47 +25,52 @@ const UserLeftMenu = () => {
         <li className={`${styles.item} ${path === "" ? styles.active : ""}`}>
           <Link to={`/user/${authen?.user?.id}`}>
             <FaUserAlt className={styles.icon} />
-            My account
+            Account info
           </Link>
         </li>
         <li
-          className={`${styles.item} ${
-            path === "order-hitory" ? styles.active : ""
-          }`}
+          className={`${styles.item} ${path === "order-hitory" ? styles.active : ""
+            }`}
         >
           <Link to={`/user/${authen?.user?.id}/order-history`}>
             <FaShoppingCart className={styles.icon} />
-            My orders
+            Orders
           </Link>
         </li>
         <li
-          className={`${styles.item} ${
-            path === "reviews" ? styles.active : ""
-          }`}
+          className={`${styles.item} ${path === "reviews" ? styles.active : ""
+            }`}
         >
           <Link to={`/user/${authen?.user?.id}/reviews`}>
             <FaStarHalfAlt className={styles.icon} />
-            My reviews
+            Reviews
           </Link>
         </li>
         <li
-          className={`${styles.item} ${
-            path === "notification" ? styles.active : ""
-          }`}
+          className={`${styles.item} ${path === "notification" ? styles.active : ""
+            }`}
         >
           <Link to={`/user/${authen?.user?.id}/notification`}>
             <BsBellFill className={styles.icon} />
-            My notification
+            Notification
           </Link>
         </li>
         <li
-          className={`${styles.item} ${
-            path === "favorite-products" ? styles.active : ""
-          }`}
+          className={`${styles.item} ${path === "address" ? styles.active : ""
+            }`}
+        >
+          <Link to={`/user/${authen?.user?.id}/address`}>
+            <FaAddressBook className={styles.icon} />
+            Delivery address
+          </Link>
+        </li>
+        <li
+          className={`${styles.item} ${path === "favorite-products" ? styles.active : ""
+            }`}
         >
           <Link to={`/user/${authen?.user?.id}/favorite-products`}>
             <FaHeart className={styles.icon} />
-            My favorite products
+            Favorite products
           </Link>
         </li>
       </ul>
