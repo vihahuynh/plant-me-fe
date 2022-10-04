@@ -30,6 +30,8 @@ import DeliveryAddress from "./pages/user/deliveryAddress";
 
 import { authenticationActions, cartActions } from "./store";
 import cartService from "./services/cart";
+import SendResetPasswordLink from "./pages/sendResetPasswordLink";
+import ResetPassword from "./pages/resetPassword";
 
 const App = () => {
   const authen = useSelector((state) => state.authentication);
@@ -45,16 +47,19 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const cartData = await cartService.get(authen?.user?.cart, authen?.user?.token)
-        dispatch(cartActions.updateCart({ cart: cartData.data }))
+        const cartData = await cartService.get(
+          authen?.user?.cart,
+          authen?.user?.token
+        );
+        dispatch(cartActions.updateCart({ cart: cartData.data }));
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
-    }
+    };
     if (authen?.user) {
-      fetchData()
+      fetchData();
     }
-  }, [authen?.user, dispatch])
+  }, [authen?.user, dispatch]);
 
   return (
     <Router>
@@ -118,6 +123,12 @@ const App = () => {
         </Route>
         <Route path="/admin/products/:id">
           <UpdateProductForm />
+        </Route>
+        <Route exact path="/password-reset">
+          <SendResetPasswordLink />
+        </Route>
+        <Route path="/password-reset/:token">
+          <ResetPassword />
         </Route>
       </Switch>
     </Router>

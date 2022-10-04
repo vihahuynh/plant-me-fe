@@ -1,7 +1,7 @@
 @import "./../variable.scss";
 
 html {
-  top: 0;
+  top: 0 !important;
 }
 
 .container {
@@ -17,6 +17,7 @@ html {
     position: absolute;
     top: 50%;
     left: 50%;
+    border-radius: 3px;
     transform: translate(-50%, -50%);
 
     h2 {
@@ -32,6 +33,13 @@ html {
         &:not(:last-child) {
           margin-bottom: 1.5rem;
         }
+      }
+
+      .label {
+        display: block;
+        font-size: $default-font-size;
+        color: $color-primary;
+        margin-bottom: 1rem;
       }
 
       input {
@@ -55,30 +63,6 @@ html {
         }
       }
 
-      .btn {
-        align-self: center;
-        border: none;
-        border-radius: 10rem;
-        background-color: $color-primary;
-        color: $color-grey-light;
-        padding: 1rem 3rem;
-        text-transform: uppercase;
-        font-size: $default-font-size;
-        cursor: pointer;
-      }
-
-      .disabledBtn {
-        align-self: center;
-        border: none;
-        border-radius: 10rem;
-        background-color: $color-grey;
-        color: $color-grey-dark;
-        padding: 1rem 3rem;
-        text-transform: uppercase;
-        font-size: $default-font-size;
-        cursor: not-allowed;
-      }
-
       .errors {
         margin-top: 3px;
         margin-left: 1.5rem;
@@ -100,4 +84,53 @@ html {
   color: darkred;
   font-size: 1.4rem;
   margin-bottom: 1rem;
+}
+
+.btn {
+  align-self: center;
+  border: none;
+  border-radius: 10rem;
+  background-color: $color-primary;
+  color: $color-grey-light;
+  padding: 1rem 3rem;
+  text-transform: uppercase;
+  font-size: $default-font-size;
+  cursor: pointer;
+}
+
+.disabledBtn {
+  align-self: center;
+  border: none;
+  border-radius: 10rem;
+  background-color: $color-grey;
+  color: $color-grey-dark;
+  padding: 1rem 3rem;
+  text-transform: uppercase;
+  font-size: $default-font-size;
+  cursor: not-allowed;
+}
+
+.infoBox {
+  width: 35%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 3px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $color-primary-light;
+  padding: 3rem 4rem;
+  border-radius: 3px;
+
+  h2 {
+    align-self: flex-start;
+  }
+
+  p {
+    color: $color-primary;
+    font-size: $default-font-size;
+    margin-bottom: 2rem;
+  }
 }

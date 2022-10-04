@@ -4,54 +4,52 @@ import { useHistory } from "react-router-dom";
 import userService from "../services/user";
 
 import styles from "./signIn.module.scss";
+import { useEffect } from "react";
 
-const SignUp = () => {
-  const [error, setError] = useState("");
-
+const ResetPassword = () => {
+  const [users, setUsers] = useState([]);
   const history = useHistory();
-  const onCreateUser = async (values) => {
-    try {
-      const newUser = {
-        username: values.username,
-        email: values.email,
-        password: values.password,
-      };
-      await userService.create(newUser);
-      history.push("/signin");
-    } catch (err) {
-      const errorMessage = err?.response?.data?.error;
-      setError(errorMessage || "");
-    }
-  };
+
+  useEffect(() => {
+    const fetchAllUsers = async () => {
+      try {
+        const result = await userService.getAll();
+        setUsers(result.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchAllUsers();
+  }, []);
+
+  //   const onCreateUser = async (values) => {
+  //     try {
+  //       const newUser = {
+  //         username: values.username,
+  //         email: values.email,
+  //         password: values.password,
+  //       };
+  //       const result = await userService.create(newUser);
+  //       setUsers((prev) => prev.concat(result?.data));
+  //       history.push("/signin");
+  //     } catch (err) {
+  //       const errorMessage = err?.response?.data?.error;
+  //       console.log(errorMessage || "Something when wrong!");
+  //     }
+  //   };
 
   return (
     <div className={styles.container}>
-      <img src="/images/blog-2.png" alt="plant-care" />
+      <img src="/images/blog-4.png" alt="plant-care" />
       <div className={styles.formContainer}>
-        <h2>Sign Up</h2>
-        <p className={styles.bigError}>{!!error && error}</p>
+        <h2>Change password for @{}</h2>
         <Formik
           initialValues={{
-            username: "",
-            email: "",
             password: "",
             confirmPassword: "",
           }}
           validate={(values) => {
             const errors = {};
-            if (!values.username) {
-              errors.username = "Username is required";
-            } else if (values.username?.length < 5) {
-              errors.username = "Username must contain at least 5 characters";
-            }
-
-            if (!values.email) {
-              errors.email = "Email address is required";
-            } else if (
-              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-            ) {
-              errors.email = "Invalid email address";
-            }
 
             if (!values.confirmPassword) {
               errors.confirmPassword = "Confirm password is required";
@@ -69,7 +67,8 @@ const SignUp = () => {
           }}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
-              onCreateUser(values);
+              //   onCreateUser(values);
+              console.log(values);
               setSubmitting(false);
             }, 500);
           }}
@@ -84,32 +83,6 @@ const SignUp = () => {
             isSubmitting,
           }) => (
             <form onSubmit={handleSubmit} className={styles.form}>
-              <div className={styles.inputContainer}>
-                <input
-                  type="username"
-                  name="username"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.username}
-                  placeholder="Username"
-                />
-                <p className={styles.errors}>
-                  {errors.username && touched.username && errors.username}
-                </p>
-              </div>
-              <div className={styles.inputContainer}>
-                <input
-                  type="email"
-                  name="email"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.email}
-                  placeholder="Email address"
-                />
-                <p className={styles.errors}>
-                  {errors.email && touched.email && errors.email}
-                </p>
-              </div>
               <div className={styles.inputContainer}>
                 <input
                   type="password"
@@ -142,7 +115,7 @@ const SignUp = () => {
                 type="submit"
                 className={!isSubmitting ? styles.btn : styles.disabledBtn}
               >
-                create account
+                change password
               </button>
             </form>
           )}
@@ -152,4 +125,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default ResetPassword;

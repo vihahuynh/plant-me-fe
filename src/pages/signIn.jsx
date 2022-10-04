@@ -2,31 +2,34 @@ import React from "react";
 import { Formik } from "formik";
 import { useHistory } from "react-router-dom";
 import loginService from "../services/login";
-import { authenticationActions } from "./../store/index"
+import { authenticationActions } from "./../store/index";
 
 import styles from "./signIn.module.scss";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 const SignIn = () => {
-  const [error, setError] = useState("")
-  const history = useHistory()
-  const dispatch = useDispatch()
+  const [error, setError] = useState("");
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   const onLogin = async (values) => {
     try {
-      const result = await loginService.login(values)
-      localStorage.setItem("loggedUser", JSON.stringify({
-        isLoggedIn: !!result.data,
-        user: result.data
-      }))
-      dispatch(authenticationActions.login({ user: result.data }))
-      history.push("/")
+      const result = await loginService.login(values);
+      localStorage.setItem(
+        "loggedUser",
+        JSON.stringify({
+          isLoggedIn: !!result.data,
+          user: result.data,
+        })
+      );
+      dispatch(authenticationActions.login({ user: result.data }));
+      history.push("/");
     } catch (err) {
-      const errorMessage = err?.response?.data?.error
-      setError(errorMessage || "")
+      const errorMessage = err?.response?.data?.error;
+      setError(errorMessage || "");
     }
-  }
+  };
 
   return (
     <div className={styles.container}>
@@ -50,7 +53,7 @@ const SignIn = () => {
           }}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
-              onLogin(values)
+              onLogin(values);
               setSubmitting(false);
             }, 500);
           }}
@@ -70,8 +73,8 @@ const SignIn = () => {
                   type="text"
                   name="loginData"
                   onChange={(e) => {
-                    handleChange(e)
-                    setError("")
+                    handleChange(e);
+                    setError("");
                   }}
                   onBlur={handleBlur}
                   value={values.loginData}
@@ -86,8 +89,8 @@ const SignIn = () => {
                   type="password"
                   name="password"
                   onChange={(e) => {
-                    handleChange(e)
-                    setError("")
+                    handleChange(e);
+                    setError("");
                   }}
                   onBlur={handleBlur}
                   value={values.password}
@@ -113,6 +116,6 @@ const SignIn = () => {
       </div>
     </div>
   );
-}
+};
 
 export default SignIn;
