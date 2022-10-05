@@ -1,10 +1,9 @@
 @import "./../variable.scss";
 
-html {
-  top: 0 !important;
-}
-
 .container {
+  position: absolute;
+  top: -10vh;
+
   img {
     width: 100vw;
     height: 100vh;
