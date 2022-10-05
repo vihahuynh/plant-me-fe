@@ -67,14 +67,16 @@ html {
         margin-top: 3px;
         margin-left: 1.5rem;
         font-size: $tiny-font-size;
-        color: darkred;
       }
 
       .link {
+        text-decoration: underline;
+        text-decoration-color: $color-primary-dark;
+        text-underline-offset: 3px;
         color: $color-primary-dark;
         font-size: 1.2rem;
         text-align: center;
-        margin-top: 1rem;
+        margin-top: 2rem;
       }
     }
   }

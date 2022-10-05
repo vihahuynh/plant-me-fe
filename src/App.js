@@ -10,10 +10,12 @@ import About from "./pages/about";
 import Contact from "./pages/contact";
 import Shop from "./pages/shop";
 import SignIn from "./pages/signIn";
-import SignUp from "./pages/signUp";
+import SignUp from "./pages/signup";
 import ProductDetails from "./pages/productDetails";
 import CartPage from "./pages/cart";
 import Checkout from "./pages/checkout";
+import SendPasswordResetLink from "./pages/sendPasswordResetLink";
+import PasswordReset from "./pages/passwordReset";
 
 // admin page
 import NewProduct from "./pages/admin/newProduct";
@@ -30,8 +32,6 @@ import DeliveryAddress from "./pages/user/deliveryAddress";
 
 import { authenticationActions, cartActions } from "./store";
 import cartService from "./services/cart";
-import SendResetPasswordLink from "./pages/sendResetPasswordLink";
-import ResetPassword from "./pages/resetPassword";
 
 const App = () => {
   const authen = useSelector((state) => state.authentication);
@@ -125,10 +125,10 @@ const App = () => {
           <UpdateProductForm />
         </Route>
         <Route exact path="/password-reset">
-          <SendResetPasswordLink />
+          <SendPasswordResetLink />
         </Route>
-        <Route path="/password-reset/:token">
-          <ResetPassword />
+        <Route path="/password-reset/:userId/:token">
+          <PasswordReset />
         </Route>
       </Switch>
     </Router>

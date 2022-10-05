@@ -1,37 +1,25 @@
 import React from "react";
 import { Formik } from "formik";
-import { useHistory } from "react-router-dom";
-import loginService from "../services/login";
-import { authenticationActions } from "./../store/index";
 
 import styles from "./signIn.module.scss";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import LinkButton from "../components/UI/buttons/linkbutton";
+import passwordResetService from "../services/passwordReset";
 
-const SendResetPasswordLink = () => {
+const SendPasswordResetLink = () => {
   const [error, setError] = useState("");
   const [sentEmail, setSentEmail] = useState(false);
-  const history = useHistory();
-  const dispatch = useDispatch();
 
-  //   const onLogin = async (values) => {
-  //     try {
-  //       const result = await loginService.login(values);
-  //       localStorage.setItem(
-  //         "loggedUser",
-  //         JSON.stringify({
-  //           isLoggedIn: !!result.data,
-  //           user: result.data,
-  //         })
-  //       );
-  //       dispatch(authenticationActions.login({ user: result.data }));
-  //       history.push("/");
-  //     } catch (err) {
-  //       const errorMessage = err?.response?.data?.error;
-  //       setError(errorMessage || "");
-  //     }
-  //   };
+  const onSendPasswordResetLink = async (values) => {
+    try {
+      setError("")
+      await passwordResetService.sendLink(values)
+      setSentEmail(true)
+    } catch (err) {
+      console.log(err)
+      setError(err?.response?.data?.err || "Something went wrong! Please enter correct email and try again!")
+    }
+  }
 
   return (
     <div className={styles.container}>
@@ -53,10 +41,9 @@ const SendResetPasswordLink = () => {
               }
               return errors;
             }}
-            onSubmit={(values, { setSubmitting }) => {
+            onSubmit={async (values, { setSubmitting }) => {
+              await onSendPasswordResetLink(values)
               setTimeout(() => {
-                //   onLogin(values);
-                console.log(values);
                 setSubmitting(false);
               }, 500);
             }}
@@ -120,4 +107,4 @@ const SendResetPasswordLink = () => {
   );
 };
 
-export default SendResetPasswordLink;
+export default SendPasswordResetLink;

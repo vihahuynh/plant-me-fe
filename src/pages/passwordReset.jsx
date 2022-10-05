@@ -1,48 +1,31 @@
 import { useState } from "react";
 import { Formik } from "formik";
-import { useHistory } from "react-router-dom";
-import userService from "../services/user";
+import { useHistory, useParams } from "react-router-dom";
 
 import styles from "./signIn.module.scss";
-import { useEffect } from "react";
+import passwordResetService from "../services/passwordReset";
 
-const ResetPassword = () => {
-  const [users, setUsers] = useState([]);
-  const history = useHistory();
+const PasswordReset = () => {
+  const [error, setError] = useState("");
+  const { userId, token } = useParams()
+  const history = useHistory()
 
-  useEffect(() => {
-    const fetchAllUsers = async () => {
-      try {
-        const result = await userService.getAll();
-        setUsers(result.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchAllUsers();
-  }, []);
-
-  //   const onCreateUser = async (values) => {
-  //     try {
-  //       const newUser = {
-  //         username: values.username,
-  //         email: values.email,
-  //         password: values.password,
-  //       };
-  //       const result = await userService.create(newUser);
-  //       setUsers((prev) => prev.concat(result?.data));
-  //       history.push("/signin");
-  //     } catch (err) {
-  //       const errorMessage = err?.response?.data?.error;
-  //       console.log(errorMessage || "Something when wrong!");
-  //     }
-  //   };
+  const onChangeEmail = async (values) => {
+    try {
+      await passwordResetService.updatePassword(userId, token, values)
+      history.push("/signin")
+    } catch (err) {
+      console.log(err)
+      setError(err?.response?.data?.err || "Something went wrong!")
+    }
+  }
 
   return (
     <div className={styles.container}>
       <img src="/images/blog-4.png" alt="plant-care" />
       <div className={styles.formContainer}>
-        <h2>Change password for @{}</h2>
+        <h2>Change password</h2>
+        <p className={styles.bigError}>{!!error && error}</p>
         <Formik
           initialValues={{
             password: "",
@@ -66,9 +49,8 @@ const ResetPassword = () => {
             return errors;
           }}
           onSubmit={(values, { setSubmitting }) => {
+            onChangeEmail(values);
             setTimeout(() => {
-              //   onCreateUser(values);
-              console.log(values);
               setSubmitting(false);
             }, 500);
           }}
@@ -125,4 +107,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default PasswordReset;

@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik } from "formik";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import loginService from "../services/login";
 import { authenticationActions } from "./../store/index";
 
@@ -26,8 +26,8 @@ const SignIn = () => {
       dispatch(authenticationActions.login({ user: result.data }));
       history.push("/");
     } catch (err) {
-      const errorMessage = err?.response?.data?.error;
-      setError(errorMessage || "");
+      const errorMessage = err?.response?.data?.err;
+      setError(errorMessage || "Some thing went wrong!");
     }
   };
 
@@ -52,8 +52,8 @@ const SignIn = () => {
             return errors;
           }}
           onSubmit={(values, { setSubmitting }) => {
+            onLogin(values);
             setTimeout(() => {
-              onLogin(values);
               setSubmitting(false);
             }, 500);
           }}
@@ -107,9 +107,7 @@ const SignIn = () => {
               >
                 Sign in
               </button>
-              <a className={styles.link} href="/#">
-                Forgot password?
-              </a>
+              <Link to="/password-reset" className={styles.link}>Forgot password?</Link>
             </form>
           )}
         </Formik>
