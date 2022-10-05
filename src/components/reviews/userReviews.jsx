@@ -53,9 +53,7 @@ const UserReviews = () => {
       try {
         if (authen?.user) {
           const ordersData = await orderService.getAll(
-            {
-              userId: authen?.user?.id,
-            },
+            undefined,
             undefined,
             authen?.user?.token
           );

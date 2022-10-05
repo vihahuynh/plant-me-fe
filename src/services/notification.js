@@ -4,9 +4,6 @@ const baseUrl = "http://localhost:3001/api/notification";
 
 const getAll = (query, sort, token) => {
   let queryArr = [];
-  if (query?.userId) {
-    queryArr = queryArr.concat(`user=${query.userId}`);
-  }
   if (query?.orderId) {
     queryArr = queryArr.concat(`order=${query.orderId}`);
   }

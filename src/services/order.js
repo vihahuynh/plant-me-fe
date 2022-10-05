@@ -3,9 +3,9 @@ const baseUrl = "http://localhost:3001/api/orders";
 
 const getAll = (query, sort, token) => {
   let queryArr = [];
-  if (query?.userId) {
-    queryArr = queryArr.concat(`user=${query.userId}`);
-  }
+  // if (query?.userId) {
+  //   queryArr = queryArr.concat(`user=${query.userId}`);
+  // }
   const queryStr = queryArr.join("&");
   return axios.get(`${baseUrl}?${queryStr}`, {
     headers: { Authorization: `bearer ${token}` },

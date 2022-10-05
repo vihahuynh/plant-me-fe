@@ -22,7 +22,7 @@ const OrderHistory = () => {
       try {
         if (!authen?.user) return;
         const ordersData = await orderService.getAll(
-          { userId },
+          undefined,
           undefined,
           authen?.user?.token
         );
