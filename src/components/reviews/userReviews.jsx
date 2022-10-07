@@ -48,7 +48,6 @@ const UserReviews = () => {
   }, [authen?.user]);
 
   useEffect(() => {
-    console.log("reviews: ", reviews)
     const reviewIds = reviews.map((review) => review.product.id);
     const fetchData = async () => {
       try {
@@ -62,17 +61,17 @@ const UserReviews = () => {
             (result, order) => {
               order.cart.forEach((p) => {
                 const itemIds = result.map((i) => i.product);
-                console.log("itemIds: ", itemIds)
-                console.log("reviewIds: ", reviewIds)
-                console.log("product: ", p.product)
-                if (!itemIds.includes(p.product) && !reviewIds.includes(p.product)) {
+                if (
+                  !itemIds.includes(p.product) &&
+                  !reviewIds.includes(p.product)
+                ) {
                   result = result.concat(p);
                 }
               });
               return result;
-            }, []
+            },
+            []
           );
-          console.log("productsNeedToReview: ", productsNeedToReview)
           setProducts(productsNeedToReview);
         }
       } catch (err) {
@@ -86,7 +85,7 @@ const UserReviews = () => {
     <div className={styles.container}>
       <div>
         <h3>Waiting for your review</h3>
-        {products.length ?
+        {products.length ? (
           <div className={styles["thumbnail-slider-wrap"]}>
             <Slider {...settings}>
               {products.map((p) => (
@@ -98,19 +97,18 @@ const UserReviews = () => {
               ))}
             </Slider>
           </div>
-
-          : <p>No product to review</p>
-        }
+        ) : (
+          <p>No product to review</p>
+        )}
       </div>
       <div>
         <h3>Your reviews</h3>
         <ul className={styles.userReviewsList}>
-          {reviews.length
-            ? reviews.map((item) => (
-              <UserReviewItem key={item.id} item={item} />
-            ))
-            : <p>No review</p>
-          }
+          {reviews.length ? (
+            reviews.map((item) => <UserReviewItem key={item.id} item={item} />)
+          ) : (
+            <p>No review</p>
+          )}
         </ul>
       </div>
     </div>

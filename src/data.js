@@ -264,7 +264,7 @@ export const plantsFilterOptions = [
         id: 3,
         text: "Direct Light",
         query: "light=direct light",
-      }
+      },
     ],
   },
   {
@@ -383,7 +383,7 @@ export const reviewsFilterOptions = [
   {
     id: 2,
     text: "Include images",
-    type: "checkbox",
+    type: "radio",
     subOptions: [
       {
         id: 1,
@@ -543,6 +543,4 @@ export const orderHistory = [
   },
 ];
 
-export const livingConditions = {
-
-}
+export const livingConditions = {};

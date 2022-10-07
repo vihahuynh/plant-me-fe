@@ -7,7 +7,6 @@ import ImageCarousel from "../components/products/imageCarousel";
 import styles from "./productDetails.module.scss";
 import BuyInfo from "../components/products/buyInfo";
 import Reviews from "../components/reviews/reviews";
-// import Products from "../components/products/products";
 import ProductInfo from "../components/products/productInfo";
 import Features from "../components/features/features";
 import productService from "../services/product";
@@ -32,7 +31,7 @@ const ProductDetails = () => {
   if (!product) {
     return <div>Product not found</div>;
   }
-
+  console.log(product);
   return (
     <Wrapper>
       <div className={styles.container}>
@@ -51,7 +50,7 @@ const ProductDetails = () => {
         </div> */}
 
         <div className={styles.reviews}>
-          <Reviews productId={product.id} />
+          <Reviews reviews={product.reviews} />
         </div>
         <div className={styles.features}>
           <h2>Why People Choose Us?</h2>

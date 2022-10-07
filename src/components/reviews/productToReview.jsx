@@ -39,14 +39,8 @@ const ProductToReview = ({ product, setReviews }) => {
         formData,
         authen?.user?.token
       );
-      const review = {
-        ...returnReview.data,
-        product,
-        id: returnReview.data._id
-      };
-      console.log(returnReview.data)
-      setRating(0)
-      setReviews((prev) => [review, ...prev]);
+      setRating(0);
+      setReviews((prev) => [returnReview.data, ...prev]);
     } catch (error) {
       console.log(error);
     }

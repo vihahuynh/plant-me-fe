@@ -26,9 +26,14 @@ const ReviewForm = ({ onSave, onCancel, rating }) => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
+          onSave(values);
           setTimeout(() => {
-            onSave(values);
             setSubmitting(false);
+            values = {
+              title: "",
+              content: "",
+              images: [],
+            };
           }, 400);
         }}
       >

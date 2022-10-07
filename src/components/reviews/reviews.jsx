@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { Rating } from "@mui/material";
 
 import styles from "./reviews.module.scss";
@@ -9,21 +8,7 @@ import FilterDrawer from "../UI/drawers/filterDrawer";
 import ProgressBar from "../UI/progressBar";
 import ReviewItem from "./reviewItem";
 
-import reviewService from "../../services/review";
-
-const Reviews = ({ productId }) => {
-  const [reviews, setReviews] = useState([]);
-  useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const reviewsData = await reviewService.getAll({ productId });
-        setReviews(reviewsData.data);
-      } catch (err) {
-        console.log(err)
-      }
-    };
-    fetchReviews();
-  }, [productId]);
+const Reviews = ({ reviews }) => {
   const ratingStatistics = {
     total: reviews.length,
     average: reviews.reduce((average, review) => {
@@ -63,7 +48,6 @@ const Reviews = ({ productId }) => {
             ))}
           </ul>
         </div>
-        {/* <ReviewForm setReviews={setReviews} productId={productId} /> */}
         {!!reviews.length && (
           <div className={styles.btnContainers}>
             <div className={styles.btn}>
