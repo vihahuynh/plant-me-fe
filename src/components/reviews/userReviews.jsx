@@ -48,6 +48,7 @@ const UserReviews = () => {
   }, [authen?.user]);
 
   useEffect(() => {
+    console.log("reviews: ", reviews)
     const reviewIds = reviews.map((review) => review.product.id);
     const fetchData = async () => {
       try {
@@ -61,6 +62,9 @@ const UserReviews = () => {
             (result, order) => {
               order.cart.forEach((p) => {
                 const itemIds = result.map((i) => i.product);
+                console.log("itemIds: ", itemIds)
+                console.log("reviewIds: ", reviewIds)
+                console.log("product: ", p.product)
                 if (!itemIds.includes(p.product) && !reviewIds.includes(p.product)) {
                   result = result.concat(p);
                 }
@@ -68,6 +72,7 @@ const UserReviews = () => {
               return result;
             }, []
           );
+          console.log("productsNeedToReview: ", productsNeedToReview)
           setProducts(productsNeedToReview);
         }
       } catch (err) {
@@ -86,10 +91,9 @@ const UserReviews = () => {
             <Slider {...settings}>
               {products.map((p) => (
                 <ProductToReview
-                  key={p.id}
+                  key={p.product}
                   product={p}
                   setReviews={setReviews}
-                  setProducts={setProducts}
                 />
               ))}
             </Slider>

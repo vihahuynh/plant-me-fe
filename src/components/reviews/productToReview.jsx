@@ -12,7 +12,7 @@ import Modal from "./../UI/modal";
 import ReviewForm from "./reviewForm";
 import { useSelector } from "react-redux";
 
-const ProductToReview = ({ product, setReviews, setProducts }) => {
+const ProductToReview = ({ product, setReviews }) => {
   const authen = useSelector((state) => state.authentication);
   const [rating, setRating] = useState(0);
   const [openModal, setOpenModal] = useState(false);
@@ -42,10 +42,11 @@ const ProductToReview = ({ product, setReviews, setProducts }) => {
       const review = {
         ...returnReview.data,
         product,
+        id: returnReview.data._id
       };
+      console.log(returnReview.data)
       setRating(0)
       setReviews((prev) => [review, ...prev]);
-      setProducts((prev) => prev.filter((p) => p.id !== product.id));
     } catch (error) {
       console.log(error);
     }

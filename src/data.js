@@ -160,7 +160,7 @@ export const categoriesBanners = [
 export const plantsSortOptions = [
   {
     id: 1,
-    query: "?sort=name:des",
+    query: "?sort=name:desc",
     text: "Name: A to Z",
   },
   {
@@ -248,38 +248,23 @@ export const plantsFilterOptions = [
   {
     id: 3,
     text: "Light",
-    type: "radio",
+    type: "checkbox",
     subOptions: [
       {
         id: 1,
         text: "Low Light",
-        query: "light=low-light",
+        query: "light=low light",
       },
       {
         id: 2,
         text: "Bright Indirect Light",
-        query: "light=bright-indirect-light",
+        query: "light=bright indirect light",
       },
       {
         id: 3,
-        text: "Direct Sunlight",
-        query: "light=direct-sunlight",
-      },
-      {
-        id: 4,
-        text: "Low Light",
-        query: "light=low-light",
-      },
-      {
-        id: 5,
-        text: "Bright Indirect Light",
-        query: "light=bright-indirect-light",
-      },
-      {
-        id: 6,
-        text: "Direct Sunlight",
-        query: "light=direct-sunlight",
-      },
+        text: "Direct Light",
+        query: "light=direct light",
+      }
     ],
   },
   {
@@ -312,22 +297,22 @@ export const plantsFilterOptions = [
       {
         id: 1,
         text: "Twice a week",
-        query: "water-schedule=twice-a-week",
+        query: "livingConditions.content=twice a week",
       },
       {
         id: 2,
         text: "Every alternate day",
-        query: "water-schedule=every-alternate-day",
+        query: "livingConditions.content=every alternate day",
       },
       {
         id: 3,
         text: "Once a day",
-        query: "water-schedule=once-a-day",
+        query: "livingConditions.content=once a day",
       },
       {
         id: 4,
         text: "Once a week",
-        query: "water-schedule=once-a-week",
+        query: "livingConditions.content=once a week",
       },
     ],
   },
@@ -336,12 +321,12 @@ export const plantsFilterOptions = [
 export const reviewsSortOptions = [
   {
     id: 1,
-    query: "?sort=createdAt:des",
+    query: "?sort=createdAt:desc",
     text: "Newest",
   },
   {
     id: 2,
-    query: "?sort=rating:des",
+    query: "?sort=rating:desc",
     text: "Highest rating",
   },
   {
@@ -351,12 +336,12 @@ export const reviewsSortOptions = [
   },
   {
     id: 4,
-    query: "?sort=like:des",
+    query: "?sort=like:desc",
     text: "Most likes",
   },
   {
     id: 5,
-    query: "?sort=dislike:des",
+    query: "?sort=dislike:desc",
     text: "Most dislikes",
   },
 ];
@@ -398,6 +383,7 @@ export const reviewsFilterOptions = [
   {
     id: 2,
     text: "Include images",
+    type: "checkbox",
     subOptions: [
       {
         id: 1,
@@ -416,12 +402,12 @@ export const reviewsFilterOptions = [
 export const ordersSortOptions = [
   {
     id: 1,
-    query: "?sort=createdAt:des",
+    query: "?sort=createdAt:desc",
     text: "Newest",
   },
   {
     id: 2,
-    query: "?sort=payment:des",
+    query: "?sort=payment:desc",
     text: "Highest payment",
   },
   {
@@ -556,3 +542,7 @@ export const orderHistory = [
     createdAt: "2022-08-31",
   },
 ];
+
+export const livingConditions = {
+
+}
