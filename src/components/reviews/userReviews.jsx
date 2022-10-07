@@ -60,14 +60,13 @@ const UserReviews = () => {
           const productsNeedToReview = ordersData.data.reduce(
             (result, order) => {
               order.cart.forEach((p) => {
-                const itemIds = result.map((i) => i.id);
-                if (!itemIds.includes(p.id) && !reviewIds.includes(p.id)) {
+                const itemIds = result.map((i) => i.product);
+                if (!itemIds.includes(p.product) && !reviewIds.includes(p.product)) {
                   result = result.concat(p);
                 }
               });
               return result;
-            },
-            []
+            }, []
           );
           setProducts(productsNeedToReview);
         }
@@ -82,25 +81,32 @@ const UserReviews = () => {
     <div className={styles.container}>
       <div>
         <h3>Waiting for your review</h3>
-        <div className={styles["thumbnail-slider-wrap"]}>
-          <Slider {...settings}>
-            {products.map((p) => (
-              <ProductToReview
-                key={p.id}
-                product={p}
-                setReviews={setReviews}
-                setProducts={setProducts}
-              />
-            ))}
-          </Slider>
-        </div>
+        {products.length ?
+          <div className={styles["thumbnail-slider-wrap"]}>
+            <Slider {...settings}>
+              {products.map((p) => (
+                <ProductToReview
+                  key={p.id}
+                  product={p}
+                  setReviews={setReviews}
+                  setProducts={setProducts}
+                />
+              ))}
+            </Slider>
+          </div>
+
+          : <p>No product to review</p>
+        }
       </div>
       <div>
         <h3>Your reviews</h3>
         <ul className={styles.userReviewsList}>
-          {reviews.map((item) => (
-            <UserReviewItem key={item.id} item={item} />
-          ))}
+          {reviews.length
+            ? reviews.map((item) => (
+              <UserReviewItem key={item.id} item={item} />
+            ))
+            : <p>No review</p>
+          }
         </ul>
       </div>
     </div>

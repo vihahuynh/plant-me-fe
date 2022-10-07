@@ -11,7 +11,7 @@ const Subcribe = () => {
           & <span>get 20% discount</span> on your first order
         </p>
         <form className={styles.form}>
-          <input type="text" placeholder="Enter your email" />
+          <input className={styles.input} type="text" placeholder="Enter your email" />
           <Button
             text="Join us"
             size="medium"

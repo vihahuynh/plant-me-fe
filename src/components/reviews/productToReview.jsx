@@ -25,7 +25,7 @@ const ProductToReview = ({ product, setReviews, setProducts }) => {
       const newReview = {
         ...values,
         rating: rating,
-        productId: product.id,
+        productId: product.product,
         createdBy: authen?.user?.id,
       };
       delete newReview.images;
@@ -68,10 +68,6 @@ const ProductToReview = ({ product, setReviews, setProducts }) => {
             name="read-only"
             value={rating}
             readOnly
-          // onChange={(_, newValue) => {
-          //   setRating(newValue);
-          //   onOpenModal();
-          // }}
           />
         </div>
       </div>

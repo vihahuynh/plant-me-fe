@@ -18,7 +18,8 @@ const Features = () => {
           <SubFeatureItem key={f.id} subFeature={f} />
         ))}
       </div>
-      <Subcribe /></>
+      <Subcribe />
+    </>
   );
 };
 

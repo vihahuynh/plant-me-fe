@@ -55,12 +55,17 @@ const OrderHistory = () => {
               </div>
             )}
           </div>
-          <SearchBar />
-          <ul className={styles.ordersList}>
-            {orders.map((order) => (
-              <Order key={order.id} order={order} userId={userId} />
-            ))}
-          </ul>
+          {orders.length ?
+            <>
+              <SearchBar />
+              <ul className={styles.ordersList}>
+                {orders.map((order) => (
+                  <Order key={order.id} order={order} userId={userId} />
+                ))}
+              </ul>
+            </>
+            : <p>No order</p>
+          }
         </div>
       </div>
     </Wrapper>

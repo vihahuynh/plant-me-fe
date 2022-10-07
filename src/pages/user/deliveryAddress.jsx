@@ -48,7 +48,7 @@ const DeliveryAddress = () => {
                 }
                 <ul className={styles.addressList}>
                     {addresses.map(address =>
-                        <AddressItem address={address} setAddresses={setAddresses} onChangeDefaultAddress={onChangeDefaultAddress} />
+                        <AddressItem key={address.id} address={address} setAddresses={setAddresses} onChangeDefaultAddress={onChangeDefaultAddress} />
                     )}
                 </ul>
             </div>
