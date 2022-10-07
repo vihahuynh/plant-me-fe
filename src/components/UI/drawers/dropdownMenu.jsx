@@ -7,31 +7,43 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./dropdownMenu.module.scss";
 
 const DropdownMenu = ({ item }) => {
-  const selectedFilters = useSelector((state) => state.filters.selectedFilters);
-  const [open, setOpen] = useState(!!selectedFilters[item.text]);
+  const filters = useSelector((state) => state.filters);
+  const [open, setOpen] = useState(!!filters.selectedFilters[item.text]);
   const dispatch = useDispatch();
 
-  const onAddFilter = (option, subOption) => {
-    const filter = selectedFilters[option];
-    const newFilters = { ...selectedFilters };
+  const onAddFilter = (option, subOption, query) => {
+    const filter = filters.selectedFilters[option];
+    const newFilters = { ...filters.selectedFilters };
+    let newApplyFilters = [...filters.applyFilters];
     if (item.type === "checkbox") {
       if (!filter) {
         newFilters[option] = [subOption];
+        newApplyFilters = newApplyFilters.concat(query);
       } else {
         if (filter.includes(subOption)) {
           newFilters[option] = filter.filter((f) => f !== subOption);
           if (newFilters[option].length === 0) {
             delete newFilters[option];
           }
+          newApplyFilters = newApplyFilters.filter((f) => f !== query);
         } else {
           newFilters[option] = filter.concat(subOption);
+          newApplyFilters = newApplyFilters.concat(query);
         }
       }
     } else if (item.type === "radio") {
       newFilters[option] = subOption;
+      newApplyFilters = newApplyFilters.filter(
+        (f) => !f.includes(query.split("=")[0])
+      );
+      newApplyFilters = newApplyFilters.concat(query);
     }
-    console.log("newFilters: ", newFilters);
-    dispatch(filtersActions.updateSelectFilters({ filters: newFilters }));
+    dispatch(
+      filtersActions.updateSelectFilters({
+        selectedFilters: newFilters,
+        applyFilters: newApplyFilters,
+      })
+    );
   };
 
   return (
@@ -55,9 +67,10 @@ const DropdownMenu = ({ item }) => {
               value={option.query}
               label={option.text}
               checked={
-                selectedFilters[item.text]?.includes(option.text) || false
+                filters?.selectedFilters[item.text]?.includes(option.text) ||
+                false
               }
-              onChange={() => onAddFilter(item.text, option.text)}
+              onChange={() => onAddFilter(item.text, option.text, option.query)}
             />
           ))}
         {item.type === "radio" &&
@@ -67,8 +80,7 @@ const DropdownMenu = ({ item }) => {
               name={item.text}
               value={option.query}
               label={option.text}
-              // checked={selectedFilters[item.text]?.includes(option.text) || false}
-              onChange={() => onAddFilter(item.text, option.text)}
+              onChange={() => onAddFilter(item.text, option.text, option.query)}
             />
           ))}
       </div>

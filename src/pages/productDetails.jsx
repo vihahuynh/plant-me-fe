@@ -31,7 +31,6 @@ const ProductDetails = () => {
   if (!product) {
     return <div>Product not found</div>;
   }
-  console.log(product);
   return (
     <Wrapper>
       <div className={styles.container}>

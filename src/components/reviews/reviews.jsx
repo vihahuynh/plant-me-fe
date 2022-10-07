@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { Rating } from "@mui/material";
 
 import styles from "./reviews.module.scss";
@@ -7,8 +9,12 @@ import SortDrawer from "../UI/drawers/sortDrawer";
 import FilterDrawer from "../UI/drawers/filterDrawer";
 import ProgressBar from "../UI/progressBar";
 import ReviewItem from "./reviewItem";
+import { useSelector } from "react-redux";
 
 const Reviews = ({ reviews }) => {
+  const filters = useSelector((state) => state.filters);
+  const history = useHistory();
+
   const ratingStatistics = {
     total: reviews.length,
     average: reviews.reduce((average, review) => {
@@ -22,6 +28,13 @@ const Reviews = ({ reviews }) => {
       reviews.filter((r) => r.rating === 1).length,
     ],
   };
+
+  useEffect(() => {
+    if (filters.applyFilters.length) {
+      const queryStr = filters.applyFilters.join("&");
+      history.push(`${history.location.pathname}?${queryStr}`);
+    }
+  }, [history, filters.applyFilters]);
 
   return (
     <div className={styles.container}>
