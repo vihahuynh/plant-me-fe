@@ -69,7 +69,6 @@ const UserReviews = () => {
             },
             []
           );
-          console.log(productsNeedToReview);
           setProducts(productsNeedToReview);
         }
       } catch (err) {

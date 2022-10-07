@@ -43,6 +43,7 @@ const ProductToReview = ({ product, setReviews, setProducts }) => {
         ...returnReview.data,
         product,
       };
+      setRating(0)
       setReviews((prev) => [review, ...prev]);
       setProducts((prev) => prev.filter((p) => p.id !== product.id));
     } catch (error) {
@@ -67,10 +68,10 @@ const ProductToReview = ({ product, setReviews, setProducts }) => {
             name="read-only"
             value={rating}
             readOnly
-            // onChange={(_, newValue) => {
-            //   setRating(newValue);
-            //   onOpenModal();
-            // }}
+          // onChange={(_, newValue) => {
+          //   setRating(newValue);
+          //   onOpenModal();
+          // }}
           />
         </div>
       </div>
