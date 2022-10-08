@@ -10,10 +10,20 @@ import FilterDrawer from "../UI/drawers/filterDrawer";
 import ProgressBar from "../UI/progressBar";
 import ReviewItem from "./reviewItem";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+import reviewService from "../../services/review";
 
-const Reviews = ({ reviews }) => {
+const Reviews = ({ productId }) => {
+  const [reviews, setReviews] = useState([]);
   const filters = useSelector((state) => state.filters);
   const history = useHistory();
+  useEffect(() => {
+    const fetchData = async () => {
+      const reviewsData = await reviewService.getAll(`product=${productId}`);
+      setReviews(reviewsData.data);
+    };
+    fetchData();
+  }, [productId]);
 
   const ratingStatistics = {
     total: reviews.length,
@@ -32,7 +42,9 @@ const Reviews = ({ reviews }) => {
   useEffect(() => {
     if (filters.applyFilters.length) {
       const queryStr = filters.applyFilters.join("&");
-      history.push(`${history.location.pathname}?${queryStr}`);
+      history.push({
+        search: `?${queryStr}`,
+      });
     }
   }, [history, filters.applyFilters]);
 

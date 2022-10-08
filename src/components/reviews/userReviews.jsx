@@ -34,9 +34,9 @@ const UserReviews = () => {
     const fetchData = async () => {
       try {
         if (authen?.user?.id) {
-          const reviewsData = await reviewService.getAll({
-            userId: authen?.user?.id,
-          });
+          const reviewsData = await reviewService.getAll(
+            `user=${authen?.user?.id}`
+          );
           setReviews(reviewsData.data);
         }
       } catch (err) {
@@ -52,11 +52,7 @@ const UserReviews = () => {
     const fetchData = async () => {
       try {
         if (authen?.user) {
-          const ordersData = await orderService.getAll(
-            undefined,
-            undefined,
-            authen?.user?.token
-          );
+          const ordersData = await orderService.getAll("", authen?.user?.token);
           const productsNeedToReview = ordersData.data.reduce(
             (result, order) => {
               order.cart.forEach((p) => {

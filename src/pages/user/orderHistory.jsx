@@ -21,11 +21,7 @@ const OrderHistory = () => {
     const fetchData = async () => {
       try {
         if (!authen?.user) return;
-        const ordersData = await orderService.getAll(
-          undefined,
-          undefined,
-          authen?.user?.token
-        );
+        const ordersData = await orderService.getAll("", authen?.user?.token);
         setOrders(ordersData.data);
       } catch (err) {
         console.log(err);
@@ -55,7 +51,7 @@ const OrderHistory = () => {
               </div>
             )}
           </div>
-          {orders.length ?
+          {orders.length ? (
             <>
               <SearchBar />
               <ul className={styles.ordersList}>
@@ -64,8 +60,9 @@ const OrderHistory = () => {
                 ))}
               </ul>
             </>
-            : <p>No order</p>
-          }
+          ) : (
+            <p>No order</p>
+          )}
         </div>
       </div>
     </Wrapper>

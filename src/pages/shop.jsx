@@ -9,26 +9,26 @@ import productService from "../services/product";
 
 import { plantsFilterOptions, plantsSortOptions } from "../data";
 
-import styles from "./shop.module.scss"
+import styles from "./shop.module.scss";
 
 const Shop = () => {
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState([]);
   const itemsPerPage = 4;
   const [page, setPage] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const productsData = await productService.getAll()
-        setProducts(productsData.data)
+        const productsData = await productService.getAll();
+        setProducts(productsData.data);
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
-    }
-    fetchData()
-  }, [])
+    };
+    fetchData();
+  }, []);
 
-  const productsToDisplay = products.filter(p => !!p.stocks.length)
+  const productsToDisplay = products.filter((p) => !!p.stocks.length);
 
   const totalPages = Math.ceil(productsToDisplay.length / itemsPerPage);
 
@@ -41,8 +41,12 @@ const Shop = () => {
   return (
     <Wrapper>
       <div className={styles.btnContainers}>
-        <div className={styles.btn}><SortDrawer sortOptions={plantsSortOptions} /></div>
-        <div className={styles.btn}><FilterDrawer filterOptions={plantsFilterOptions} /></div>
+        <div className={styles.btn}>
+          <SortDrawer sortOptions={plantsSortOptions} />
+        </div>
+        <div className={styles.btn}>
+          <FilterDrawer filterOptions={plantsFilterOptions} />
+        </div>
       </div>
       <div className={styles.container}>
         <Products products={productsToDisplay.slice(start, end)} />

@@ -2,13 +2,8 @@ import axios from "axios";
 
 const baseUrl = "http://localhost:3001/api/notification";
 
-const getAll = (query, sort, token) => {
-  let queryArr = [];
-  if (query?.orderId) {
-    queryArr = queryArr.concat(`order=${query.orderId}`);
-  }
-  const queryStr = queryArr.join("&");
-  return axios.get(`${baseUrl}?${queryStr}`, {
+const getAll = (query, token) => {
+  return axios.get(`${baseUrl}?${query}`, {
     headers: { Authorization: `bearer ${token}` },
   });
 };
