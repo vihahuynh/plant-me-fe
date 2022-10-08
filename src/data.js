@@ -160,37 +160,37 @@ export const categoriesBanners = [
 export const plantsSortOptions = [
   {
     id: 1,
-    query: "?sort=name:desc",
+    query: "sortBy=name:desc",
     text: "Name: A to Z",
   },
   {
     id: 2,
-    query: "?sort=name:desc",
+    query: "sortBy=name:desc",
     text: "Name: Z to A",
   },
   {
     id: 3,
-    query: "?sort=price:asc",
+    query: "sortBy=price:asc",
     text: "Price: Low to High",
   },
   {
     id: 4,
-    query: "?sort=price:desc",
+    query: "sortBy=price:desc",
     text: "Price: High to Low",
   },
   {
     id: 5,
-    query: "?sort=createdAt:desc",
+    query: "sortBy=createdAt:desc",
     text: "New arrivals",
   },
   {
     id: 6,
-    query: "?sort=rating:desc",
+    query: "sortBy=rating:desc",
     text: "Highest rating",
   },
   {
     id: 7,
-    query: "?sort=sold:desc",
+    query: "sortBy=sold:desc",
     text: "Best sellers",
   },
 ];
@@ -321,28 +321,33 @@ export const plantsFilterOptions = [
 export const reviewsSortOptions = [
   {
     id: 1,
-    query: "?sort=createdAt:desc",
+    query: "sortBy=createdAt:desc",
     text: "Newest",
   },
   {
     id: 2,
-    query: "?sort=rating:desc",
-    text: "Highest rating",
+    query: "sortBy=createdAt:asc",
+    text: "Lastest",
   },
   {
     id: 3,
-    query: "?sort=rating:asc",
-    text: "Lowest rating",
+    query: "sortBy=rating:desc",
+    text: "Highest rating",
   },
   {
     id: 4,
-    query: "?sort=like:desc",
-    text: "Most likes",
+    query: "sortBy=rating:asc",
+    text: "Lowest rating",
   },
   {
     id: 5,
-    query: "?sort=dislike:desc",
-    text: "Most dislikes",
+    query: "sortBy=like:desc",
+    text: "Most likes",
+  },
+  {
+    id: 6,
+    query: "sortBy=like:asc",
+    text: "Least likes",
   },
 ];
 
@@ -402,17 +407,17 @@ export const reviewsFilterOptions = [
 export const ordersSortOptions = [
   {
     id: 1,
-    query: "?sort=createdAt:desc",
+    query: "sortBy=createdAt:desc",
     text: "Newest",
   },
   {
     id: 2,
-    query: "?sort=payment:desc",
+    query: "sortBy=payment:desc",
     text: "Highest payment",
   },
   {
     id: 3,
-    query: "?sort=payment:asc",
+    query: "sortBy=payment:asc",
     text: "Lowest payment",
   },
 ];

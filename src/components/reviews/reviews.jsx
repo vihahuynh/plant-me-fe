@@ -21,6 +21,8 @@ const Reviews = ({ productId }) => {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  console.log("filters: ", filters);
+
   useEffect(() => {
     dispatch(
       filtersActions.updateFilters({
@@ -28,7 +30,10 @@ const Reviews = ({ productId }) => {
         filters: history.location.search.slice(1)?.split("&"),
       })
     );
-  }, [history.location.search, dispatch]);
+    if (!filters.filters.length) {
+      history.push(history.location.pathname);
+    }
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
