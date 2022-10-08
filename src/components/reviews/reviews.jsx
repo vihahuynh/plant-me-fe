@@ -21,8 +21,6 @@ const Reviews = ({ productId }) => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  console.log("filters: ", filters);
-
   useEffect(() => {
     dispatch(
       filtersActions.updateFilters({
