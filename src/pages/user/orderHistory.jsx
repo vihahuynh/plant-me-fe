@@ -21,7 +21,7 @@ const OrderHistory = () => {
     const fetchData = async () => {
       try {
         if (!authen?.user) return;
-        const ordersData = await orderService.getAll("", authen?.user?.token);
+        const ordersData = await orderService.getAll([], authen?.user?.token);
         setOrders(ordersData.data);
       } catch (err) {
         console.log(err);

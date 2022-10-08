@@ -8,42 +8,24 @@ import styles from "./dropdownMenu.module.scss";
 
 const DropdownMenu = ({ item }) => {
   const filters = useSelector((state) => state.filters);
-  const [open, setOpen] = useState(!!filters.selectedFilters[item.text]);
+  const [open, setOpen] = useState(
+    filters.filters.some((f) => item.subOptions.map((s) => s.query).includes(f))
+  );
   const dispatch = useDispatch();
 
-  const onAddFilter = (option, subOption, query) => {
-    const filter = filters.selectedFilters[option];
-    const newFilters = { ...filters.selectedFilters };
-    let newApplyFilters = [...filters.applyFilters];
+  const onAddFilter = (query) => {
+    let newFilters = [...filters.filters];
     if (item.type === "checkbox") {
-      if (!filter) {
-        newFilters[option] = [subOption];
-        newApplyFilters = newApplyFilters.concat(query);
+      if (newFilters.includes(query)) {
+        newFilters = newFilters.filter((f) => f !== query);
       } else {
-        if (filter.includes(subOption)) {
-          newFilters[option] = filter.filter((f) => f !== subOption);
-          if (newFilters[option].length === 0) {
-            delete newFilters[option];
-          }
-          newApplyFilters = newApplyFilters.filter((f) => f !== query);
-        } else {
-          newFilters[option] = filter.concat(subOption);
-          newApplyFilters = newApplyFilters.concat(query);
-        }
+        newFilters = newFilters.concat(query);
       }
     } else if (item.type === "radio") {
-      newFilters[option] = subOption;
-      newApplyFilters = newApplyFilters.filter(
-        (f) => !f.includes(query.split("=")[0])
-      );
-      newApplyFilters = newApplyFilters.concat(query);
+      newFilters = newFilters.filter((f) => !f.includes(query.split("=")[0]));
+      newFilters = newFilters.concat(query);
     }
-    dispatch(
-      filtersActions.updateSelectFilters({
-        selectedFilters: newFilters,
-        applyFilters: newApplyFilters,
-      })
-    );
+    dispatch(filtersActions.updateFilters({ filters: newFilters }));
   };
 
   return (
@@ -66,11 +48,8 @@ const DropdownMenu = ({ item }) => {
               name={option.query}
               value={option.query}
               label={option.text}
-              checked={
-                filters?.selectedFilters[item.text]?.includes(option.text) ||
-                false
-              }
-              onChange={() => onAddFilter(item.text, option.text, option.query)}
+              checked={filters.filters.includes(option.query)}
+              onChange={() => onAddFilter(option.query)}
             />
           ))}
         {item.type === "radio" &&
@@ -80,7 +59,8 @@ const DropdownMenu = ({ item }) => {
               name={item.text}
               value={option.query}
               label={option.text}
-              onChange={() => onAddFilter(item.text, option.text, option.query)}
+              onChange={() => onAddFilter(option.query)}
+              checked={filters.filters.includes(option.query)}
             />
           ))}
       </div>

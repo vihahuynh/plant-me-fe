@@ -1,21 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initState = {
-  applyFilters: [],
-  selectedFilters: {},
+  dataType: "",
+  filters: [],
 };
 
 const filterSllice = createSlice({
   name: "filters",
   initialState: initState,
   reducers: {
-    updateSelectFilters(state, action) {
-      state.selectedFilters = action.payload.selectedFilters;
-      state.applyFilters = action.payload.applyFilters;
+    updateFilters(state, action) {
+      if (
+        !state.dataType ||
+        !action.payload.dataType ||
+        state.dataType === action.payload.dataType
+      ) {
+        state.filters = action.payload.filters || state.filters;
+      } else {
+        state.filters = [];
+      }
+      state.dataType = action.payload.dataType || state.dataType;
     },
     clear(state) {
-      state.selectedFilters = {};
-      state.applyFilters = [];
+      state.filters = [];
     },
   },
 });

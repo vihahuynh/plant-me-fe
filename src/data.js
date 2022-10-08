@@ -388,12 +388,12 @@ export const reviewsFilterOptions = [
       {
         id: 1,
         text: "Yes",
-        query: "image=yes",
+        query: "images=yes",
       },
       {
         id: 2,
         text: "No",
-        query: "image=no",
+        query: "images=no",
       },
     ],
   },

@@ -16,7 +16,7 @@ const Notification = () => {
       try {
         if (!authen?.user) return;
         const notiData = await notificationService.getAll(
-          "",
+          [],
           authen?.user?.token
         );
         setNotification(notiData.data);

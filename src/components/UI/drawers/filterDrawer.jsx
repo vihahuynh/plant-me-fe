@@ -14,12 +14,7 @@ import { filtersActions } from "../../../store";
 const FilterDrawer = ({ filterOptions }) => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
-  const filters = useSelector((state) => state.filters.selectedFilters);
-
-  // const onApplyFilters = () => {
-  //     dispatch(filtersActions.applyFilter())
-  //     setOpen(false)
-  // }
+  const filters = useSelector((state) => state.filters);
 
   const onClearAll = () => {
     dispatch(filtersActions.clear());
@@ -41,38 +36,10 @@ const FilterDrawer = ({ filterOptions }) => {
             />
           </div>
           <div className={styles.filters}>
-            {Object.keys(filters).length > 0 && (
-              <div className={styles.selectedFilters}>
-                <div className={styles.filtersHeaderBox}>
-                  <h5>Selected filters: </h5>
-                  <h5 className={styles.clear} onClick={onClearAll}>
-                    Clear All
-                  </h5>
-                </div>
-                <ul>
-                  {Object.keys(filters).map((key) => {
-                    if (Array.isArray(filters[key])) {
-                      return (
-                        <div key={key}>
-                          {filters[key].map((value) => (
-                            <li key={`${key}-${value}`}>
-                              <span className={styles.key}>{key}: </span>
-                              <span>{value}</span>
-                            </li>
-                          ))}
-                        </div>
-                      );
-                    } else {
-                      return (
-                        <li key={`${key}-${filters[key]}`}>
-                          <span className={styles.key}>{key}: </span>
-                          <span>{filters[key]}</span>
-                        </li>
-                      );
-                    }
-                  })}
-                </ul>
-              </div>
+            {!!filters.filters.length && (
+              <h5 className={styles.clear} onClick={onClearAll}>
+                Clear All
+              </h5>
             )}
             {filterOptions.map((option) => (
               <DropdownMenu key={option.id} item={option} />

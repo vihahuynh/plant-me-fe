@@ -9,44 +9,67 @@ import SortDrawer from "../UI/drawers/sortDrawer";
 import FilterDrawer from "../UI/drawers/filterDrawer";
 import ProgressBar from "../UI/progressBar";
 import ReviewItem from "./reviewItem";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import reviewService from "../../services/review";
+import { filtersActions } from "../../store";
 
 const Reviews = ({ productId }) => {
+  const [allReviews, setAllReviews] = useState([]);
   const [reviews, setReviews] = useState([]);
   const filters = useSelector((state) => state.filters);
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(
+      filtersActions.updateFilters({
+        dataType: "product-review",
+        filters: history.location.search.slice(1)?.split("&"),
+      })
+    );
+  }, [history.location.search, dispatch]);
+
   useEffect(() => {
     const fetchData = async () => {
-      const reviewsData = await reviewService.getAll(`product=${productId}`);
-      setReviews(reviewsData.data);
+      const reviewsData = await reviewService.getAll([`product=${productId}`]);
+      setAllReviews(reviewsData.data);
     };
     fetchData();
   }, [productId]);
 
-  const ratingStatistics = {
-    total: reviews.length,
-    average: reviews.reduce((average, review) => {
-      return average + review.rating / reviews.length;
-    }, 0),
-    count: [
-      reviews.filter((r) => r.rating === 5).length,
-      reviews.filter((r) => r.rating === 4).length,
-      reviews.filter((r) => r.rating === 3).length,
-      reviews.filter((r) => r.rating === 2).length,
-      reviews.filter((r) => r.rating === 1).length,
-    ],
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      const reviewsData = await reviewService.getAll([
+        `product=${productId}&${filters.filters.join("&")}`,
+      ]);
+      setReviews(reviewsData.data);
+    };
+    fetchData();
+  }, [productId, filters.filters]);
 
   useEffect(() => {
-    if (filters.applyFilters.length) {
-      const queryStr = filters.applyFilters.join("&");
+    if (filters.filters.length) {
+      const queryStr = filters.filters.join("&");
       history.push({
         search: `?${queryStr}`,
       });
     }
-  }, [history, filters.applyFilters]);
+  }, [history, filters.filters]);
+
+  const ratingStatistics = {
+    total: allReviews.length,
+    average: allReviews.reduce((average, review) => {
+      return average + review.rating / allReviews.length;
+    }, 0),
+    count: [
+      allReviews.filter((r) => r.rating === 5).length,
+      allReviews.filter((r) => r.rating === 4).length,
+      allReviews.filter((r) => r.rating === 3).length,
+      allReviews.filter((r) => r.rating === 2).length,
+      allReviews.filter((r) => r.rating === 1).length,
+    ],
+  };
 
   return (
     <div className={styles.container}>
@@ -73,7 +96,7 @@ const Reviews = ({ productId }) => {
             ))}
           </ul>
         </div>
-        {!!reviews.length && (
+        {!!allReviews.length && (
           <div className={styles.btnContainers}>
             <div className={styles.btn}>
               <SortDrawer sortOptions={reviewsSortOptions} />

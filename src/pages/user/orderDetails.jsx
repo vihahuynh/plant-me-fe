@@ -34,9 +34,11 @@ const OrderDetails = () => {
     );
     setOrder(updatedOder.data);
     for (let item of order.cart) {
-      const stock = await stockService.getAll(
-        `color=${item.color}&size=${item.size}&product=${item.id}`
-      );
+      const stock = await stockService.getAll([
+        `color=${item.color}`,
+        `size=${item.size}`,
+        `product=${item.id}`,
+      ]);
       const stockToUpdate = stock?.data?.[0];
       if (stockToUpdate) {
         stockToUpdate.quantity = stockToUpdate.quantity + item.quantity;

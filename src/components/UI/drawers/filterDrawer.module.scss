@@ -38,20 +38,11 @@
     }
   }
 
-  .filtersHeaderBox {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    h5 {
-      font-size: 2rem;
-      color: $color-primary;
-    }
-
-    .clear {
-      color: darkred;
-      cursor: pointer;
-    }
+  .clear {
+    font-size: 2rem;
+    margin: 0 2rem;
+    color: darkred;
+    cursor: pointer;
   }
 
   .selectedFilters {
