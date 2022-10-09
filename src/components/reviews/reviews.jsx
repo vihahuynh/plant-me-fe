@@ -9,29 +9,14 @@ import SortDrawer from "../UI/drawers/sortDrawer";
 import FilterDrawer from "../UI/drawers/filterDrawer";
 import ProgressBar from "../UI/progressBar";
 import ReviewItem from "./reviewItem";
-import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import reviewService from "../../services/review";
-import { filtersActions } from "../../store";
 
 const Reviews = ({ productId }) => {
   const [allReviews, setAllReviews] = useState([]);
   const [reviews, setReviews] = useState([]);
-  const filters = useSelector((state) => state.filters);
   const history = useHistory();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(
-      filtersActions.updateFilters({
-        dataType: "product-review",
-        filters: history.location.search.slice(1)?.split("&"),
-      })
-    );
-    if (!filters.filters.length) {
-      history.push(history.location.pathname);
-    }
-  }, []);
+  const queries = history.location.search.slice(1);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,21 +29,12 @@ const Reviews = ({ productId }) => {
   useEffect(() => {
     const fetchData = async () => {
       const reviewsData = await reviewService.getAll([
-        `product=${productId}&${filters.filters.join("&")}`,
+        `product=${productId}&${queries}`,
       ]);
       setReviews(reviewsData.data);
     };
     fetchData();
-  }, [productId, filters.filters]);
-
-  useEffect(() => {
-    if (filters.filters.length) {
-      const queryStr = filters.filters.join("&");
-      history.push({
-        search: `?${queryStr}`,
-      });
-    }
-  }, [history, filters.filters]);
+  }, [productId, queries]);
 
   const ratingStatistics = {
     total: allReviews.length,

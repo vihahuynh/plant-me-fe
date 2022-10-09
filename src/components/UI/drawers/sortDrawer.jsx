@@ -4,20 +4,21 @@ import { useState } from "react";
 import styles from "./sortDrawer.module.scss";
 import { VscChromeClose } from "react-icons/vsc/index";
 import { TbArrowsSort } from "react-icons/tb/index";
-import { useDispatch, useSelector } from "react-redux";
-import { filtersActions } from "../../../store";
+import { useHistory } from "react-router-dom";
 
 const SortDrawer = ({ sortOptions }) => {
-  const filters = useSelector((state) => state.filters);
   const [open, setOpen] = useState(false);
   const [sort, setSort] = useState(null);
-  const dispatch = useDispatch();
+  const history = useHistory();
+  const queries = history.location.search.slice(1).split("&");
 
   const onAddFilters = (query) => {
-    let newFilters = [...filters.filters];
-    newFilters = newFilters.filter((f) => !f.includes("sortBy"));
-    newFilters = newFilters.concat(query);
-    dispatch(filtersActions.updateFilters({ filters: newFilters }));
+    let newQueries = [...queries];
+    newQueries = newQueries.filter((f) => !f.includes("sortBy"));
+    newQueries = newQueries.concat(query);
+    history.push({
+      search: `?${newQueries.join("&")}`,
+    });
   };
 
   return (

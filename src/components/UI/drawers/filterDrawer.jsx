@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 import Drawer from "@mui/material/Drawer";
 import { VscChromeClose } from "react-icons/vsc/index";
@@ -8,16 +7,15 @@ import styles from "./filterDrawer.module.scss";
 import DropdownMenu from "./dropdownMenu";
 
 import { TbFilter } from "react-icons/tb/index";
-
-import { filtersActions } from "../../../store";
+import { useHistory } from "react-router-dom";
 
 const FilterDrawer = ({ filterOptions }) => {
   const [open, setOpen] = useState(false);
-  const dispatch = useDispatch();
-  const filters = useSelector((state) => state.filters);
+  const history = useHistory();
+  const queries = history.location.search.slice(1);
 
   const onClearAll = () => {
-    dispatch(filtersActions.clear());
+    history.push({ search: "" });
   };
 
   return (
@@ -36,7 +34,7 @@ const FilterDrawer = ({ filterOptions }) => {
             />
           </div>
           <div className={styles.filters}>
-            {!!filters.filters.length && (
+            {!!queries.length && (
               <h5 className={styles.clear} onClick={onClearAll}>
                 Clear All
               </h5>
@@ -45,7 +43,6 @@ const FilterDrawer = ({ filterOptions }) => {
               <DropdownMenu key={option.id} item={option} />
             ))}
           </div>
-          {/* <div className={styles.footer} onClick={onApplyFilters}>Apply Filters</div> */}
         </div>
       </Drawer>
     </>
