@@ -16,6 +16,7 @@ const SortDrawer = ({ sortOptions }) => {
     let newQueries = [...queries];
     newQueries = newQueries.filter((f) => !f.includes("sortBy"));
     newQueries = newQueries.concat(query);
+    newQueries = newQueries.filter(f => f !== "")
     history.push({
       search: `?${newQueries.join("&")}`,
     });

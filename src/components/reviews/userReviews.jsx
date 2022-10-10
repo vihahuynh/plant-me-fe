@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
+import { reviewsFilterOptions, reviewsSortOptions } from "./../../data"
+
 import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
@@ -15,10 +17,16 @@ import Arrow from "../UI/arrow";
 
 import styles from "./userReviews.module.scss";
 
+import SortDrawer from "./../UI/drawers/sortDrawer"
+import FilterDrawer from "../UI/drawers/filterDrawer";
+import { useHistory } from "react-router-dom";
+
 const UserReviews = () => {
   const [reviews, setReviews] = useState([]);
   const [products, setProducts] = useState([]);
   const authen = useSelector((state) => state.authentication);
+  const history = useHistory()
+  const queries = history.location.search.slice(1);
 
   const settings = {
     className: "center",
@@ -34,9 +42,9 @@ const UserReviews = () => {
     const fetchData = async () => {
       try {
         if (authen?.user?.id) {
-          const reviewsData = await reviewService.getAll([
-            `user=${authen?.user?.id}`,
-          ]);
+          const reviewsData = await reviewService.getAll(
+            `user=${authen?.user?.id}&${queries}`,
+          );
           setReviews(reviewsData.data);
         }
       } catch (err) {
@@ -45,7 +53,7 @@ const UserReviews = () => {
     };
 
     fetchData();
-  }, [authen?.user]);
+  }, [authen?.user?.id, queries]);
 
   useEffect(() => {
     const reviewIds = reviews.map((review) => review.product.id);
@@ -98,7 +106,19 @@ const UserReviews = () => {
         )}
       </div>
       <div>
-        <h3>Your reviews</h3>
+        <div className={styles.header}>
+          <h3>Your reviews</h3>
+          {!!reviews.length && (
+            <div className={styles.btnContainers}>
+              <div className={styles.btn}>
+                <SortDrawer sortOptions={reviewsSortOptions} />
+              </div>
+              <div className={styles.btn}>
+                <FilterDrawer filterOptions={reviewsFilterOptions} />
+              </div>
+            </div>
+          )}
+        </div>
         <ul className={styles.userReviewsList}>
           {reviews.length ? (
             reviews.map((item) => <UserReviewItem key={item.id} item={item} />)

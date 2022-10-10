@@ -24,6 +24,7 @@ const DropdownMenu = ({ item }) => {
       newQueries = newQueries.filter((f) => !f.includes(query.split("=")[0]));
       newQueries = newQueries.concat(query);
     }
+    newQueries = newQueries.filter(q => q !== "")
     history.push({
       search: `?${newQueries.join("&")}`,
     });

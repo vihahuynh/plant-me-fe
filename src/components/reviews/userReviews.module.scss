@@ -9,3 +9,17 @@
     color: $color-primary;
   }
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btnContainers {
+  align-self: flex-end;
+  margin-right: 2rem;
+
+  .btn {
+    display: inline-block;
+  }
+}

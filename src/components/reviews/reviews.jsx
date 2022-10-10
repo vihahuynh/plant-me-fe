@@ -20,7 +20,7 @@ const Reviews = ({ productId }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const reviewsData = await reviewService.getAll([`product=${productId}`]);
+      const reviewsData = await reviewService.getAll(`product=${productId}`);
       setAllReviews(reviewsData.data);
     };
     fetchData();
@@ -28,9 +28,9 @@ const Reviews = ({ productId }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const reviewsData = await reviewService.getAll([
+      const reviewsData = await reviewService.getAll(
         `product=${productId}&${queries}`,
-      ]);
+      );
       setReviews(reviewsData.data);
     };
     fetchData();
