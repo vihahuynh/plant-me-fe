@@ -63,12 +63,12 @@ const CartItem = ({
       netPrice: Math.round(item.price - (item.price * item.salePercent) / 100),
       isCheckout: !item.isCheckout,
     };
-    await dispatch(
+    const updatedCart = await dispatch(
       updateItem({ cart, item: checkoutItem, token: authen?.user?.token })
     ).unwrap();
     if (!checkoutItem.isCheckout && checkoutAllItems) {
       await dispatch(
-        toggleCheckoutAll({ cart, value: false, token: authen?.user?.token })
+        toggleCheckoutAll({ cart: updatedCart, value: false, token: authen?.user?.token })
       ).unwrap();
     }
   };

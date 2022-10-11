@@ -31,18 +31,6 @@ const getStatusIcon = (status) => {
 const Order = ({ order, userId }) => {
   const statusIcon = getStatusIcon(order.status);
 
-  const totalPayment = order.cart.reduce((result, item) => {
-    return result + item.price * item.quantity;
-  }, 0);
-
-  const totalDiscount = order.cart.reduce((result, item) => {
-    return result + item.discount;
-  }, 0);
-
-  const totalDeliveryCharges = order.cart.reduce((result, item) => {
-    return result + item.deliveryCharges || 10;
-  }, 0);
-
   return (
     <li className={styles.orderContainer}>
       <div className={styles.orderHeader}>
@@ -58,7 +46,7 @@ const Order = ({ order, userId }) => {
         <p className={styles.orderPaymentBox}>
           Total payment:{" "}
           <span className={styles.orderPayment}>
-            {totalPayment + totalDeliveryCharges - totalDiscount}.000 &#x20ab;
+            {order.totalPayment}.000 &#x20ab;
           </span>
         </p>
         <div className={styles.orderBtnGroup}>

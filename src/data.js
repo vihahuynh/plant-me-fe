@@ -412,11 +412,16 @@ export const ordersSortOptions = [
   },
   {
     id: 2,
+    query: "sortBy=createdAt:asc",
+    text: "Latest",
+  },
+  {
+    id: 3,
     query: "sortBy=payment:desc",
     text: "Highest payment",
   },
   {
-    id: 3,
+    id: 4,
     query: "sortBy=payment:asc",
     text: "Lowest payment",
   },

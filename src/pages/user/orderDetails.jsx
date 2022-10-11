@@ -64,18 +64,6 @@ const OrderDetails = () => {
   if (authen.user?.id !== userId) return <p>Permission denied</p>;
   if (!order) return <p>No order found</p>;
 
-  const totalPayment = order.cart.reduce((result, item) => {
-    return result + item.price * item.quantity;
-  }, 0);
-
-  const totalDiscount = order.cart.reduce((result, item) => {
-    return result + item.discount;
-  }, 0);
-
-  const totalDeliveryCharges = order.cart.reduce((result, item) => {
-    return result + item.deliveryCharges || 10;
-  }, 0);
-
   return (
     <Wrapper>
       <div className={styles.main}>
@@ -145,40 +133,40 @@ const OrderDetails = () => {
               <p>
                 <span>Payment</span>
                 <span className={styles.boldText}>
-                  {totalPayment}.000 &#x20ab;
+                  {order.totalPayment - order.deliveryCharges + order.totalDiscount}.000 &#x20ab;
                 </span>
               </p>
               <p>
                 <span>Delivery charges</span>
                 <span className={styles.boldText}>
-                  {totalDeliveryCharges}.000 &#x20ab;
+                  {order.deliveryCharges}.000 &#x20ab;
                 </span>
               </p>
               <p>
                 <span>Discount</span>
                 <span className={styles.boldText}>
-                  {totalDiscount}.000 &#x20ab;
+                  {order.totalDiscount}.000 &#x20ab;
                 </span>
               </p>
               <p>
                 <span>Total</span>
                 <span className={styles.totalPayment}>
-                  {totalPayment + totalDeliveryCharges - totalDiscount}.000
+                  {order.totalPayment}.000
                   &#x20ab;
                 </span>
               </p>
               {(order.status === "Waiting for payment" ||
                 order.status === "Confirm") && (
-                <div className={styles.cancelBtn}>
-                  <Button
-                    text="Cancel order"
-                    size="small"
-                    borderRadius="square"
-                    theme="red"
-                    onClick={onOpenCancelModal}
-                  />
-                </div>
-              )}
+                  <div className={styles.cancelBtn}>
+                    <Button
+                      text="Cancel order"
+                      size="small"
+                      borderRadius="square"
+                      theme="red"
+                      onClick={onOpenCancelModal}
+                    />
+                  </div>
+                )}
             </div>
           </div>
         </div>

@@ -11,6 +11,8 @@ import { clearCheckoutItems } from "../store/cartSlice";
 import styles from "./checkout.module.scss";
 import stockService from "../services/stock";
 
+import _ from "lodash"
+
 const Checkout = () => {
   const cart = useSelector((state) => state.cart);
   const authen = useSelector((state) => state.authentication);
@@ -29,6 +31,8 @@ const Checkout = () => {
         deliveryMethod: "meow",
         deliveryCharges: 20,
         user: authen?.user?.id,
+        totalDiscount: _.sum(items.map(i => i.discount * i.quantity)),
+        totalPayment: _.sum(items.map(i => i.price * i.quantity)) + 20 - _.sum(items.map(i => i.discount * i.quantity))
       };
 
       const returnedOrder = await orderService.create(
