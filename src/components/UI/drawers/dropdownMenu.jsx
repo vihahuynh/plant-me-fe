@@ -9,7 +9,7 @@ const DropdownMenu = ({ item }) => {
   const history = useHistory();
   const queries = history.location.search.slice(1).split("&");
   const [open, setOpen] = useState(
-    queries.some((f) => item.subOptions.map((s) => s.query).includes(f))
+    queries.some((f) => item.subOptions.map((s) => s.query.replace(/ /g, "%20")).includes(f))
   );
 
   const onAddFilter = (query) => {
@@ -50,7 +50,7 @@ const DropdownMenu = ({ item }) => {
               name={option.query}
               value={option.query}
               label={option.text}
-              checked={queries.includes(option.query)}
+              checked={queries.includes(option.query) || queries.includes(option.query.replace(/ /g, "%20"))}
               onChange={() => onAddFilter(option.query)}
             />
           ))}
@@ -62,7 +62,7 @@ const DropdownMenu = ({ item }) => {
               value={option.query}
               label={option.text}
               onChange={() => onAddFilter(option.query)}
-              checked={queries.includes(option.query)}
+              checked={queries.includes(option.query) || queries.includes(option.query.replace(/ /g, "%20"))}
             />
           ))}
       </div>

@@ -417,12 +417,12 @@ export const ordersSortOptions = [
   },
   {
     id: 3,
-    query: "sortBy=payment:desc",
+    query: "sortBy=totalPayment:desc",
     text: "Highest payment",
   },
   {
     id: 4,
-    query: "sortBy=payment:asc",
+    query: "sortBy=totalPayment:asc",
     text: "Lowest payment",
   },
 ];
@@ -436,28 +436,28 @@ export const ordersFilterOptions = [
       {
         id: 1,
         text: "Waiting for payment",
-        query: "status=waiting-for-payment",
+        query: "status=Waiting for payment",
       },
 
       {
         id: 2,
         text: "Packed",
-        query: "status=packed",
+        query: "status=Packed",
       },
       {
         id: 3,
         text: "In transit",
-        query: "status=in-transit",
+        query: "status=In Transit",
       },
       {
         id: 4,
         text: "Delivered",
-        query: "status=delivered",
+        query: "status=Delivered",
       },
       {
         id: 5,
         text: "Cancelled",
-        query: "status=cancelled",
+        query: "status=Cancelled",
       },
     ],
   },

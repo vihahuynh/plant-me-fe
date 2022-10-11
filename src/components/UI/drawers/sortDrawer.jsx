@@ -1,5 +1,5 @@
 import Drawer from "@mui/material/Drawer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import styles from "./sortDrawer.module.scss";
 import { VscChromeClose } from "react-icons/vsc/index";
@@ -11,6 +11,11 @@ const SortDrawer = ({ sortOptions }) => {
   const [sort, setSort] = useState(null);
   const history = useHistory();
   const queries = history.location.search.slice(1).split("&");
+
+  useEffect(() => {
+    const curSort = queries.find(q => q.includes("sortBy"))
+    setSort(curSort)
+  }, [])
 
   const onAddFilters = (query) => {
     let newQueries = [...queries];
