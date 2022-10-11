@@ -6,20 +6,21 @@ import { AiOutlineLike } from "react-icons/ai";
 import styles from "./userReviewItem.module.scss";
 
 const UserReviewItem = ({ item }) => {
+  if (!item) return null
   return (
     <div className={styles.userReviewItem}>
       <img
         src={
-          item.product?.images?.find((img) => img.includes("eye")) ||
-          item.product?.images?.[0] ||
-          item.product?.image
+          item?.product?.images?.find((img) => img.includes("eye")) ||
+          item?.product?.images?.[0] ||
+          item?.product?.image
         }
         alt=""
       />
 
       <div className={styles.reviewContent}>
         <Link to={`/products/${item.product.id}`}>
-          <h5 className={styles.productTitle}>{item.product.title}</h5>
+          <h5 className={styles.productTitle}>{item?.product?.title}</h5>
         </Link>
         <Rating
           className={styles.rating}

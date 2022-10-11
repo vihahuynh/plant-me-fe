@@ -1,33 +1,34 @@
-import { useState, useEffect } from "react";
+import { useHistory, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { reviewsFilterOptions, reviewsSortOptions } from "../../data";
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
-import { reviewsFilterOptions, reviewsSortOptions } from "./../../data"
-
-import SortDrawer from "./../../components/UI/drawers/sortDrawer"
-import FilterDrawer from "./../../components/UI/drawers/filterDrawer";
-import Wrapper from "../../components/layout/wrapper";
-import UserReviewItem from "../../components/reviews/userReviewItem";
 import UserLeftMenu from "../../components/layout/userLetfMenu/userLeftMenu";
-import ProductToReview from "./../../components/reviews/productToReview";
-import Arrow from "./../../components/UI/arrow";
+import UserReviewItem from "./../../components/reviews/userReviewItem"
+import Wrapper from "../../components/layout/wrapper";
+import FilterDrawer from "./../../components/UI/drawers/filterDrawer";
+import SortDrawer from "./../../components/UI/drawers/sortDrawer";
+import Arrow from "./../../components/UI/arrow"
+import ProductToReview from "./../../components/reviews/productToReview"
 
-import reviewService from "./../../services/review";
-import orderService from "./../../services/order";
+import reviewService from "../../services/review";
+import orderService from "../../services/order";
 
 import Slider from "react-slick";
 
 import styles from "./reviewHistory.module.scss";
 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 const ReviewHistory = () => {
+  const [allReviews, setAllReviews] = useState([])
   const [reviews, setReviews] = useState([]);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([])
+  const userId = useParams().userId;
   const authen = useSelector((state) => state.authentication);
   const history = useHistory()
-  const queries = history.location.search.slice(1);
+  const queries = history.location.search.slice(1)
 
   const settings = {
     className: "center",
@@ -42,22 +43,31 @@ const ReviewHistory = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (authen?.user?.id) {
-          const reviewsData = await reviewService.getAll(
-            `user=${authen?.user?.id}&${queries}`,
-          );
-          setReviews(reviewsData.data);
-        }
+        if (!authen?.user) return;
+        const reviewsData = await reviewService.getAll(`user=${authen?.user?.id}`, authen?.user?.token);
+        setAllReviews(reviewsData.data);
       } catch (err) {
         console.log(err);
       }
     };
-
     fetchData();
-  }, [authen?.user?.id, queries]);
+  }, [authen]);
 
   useEffect(() => {
-    const reviewIds = reviews.map((review) => review.product.id);
+    const fetchData = async () => {
+      try {
+        if (!authen?.user) return;
+        const reviewsData = await reviewService.getAll(`user=${authen?.user?.id}&${queries}`, authen?.user?.token);
+        setReviews(reviewsData.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, [authen, queries]);
+
+  useEffect(() => {
+    const reviewIds = allReviews.map((review) => review.product.id);
     const fetchData = async () => {
       try {
         if (authen?.user) {
@@ -84,14 +94,17 @@ const ReviewHistory = () => {
       }
     };
     fetchData();
-  }, [authen?.user, reviews]);
+  }, [authen?.user, allReviews]);
+
+  if (authen.user?.id !== userId) return <p>Permission denied</p>;
+  if (!allReviews) return <p>No review found</p>;
 
   return (
     <Wrapper>
       <div className={styles.main}>
         <UserLeftMenu />
         <div className={styles.container}>
-          <h3>Waiting for your review</h3>
+          <h3>Products to review</h3>
           {products.length ? (
             <div className={styles["thumbnail-slider-wrap"]}>
               <Slider {...settings}>
@@ -108,24 +121,29 @@ const ReviewHistory = () => {
             <p>No product to review</p>
           )}
           <div className={styles.allReviews}>
-            {!!reviews.length && (
-              <div className={styles.btnContainers}>
-                <div className={styles.btn}>
-                  <SortDrawer sortOptions={reviewsSortOptions} />
+            <h3>My Reviews</h3>
+            <div className={styles.header}>
+              {!!allReviews.length && (
+                <div className={styles.btnContainers}>
+                  <div className={styles.btn}>
+                    <SortDrawer sortOptions={reviewsSortOptions} />
+                  </div>
+                  <div className={styles.btn}>
+                    <FilterDrawer filterOptions={reviewsFilterOptions} />
+                  </div>
                 </div>
-                <div className={styles.btn}>
-                  <FilterDrawer filterOptions={reviewsFilterOptions} />
-                </div>
-              </div>
-            )}
-            <h3>Your reviews</h3>
-            <ul>
-              {reviews?.length ? (
-                reviews.map((item) => <UserReviewItem key={item.id} item={item} />)
-              ) : (
-                <p>No review</p>
               )}
-            </ul>
+            </div>
+            {reviews.length ? (
+
+              <ul className={styles.reviewsList}>
+                {reviews.map((review) => (
+                  <UserReviewItem key={review.id} item={review} />
+                ))}
+              </ul>
+            ) : (
+              <p>No review found</p>
+            )}
           </div>
         </div>
       </div>
