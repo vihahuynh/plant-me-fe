@@ -1,38 +1,3 @@
-export const products = [
-  {
-    id: 1,
-    name: "Jade Plant Mini",
-    imageUrl: "/images/jade-plant-mini.png",
-    price: 399,
-    salePercent: 25,
-    like: true,
-  },
-  {
-    id: 2,
-    name: "Broken Heart Plant",
-    imageUrl: "/images/broken-heart-plant.png",
-    price: 499,
-    salePercent: 20,
-    like: false,
-  },
-  {
-    id: 3,
-    name: "Peperomia Variegated Plant",
-    imageUrl: "/images/peperomia-variegated-plant.png",
-    price: 399,
-    salePercent: 25,
-    like: false,
-  },
-  {
-    id: 4,
-    name: "Aralia Variegated Mini Plant",
-    imageUrl: "/images/aralia-variegated-mini-plant.png",
-    price: 399,
-    salePercent: 13,
-    like: true,
-  },
-];
-
 export const mainFeatures = [
   {
     id: 1,
@@ -253,17 +218,17 @@ export const plantsFilterOptions = [
       {
         id: 1,
         text: "Low Light",
-        query: "light=low light",
+        query: "livingConditions.content=low light",
       },
       {
         id: 2,
         text: "Bright Indirect Light",
-        query: "light=bright indirect light",
+        query: "livingConditions.content=bright indirect light",
       },
       {
         id: 3,
         text: "Direct Light",
-        query: "light=direct light",
+        query: "livingConditions.content=direct light",
       },
     ],
   },
@@ -404,7 +369,6 @@ export const reviewsFilterOptions = [
   },
 ];
 
-
 export const notificationSortOptions = [
   {
     id: 1,
@@ -425,7 +389,7 @@ export const notificationSortOptions = [
     id: 4,
     query: "sortBy=isRead:desc",
     text: "Show unread notification last",
-  }
+  },
 ];
 
 export const notificationFilterOptions = [
@@ -449,7 +413,7 @@ export const notificationFilterOptions = [
         id: 3,
         text: "General",
         query: "type=general",
-      }
+      },
     ],
   },
   {
