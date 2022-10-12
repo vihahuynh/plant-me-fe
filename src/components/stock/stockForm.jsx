@@ -7,6 +7,7 @@ import { Formik } from "formik";
 import Button from "./../UI/buttons/button";
 import stockSerice from "../../services/stock";
 import { useSelector } from "react-redux";
+import SelectInput from "./../UI/inputs/selectInput";
 
 const StockForm = ({ stock, productId, onCancel, setStocks }) => {
   const authen = useSelector((state) => state.authentication);
@@ -106,19 +107,11 @@ const StockForm = ({ stock, productId, onCancel, setStocks }) => {
             <form onSubmit={handleSubmit} className={styles.form}>
               <div className={`${styles.inputContainer} ${styles.size}`}>
                 <label>Size</label>
-                <ul className={styles.sizeList}>
-                  {["XS", "S", "M", "L", "XL"].map((item) => (
-                    <li
-                      className={`${styles.sizeItem} ${
-                        currentSize === item ? styles.active : ""
-                      }`}
-                      key={item}
-                      onClick={() => setCurrentSize(item)}
-                    >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+                <SelectInput
+                  listData={["XS", "S", "M", "L", "XL"]}
+                  currentOption={currentSize}
+                  setCurrentOption={setCurrentSize}
+                />
                 <p className={styles.errors}>
                   {errors.size && touched.size && errors.size}
                 </p>

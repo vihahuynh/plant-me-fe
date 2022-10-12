@@ -129,28 +129,6 @@
   right: 0;
 }
 
-.sizeList {
-  list-style: none;
-  display: flex;
-  column-gap: 2rem;
-}
-
-.sizeItem {
-  color: $color-primary;
-  font-size: 1.4rem;
-  border: 1px solid $color-grey-light;
-  border-radius: 3px;
-  padding: 1rem 3rem;
-  text-transform: capitalize;
-  transition: all 0.3s;
-  cursor: pointer;
-}
-
-.sizeItem.active {
-  color: $color-primary;
-  border: 1px solid $color-primary;
-}
-
 .size {
   width: 80%;
 }

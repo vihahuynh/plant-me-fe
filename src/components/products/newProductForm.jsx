@@ -5,14 +5,19 @@ import { Formik } from "formik";
 
 import productService from "../../services/product";
 import InputGroup from "../UI/inputs/inputGroup/inputGroup";
+import SelectInput from "../UI/inputs/selectInput";
+
 import styles from "./newProductForm.module.scss";
 import "./../../custom.scss";
 
-
 const NewProductForm = () => {
-  const authen = useSelector(state => state.authentication)
-
-  const [livingConditions, setLivingConditions] = useState([]);
+  const authen = useSelector((state) => state.authentication);
+  const [watering, setWatering] = useState("");
+  const [light, setLight] = useState("");
+  const [idealLocation, setIdealLocation] = useState([]);
+  const [whereToGrow, setWhereToGrow] = useState([]);
+  const [specialFeatures, setSpecialFeatures] = useState([]);
+  // const [livingConditions, setLivingConditions] = useState([]);
   const [commonProblems, setCommonProblems] = useState([]);
   const [decorTips, setDecorTips] = useState([]);
   const [plantCare, setPlantCare] = useState([]);
@@ -21,13 +26,15 @@ const NewProductForm = () => {
     try {
       const newProduct = {
         ...values,
-        livingConditions,
+        // livingConditions,
         decorTips,
         commonProblems,
-        plantCare
-      }
-      newProduct.salePercent = values.salePercent ? Number(values.salePercent) : 0
-      delete newProduct.images
+        plantCare,
+      };
+      newProduct.salePercent = values.salePercent
+        ? Number(values.salePercent)
+        : 0;
+      delete newProduct.images;
 
       const formData = new FormData();
       for (const singleFile of values.images) {
@@ -54,7 +61,10 @@ const NewProductForm = () => {
           about: "",
           price: "",
           salePercent: "",
-          livingConditions: [],
+          watering,
+          light,
+          idealLocation,
+          specialFeatures,
           commonProblems: [],
           plantCare: [],
           decorTips: [],
@@ -173,11 +183,66 @@ const NewProductForm = () => {
                 {errors.about && touched.about && errors.about}
               </p>
             </div>
-            <div className={styles.livingConditions}>
-              <InputGroup
-                inputTitle="Living Conditions"
-                items={livingConditions}
-                setItems={setLivingConditions}
+            <div className={`${styles.inputContainer} ${styles.watering}`}>
+              <label className={styles.label}>Watering Schedule</label>
+              <SelectInput
+                listData={[
+                  "Every day",
+                  "Every alternate day ",
+                  "Once a day",
+                  "Once a week",
+                  "Twice a week",
+                ]}
+                currentOption={watering}
+                setCurrentOption={setWatering}
+              />
+            </div>
+            <div className={`${styles.inputContainer} ${styles.light}`}>
+              <label className={styles.label}>Light</label>
+              <SelectInput
+                listData={[
+                  "Bright ndirect light",
+                  "Direct sunlight",
+                  "Low light ",
+                ]}
+                currentOption={light}
+                setCurrentOption={setLight}
+              />
+            </div>
+            <div className={`${styles.inputContainer} ${styles.location}`}>
+              <label className={styles.label}>Ideal plants location</label>
+              <SelectInput
+                listData={[
+                  "Office desk",
+                  "Office premises",
+                  "Living room tables",
+                  "Shaded Balconies",
+                  "Sunny balconies",
+                  "Windowsill",
+                ]}
+                currentOption={idealLocation}
+                setCurrentOption={setIdealLocation}
+                multiple={true}
+              />
+            </div>
+            <div className={`${styles.inputContainer} ${styles.whereToGrow}`}>
+              <label className={styles.label}>Where To Grow</label>
+              <SelectInput
+                listData={["Indoor", "Outdoor Shade", "Outdoor Sunny"]}
+                currentOption={whereToGrow}
+                setCurrentOption={setWhereToGrow}
+                multiple={true}
+              />
+            </div>
+            <div
+              className={`${styles.inputContainer} ${styles.specialFeatures}`}
+            >
+              <label className={styles.label}>Special Features</label>
+              <SelectInput
+                listData={["XS", "S", "M", "L", "XL"]}
+                currentOption={specialFeatures}
+                setCurrentOption={setSpecialFeatures}
+                multiple={true}
               />
             </div>
             <div className={styles.plantCare}>
