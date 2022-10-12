@@ -29,7 +29,7 @@ const UserLeftMenu = () => {
           </Link>
         </li>
         <li
-          className={`${styles.item} ${path === "order-hitory" ? styles.active : ""
+          className={`${styles.item} ${path === "order-history" ? styles.active : ""
             }`}
         >
           <Link to={`/user/${authen?.user?.id}/order-history`}>

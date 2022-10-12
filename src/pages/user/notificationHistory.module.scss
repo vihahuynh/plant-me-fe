@@ -6,3 +6,24 @@
   display: flex;
   column-gap: 4rem;
 }
+
+.notiList {
+  font-size: $default-font-size;
+  color: $color-grey-dark;
+  border-radius: 3rem;
+}
+
+.container {
+  width: 100%;
+  position: relative;
+}
+
+.btnContainers {
+  position: absolute;
+  top: 0;
+  right: 2rem;
+
+  .btn {
+    display: inline-block;
+  }
+}

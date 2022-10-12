@@ -18,7 +18,7 @@ const OrderHistory = () => {
   const userId = useParams().userId;
   const authen = useSelector((state) => state.authentication);
   const history = useHistory()
-  const queries = history.location.search
+  const queries = history.location.search.slice(1)
 
 
   useEffect(() => {

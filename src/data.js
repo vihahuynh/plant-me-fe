@@ -327,7 +327,7 @@ export const reviewsSortOptions = [
   {
     id: 2,
     query: "sortBy=createdAt:asc",
-    text: "Lastest",
+    text: "Oldest",
   },
   {
     id: 3,
@@ -404,6 +404,73 @@ export const reviewsFilterOptions = [
   },
 ];
 
+
+export const notificationSortOptions = [
+  {
+    id: 1,
+    query: "sortBy=createdAt:desc",
+    text: "Newest",
+  },
+  {
+    id: 2,
+    query: "sortBy=createdAt:asc",
+    text: "Oldest",
+  },
+  {
+    id: 3,
+    query: "sortBy=isRead:asc",
+    text: "Show unread notification first",
+  },
+  {
+    id: 4,
+    query: "sortBy=isRead:desc",
+    text: "Show unread notification last",
+  }
+];
+
+export const notificationFilterOptions = [
+  {
+    id: 1,
+    text: "Type",
+    type: "checkbox",
+    subOptions: [
+      {
+        id: 1,
+        text: "Order",
+        query: "type=order",
+      },
+
+      {
+        id: 2,
+        text: "Gift",
+        query: "type=gift",
+      },
+      {
+        id: 3,
+        text: "General",
+        query: "type=general",
+      }
+    ],
+  },
+  {
+    id: 2,
+    text: "Read",
+    type: "radio",
+    subOptions: [
+      {
+        id: 1,
+        text: "Yes",
+        query: "isRead=true",
+      },
+      {
+        id: 2,
+        text: "No",
+        query: "isRead=false",
+      },
+    ],
+  },
+];
+
 export const ordersSortOptions = [
   {
     id: 1,
@@ -413,7 +480,7 @@ export const ordersSortOptions = [
   {
     id: 2,
     query: "sortBy=createdAt:asc",
-    text: "Latest",
+    text: "Oldest",
   },
   {
     id: 3,
