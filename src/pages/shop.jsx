@@ -10,23 +10,26 @@ import productService from "../services/product";
 import { plantsFilterOptions, plantsSortOptions } from "../data";
 
 import styles from "./shop.module.scss";
+import { useHistory } from "react-router-dom";
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
   const itemsPerPage = 4;
   const [page, setPage] = useState(1);
+  const history = useHistory()
+  const queries = history.location.search.slice(1)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const productsData = await productService.getAll();
+        const productsData = await productService.getAll(queries);
         setProducts(productsData.data);
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
-  }, []);
+  }, [queries]);
 
   const productsToDisplay = products.filter((p) => !!p.stocks.length);
 
@@ -38,16 +41,20 @@ const Shop = () => {
       ? page * itemsPerPage
       : productsToDisplay.length;
 
+  console.log("products: ", products)
+
   return (
     <Wrapper>
-      <div className={styles.btnContainers}>
-        <div className={styles.btn}>
-          <SortDrawer sortOptions={plantsSortOptions} />
+      {!!products
+        && <div className={styles.btnContainers}>
+          <div className={styles.btn}>
+            <SortDrawer sortOptions={plantsSortOptions} />
+          </div>
+          <div className={styles.btn}>
+            <FilterDrawer filterOptions={plantsFilterOptions} />
+          </div>
         </div>
-        <div className={styles.btn}>
-          <FilterDrawer filterOptions={plantsFilterOptions} />
-        </div>
-      </div>
+      }
       <div className={styles.container}>
         <Products products={productsToDisplay.slice(start, end)} />
         <Pagination page={page} setPage={setPage} totalPages={totalPages} />

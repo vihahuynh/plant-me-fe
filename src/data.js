@@ -160,126 +160,110 @@ export const plantsSortOptions = [
   },
 ];
 
+export const whereToGrowList = ["Indoor", "Outdoor Shade", "Outdoor Sunny"]
+export const wateringList = ["Every day", "Every alternate day ", "Once a day", "Once a week", "Twice a week"]
+export const lightList = ["Bright indirect light", "Direct sunlight", "Low light "]
+export const idealLocationList = ["Office desk", "Office premises", "Living room tables", "Shaded balconies", "Sunny balconies", "Windowsill"]
+export const specialFeaturesList = ["Beginner friendly", "Pet friendly"]
+export const typeOfPlantsList = [
+  "Air Plant",
+  "Cacti & Succulents",
+  "Climbers",
+  "Creepers/Groundcovers",
+  "Flowering Plants",
+  "Focal Plants",
+  "Ground Covers",
+  "Hanging Basket Plants",
+  "Hedge Plants",
+  "Herbaceous",
+  "Medicinal Plants",
+  "Moss Stick Plants",
+  "Screen Plants",
+  "Shrub Plants"
+]
+
 export const plantsFilterOptions = [
   {
     id: 1,
     text: "Category",
     type: "checkbox",
-    subOptions: [
-      {
-        id: 1,
-        text: "Test",
-        query: "category=test",
-      },
-    ],
+    subOptions: typeOfPlantsList.map((item, index) => {
+      return {
+        id: index,
+        text: item,
+        query: `typeOfPlants=${item}`,
+      }
+    })
   },
   {
     id: 2,
     text: "Where to grow",
     type: "checkbox",
-    subOptions: [
-      {
-        id: 1,
-        text: "Windowsill Plants",
-        query: "location=windowsill",
-      },
-      {
-        id: 2,
-        text: "Shaded Balconies",
-        query: "location=shaded-balconies",
-      },
-      {
-        id: 3,
-        text: "Sunny Balconies",
-        query: "location=sunny-balconies",
-      },
-      {
-        id: 4,
-        text: "Living Room Tables",
-        query: "location=living-room-tables",
-      },
-      {
-        id: 5,
-        text: "Office Desk Plants",
-        query: "location=office-desk",
-      },
-      {
-        id: 6,
-        text: "Offices premises plants",
-        query: "location=office-premises",
-      },
-    ],
+    subOptions: whereToGrowList.map((item, index) => {
+      return {
+        id: index,
+        text: item,
+        query: `whereToGrow=${item}`,
+      }
+    })
   },
   {
     id: 3,
     text: "Light",
     type: "checkbox",
-    subOptions: [
-      {
-        id: 1,
-        text: "Low Light",
-        query: "livingConditions.content=low light",
-      },
-      {
-        id: 2,
-        text: "Bright Indirect Light",
-        query: "livingConditions.content=bright indirect light",
-      },
-      {
-        id: 3,
-        text: "Direct Light",
-        query: "livingConditions.content=direct light",
-      },
-    ],
+    subOptions: lightList.map((item, index) => {
+      return {
+        id: index,
+        text: item,
+        query: `light=${item}`,
+      }
+    })
   },
   {
     id: 4,
-    text: "Pot Size",
+    text: "Ideal Location",
     type: "checkbox",
-    subOptions: [
-      {
-        id: 1,
-        text: "Small",
-        query: "size=small",
-      },
-      {
-        id: 2,
-        text: "Medium",
-        query: "size=medium",
-      },
-      {
-        id: 3,
-        text: "Large",
-        query: "size=large",
-      },
-    ],
+    subOptions: idealLocationList.map((item, index) => {
+      return {
+        id: index,
+        text: item,
+        query: `idealLocation=${item}`,
+      }
+    })
   },
+  // {
+  //   id: 4,
+  //   text: "Pot Size",
+  //   type: "checkbox",
+  //   subOptions: [
+  //     {
+  //       id: 1,
+  //       text: "Small",
+  //       query: "size=small",
+  //     },
+  //     {
+  //       id: 2,
+  //       text: "Medium",
+  //       query: "size=medium",
+  //     },
+  //     {
+  //       id: 3,
+  //       text: "Large",
+  //       query: "size=large",
+  //     },
+  //   ],
+  // },
   {
     id: 5,
     text: "Water Schedule",
     type: "checkbox",
-    subOptions: [
-      {
-        id: 1,
-        text: "Twice a week",
-        query: "livingConditions.content=twice a week",
-      },
-      {
-        id: 2,
-        text: "Every alternate day",
-        query: "livingConditions.content=every alternate day",
-      },
-      {
-        id: 3,
-        text: "Once a day",
-        query: "livingConditions.content=once a day",
-      },
-      {
-        id: 4,
-        text: "Once a week",
-        query: "livingConditions.content=once a week",
-      },
-    ],
+    subOptions: wateringList.map((item, index) => {
+      return {
+        id: index,
+        text: item,
+        query: `watering=${item}`,
+      }
+    })
   },
 ];
 

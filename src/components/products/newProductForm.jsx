@@ -8,6 +8,8 @@ import productService from "../../services/product";
 import InputGroup from "../UI/inputs/inputGroup/inputGroup";
 import SelectInput from "../UI/inputs/selectInput";
 
+import { wateringList, lightList, idealLocationList, whereToGrowList, specialFeaturesList, typeOfPlantsList } from "./../../data"
+
 import styles from "./newProductForm.module.scss";
 import "./../../custom.scss";
 
@@ -196,13 +198,7 @@ const NewProductForm = () => {
             <div className={`${styles.inputContainer} ${styles.watering}`}>
               <label className={styles.label}>Watering Schedule</label>
               <SelectInput
-                listData={[
-                  "Every day",
-                  "Every alternate day ",
-                  "Once a day",
-                  "Once a week",
-                  "Twice a week",
-                ]}
+                listData={wateringList}
                 currentOption={watering}
                 setCurrentOption={setWatering}
               />
@@ -210,11 +206,7 @@ const NewProductForm = () => {
             <div className={`${styles.inputContainer} ${styles.light}`}>
               <label className={styles.label}>Light</label>
               <SelectInput
-                listData={[
-                  "Bright indirect light",
-                  "Direct sunlight",
-                  "Low light ",
-                ]}
+                listData={lightList}
                 currentOption={light}
                 setCurrentOption={setLight}
               />
@@ -222,14 +214,7 @@ const NewProductForm = () => {
             <div className={`${styles.inputContainer} ${styles.location}`}>
               <label className={styles.label}>Ideal plants location</label>
               <SelectInput
-                listData={[
-                  "Office desk",
-                  "Office premises",
-                  "Living room tables",
-                  "Shaded balconies",
-                  "Sunny balconies",
-                  "Windowsill",
-                ]}
+                listData={idealLocationList}
                 currentOption={idealLocation}
                 setCurrentOption={setIdealLocation}
                 multiple={true}
@@ -238,7 +223,7 @@ const NewProductForm = () => {
             <div className={`${styles.inputContainer} ${styles.whereToGrow}`}>
               <label className={styles.label}>Where To Grow</label>
               <SelectInput
-                listData={["Indoor", "Outdoor Shade", "Outdoor Sunny"]}
+                listData={whereToGrowList}
                 currentOption={whereToGrow}
                 setCurrentOption={setWhereToGrow}
                 multiple={true}
@@ -249,7 +234,7 @@ const NewProductForm = () => {
             >
               <label className={styles.label}>Special Features</label>
               <SelectInput
-                listData={["Beginner friendly"]}
+                listData={specialFeaturesList}
                 currentOption={specialFeatures}
                 setCurrentOption={setSpecialFeatures}
                 multiple={true}
@@ -260,22 +245,7 @@ const NewProductForm = () => {
             >
               <label className={styles.label}>Type of plants</label>
               <SelectInput
-                listData={[
-                  "Air Plant",
-                  "Cacti & Succulents",
-                  "Climbers",
-                  "Creepers/Groundcovers",
-                  "Flowering Plants",
-                  "Focal Plants",
-                  "Ground Covers",
-                  "Hanging Basket Plants",
-                  "Hedge Plants",
-                  "Herbaceous",
-                  "Medicinal Plants",
-                  "Moss Stick Plants",
-                  "Screen Plants",
-                  "Shrub Plants"
-                ]}
+                listData={typeOfPlantsList}
                 currentOption={typeOfPlants}
                 setCurrentOption={setTypeOfPlants}
                 multiple={true}

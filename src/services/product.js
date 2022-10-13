@@ -2,8 +2,8 @@ import axios from "axios";
 
 const baseUrl = "http://localhost:3001/api/products";
 
-const getAll = () => {
-  return axios.get(baseUrl);
+const getAll = (query) => {
+  return axios.get(`${baseUrl}?${query}`);
 };
 
 const create = (newObject, token) => {
