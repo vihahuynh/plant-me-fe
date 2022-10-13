@@ -7,6 +7,7 @@ import { Formik } from "formik";
 import productService from "../../services/product";
 import InputGroup from "../UI/inputs/inputGroup/inputGroup";
 import Stocks from "../stock/stocks";
+import SelectInput from "../UI/inputs/selectInput";
 
 import { MdCancel } from "react-icons/md"
 
@@ -18,7 +19,14 @@ const UpdateProductForm = () => {
   const authen = useSelector((state) => state.authentication);
   const [product, setProduct] = useState();
   const [productImages, setProductImages] = useState([]);
-  const [livingConditions, setLivingConditions] = useState([]);
+
+  const [watering, setWatering] = useState("");
+  const [light, setLight] = useState("");
+  const [idealLocation, setIdealLocation] = useState([]);
+  const [whereToGrow, setWhereToGrow] = useState([]);
+  const [specialFeatures, setSpecialFeatures] = useState([]);
+  const [typeOfPlants, setTypeOfPlants] = useState([])
+
   const [commonProblems, setCommonProblems] = useState([]);
   const [decorTips, setDecorTips] = useState([]);
   const [plantCare, setPlantCare] = useState([]);
@@ -38,7 +46,13 @@ const UpdateProductForm = () => {
   }, [id]);
 
   useEffect(() => {
-    setLivingConditions(product?.livingConditions || []);
+    setWatering(product?.watering || '')
+    setLight(product?.light || '')
+    setIdealLocation(product?.idealLocation || [])
+    setWhereToGrow(product?.whereToGrow || [])
+    setSpecialFeatures(product?.specialFeatures || [])
+    setTypeOfPlants(product?.typeOfPlants || [])
+    // setLivingConditions(product?.livingConditions || []);
     setCommonProblems(product?.commonProblems || []);
     setDecorTips(product?.decorTips || []);
     setPlantCare(product?.plantCare || []);
@@ -49,7 +63,12 @@ const UpdateProductForm = () => {
     try {
       const productToUpdate = {
         ...values,
-        livingConditions,
+        watering,
+        light,
+        idealLocation,
+        whereToGrow,
+        specialFeatures,
+        typeOfPlants,
         decorTips,
         commonProblems,
         plantCare,
@@ -208,13 +227,93 @@ const UpdateProductForm = () => {
                   {errors.about && touched.about && errors.about}
                 </p>
               </div>
-              <div className={styles.livingConditions}>
-                <InputGroup
-                  inputTitle="Living Conditions"
-                  items={livingConditions}
-                  setItems={setLivingConditions}
+              <div className={`${styles.inputContainer} ${styles.watering}`}>
+                <label className={styles.label}>Watering Schedule</label>
+                <SelectInput
+                  listData={[
+                    "Every day",
+                    "Every alternate day ",
+                    "Once a day",
+                    "Once a week",
+                    "Twice a week",
+                  ]}
+                  currentOption={watering}
+                  setCurrentOption={setWatering}
                 />
-                {/* <p className={styles.errors}>{!livingConditions.length && "Living conditions is required"} </p> */}
+              </div>
+              <div className={`${styles.inputContainer} ${styles.light}`}>
+                <label className={styles.label}>Light</label>
+                <SelectInput
+                  listData={[
+                    "Bright indirect light",
+                    "Direct sunlight",
+                    "Low light ",
+                  ]}
+                  currentOption={light}
+                  setCurrentOption={setLight}
+                />
+              </div>
+              <div className={`${styles.inputContainer} ${styles.location}`}>
+                <label className={styles.label}>Ideal plants location</label>
+                <SelectInput
+                  listData={[
+                    "Office desk",
+                    "Office premises",
+                    "Living room tables",
+                    "Shaded balconies",
+                    "Sunny balconies",
+                    "Windowsill",
+                  ]}
+                  currentOption={idealLocation}
+                  setCurrentOption={setIdealLocation}
+                  multiple={true}
+                />
+              </div>
+              <div className={`${styles.inputContainer} ${styles.whereToGrow}`}>
+                <label className={styles.label}>Where To Grow</label>
+                <SelectInput
+                  listData={["Indoor", "Outdoor Shade", "Outdoor Sunny"]}
+                  currentOption={whereToGrow}
+                  setCurrentOption={setWhereToGrow}
+                  multiple={true}
+                />
+              </div>
+              <div
+                className={`${styles.inputContainer} ${styles.specialFeatures}`}
+              >
+                <label className={styles.label}>Special Features</label>
+                <SelectInput
+                  listData={["XS", "S", "M", "L", "XL"]}
+                  currentOption={specialFeatures}
+                  setCurrentOption={setSpecialFeatures}
+                  multiple={true}
+                />
+              </div>
+              <div
+                className={`${styles.inputContainer} ${styles.typeOfPlants}`}
+              >
+                <label className={styles.label}>Type of plants</label>
+                <SelectInput
+                  listData={[
+                    "Air Plant",
+                    "Cacti & Succulents",
+                    "Climbers",
+                    "Creepers/Groundcovers",
+                    "Flowering Plants",
+                    "Focal Plants",
+                    "Ground Covers",
+                    "Hanging Basket Plants",
+                    "Hedge Plants",
+                    "Herbaceous",
+                    "Medicinal Plants",
+                    "Moss Stick Plants",
+                    "Screen Plants",
+                    "Shrub Plants"
+                  ]}
+                  currentOption={typeOfPlants}
+                  setCurrentOption={setTypeOfPlants}
+                  multiple={true}
+                />
               </div>
               <div className={styles.plantCare}>
                 <InputGroup

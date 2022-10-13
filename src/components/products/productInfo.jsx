@@ -4,29 +4,15 @@ import styles from "./productInfo.module.scss";
 
 import { CgArrowLongRight } from "react-icons/cg/index";
 import {
-  TbTemperature,
   TbSun,
   TbTree,
   TbDroplet,
-  TbNote,
+  TbGrowth,
 } from "react-icons/tb/index";
 
-import { plantNotes } from "../../data";
+import { HiOutlineSparkles } from "react-icons/hi"
 
-const getIcon = (icon) => {
-  switch (icon) {
-    case "Light":
-      return <TbSun className={styles.icon} />;
-    case "Watering":
-      return <TbDroplet className={styles.icon} />;
-    case "Where to grow":
-      return <TbTree className={styles.icon} />;
-    case "Maintenace":
-      return <TbTemperature className={styles.icon} />;
-    default:
-      return <TbNote className={styles.icon} />;
-  }
-};
+import { plantNotes } from "../../data";
 
 const ProductInfo = ({ product }) => {
   return (
@@ -44,15 +30,51 @@ const ProductInfo = ({ product }) => {
       </Accordion>
       <Accordion title="Living Condition">
         <div className={styles.livingConditions}>
-          {product.livingConditions.map((item) => (
-            <div className={styles.condition} key={item.title}>
-              {getIcon(item.title)}
+          {!!product?.watering &&
+            <div className={styles.condition} key="Watering">
+              <TbDroplet className={styles.icon} />
               <div>
-                <h4>{item.title}</h4>
-                <p>{item.content}</p>
+                <h4>Watering</h4>
+                <p>{product.watering}</p>
               </div>
             </div>
-          ))}
+          }
+          {!!product?.light &&
+            <div className={styles.condition} key="light">
+              <TbSun className={styles.icon} />
+              <div>
+                <h4>Light</h4>
+                <p>{product?.light}</p>
+              </div>
+            </div>
+          }
+          {!!product?.idealLocation?.length &&
+            <div className={styles.condition} key="ideal-location">
+              <TbTree className={styles.icon} />
+              <div>
+                <h4>Ideal location</h4>
+                <p>{product?.idealLocation?.join(", ")}</p>
+              </div>
+            </div>
+          }
+          {!!product?.whereToGrow?.length &&
+            <div className={styles.condition} key="where-to-grow">
+              <TbGrowth className={styles.icon} />
+              <div>
+                <h4>Where to grow</h4>
+                <p>{product?.whereToGrow?.join(", ")}</p>
+              </div>
+            </div>
+          }
+          {!!product?.specialFeatures?.length &&
+            <div className={styles.condition} key="special-features">
+              <HiOutlineSparkles className={styles.icon} />
+              <div>
+                <h4>Special Fetures</h4>
+                <p>{product?.specialFeatures?.join(", ")}</p>
+              </div>
+            </div>
+          }
         </div>
       </Accordion>
       <Accordion title="Plant care">

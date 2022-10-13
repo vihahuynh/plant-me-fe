@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import { Formik } from "formik";
 
@@ -12,11 +13,14 @@ import "./../../custom.scss";
 
 const NewProductForm = () => {
   const authen = useSelector((state) => state.authentication);
+  const history = useHistory()
+
   const [watering, setWatering] = useState("");
   const [light, setLight] = useState("");
   const [idealLocation, setIdealLocation] = useState([]);
   const [whereToGrow, setWhereToGrow] = useState([]);
   const [specialFeatures, setSpecialFeatures] = useState([]);
+  const [typeOfPlants, setTypeOfPlants] = useState([])
   // const [livingConditions, setLivingConditions] = useState([]);
   const [commonProblems, setCommonProblems] = useState([]);
   const [decorTips, setDecorTips] = useState([]);
@@ -27,6 +31,12 @@ const NewProductForm = () => {
       const newProduct = {
         ...values,
         // livingConditions,
+        watering,
+        light,
+        idealLocation,
+        whereToGrow,
+        specialFeatures,
+        typeOfPlants,
         decorTips,
         commonProblems,
         plantCare,
@@ -45,7 +55,7 @@ const NewProductForm = () => {
         formData,
         authen?.user?.token
       );
-      console.log(returnedProduct);
+      history.push(`/admin/products/${returnedProduct.data.id}`)
     } catch (err) {
       console.log(err);
     }
@@ -201,7 +211,7 @@ const NewProductForm = () => {
               <label className={styles.label}>Light</label>
               <SelectInput
                 listData={[
-                  "Bright ndirect light",
+                  "Bright indirect light",
                   "Direct sunlight",
                   "Low light ",
                 ]}
@@ -216,7 +226,7 @@ const NewProductForm = () => {
                   "Office desk",
                   "Office premises",
                   "Living room tables",
-                  "Shaded Balconies",
+                  "Shaded balconies",
                   "Sunny balconies",
                   "Windowsill",
                 ]}
@@ -239,9 +249,35 @@ const NewProductForm = () => {
             >
               <label className={styles.label}>Special Features</label>
               <SelectInput
-                listData={["XS", "S", "M", "L", "XL"]}
+                listData={["Beginner friendly"]}
                 currentOption={specialFeatures}
                 setCurrentOption={setSpecialFeatures}
+                multiple={true}
+              />
+            </div>
+            <div
+              className={`${styles.inputContainer} ${styles.typeOfPlants}`}
+            >
+              <label className={styles.label}>Type of plants</label>
+              <SelectInput
+                listData={[
+                  "Air Plant",
+                  "Cacti & Succulents",
+                  "Climbers",
+                  "Creepers/Groundcovers",
+                  "Flowering Plants",
+                  "Focal Plants",
+                  "Ground Covers",
+                  "Hanging Basket Plants",
+                  "Hedge Plants",
+                  "Herbaceous",
+                  "Medicinal Plants",
+                  "Moss Stick Plants",
+                  "Screen Plants",
+                  "Shrub Plants"
+                ]}
+                currentOption={typeOfPlants}
+                setCurrentOption={setTypeOfPlants}
                 multiple={true}
               />
             </div>

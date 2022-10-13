@@ -1,24 +1,82 @@
 @import "./../../../variable.scss";
 
-.dataList {
-  list-style: none;
-  display: flex;
-  column-gap: 2rem;
+.container {
+  position: relative;
 }
 
-.dataItem {
+.choosenDataList {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.choosenDataItem {
   color: $color-primary;
-  border: 1px solid $color-grey-light;
-  background-color: white;
+  background-color: $color-primary-light;
+  border: 1px solid $color-primary;
   font-size: 1.4rem;
   border-radius: 3px;
   padding: 1rem 3rem;
   text-transform: capitalize;
   transition: all 0.3s;
+  cursor: default;
+}
+
+.dataList {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  color: $color-grey-dark;
+  list-style: none;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.dataList.active::after {
+  content: attr(data-num-item);
+  display: block
+}
+
+.dataItem {
+  display: flex;
+  align-items: center;
+  font-size: 1.4rem;
+  height: 4rem;
+  padding: 0 2rem;
+  background-color: white;
+  transition: all .3s;
   cursor: pointer;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid $color-grey-light;
+  }
+
+  &:hover {
+    color: white;
+    background-color: $color-primary;
+  }
 }
 
 .dataItem.active {
-  color: $color-primary;
+  color: white;
+  background-color: $color-primary;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid $color-primary-light;
+  }
+}
+
+.optionBox {
+  background-color: white;
   border: 1px solid $color-primary;
+  padding: .7rem 1.5rem;
+  border-radius: 5px;
+}
+
+.text {
+  color: $color-grey;
+  font-size: $default-font-size;
+  padding: .9rem 0;
 }

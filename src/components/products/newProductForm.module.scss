@@ -47,11 +47,10 @@
       &:hover::before {
         border-color: $color-primary;
       }
-
-      // color: transparent;
     }
 
     .inputContainer {
+      width: 100%;
       height: fit-content;
 
       &:not(:last-child) {
@@ -113,7 +112,6 @@
 
     .btn {
       cursor: pointer;
-      display: inline-block;
       border: none;
       border-radius: 10rem;
       background-color: $color-primary;
@@ -121,8 +119,9 @@
       padding: 1rem 5rem;
       text-transform: uppercase;
       font-size: $default-font-size;
-      grid-column: 1/5;
-      margin: 3rem auto 0;
+      margin: 3rem auto;
+
+      grid-column: 1/-1;
     }
 
     .errors {
@@ -223,28 +222,34 @@
 
 .watering {
   grid-row: 5 / 6;
-  grid-column: 1 / -1;
+  grid-column: 1 / 4;
 }
 
 .light {
-  grid-row: 6 / 7;
-  grid-column: 1 / -1;
+  grid-row: 5 / 6;
+  grid-column: 4 / 7;
 }
 
 .location {
-  grid-row: 7 / 8;
-  grid-column: 1 / -1;
+  grid-row: 6 / 7;
+  grid-column: 1 / 4;
 }
 
 .whereToGrow {
-  grid-row: 8 / 9;
-  grid-column: 1 / -1;
+  grid-row: 6 / 7;
+  grid-column: 4 / 7;
 }
 
 .specialFeatures {
-  grid-row: 9 / 10;
-  grid-column: 1 / -1;
+  grid-row: 7 / 8;
+  grid-column: 1 / 4;
 }
+
+.typeOfPlants {
+  grid-row: 7 / 8;
+  grid-column: 4 / 7;
+}
+
 
 .plantCare {
   grid-column: 1/3;
