@@ -80,7 +80,7 @@ const OrderDetails = () => {
           <div>
             <h5>Notification: </h5>
             <ul className={styles.notiList}>
-              {order.notification.map((noti) => (
+              {order?.notification?.map((noti) => (
                 <li key={noti.id} className={styles.notiItem}>
                   <Moment format="YYYY-MM-DD">{noti.createdAt}</Moment>
                   <p>{noti.content}</p>

@@ -1,11 +1,46 @@
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import styles from "./pagination.module.scss";
 
-const Pagination = ({ page, setPage, totalPages }) => {
-  const onNext = () =>
-    setPage((curPage) => (curPage + 1 >= totalPages ? totalPages : curPage + 1));
+const Pagination = ({ page, setPage, totalPages, itemsPerPage }) => {
+  const history = useHistory()
+  const queries = history.location.search.slice(1)
+  const otherQueries = queries.split("&").filter(q => !q.includes("skip") && !q.includes("limit")).join("&")
 
-  const onPrevious = () =>
-    setPage((curPage) => (curPage === 1 ? 1 : curPage - 1));
+  useEffect(() => {
+    if (!queries.includes("") || !queries.includes("limit")) {
+      history.push({
+        search: `skip=${(page - 1) * itemsPerPage}&limit=${itemsPerPage}${otherQueries ? `&${otherQueries}` : ''}`
+      })
+    }
+  }, [queries, history, itemsPerPage, page, otherQueries])
+
+  const onNext = () => {
+    setPage((curPage) => {
+      const newPage = curPage + 1 >= totalPages ? totalPages : curPage + 1
+      history.push({
+        search: `skip=${(newPage - 1) * itemsPerPage}&limit=${itemsPerPage}${otherQueries ? `&${otherQueries}` : ''}`
+      })
+      return newPage
+    });
+  }
+
+  const onPrevious = () => {
+    setPage((curPage) => {
+      const newPage = curPage === 1 ? 1 : curPage - 1
+      history.push({
+        search: `skip=${(newPage - 1) * itemsPerPage}&limit=${itemsPerPage}${otherQueries ? `&${otherQueries}` : ''}`
+      })
+      return newPage
+    });
+  }
+
+  const onSelectPage = (value) => {
+    setPage(value)
+    history.push({
+      search: `skip=${(value - 1) * itemsPerPage}&limit=${itemsPerPage}${otherQueries ? `&${otherQueries}` : ''}`
+    })
+  }
 
   const showPages = () => {
     let start = page - 2 > 0 ? page - 2 : 1;
@@ -35,7 +70,7 @@ const Pagination = ({ page, setPage, totalPages }) => {
             <li
               key={i}
               className={i === page ? styles.current : ""}
-              onClick={(e) => setPage(+e.target.innerText)}
+              onClick={(e) => onSelectPage(+e.target.innerText)}
             >
               {i}
             </li>
