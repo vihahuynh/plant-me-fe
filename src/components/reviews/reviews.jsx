@@ -99,10 +99,16 @@ const Reviews = ({ productId }) => {
           </div>
         )}
       </div>
-      {reviews.map((review) => (
-        <ReviewItem key={review.id} review={review} />
-      ))}
-      <Pagination page={page} setPage={setPage} totalPages={Math.ceil(filterReviews.length / 2)} itemsPerPage={2} />
+      {!!reviews.length &&
+        <>
+          {
+            reviews.map((review) => (
+              <ReviewItem key={review.id} review={review} />
+            ))
+          }
+          < Pagination page={page} setPage={setPage} totalPages={Math.ceil(filterReviews.length / 2)} itemsPerPage={2} />
+        </>
+      }
     </div>
   );
 };
