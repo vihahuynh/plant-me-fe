@@ -2,10 +2,20 @@ import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styles from "./pagination.module.scss";
 
-const Pagination = ({ page, setPage, totalPages, itemsPerPage }) => {
+const Pagination = ({ page, setPage, totalPages, itemsPerPage, theme = "primary" }) => {
   const history = useHistory()
   const queries = history.location.search.slice(1)
   const otherQueries = queries.split("&").filter(q => !q.includes("skip") && !q.includes("limit")).join("&")
+
+  const limit = queries.split("&").find(q => q.includes("limit"))?.split("=")?.[1]
+  const skip = queries.split("&").find(q => q.includes("skip"))?.split("=")?.[1]
+  const curPage = +skip / +limit + 1
+
+  useEffect(() => {
+    if (curPage !== page) {
+      setPage(curPage)
+    }
+  }, [curPage, page, setPage])
 
   useEffect(() => {
     if (!queries.includes("") || !queries.includes("limit")) {
@@ -69,7 +79,7 @@ const Pagination = ({ page, setPage, totalPages, itemsPerPage }) => {
           {pages.map((i) => (
             <li
               key={i}
-              className={i === page ? styles.current : ""}
+              className={i === page ? styles.current : styles[theme]}
               onClick={(e) => onSelectPage(+e.target.innerText)}
             >
               {i}

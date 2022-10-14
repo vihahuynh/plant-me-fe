@@ -23,6 +23,7 @@ const SignIn = () => {
           user: result.data,
         })
       );
+      console.log(result.data)
       dispatch(authenticationActions.login({ user: result.data }));
       history.push("/");
     } catch (err) {

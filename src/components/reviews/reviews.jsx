@@ -1,22 +1,27 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Rating } from "@mui/material";
 
 import styles from "./reviews.module.scss";
 
-import { reviewsSortOptions, reviewsFilterOptions } from "./../../data";
 import SortDrawer from "../UI/drawers/sortDrawer";
 import FilterDrawer from "../UI/drawers/filterDrawer";
 import ProgressBar from "../UI/progressBar";
 import ReviewItem from "./reviewItem";
-import { useState } from "react";
+import Pagination from "../UI/pagination";
+
 import reviewService from "../../services/review";
+import { reviewsSortOptions, reviewsFilterOptions } from "./../../data";
 
 const Reviews = ({ productId }) => {
+  const [page, setPage] = useState(1)
   const [allReviews, setAllReviews] = useState([]);
+  const [filterReviews, setFilterReviews] = useState([])
   const [reviews, setReviews] = useState([]);
+
   const history = useHistory();
   const queries = history.location.search.slice(1);
+  const otherQueries = queries.split("&").filter(q => !q.includes("skip") && !q.includes("limit")).join("&")
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,6 +30,14 @@ const Reviews = ({ productId }) => {
     };
     fetchData();
   }, [productId]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const reviewsData = await reviewService.getAll(`product=${productId}&${otherQueries}`);
+      setFilterReviews(reviewsData.data);
+    };
+    fetchData();
+  }, [productId, otherQueries]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -86,10 +99,10 @@ const Reviews = ({ productId }) => {
           </div>
         )}
       </div>
-
       {reviews.map((review) => (
         <ReviewItem key={review.id} review={review} />
       ))}
+      <Pagination page={page} setPage={setPage} totalPages={Math.ceil(filterReviews.length / 2)} itemsPerPage={2} />
     </div>
   );
 };

@@ -30,7 +30,7 @@ const OrderHistory = () => {
     const fetchData = async () => {
       try {
         if (!authen?.user) return;
-        const ordersData = await orderService.getAll(`user=${authen?.user?.id}${otherQueries ? `&${otherQueries}` : ''}`, authen?.user?.token);
+        const ordersData = await orderService.getAll(`user=${authen?.user?.id}&${otherQueries}`, authen?.user?.token);
         setFilterOrders(ordersData.data);
       } catch (err) {
         console.log(err);
@@ -79,7 +79,7 @@ const OrderHistory = () => {
                   <Order key={order.id} order={order} userId={userId} />
                 ))}
               </ul>
-              <Pagination page={page} setPage={setPage} totalPages={Math.ceil(filterOrders.length / 2)} itemsPerPage={2} />
+              <Pagination page={page} setPage={setPage} totalPages={Math.ceil(filterOrders.length / 2)} itemsPerPage={2} theme="white" />
             </>
           ) : (
             <p>No order found</p>

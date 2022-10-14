@@ -10,6 +10,7 @@ import FilterDrawer from "./../../components/UI/drawers/filterDrawer";
 import SortDrawer from "./../../components/UI/drawers/sortDrawer";
 import Arrow from "./../../components/UI/arrow"
 import ProductToReview from "./../../components/reviews/productToReview"
+import Pagination from "../../components/UI/pagination";
 
 import reviewService from "../../services/review";
 import orderService from "../../services/order";
@@ -22,13 +23,17 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const ReviewHistory = () => {
+  const [page, setPage] = useState(1)
   const [allReviews, setAllReviews] = useState([])
+  const [filterReviews, setFilterReviews] = useState([])
   const [reviews, setReviews] = useState([]);
   const [products, setProducts] = useState([])
+
   const userId = useParams().userId;
   const authen = useSelector((state) => state.authentication);
   const history = useHistory()
   const queries = history.location.search.slice(1)
+  const otherQueries = queries.split("&").filter(q => !q.includes("skip") && !q.includes("limit")).join("&")
 
   const settings = {
     className: "center",
@@ -52,6 +57,19 @@ const ReviewHistory = () => {
     };
     fetchData();
   }, [authen]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (!authen?.user) return;
+        const reviewsData = await reviewService.getAll(`user=${authen?.user?.id}&${otherQueries}`, authen?.user?.token);
+        setFilterReviews(reviewsData.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, [authen, otherQueries]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -93,11 +111,12 @@ const ReviewHistory = () => {
         console.log(err);
       }
     };
+
     fetchData();
-  }, [authen?.user, allReviews]);
+  }, [authen?.user, allReviews, reviews]);
 
   if (authen.user?.id !== userId) return <p>Permission denied</p>;
-  if (!allReviews) return <p>No review found</p>;
+  if (!filterReviews) return <p>No review found</p>;
 
   return (
     <Wrapper>
@@ -123,24 +142,24 @@ const ReviewHistory = () => {
           <div className={styles.allReviews}>
             <h3>My Reviews</h3>
             <div className={styles.header}>
-              {!!allReviews.length && (
-                <div className={styles.btnContainers}>
-                  <div className={styles.btn}>
-                    <SortDrawer sortOptions={reviewsSortOptions} />
-                  </div>
-                  <div className={styles.btn}>
-                    <FilterDrawer filterOptions={reviewsFilterOptions} />
-                  </div>
+              <div className={styles.btnContainers}>
+                <div className={styles.btn}>
+                  <SortDrawer sortOptions={reviewsSortOptions} />
                 </div>
-              )}
+                <div className={styles.btn}>
+                  <FilterDrawer filterOptions={reviewsFilterOptions} />
+                </div>
+              </div>
             </div>
             {reviews.length ? (
-
-              <ul className={styles.reviewsList}>
-                {reviews.map((review) => (
-                  <UserReviewItem key={review.id} item={review} />
-                ))}
-              </ul>
+              <>
+                <ul className={styles.reviewsList}>
+                  {reviews.map((review) => (
+                    <UserReviewItem key={review.id} item={review} />
+                  ))}
+                </ul>
+                <Pagination page={page} setPage={setPage} totalPages={Math.ceil(filterReviews.length / 2)} itemsPerPage={2} theme="white" />
+              </>
             ) : (
               <p>No review found</p>
             )}

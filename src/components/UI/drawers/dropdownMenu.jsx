@@ -14,6 +14,7 @@ const DropdownMenu = ({ item }) => {
 
   const onAddFilter = (query) => {
     let newQueries = [...queries];
+    newQueries = newQueries.filter(q => !q.includes("skip") && !q.includes("limit"))
     if (item.type === "checkbox") {
       if (newQueries.includes(query)) {
         newQueries = newQueries.filter((f) => f !== query);
@@ -26,7 +27,7 @@ const DropdownMenu = ({ item }) => {
     }
     newQueries = newQueries.filter(q => q !== "")
     history.push({
-      search: `?${newQueries.join("&")}`,
+      search: `?skip=0&limit=2&${newQueries.join("&")}`,
     });
   };
 
