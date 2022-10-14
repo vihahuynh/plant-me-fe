@@ -50,7 +50,6 @@ const NotificationItem = ({ item, setNotification }) => {
     );
   };
 
-  if (!item.show) return null;
   return (
     <li
       className={styles.notiItem}

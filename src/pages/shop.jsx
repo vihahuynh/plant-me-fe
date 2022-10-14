@@ -14,23 +14,23 @@ import { useHistory } from "react-router-dom";
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
-  const [allProducts, setAllProducts] = useState([])
-  const itemsPerPage = 4;
+  const [filterProducts, setFilterProducts] = useState([])
   const [page, setPage] = useState(1);
   const history = useHistory()
   const queries = history.location.search.slice(1)
+  const otherQueries = queries.split("&").filter(q => !q.includes("skip") && !q.includes("limit")).join("&")
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const productsData = await productService.getAll();
-        setAllProducts(productsData.data);
+        const productsData = await productService.getAll(otherQueries);
+        setFilterProducts(productsData.data);
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
-  }, []);
+  }, [otherQueries]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,19 +44,9 @@ const Shop = () => {
     fetchData();
   }, [queries]);
 
-  const productsToDisplay = products.filter((p) => !!p.stocks.length);
-
-  const totalPages = Math.ceil(productsToDisplay.length / itemsPerPage);
-
-  const start = (page - 1) * itemsPerPage;
-  const end =
-    page * itemsPerPage < productsToDisplay.length
-      ? page * itemsPerPage
-      : productsToDisplay.length;
-
   return (
     <Wrapper>
-      {!!allProducts.length
+      {!!filterProducts.length
         && <div className={styles.btnContainers}>
           <div className={styles.btn}>
             <SortDrawer sortOptions={plantsSortOptions} />
@@ -67,8 +57,8 @@ const Shop = () => {
         </div>
       }
       <div className={styles.container}>
-        <Products products={productsToDisplay.slice(start, end)} />
-        <Pagination page={page} setPage={setPage} totalPages={totalPages} />
+        <Products products={products} />
+        {/* <Pagination page={page} setPage={setPage} totalPages={Math.ceil(filterProducts.length / 2)} itemsPerPage={2} /> */}
       </div>
     </Wrapper>
   );
