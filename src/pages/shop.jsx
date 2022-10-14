@@ -14,10 +14,23 @@ import { useHistory } from "react-router-dom";
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState([])
   const itemsPerPage = 4;
   const [page, setPage] = useState(1);
   const history = useHistory()
   const queries = history.location.search.slice(1)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const productsData = await productService.getAll();
+        setAllProducts(productsData.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,11 +54,9 @@ const Shop = () => {
       ? page * itemsPerPage
       : productsToDisplay.length;
 
-  console.log("products: ", products)
-
   return (
     <Wrapper>
-      {!!products
+      {!!allProducts.length
         && <div className={styles.btnContainers}>
           <div className={styles.btn}>
             <SortDrawer sortOptions={plantsSortOptions} />

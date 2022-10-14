@@ -125,12 +125,12 @@ export const categoriesBanners = [
 export const plantsSortOptions = [
   {
     id: 1,
-    query: "sortBy=name:desc",
+    query: "sortBy=title:asc",
     text: "Name: A to Z",
   },
   {
     id: 2,
-    query: "sortBy=name:desc",
+    query: "sortBy=title:desc",
     text: "Name: Z to A",
   },
   {
@@ -148,16 +148,16 @@ export const plantsSortOptions = [
     query: "sortBy=createdAt:desc",
     text: "New arrivals",
   },
-  {
-    id: 6,
-    query: "sortBy=rating:desc",
-    text: "Highest rating",
-  },
-  {
-    id: 7,
-    query: "sortBy=sold:desc",
-    text: "Best sellers",
-  },
+  // {
+  //   id: 6,
+  //   query: "sortBy=rating:desc",
+  //   text: "Highest rating",
+  // },
+  // {
+  //   id: 7,
+  //   query: "sortBy=sold:desc",
+  //   text: "Best sellers",
+  // },
 ];
 
 export const whereToGrowList = ["Indoor", "Outdoor Shade", "Outdoor Sunny"]
@@ -231,28 +231,6 @@ export const plantsFilterOptions = [
       }
     })
   },
-  // {
-  //   id: 4,
-  //   text: "Pot Size",
-  //   type: "checkbox",
-  //   subOptions: [
-  //     {
-  //       id: 1,
-  //       text: "Small",
-  //       query: "size=small",
-  //     },
-  //     {
-  //       id: 2,
-  //       text: "Medium",
-  //       query: "size=medium",
-  //     },
-  //     {
-  //       id: 3,
-  //       text: "Large",
-  //       query: "size=large",
-  //     },
-  //   ],
-  // },
   {
     id: 5,
     text: "Water Schedule",
