@@ -14,13 +14,17 @@ import { useHistory } from "react-router-dom";
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
-  const [filterProducts, setFilterProducts] = useState([])
+  const [filterProducts, setFilterProducts] = useState([]);
   const [page, setPage] = useState(1);
-  const history = useHistory()
-  const queries = history.location.search.slice(1)
-  const otherQueries = queries.split("&").filter(q => !q.includes("skip") && !q.includes("limit")).join("&")
+  const history = useHistory();
+  const queries = history.location.search.slice(1);
+  const otherQueries = queries
+    .split("&")
+    .filter((q) => !q.includes("skip") && !q.includes("limit"))
+    .join("&");
 
   useEffect(() => {
+    console.log("meow");
     const fetchData = async () => {
       try {
         const productsData = await productService.getAll(otherQueries);
@@ -46,8 +50,8 @@ const Shop = () => {
 
   return (
     <Wrapper>
-      {!!filterProducts.length
-        && <div className={styles.btnContainers}>
+      {!!filterProducts.length && (
+        <div className={styles.btnContainers}>
           <div className={styles.btn}>
             <SortDrawer sortOptions={plantsSortOptions} />
           </div>
@@ -55,10 +59,15 @@ const Shop = () => {
             <FilterDrawer filterOptions={plantsFilterOptions} />
           </div>
         </div>
-      }
+      )}
       <div className={styles.container}>
         <Products products={products} />
-        {/* <Pagination page={page} setPage={setPage} totalPages={Math.ceil(filterProducts.length / 2)} itemsPerPage={2} /> */}
+        <Pagination
+          page={page}
+          setPage={setPage}
+          totalPages={Math.ceil(filterProducts.length / 2)}
+          itemsPerPage={2}
+        />
       </div>
     </Wrapper>
   );

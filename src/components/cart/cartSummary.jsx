@@ -1,10 +1,30 @@
+import { useState } from "react";
+import { useSelector } from "react-redux";
+
 import styles from "./cartSummary.module.scss";
 
 import Button from "./../UI/buttons/button";
-import { useSelector } from "react-redux";
+import LinkButton from "../UI/buttons/linkbutton";
+
+import addressService from "../../services/address";
+import { useEffect } from "react";
 
 const CartSummary = ({ title, onClick, disabled = false }) => {
   const cart = useSelector((state) => state.cart);
+  const authen = useSelector((state) => state.authentication);
+  const [address, setAddress] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const addressesData = await addressService.getAll(authen?.user?.token);
+        setAddress(addressesData.data.find((a) => a.isDefault));
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    if (authen?.user?.token) fetchData();
+  }, [authen?.user?.token]);
 
   const subTotal = cart.items
     .filter((item) => item.isCheckout)
@@ -19,13 +39,24 @@ const CartSummary = ({ title, onClick, disabled = false }) => {
   return (
     <div className={styles.summary}>
       <div className={styles.delivery}>
-        <Button text="Change" size="small" className={styles.change} />
+        <LinkButton
+          url="/cart/change-delivery-address"
+          text={address ? "Change" : "Add"}
+          size="small"
+          className={styles.change}
+        />
         <h5>Delivery to</h5>
-        <div className={styles.userInfo}>
-          <p>Huynh Vi Ha</p>
-          <p>076 690 1516</p>
-        </div>
-        <p className={styles.address}>168B Bai Say 01 06 tpchm</p>
+        {address ? (
+          <>
+            <div className={styles.userInfo}>
+              <p>{address?.name}</p>
+              <p>{address?.phoneNumber}</p>
+            </div>
+            <p className={styles.address}>{address?.address}</p>
+          </>
+        ) : (
+          <></>
+        )}
       </div>
       <div className={styles.orderSummary}>
         <h5>Order Summary</h5>

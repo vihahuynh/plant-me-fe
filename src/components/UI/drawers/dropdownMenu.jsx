@@ -9,12 +9,18 @@ const DropdownMenu = ({ item }) => {
   const history = useHistory();
   const queries = history.location.search.slice(1).split("&");
   const [open, setOpen] = useState(
-    queries.some((f) => item.subOptions.map((s) => s.query.replace(/ /g, "%20")).includes(f))
+    queries.some((f) =>
+      item.subOptions.map((s) => s.query.replace(/ /g, "%20")).includes(f)
+    )
   );
+
+  console.log("queries: ", queries);
 
   const onAddFilter = (query) => {
     let newQueries = [...queries];
-    newQueries = newQueries.filter(q => !q.includes("skip") && !q.includes("limit"))
+    newQueries = newQueries.filter(
+      (q) => !q.includes("skip") && !q.includes("limit")
+    );
     if (item.type === "checkbox") {
       if (newQueries.includes(query)) {
         newQueries = newQueries.filter((f) => f !== query);
@@ -25,7 +31,7 @@ const DropdownMenu = ({ item }) => {
       newQueries = newQueries.filter((f) => !f.includes(query.split("=")[0]));
       newQueries = newQueries.concat(query);
     }
-    newQueries = newQueries.filter(q => q !== "")
+    newQueries = newQueries.filter((q) => q !== "");
     history.push({
       search: `?skip=0&limit=2&${newQueries.join("&")}`,
     });
@@ -51,7 +57,10 @@ const DropdownMenu = ({ item }) => {
               name={option.query}
               value={option.query}
               label={option.text}
-              checked={queries.includes(option.query) || queries.includes(option.query.replace(/ /g, "%20"))}
+              checked={
+                queries.includes(option.query) ||
+                queries.includes(option.query.replace(/ /g, "%20"))
+              }
               onChange={() => onAddFilter(option.query)}
             />
           ))}
@@ -63,7 +72,10 @@ const DropdownMenu = ({ item }) => {
               value={option.query}
               label={option.text}
               onChange={() => onAddFilter(option.query)}
-              checked={queries.includes(option.query) || queries.includes(option.query.replace(/ /g, "%20"))}
+              checked={
+                queries.includes(option.query) ||
+                queries.includes(option.query.replace(/ /g, "%20"))
+              }
             />
           ))}
       </div>

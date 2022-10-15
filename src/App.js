@@ -13,6 +13,7 @@ import SignIn from "./pages/signIn";
 import SignUp from "./pages/signup";
 import ProductDetails from "./pages/productDetails";
 import CartPage from "./pages/cart";
+import ChangeDeliveryAddress from "./pages/changeDeliveryAddress";
 import Checkout from "./pages/checkout";
 import SendPasswordResetLink from "./pages/sendPasswordResetLink";
 import PasswordReset from "./pages/passwordReset";
@@ -76,8 +77,11 @@ const App = () => {
         <Route exact path="/shop">
           <Shop />
         </Route>
-        <Route path="/cart">
+        <Route exact path="/cart">
           <CartPage />
+        </Route>
+        <Route path="/cart/change-delivery-address">
+          <ChangeDeliveryAddress />
         </Route>
         <Route path="/checkout">
           <Checkout />

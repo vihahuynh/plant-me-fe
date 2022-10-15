@@ -13,15 +13,15 @@ const SortDrawer = ({ sortOptions }) => {
   const queries = history.location.search.slice(1).split("&");
 
   useEffect(() => {
-    const curSort = queries.find(q => q.includes("sortBy"))
-    setSort(curSort)
-  }, [])
+    const curSort = queries.find((q) => q.includes("sortBy"));
+    setSort(curSort);
+  }, [queries]);
 
   const onAddFilters = (query) => {
     let newQueries = [...queries];
     newQueries = newQueries.filter((f) => !f.includes("sortBy"));
     newQueries = newQueries.concat(query);
-    newQueries = newQueries.filter(f => f !== "")
+    newQueries = newQueries.filter((f) => f !== "");
     history.push({
       search: `?${newQueries.join("&")}`,
     });

@@ -1,0 +1,21 @@
+@import "./../variable.scss";
+
+.main {
+  padding: 4rem 10rem;
+  background-color: $color-primary-light;
+}
+
+.addressList {
+  margin-top: 1rem;
+  list-style: none;
+  font-size: $default-font-size;
+  color: $color-grey-dark;
+}
+
+.text {
+  font-size: $default-font-size;
+}
+
+.addNewAddress {
+  margin-top: 2rem;
+}

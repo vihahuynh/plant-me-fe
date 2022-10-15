@@ -19,11 +19,13 @@ const DeliveryAddress = () => {
 
   const onChangeDefaultAddress = async (addressToUpdate) => {
     const defaultAddress = addresses.find((a) => a.isDefault);
-    await addressService.update(
-      defaultAddress.id,
-      { ...defaultAddress, isDefault: false },
-      authen?.user?.token
-    );
+    if (defaultAddress?.id) {
+      await addressService.update(
+        defaultAddress?.id,
+        { ...defaultAddress, isDefault: false },
+        authen?.user?.token
+      );
+    }
     await addressService.update(
       addressToUpdate.id,
       { ...addressToUpdate, isDefault: true },
