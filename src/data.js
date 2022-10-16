@@ -160,27 +160,155 @@ export const plantsSortOptions = [
   // },
 ];
 
-export const whereToGrowList = ["Indoor", "Outdoor Shade", "Outdoor Sunny"]
-export const wateringList = ["Every day", "Every alternate day ", "Once a day", "Once a week", "Twice a week"]
-export const lightList = ["Bright indirect light", "Direct sunlight", "Low light "]
-export const idealLocationList = ["Office desk", "Office premises", "Living room tables", "Shaded balconies", "Sunny balconies", "Windowsill"]
-export const specialFeaturesList = ["Beginner friendly", "Pet friendly"]
+export const whereToGrowList = [
+  {
+    text: "Indoor",
+    value: "Indoor",
+  },
+  {
+    text: "Outdoor Shade",
+    value: "Outdoor Shade",
+  },
+  {
+    text: "Outdoor Sunny",
+    value: "Outdoor Sunny",
+  },
+];
+
+export const wateringList = [
+  {
+    text: "Every day",
+    value: "Every day",
+  },
+  {
+    text: "Every alternate day",
+    value: "Every alternate day",
+  },
+  {
+    text: "Once a day",
+    value: "Once a day",
+  },
+  {
+    text: "Once a week",
+    value: "Once a week",
+  },
+  {
+    text: "Twice a week",
+    value: "Twice a week",
+  },
+];
+
+export const lightList = [
+  {
+    text: "Bright indirect light",
+    value: "Bright indirect light",
+  },
+  {
+    text: "Direct sunlight",
+    value: "Direct sunlight",
+  },
+  {
+    text: "Low light",
+    value: "Low light",
+  },
+];
+
+export const idealLocationList = [
+  {
+    text: "Office desk",
+    value: "Office desk",
+  },
+  {
+    text: "Office premises",
+    value: "Office premises",
+  },
+  {
+    text: "Living room tables",
+    value: "Living room tables",
+  },
+  {
+    text: "Shaded balconies",
+    value: "Shaded balconies",
+  },
+  {
+    text: "Sunny balconies",
+    value: "Sunny balconies",
+  },
+  {
+    text: "Windowsill",
+    value: "Windowsill",
+  },
+];
+
+export const specialFeaturesList = [
+  {
+    text: "Beginner friendly",
+    value: "Beginner friendly",
+  },
+  {
+    text: "Pet friendly",
+    value: "Pet friendly",
+  },
+];
+
 export const typeOfPlantsList = [
-  "Air Plant",
-  "Cacti & Succulents",
-  "Climbers",
-  "Creepers/Groundcovers",
-  "Flowering Plants",
-  "Focal Plants",
-  "Ground Covers",
-  "Hanging Basket Plants",
-  "Hedge Plants",
-  "Herbaceous",
-  "Medicinal Plants",
-  "Moss Stick Plants",
-  "Screen Plants",
-  "Shrub Plants"
-]
+  {
+    text: "Air Plant",
+    value: "Air Plant",
+  },
+  {
+    text: "Cacti & Succulents",
+    value: "Cacti & Succulents",
+  },
+  {
+    text: "Climbers",
+    value: "Climbers",
+  },
+  {
+    text: "Creepers/Groundcovers",
+    value: "Creepers/Groundcovers",
+  },
+  {
+    text: "Flowering Plants",
+    value: "Flowering Plants",
+  },
+  {
+    text: "Focal Plants",
+    value: "Focal Plants",
+  },
+  {
+    text: "Ground Covers",
+    value: "Ground Covers",
+  },
+  {
+    text: "Hanging Basket Plants",
+    value: "Hanging Basket Plants",
+  },
+  {
+    text: "Hedge Plants",
+    value: "Hedge Plants",
+  },
+  {
+    text: "Herbaceous",
+    value: "Herbaceous",
+  },
+  {
+    text: "Medicinal Plants",
+    value: "Medicinal Plants",
+  },
+  {
+    text: "Moss Stick Plants",
+    value: "Moss Stick Plants",
+  },
+  {
+    text: "Screen Plants",
+    value: "Screen Plants",
+  },
+  {
+    text: "Shrub Plants",
+    value: "Shrub Plants",
+  },
+];
 
 export const plantsFilterOptions = [
   {
@@ -192,8 +320,8 @@ export const plantsFilterOptions = [
         id: index,
         text: item,
         query: `typeOfPlants=${item}`,
-      }
-    })
+      };
+    }),
   },
   {
     id: 2,
@@ -204,8 +332,8 @@ export const plantsFilterOptions = [
         id: index,
         text: item,
         query: `whereToGrow=${item}`,
-      }
-    })
+      };
+    }),
   },
   {
     id: 3,
@@ -216,8 +344,8 @@ export const plantsFilterOptions = [
         id: index,
         text: item,
         query: `light=${item}`,
-      }
-    })
+      };
+    }),
   },
   {
     id: 4,
@@ -228,8 +356,8 @@ export const plantsFilterOptions = [
         id: index,
         text: item,
         query: `idealLocation=${item}`,
-      }
-    })
+      };
+    }),
   },
   {
     id: 5,
@@ -240,8 +368,8 @@ export const plantsFilterOptions = [
         id: index,
         text: item,
         query: `watering=${item}`,
-      }
-    })
+      };
+    }),
   },
 ];
 

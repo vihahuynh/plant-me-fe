@@ -8,12 +8,19 @@ const SelectInput = ({
   multiple = false,
 }) => {
   const [openDataList, setOpenDataList] = useState(false);
+
   const onSelectMultipleData = (value) => {
     if (currentOption.includes(value)) {
       setCurrentOption((prev) => prev.filter((op) => op !== value));
     } else {
       setCurrentOption((prev) => prev.concat(value));
     }
+    toggleOpenDataList();
+  };
+
+  const onSelectData = (value) => {
+    setCurrentOption(value);
+    toggleOpenDataList();
   };
 
   const toggleOpenDataList = () => setOpenDataList((prev) => !prev);
@@ -23,7 +30,7 @@ const SelectInput = ({
       <div className={styles.container}>
         <div className={styles.optionBox} onClick={toggleOpenDataList}>
           <p className={styles.chosenText}>
-            {currentOption || "Please select an option"}
+            {currentOption?.text || "Please select an option"}
           </p>
         </div>
         <ul
@@ -34,10 +41,10 @@ const SelectInput = ({
               className={`${styles.dataItem} ${
                 currentOption === item ? styles.active : ""
               }`}
-              key={item}
-              onClick={() => setCurrentOption(item)}
+              key={item.value}
+              onClick={() => onSelectData(item)}
             >
-              {item}
+              {item.text}
             </li>
           ))}
         </ul>
@@ -48,7 +55,8 @@ const SelectInput = ({
     <div className={styles.container}>
       <div className={styles.optionBox} onClick={toggleOpenDataList}>
         <p className={styles.chosenText}>
-          {currentOption?.join(", ") || "Please select an option"}
+          {currentOption?.map((op) => op.text)?.join(", ") ||
+            "Please select an option"}
         </p>
       </div>
       <ul className={`${styles.dataList} ${openDataList ? styles.active : ""}`}>
@@ -57,10 +65,10 @@ const SelectInput = ({
             className={`${styles.dataItem} ${
               currentOption.includes(item) ? styles.active : ""
             }`}
-            key={item}
+            key={item.value}
             onClick={() => onSelectMultipleData(item)}
           >
-            {item}
+            {item.text}
           </li>
         ))}
       </ul>

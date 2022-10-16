@@ -1,13 +1,31 @@
 import styles from "./addressForm.module.scss";
+import { useState, useEffect } from "react";
 import { Formik } from "formik";
 import { useSelector } from "react-redux";
 
 import Button from "./../UI/buttons/button";
+import SelectInput from "../UI/inputs/selectInput";
 
 import addressService from "../../services/address";
+import locationService from "../../services/location";
 
 const AddressForm = ({ address, onCancel, setAddresses }) => {
   const authen = useSelector((state) => state.authentication);
+  const [provinces, setProvinces] = useState([]);
+  const [curProvince, setCurProvince] = useState();
+  const [districts, setDistricsts] = useState([]);
+  const [curDistrict, setCurDistrict] = useState();
+  const [wards, setWards] = useState([]);
+  const [curWard, setCurWard] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const provinceData = await locationService.getAll();
+      setProvinces(provinceData.data.map((p) => p.name));
+    };
+    fetchData();
+  }, []);
+
   const onAddNewAddress = async (values) => {
     try {
       const newAddress = await addressService.create(
@@ -118,7 +136,7 @@ const AddressForm = ({ address, onCancel, setAddresses }) => {
                   errors.phoneNumber}
               </p>
             </div>
-            <div className={styles.inputContainer}>
+            {/* <div className={styles.inputContainer}>
               <input
                 id="address"
                 type="text"
@@ -131,6 +149,14 @@ const AddressForm = ({ address, onCancel, setAddresses }) => {
               <p className={styles.errors}>
                 {errors.address && touched.address && errors.address}
               </p>
+            </div> */}
+            <div className={`${styles.inputContainer} ${styles.location}`}>
+              <label className={styles.label}>City</label>
+              <SelectInput
+                listData={provinces}
+                currentOption={curProvince}
+                setCurrentOption={setCurProvince}
+              />
             </div>
 
             <div className={styles.formBtnGroup}>

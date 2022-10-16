@@ -12,7 +12,7 @@ import SelectInput from "./../UI/inputs/selectInput";
 const StockForm = ({ stock, productId, onCancel, setStocks }) => {
   const authen = useSelector((state) => state.authentication);
   const [currentColor, setCurrentColor] = useState("#fff");
-  const [currentSize, setCurrentSize] = useState("M");
+  const [currentSize, setCurrentSize] = useState({ text: "M", value: "M" });
 
   useEffect(() => {
     setCurrentColor(stock?.color || "#fff");
@@ -24,7 +24,7 @@ const StockForm = ({ stock, productId, onCancel, setStocks }) => {
       const stockToUpdate = {
         ...stock,
         color: currentColor,
-        size: currentSize,
+        size: currentSize.text,
         quantity: values.quantity,
       };
       const updatedStock = await stockSerice.update(
@@ -47,7 +47,7 @@ const StockForm = ({ stock, productId, onCancel, setStocks }) => {
       const newStock = {
         product: productId,
         color: currentColor,
-        size: currentSize,
+        size: currentSize.text,
         quantity: values.quantity,
       };
       const returnedStock = await stockSerice.create(
@@ -69,7 +69,7 @@ const StockForm = ({ stock, productId, onCancel, setStocks }) => {
           initialValues={
             stock || {
               color: currentColor,
-              size: currentSize,
+              size: currentSize.text,
               quantity: stock?.quantity || 1,
             }
           }
@@ -108,7 +108,28 @@ const StockForm = ({ stock, productId, onCancel, setStocks }) => {
               <div className={`${styles.inputContainer} ${styles.size}`}>
                 <label>Size</label>
                 <SelectInput
-                  listData={["XS", "S", "M", "L", "XL"]}
+                  listData={[
+                    {
+                      text: "XS",
+                      value: "XS",
+                    },
+                    {
+                      text: "S",
+                      value: "S",
+                    },
+                    {
+                      text: "M",
+                      value: "M",
+                    },
+                    {
+                      text: "L",
+                      value: "L",
+                    },
+                    {
+                      text: "XL",
+                      value: "XL",
+                    },
+                  ]}
                   currentOption={currentSize}
                   setCurrentOption={setCurrentSize}
                 />

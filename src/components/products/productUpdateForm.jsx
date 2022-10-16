@@ -9,9 +9,16 @@ import InputGroup from "../UI/inputs/inputGroup/inputGroup";
 import Stocks from "../stock/stocks";
 import SelectInput from "../UI/inputs/selectInput";
 
-import { MdCancel } from "react-icons/md"
+import { MdCancel } from "react-icons/md";
 
-import { wateringList, lightList, idealLocationList, whereToGrowList, specialFeaturesList, typeOfPlantsList } from "./../../data"
+import {
+  wateringList,
+  lightList,
+  idealLocationList,
+  whereToGrowList,
+  specialFeaturesList,
+  typeOfPlantsList,
+} from "./../../data";
 
 import styles from "./productUpdateForm.module.scss";
 import "./../../custom.scss";
@@ -22,18 +29,19 @@ const UpdateProductForm = () => {
   const [product, setProduct] = useState();
   const [productImages, setProductImages] = useState([]);
 
-  const [watering, setWatering] = useState("");
-  const [light, setLight] = useState("");
+  const [watering, setWatering] = useState(null);
+  const [light, setLight] = useState(null);
   const [idealLocation, setIdealLocation] = useState([]);
   const [whereToGrow, setWhereToGrow] = useState([]);
   const [specialFeatures, setSpecialFeatures] = useState([]);
-  const [typeOfPlants, setTypeOfPlants] = useState([])
+  const [typeOfPlants, setTypeOfPlants] = useState([]);
 
   const [commonProblems, setCommonProblems] = useState([]);
   const [decorTips, setDecorTips] = useState([]);
   const [plantCare, setPlantCare] = useState([]);
 
-  const onDeleteImage = (img) => setProductImages(prev => prev.filter(i => i !== img))
+  const onDeleteImage = (img) =>
+    setProductImages((prev) => prev.filter((i) => i !== img));
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,12 +56,34 @@ const UpdateProductForm = () => {
   }, [id]);
 
   useEffect(() => {
-    setWatering(product?.watering || '')
-    setLight(product?.light || '')
-    setIdealLocation(product?.idealLocation || [])
-    setWhereToGrow(product?.whereToGrow || [])
-    setSpecialFeatures(product?.specialFeatures || [])
-    setTypeOfPlants(product?.typeOfPlants || [])
+    setWatering(
+      product?.watering
+        ? { text: product?.watering, value: product?.watering }
+        : null
+    );
+    setLight(
+      product?.light ? { text: product?.light, value: product?.light } : null
+    );
+    setIdealLocation(
+      product?.idealLocation?.map((item) => {
+        return { text: item, value: item };
+      }) || []
+    );
+    setWhereToGrow(
+      product?.whereToGrow?.map((item) => {
+        return { text: item, value: item };
+      }) || []
+    );
+    setSpecialFeatures(
+      product?.specialFeatures?.map((item) => {
+        return { text: item, value: item };
+      }) || []
+    );
+    setTypeOfPlants(
+      product?.typeOfPlants?.map((item) => {
+        return { text: item, value: item };
+      }) || []
+    );
     // setLivingConditions(product?.livingConditions || []);
     setCommonProblems(product?.commonProblems || []);
     setDecorTips(product?.decorTips || []);
@@ -65,16 +95,16 @@ const UpdateProductForm = () => {
     try {
       const productToUpdate = {
         ...values,
-        watering,
-        light,
-        idealLocation,
-        whereToGrow,
-        specialFeatures,
-        typeOfPlants,
+        watering: watering?.text || "",
+        light: light?.text || "",
+        idealLocation: idealLocation?.map((item) => item.text) || [],
+        whereToGrow: whereToGrow?.map((item) => item.text) || [],
+        specialFeatures: specialFeatures?.map((item) => item.text) || [],
+        typeOfPlants: typeOfPlants?.map((item) => item.text) || [],
         decorTips,
         commonProblems,
         plantCare,
-        productImages: productImages
+        productImages: productImages,
       };
       delete productToUpdate.stocks;
       delete productToUpdate.reviews;
@@ -177,9 +207,12 @@ const UpdateProductForm = () => {
                 </p>
                 <div className={styles.imgs}>
                   {productImages?.map((img) => (
-                    <div className={styles.imgBox}>
-                      <MdCancel className={styles.icon} onClick={() => onDeleteImage(img)} />
-                      <img key={img} className={styles.img} src={img} alt="" />
+                    <div className={styles.imgBox} key={img}>
+                      <MdCancel
+                        className={styles.icon}
+                        onClick={() => onDeleteImage(img)}
+                      />
+                      <img className={styles.img} src={img} alt="" />
                     </div>
                   ))}
                 </div>

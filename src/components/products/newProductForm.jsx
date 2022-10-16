@@ -8,21 +8,28 @@ import productService from "../../services/product";
 import InputGroup from "../UI/inputs/inputGroup/inputGroup";
 import SelectInput from "../UI/inputs/selectInput";
 
-import { wateringList, lightList, idealLocationList, whereToGrowList, specialFeaturesList, typeOfPlantsList } from "./../../data"
+import {
+  wateringList,
+  lightList,
+  idealLocationList,
+  whereToGrowList,
+  specialFeaturesList,
+  typeOfPlantsList,
+} from "./../../data";
 
 import styles from "./newProductForm.module.scss";
 import "./../../custom.scss";
 
 const NewProductForm = () => {
   const authen = useSelector((state) => state.authentication);
-  const history = useHistory()
+  const history = useHistory();
 
-  const [watering, setWatering] = useState("");
-  const [light, setLight] = useState("");
+  const [watering, setWatering] = useState(null);
+  const [light, setLight] = useState(null);
   const [idealLocation, setIdealLocation] = useState([]);
   const [whereToGrow, setWhereToGrow] = useState([]);
   const [specialFeatures, setSpecialFeatures] = useState([]);
-  const [typeOfPlants, setTypeOfPlants] = useState([])
+  const [typeOfPlants, setTypeOfPlants] = useState([]);
   // const [livingConditions, setLivingConditions] = useState([]);
   const [commonProblems, setCommonProblems] = useState([]);
   const [decorTips, setDecorTips] = useState([]);
@@ -33,12 +40,12 @@ const NewProductForm = () => {
       const newProduct = {
         ...values,
         // livingConditions,
-        watering,
-        light,
-        idealLocation,
-        whereToGrow,
-        specialFeatures,
-        typeOfPlants,
+        watering: watering?.text || null,
+        light: light?.text || null,
+        idealLocation: idealLocation?.map((item) => item.text) || [],
+        whereToGrow: whereToGrow?.map((item) => item.text) || [],
+        specialFeatures: specialFeatures?.map((item) => item.text) || [],
+        typeOfPlants: typeOfPlants?.map((item) => item.text) || [],
         decorTips,
         commonProblems,
         plantCare,
@@ -57,7 +64,7 @@ const NewProductForm = () => {
         formData,
         authen?.user?.token
       );
-      history.push(`/admin/products/${returnedProduct.data.id}`)
+      history.push(`/admin/products/${returnedProduct.data.id}`);
     } catch (err) {
       console.log(err);
     }
@@ -240,9 +247,7 @@ const NewProductForm = () => {
                 multiple={true}
               />
             </div>
-            <div
-              className={`${styles.inputContainer} ${styles.typeOfPlants}`}
-            >
+            <div className={`${styles.inputContainer} ${styles.typeOfPlants}`}>
               <label className={styles.label}>Type of plants</label>
               <SelectInput
                 listData={typeOfPlantsList}
