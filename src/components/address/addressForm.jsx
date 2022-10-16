@@ -22,8 +22,8 @@ const AddressForm = ({ address, onCancel, setAddresses }) => {
     const fetchData = async () => {
       const provinceData = await locationService.getProvinces();
       setProvinces(
-        provinceData.data.map((p) => {
-          return { text: p.name, value: p.code };
+        provinceData.data.data.map((p) => {
+          return { text: p.ProvinceName, value: p.ProvinceID };
         })
       );
     };
@@ -36,8 +36,8 @@ const AddressForm = ({ address, onCancel, setAddresses }) => {
         curProvince.value
       );
       setDistricsts(
-        districtData.data.districts.map((p) => {
-          return { text: p.name, value: p.code };
+        districtData.data.data.map((p) => {
+          return { text: p.DistrictName, value: p.DistrictID };
         })
       );
     };
@@ -48,8 +48,8 @@ const AddressForm = ({ address, onCancel, setAddresses }) => {
     const fetchData = async () => {
       const wardData = await locationService.getWards(curDistrict.value);
       setWards(
-        wardData.data.wards.map((p) => {
-          return { text: p.name, value: p.code };
+        wardData.data.data.map((p) => {
+          return { text: p.WardName, value: p.WardCode };
         })
       );
     };

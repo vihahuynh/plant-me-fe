@@ -1,18 +1,64 @@
 import axios from "axios";
 
-const baseUrl = "https://provinces.open-api.vn/api/";
+// const baseUrl = "https://provinces.open-api.vn/api/";
+
+// const getProvinces = () => {
+//   return axios.get(baseUrl);
+// };
+
+// const getDistricts = (code) => {
+//   return axios.get(`${baseUrl}p/${code}?depth=2`);
+// };
+
+// const getWards = (code) => {
+//   return axios.get(`${baseUrl}d/${code}?depth=2`);
+// };
+
+console.log("meow: ", process.env.REACT_APP_GHN_TOKEN);
+
+const baseUrl = "https://online-gateway.ghn.vn";
 
 const getProvinces = () => {
-  return axios.get(baseUrl);
+  return axios.get(`${baseUrl}/shiip/public-api/master-data/province`, {
+    headers: { Token: process.env.REACT_APP_GHN_TOKEN },
+  });
 };
 
 const getDistricts = (code) => {
-  return axios.get(`${baseUrl}p/${code}?depth=2`);
+  return axios.get(`${baseUrl}/shiip/public-api/master-data/district`, {
+    headers: { Token: process.env.REACT_APP_GHN_TOKEN },
+    params: { province_id: code },
+  });
 };
 
 const getWards = (code) => {
-  return axios.get(`${baseUrl}d/${code}?depth=2`);
+  return axios.get(`${baseUrl}/shiip/public-api/master-data/ward`, {
+    headers: { Token: process.env.REACT_APP_GHN_TOKEN },
+    params: { district_id: code },
+  });
 };
 
-const locationService = { getProvinces, getDistricts, getWards };
+const getDeliveryCharge = (districtID, wardID, weight) => {
+  return (
+    axios.get(`${baseUrl}/shiip/public-api/v2/shipping-order/fee`),
+    {
+      headers: { Token: process.env.REACT_APP_GHN_TOKEN },
+      params: {
+        from_district_id: process.env.REACT_APP_GHN_FROM_DISTRICT_ID,
+        service_id: 53320, // Standard
+        service_type_id: 2,
+        to_district_id: districtID,
+        to_ward_code: wardID,
+        weight,
+      },
+    }
+  );
+};
+
+const locationService = {
+  getProvinces,
+  getDistricts,
+  getWards,
+  getDeliveryCharge,
+};
 export default locationService;
