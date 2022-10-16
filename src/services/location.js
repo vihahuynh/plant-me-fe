@@ -39,20 +39,18 @@ const getWards = (code) => {
 };
 
 const getDeliveryCharge = (districtID, wardID, weight) => {
-  return (
-    axios.get(`${baseUrl}/shiip/public-api/v2/shipping-order/fee`),
-    {
-      headers: { Token: process.env.REACT_APP_GHN_TOKEN },
-      params: {
-        from_district_id: process.env.REACT_APP_GHN_FROM_DISTRICT_ID,
-        service_id: 53320, // Standard
-        service_type_id: 2,
-        to_district_id: districtID,
-        to_ward_code: wardID,
-        weight,
-      },
-    }
-  );
+  const fromDistrictID = Number(process.env.REACT_APP_GHN_FROM_DISTRICT_ID);
+  return axios.get(`${baseUrl}/shiip/public-api/v2/shipping-order/fee`, {
+    headers: { Token: process.env.REACT_APP_GHN_TOKEN },
+    params: {
+      from_district_id: fromDistrictID,
+      service_id: 53321, // Standard
+      service_type_id: 2,
+      to_district_id: districtID,
+      to_ward_code: wardID,
+      weight,
+    },
+  });
 };
 
 const locationService = {
