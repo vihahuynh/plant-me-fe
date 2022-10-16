@@ -2,55 +2,78 @@ import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styles from "./pagination.module.scss";
 
-const Pagination = ({ page, setPage, totalPages, itemsPerPage, theme = "primary" }) => {
-  const history = useHistory()
-  const queries = history.location.search.slice(1)
-  const otherQueries = queries.split("&").filter(q => !q.includes("skip") && !q.includes("limit")).join("&")
+const Pagination = ({
+  page,
+  setPage,
+  totalPages,
+  itemsPerPage,
+  theme = "primary",
+}) => {
+  const history = useHistory();
+  const queries = history.location.search.slice(1);
+  const otherQueries = queries
+    .split("&")
+    .filter((q) => !q.includes("skip") && !q.includes("limit"))
+    .join("&");
 
-  const limit = queries.split("&").find(q => q.includes("limit"))?.split("=")?.[1]
-  const skip = queries.split("&").find(q => q.includes("skip"))?.split("=")?.[1]
-  const curPage = +skip / +limit + 1
+  const limit = queries
+    .split("&")
+    .find((q) => q.includes("limit"))
+    ?.split("=")?.[1];
+  const skip = queries
+    .split("&")
+    .find((q) => q.includes("skip"))
+    ?.split("=")?.[1];
+  const curPage = +skip / +limit + 1;
 
   useEffect(() => {
     if (curPage !== page) {
-      setPage(curPage)
+      setPage(curPage);
     }
-  }, [curPage, page, setPage])
+  }, [curPage, page, setPage]);
 
   useEffect(() => {
-    if (!queries.includes("") || !queries.includes("limit")) {
+    if (!queries.includes("skip") && !queries.includes("limit")) {
       history.push({
-        search: `skip=${(page - 1) * itemsPerPage}&limit=${itemsPerPage}${otherQueries ? `&${otherQueries}` : ''}`
-      })
+        search: `skip=${(page - 1) * itemsPerPage}&limit=${itemsPerPage}${
+          otherQueries ? `&${otherQueries}` : ""
+        }`,
+      });
     }
-  }, [queries, history, itemsPerPage, page, otherQueries])
+  }, [queries, history, itemsPerPage, page, otherQueries]);
 
   const onNext = () => {
     setPage((curPage) => {
-      const newPage = curPage + 1 >= totalPages ? totalPages : curPage + 1
+      const newPage = curPage + 1 >= totalPages ? totalPages : curPage + 1;
       history.push({
-        search: `skip=${(newPage - 1) * itemsPerPage}&limit=${itemsPerPage}${otherQueries ? `&${otherQueries}` : ''}`
-      })
-      return newPage
+        search: `skip=${(newPage - 1) * itemsPerPage}&limit=${itemsPerPage}${
+          otherQueries ? `&${otherQueries}` : ""
+        }`,
+      });
+      return newPage;
     });
-  }
+  };
 
   const onPrevious = () => {
     setPage((curPage) => {
-      const newPage = curPage === 1 ? 1 : curPage - 1
+      const newPage = curPage === 1 ? 1 : curPage - 1;
       history.push({
-        search: `skip=${(newPage - 1) * itemsPerPage}&limit=${itemsPerPage}${otherQueries ? `&${otherQueries}` : ''}`
-      })
-      return newPage
+        search: `skip=${(newPage - 1) * itemsPerPage}&limit=${itemsPerPage}${
+          otherQueries ? `&${otherQueries}` : ""
+        }`,
+      });
+      return newPage;
     });
-  }
+  };
 
   const onSelectPage = (value) => {
-    setPage(value)
+    setPage(value);
     history.push({
-      search: `skip=${(value - 1) * itemsPerPage}&limit=${itemsPerPage}${otherQueries ? `&${otherQueries}` : ''}`
-    })
-  }
+      search: `skip=${(value - 1) * itemsPerPage}&limit=${itemsPerPage}${
+        otherQueries ? `&${otherQueries}` : ""
+      }`,
+    });
+  };
 
   const showPages = () => {
     let start = page - 2 > 0 ? page - 2 : 1;

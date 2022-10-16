@@ -3,7 +3,7 @@ import CheckBox from "../inputs/checkBox";
 import RadioInput from "../inputs/radioInput";
 
 import styles from "./dropdownMenu.module.scss";
-import { useHistory } from "react-router-dom";
+import { useHistory, withRouter } from "react-router-dom";
 
 const DropdownMenu = ({ item }) => {
   const history = useHistory();
@@ -83,4 +83,4 @@ const DropdownMenu = ({ item }) => {
   );
 };
 
-export default DropdownMenu;
+export default withRouter(DropdownMenu);

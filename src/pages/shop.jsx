@@ -10,7 +10,7 @@ import productService from "../services/product";
 import { plantsFilterOptions, plantsSortOptions } from "../data";
 
 import styles from "./shop.module.scss";
-import { useHistory } from "react-router-dom";
+import { useHistory, withRouter } from "react-router-dom";
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
@@ -24,7 +24,6 @@ const Shop = () => {
     .join("&");
 
   useEffect(() => {
-    console.log("meow");
     const fetchData = async () => {
       try {
         const productsData = await productService.getAll(otherQueries);
@@ -39,8 +38,10 @@ const Shop = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const productsData = await productService.getAll(queries);
-        setProducts(productsData.data);
+        if (queries.includes("skip") && queries.includes("limit")) {
+          const productsData = await productService.getAll(queries);
+          setProducts(productsData.data);
+        }
       } catch (err) {
         console.log(err);
       }
@@ -50,16 +51,14 @@ const Shop = () => {
 
   return (
     <Wrapper>
-      {!!filterProducts.length && (
-        <div className={styles.btnContainers}>
-          <div className={styles.btn}>
-            <SortDrawer sortOptions={plantsSortOptions} />
-          </div>
-          <div className={styles.btn}>
-            <FilterDrawer filterOptions={plantsFilterOptions} />
-          </div>
+      <div className={styles.btnContainers}>
+        <div className={styles.btn}>
+          <SortDrawer sortOptions={plantsSortOptions} />
         </div>
-      )}
+        <div className={styles.btn}>
+          <FilterDrawer filterOptions={plantsFilterOptions} />
+        </div>
+      </div>
       <div className={styles.container}>
         <Products products={products} />
         <Pagination
@@ -73,4 +72,4 @@ const Shop = () => {
   );
 };
 
-export default Shop;
+export default withRouter(Shop);
