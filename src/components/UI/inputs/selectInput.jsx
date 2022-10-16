@@ -6,6 +6,8 @@ const SelectInput = ({
   currentOption,
   setCurrentOption,
   multiple = false,
+  placeholder = "Please select an option",
+  theme = "primary",
 }) => {
   const [openDataList, setOpenDataList] = useState(false);
 
@@ -25,13 +27,17 @@ const SelectInput = ({
 
   const toggleOpenDataList = () => setOpenDataList((prev) => !prev);
 
+  const optionBoxClassNames = `${styles.optionBox} ${styles[theme]}`;
+
   if (!multiple) {
     return (
       <div className={styles.container}>
-        <div className={styles.optionBox} onClick={toggleOpenDataList}>
-          <p className={styles.chosenText}>
-            {currentOption?.text || "Please select an option"}
-          </p>
+        <div className={optionBoxClassNames} onClick={toggleOpenDataList}>
+          {currentOption?.value ? (
+            <p className={styles.chosenText}>{currentOption?.text}</p>
+          ) : (
+            <p className={styles.placeholder}>{placeholder}</p>
+          )}
         </div>
         <ul
           className={`${styles.dataList} ${openDataList ? styles.active : ""}`}
@@ -53,11 +59,14 @@ const SelectInput = ({
   }
   return (
     <div className={styles.container}>
-      <div className={styles.optionBox} onClick={toggleOpenDataList}>
-        <p className={styles.chosenText}>
-          {currentOption?.map((op) => op.text)?.join(", ") ||
-            "Please select an option"}
-        </p>
+      <div className={styles.optionBoxClassNames} onClick={toggleOpenDataList}>
+        {currentOption?.length ? (
+          <p className={styles.chosenText}>
+            {currentOption?.map((op) => op.text)?.join(", ")}
+          </p>
+        ) : (
+          <p className={styles.placeholder}>{placeholder}</p>
+        )}
       </div>
       <ul className={`${styles.dataList} ${openDataList ? styles.active : ""}`}>
         {listData.map((item) => (

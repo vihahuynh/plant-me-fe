@@ -2,9 +2,17 @@ import axios from "axios";
 
 const baseUrl = "https://provinces.open-api.vn/api/";
 
-const getAll = () => {
+const getProvinces = () => {
   return axios.get(baseUrl);
 };
 
-const locationService = { getAll };
+const getDistricts = (code) => {
+  return axios.get(`${baseUrl}p/${code}?depth=2`);
+};
+
+const getWards = (code) => {
+  return axios.get(`${baseUrl}d/${code}?depth=2`);
+};
+
+const locationService = { getProvinces, getDistricts, getWards };
 export default locationService;

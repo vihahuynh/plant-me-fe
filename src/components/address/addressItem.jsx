@@ -36,6 +36,10 @@ const AddressItem = ({
     }
   };
 
+  const fullAddress = address
+    ? `${address.address}, ${address.ward.text}, ${address.district.text}, ${address.province.text}`
+    : "";
+
   return (
     <li className={styles.addressItem}>
       <div className={styles.btnGroup}>
@@ -76,7 +80,7 @@ const AddressItem = ({
       </div>
       <p>
         <span>Address: </span>
-        {address.address}
+        {fullAddress}
       </p>
       <p>
         <span>Phone number: </span>

@@ -36,6 +36,10 @@ const CartSummary = ({ title, onClick, disabled = false }) => {
       0
     );
 
+  const fullAddress = address
+    ? `${address.address}, ${address.ward.text}, ${address.district.text}, ${address.province.text}`
+    : "";
+
   return (
     <div className={styles.summary}>
       <div className={styles.delivery}>
@@ -52,7 +56,7 @@ const CartSummary = ({ title, onClick, disabled = false }) => {
               <p>{address?.name}</p>
               <p>{address?.phoneNumber}</p>
             </div>
-            <p className={styles.address}>{address?.address}</p>
+            <p className={styles.address}>{fullAddress}</p>
           </>
         ) : (
           <></>

@@ -20,16 +20,52 @@ const AddressForm = ({ address, onCancel, setAddresses }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const provinceData = await locationService.getAll();
-      setProvinces(provinceData.data.map((p) => p.name));
+      const provinceData = await locationService.getProvinces();
+      setProvinces(
+        provinceData.data.map((p) => {
+          return { text: p.name, value: p.code };
+        })
+      );
     };
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const districtData = await locationService.getDistricts(
+        curProvince.value
+      );
+      setDistricsts(
+        districtData.data.districts.map((p) => {
+          return { text: p.name, value: p.code };
+        })
+      );
+    };
+    if (curProvince?.value) fetchData();
+  }, [curProvince]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const wardData = await locationService.getWards(curDistrict.value);
+      setWards(
+        wardData.data.wards.map((p) => {
+          return { text: p.name, value: p.code };
+        })
+      );
+    };
+    if (curDistrict?.value) fetchData();
+  }, [curDistrict]);
+
   const onAddNewAddress = async (values) => {
     try {
+      const address = {
+        ...values,
+        province: curProvince,
+        district: curDistrict,
+        ward: curWard,
+      };
       const newAddress = await addressService.create(
-        values,
+        address,
         authen?.user?.token
       );
       setAddresses((prev) => prev.concat(newAddress.data));
@@ -42,9 +78,15 @@ const AddressForm = ({ address, onCancel, setAddresses }) => {
 
   const onUpdateAddress = async (id, values) => {
     try {
+      const address = {
+        ...values,
+        province: curProvince,
+        district: curDistrict,
+        ward: curWard,
+      };
       const updatedAddress = await addressService.update(
         id,
-        values,
+        address,
         authen?.user?.token
       );
       setAddresses((prev) =>
@@ -136,28 +178,57 @@ const AddressForm = ({ address, onCancel, setAddresses }) => {
                   errors.phoneNumber}
               </p>
             </div>
-            {/* <div className={styles.inputContainer}>
-              <input
-                id="address"
-                type="text"
-                name="address"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.address}
-                placeholder="Address"
-              />
-              <p className={styles.errors}>
-                {errors.address && touched.address && errors.address}
-              </p>
-            </div> */}
+
             <div className={`${styles.inputContainer} ${styles.location}`}>
-              <label className={styles.label}>City</label>
               <SelectInput
                 listData={provinces}
                 currentOption={curProvince}
                 setCurrentOption={setCurProvince}
+                placeholder="City"
+                theme={address ? "light" : "primary"}
               />
             </div>
+
+            {!!curProvince?.value && (
+              <div className={`${styles.inputContainer} ${styles.location}`}>
+                <SelectInput
+                  listData={districts}
+                  currentOption={curDistrict}
+                  setCurrentOption={setCurDistrict}
+                  placeholder="District"
+                  theme={address ? "light" : "primary"}
+                />
+              </div>
+            )}
+
+            {!!curDistrict?.value && (
+              <div className={`${styles.inputContainer} ${styles.location}`}>
+                <SelectInput
+                  listData={wards}
+                  currentOption={curWard}
+                  setCurrentOption={setCurWard}
+                  placeholder="Ward"
+                  theme={address ? "light" : "primary"}
+                />
+              </div>
+            )}
+
+            {!!curWard?.value && (
+              <div className={styles.inputContainer}>
+                <input
+                  id="address"
+                  type="text"
+                  name="address"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.address}
+                  placeholder="Address"
+                />
+                <p className={styles.errors}>
+                  {errors.address && touched.address && errors.address}
+                </p>
+              </div>
+            )}
 
             <div className={styles.formBtnGroup}>
               <Button

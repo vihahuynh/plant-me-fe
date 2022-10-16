@@ -132,6 +132,7 @@ const StockForm = ({ stock, productId, onCancel, setStocks }) => {
                   ]}
                   currentOption={currentSize}
                   setCurrentOption={setCurrentSize}
+                  theme="light"
                 />
                 <p className={styles.errors}>
                   {errors.size && touched.size && errors.size}

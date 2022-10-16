@@ -14,8 +14,6 @@ const DropdownMenu = ({ item }) => {
     )
   );
 
-  console.log("queries: ", queries);
-
   const onAddFilter = (query) => {
     let newQueries = [...queries];
     newQueries = newQueries.filter(
