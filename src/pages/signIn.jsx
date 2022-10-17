@@ -23,7 +23,6 @@ const SignIn = () => {
           user: result.data,
         })
       );
-      console.log(result.data)
       dispatch(authenticationActions.login({ user: result.data }));
       history.push("/");
     } catch (err) {
@@ -37,6 +36,7 @@ const SignIn = () => {
       <img src="/images/blog-3.png" alt="plant-care" />
       <div className={styles.formContainer}>
         <h2>Sign In</h2>
+        <a className={styles.url} href="/signup">Do not have an account?</a>
         <p className={styles.bigError}>{!!error && error}</p>
         <Formik
           initialValues={{ loginData: "", password: "" }}

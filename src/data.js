@@ -19,8 +19,8 @@ export const mainFeatures = [
 export const subFeatures = [
   {
     id: 1,
-    title: "Fast Delivery",
-    desc: "Orders above 500.000 VND",
+    title: "Free Delivery",
+    desc: "Orders above 600.000 VND",
     imageUrl: "/images/fast-delivery.png",
   },
   {

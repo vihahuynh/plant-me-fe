@@ -15,5 +15,9 @@ const update = (id, updateObject, token) => {
   });
 };
 
-const userService = { getAll, create, update };
+const subscribe = (subscribed, token) => {
+  return axios.patch(`${baseUrl}/me/subscribe`, { subscribed }, { headers: { Authorization: `bearer ${token}` } })
+}
+
+const userService = { getAll, create, update, subscribe };
 export default userService;

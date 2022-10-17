@@ -4,6 +4,16 @@
   position: absolute;
   top: -10vh;
 
+  .url {
+    font-size: $default-font-size;
+    color: $color-primary;
+    position: absolute;
+    top: 5rem;
+    right: 4rem;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
   img {
     width: 100vw;
     height: 100vh;
