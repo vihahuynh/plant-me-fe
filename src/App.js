@@ -33,6 +33,7 @@ import DeliveryAddress from "./pages/user/deliveryAddress";
 
 import { authenticationActions, cartActions } from "./store";
 import cartService from "./services/cart";
+import AdminOrderHistory from "./pages/admin/adminOrderHistory";
 
 const App = () => {
   const authen = useSelector((state) => state.authentication);
@@ -121,6 +122,9 @@ const App = () => {
         </Route>
         <Route path="/admin/products/new">
           <NewProduct />
+        </Route>
+        <Route exact path="/admin/order-history">
+          <AdminOrderHistory />
         </Route>
         <Route exact path="/admin/products">
           <AdminProducts />

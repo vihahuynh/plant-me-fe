@@ -14,7 +14,7 @@ const Subcribe = () => {
     clearTimeout(delay)
     if (authen?.user?.token) {
       await userService.subscribe(true, authen?.user?.token)
-      dispatch(authenticationActions.update({ user: { ...authen.user, subcribed: true } }))
+      dispatch(authenticationActions.update({ user: { ...authen.user, subscribed: true } }))
       dispatch(alertActions.updateMessage({ message: "Thank you for subscribing!" }))
       delay = setTimeout(() => dispatch(alertActions.clear()), 3000)
     }
