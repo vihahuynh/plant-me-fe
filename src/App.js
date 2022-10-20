@@ -101,10 +101,10 @@ const App = () => {
         <Route path="/signup">
           <SignUp />
         </Route>
-        <Route path="/user/order-history/:orderId/tracking">
+        <Route path="/user/order-history/tracking/:orderId">
           <OrderTracking />
         </Route>
-        <Route path="/user/order-history/:orderId">
+        <Route path="/user/order-history/view/:orderId">
           <OrderDetails />
         </Route>
         <Route path="/user/order-history">
@@ -122,7 +122,7 @@ const App = () => {
         <Route path="/user/reviews">
           <ReviewHistory />
         </Route>
-        <Route path="/user/:userId">
+        <Route path="/user/me">
           <Account />
         </Route>
         <Route path="/admin/products/new">

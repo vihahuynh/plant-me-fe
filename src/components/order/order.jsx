@@ -57,7 +57,7 @@ const Order = ({ order }) => {
             size="small"
             borderRadius="square"
             theme="light"
-            url={`/user/order-history/${order.id}`}
+            url={`/user/order-history/view/${order.id}`}
           />
         </div>
       </div>

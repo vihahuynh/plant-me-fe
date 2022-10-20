@@ -23,7 +23,7 @@ const UserLeftMenu = () => {
       <h3>{authen?.user?.username}</h3>
       <ul className={styles.list}>
         <li className={`${styles.item} ${path === "" ? styles.active : ""}`}>
-          <Link to={`/user/${authen?.user?.id}`}>
+          <Link to="/user/me">
             <FaUserAlt className={styles.icon} />
             Account info
           </Link>
@@ -33,7 +33,7 @@ const UserLeftMenu = () => {
             path === "order-history" ? styles.active : ""
           }`}
         >
-          <Link to={`/user/order-history`}>
+          <Link to="/user/order-history">
             <FaShoppingCart className={styles.icon} />
             Orders
           </Link>
@@ -43,7 +43,7 @@ const UserLeftMenu = () => {
             path === "reviews" ? styles.active : ""
           }`}
         >
-          <Link to={`/user/reviews`}>
+          <Link to="/user/reviews">
             <FaStarHalfAlt className={styles.icon} />
             Reviews
           </Link>
@@ -53,7 +53,7 @@ const UserLeftMenu = () => {
             path === "notification" ? styles.active : ""
           }`}
         >
-          <Link to={`/user/notification`}>
+          <Link to="/user/notification">
             <BsBellFill className={styles.icon} />
             Notification
           </Link>
@@ -63,7 +63,7 @@ const UserLeftMenu = () => {
             path === "address" ? styles.active : ""
           }`}
         >
-          <Link to={`/user/address`}>
+          <Link to="/user/address">
             <FaAddressBook className={styles.icon} />
             Delivery address
           </Link>
@@ -73,7 +73,7 @@ const UserLeftMenu = () => {
             path === "favorite-products" ? styles.active : ""
           }`}
         >
-          <Link to={`/user/favorite-products`}>
+          <Link to="/user/favorite-products">
             <FaHeart className={styles.icon} />
             Favorite products
           </Link>

@@ -71,7 +71,7 @@ const NotificationItem = ({ item, setNotification }) => {
         <LinkButton
           text="View details"
           borderRadius="square"
-          url={item.url || `/user/order-history/${item.order}`}
+          url={item.url || `/user/order-history/view/${item.order}`}
           size="small"
           theme="light"
         />

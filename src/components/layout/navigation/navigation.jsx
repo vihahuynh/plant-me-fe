@@ -50,19 +50,19 @@ const Navigation = () => {
               <BiUserCircle className={styles.icon} />
               <ul className={styles.userMenu}>
                 <li>
-                  <Link to={`/user/${authen?.user?.id}`}>Account info</Link>
+                  <Link to="/user/me">Account info</Link>
                 </li>
                 <li>
-                  <Link to={`/user/order-history`}>Orders</Link>
+                  <Link to="/user/order-history">Orders</Link>
                 </li>
                 <li>
-                  <Link to={`/user/reviews`}>Reviews</Link>
+                  <Link to="/user/reviews">Reviews</Link>
                 </li>
                 <li>
-                  <Link to={`/user/notification`}>Notification</Link>
+                  <Link to="/user/notification">Notification</Link>
                 </li>
                 <li>
-                  <Link to={`/user/favorite-products`}>Favorite products</Link>
+                  <Link to="/user/favorite-products">Favorite products</Link>
                 </li>
                 <li onClick={logout}>Log out</li>
               </ul>
