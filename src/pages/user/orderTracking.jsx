@@ -1,9 +1,10 @@
 import Wrapper from "../../components/layout/wrapper";
+import OrderProgressBar from "./../../components/UI/orderProgressBar";
 
 const OrderTracking = () => {
   return (
     <Wrapper>
-      <OrderTracking />
+      <OrderProgressBar />
     </Wrapper>
   );
 };
