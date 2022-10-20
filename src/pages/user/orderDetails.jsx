@@ -18,7 +18,7 @@ const OrderDetails = () => {
   const authen = useSelector((state) => state.authentication);
   const [order, setOrder] = useState(null);
   const [isOpenCancelModal, setIsOpenCancelModal] = useState(false);
-  const { userId, orderId } = useParams();
+  const { orderId } = useParams();
 
   const onOpenCancelModal = () => setIsOpenCancelModal(true);
   const onCloseCancelModal = () => setIsOpenCancelModal(false);
@@ -61,7 +61,8 @@ const OrderDetails = () => {
     fetchData();
   }, [orderId, authen]);
 
-  if (authen.user?.id !== userId || order.user !== userId) return <p>Permission denied</p>;
+  if (!!authen.user?.id || order.user !== authen?.user?.id)
+    return <p>Permission denied</p>;
   if (!order) return <p>No order found</p>;
 
   return (
@@ -133,7 +134,10 @@ const OrderDetails = () => {
               <p>
                 <span>Payment</span>
                 <span className={styles.boldText}>
-                  {order.totalPayment - order.deliveryCharges + order.totalDiscount}.000 &#x20ab;
+                  {order.totalPayment -
+                    order.deliveryCharges +
+                    order.totalDiscount}
+                  .000 &#x20ab;
                 </span>
               </p>
               <p>
@@ -151,22 +155,21 @@ const OrderDetails = () => {
               <p>
                 <span>Total</span>
                 <span className={styles.totalPayment}>
-                  {order.totalPayment}.000
-                  &#x20ab;
+                  {order.totalPayment}.000 &#x20ab;
                 </span>
               </p>
               {(order.status === "Waiting for payment" ||
                 order.status === "Confirm") && (
-                  <div className={styles.cancelBtn}>
-                    <Button
-                      text="Cancel order"
-                      size="small"
-                      borderRadius="square"
-                      theme="red"
-                      onClick={onOpenCancelModal}
-                    />
-                  </div>
-                )}
+                <div className={styles.cancelBtn}>
+                  <Button
+                    text="Cancel order"
+                    size="small"
+                    borderRadius="square"
+                    theme="red"
+                    onClick={onOpenCancelModal}
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>

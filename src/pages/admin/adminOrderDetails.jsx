@@ -66,9 +66,7 @@ const AdminOrderDetails = () => {
       <div className={styles.main}>
         <div className={styles.orderDetails}>
           <div className={styles.orderDetailsHeader}>
-            <h4>
-              Order: #{order.id} - <span>{order.status}</span>
-            </h4>
+            <h4>Order: #{order.id}</h4>
             <p>
               Order date: <Moment format="YYYY-MM-DD">{order.createdAt}</Moment>
             </p>
@@ -129,7 +127,10 @@ const AdminOrderDetails = () => {
               <p>
                 <span>Payment</span>
                 <span className={styles.boldText}>
-                  {order.totalPayment - order.deliveryCharges + order.totalDiscount}.000 &#x20ab;
+                  {order.totalPayment -
+                    order.deliveryCharges +
+                    order.totalDiscount}
+                  .000 &#x20ab;
                 </span>
               </p>
               <p>
@@ -147,8 +148,7 @@ const AdminOrderDetails = () => {
               <p>
                 <span>Total</span>
                 <span className={styles.totalPayment}>
-                  {order.totalPayment}.000
-                  &#x20ab;
+                  {order.totalPayment}.000 &#x20ab;
                 </span>
               </p>
             </div>

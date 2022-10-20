@@ -54,6 +54,8 @@ const DeliveryAddress = () => {
     if (authen?.user?.token) fetchData();
   }, [authen?.user?.token]);
 
+  if (!authen?.user?.id) return <p>Permission denied</p>;
+
   return (
     <Wrapper>
       <div className={styles.main}>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import Wrapper from "./../../components/layout/wrapper";
 import UserLeftMenu from "../../components/layout/userLetfMenu/userLeftMenu";
@@ -10,25 +10,30 @@ import FilterDrawer from "../../components/UI/drawers/filterDrawer";
 import SortDrawer from "../../components/UI/drawers/sortDrawer";
 import Pagination from "../../components/UI/pagination";
 
-import { notificationFilterOptions, notificationSortOptions } from "./../../data"
+import {
+  notificationFilterOptions,
+  notificationSortOptions,
+} from "./../../data";
 import styles from "./notificationHistory.module.scss";
 
 const NotificationHistory = () => {
   const authen = useSelector((state) => state.authentication);
-  const [page, setPage] = useState(1)
-  const [filterNotification, setFilterNotification] = useState([])
+  const [page, setPage] = useState(1);
+  const [filterNotification, setFilterNotification] = useState([]);
   const [notification, setNotification] = useState([]);
-  const { userId } = useParams();
-  const history = useHistory()
-  const queries = history.location.search.slice(1)
-  const otherQueries = queries.split("&").filter(q => !q.includes("skip") && !q.includes("limit")).join("&")
+  const history = useHistory();
+  const queries = history.location.search.slice(1);
+  const otherQueries = queries
+    .split("&")
+    .filter((q) => !q.includes("skip") && !q.includes("limit"))
+    .join("&");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (!authen?.user) return;
         const notiData = await notificationService.getAll(
-          `show=true&user=${userId}&${otherQueries}`,
+          `show=true&user=${authen?.user?.id}&${otherQueries}`,
           authen?.user?.token
         );
         setFilterNotification(notiData.data);
@@ -37,14 +42,14 @@ const NotificationHistory = () => {
       }
     };
     fetchData();
-  }, [authen, otherQueries, userId]);
+  }, [authen, otherQueries]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (!authen?.user) return;
         const notiData = await notificationService.getAll(
-          `show=true&user=${userId}&${queries}`,
+          `show=true&user=${authen?.user?.id}&${queries}`,
           authen?.user?.token
         );
         setNotification(notiData.data);
@@ -53,9 +58,9 @@ const NotificationHistory = () => {
       }
     };
     fetchData();
-  }, [authen, queries, userId]);
+  }, [authen, queries]);
 
-  if (userId !== authen?.user?.id) return <p>Permission denied</p>;
+  if (!authen?.user?.id) return <p>Permission denied</p>;
 
   return (
     <Wrapper>
@@ -71,7 +76,7 @@ const NotificationHistory = () => {
               <FilterDrawer filterOptions={notificationFilterOptions} />
             </div>
           </div>
-          {!!notification.length &&
+          {!!notification.length && (
             <>
               <ul className={styles.notiList}>
                 {notification.map((item) => (
@@ -83,9 +88,15 @@ const NotificationHistory = () => {
                   />
                 ))}
               </ul>
-              <Pagination page={page} setPage={setPage} totalPages={Math.ceil(filterNotification.length / 2)} itemsPerPage={2} theme="white" />
+              <Pagination
+                page={page}
+                setPage={setPage}
+                totalPages={Math.ceil(filterNotification.length / 2)}
+                itemsPerPage={2}
+                theme="white"
+              />
             </>
-          }
+          )}
         </div>
       </div>
     </Wrapper>
@@ -93,5 +104,3 @@ const NotificationHistory = () => {
 };
 
 export default NotificationHistory;
-
-

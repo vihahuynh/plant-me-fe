@@ -674,4 +674,10 @@ export const orderHistory = [
   },
 ];
 
-export const livingConditions = {};
+export const orderProgress = [
+  "Waiting for payment",
+  "Waiting for confirmation",
+  "Packing",
+  "In transit",
+  "Successful delivery",
+];

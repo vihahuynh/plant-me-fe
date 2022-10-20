@@ -28,7 +28,7 @@ const getStatusIcon = (status) => {
   }
 };
 
-const Order = ({ order, userId }) => {
+const Order = ({ order }) => {
   const statusIcon = getStatusIcon(order.status);
 
   return (
@@ -57,7 +57,7 @@ const Order = ({ order, userId }) => {
             size="small"
             borderRadius="square"
             theme="light"
-            url={`/user/${userId}/order-history/${order.id}`}
+            url={`/user/order-history/${order.id}`}
           />
         </div>
       </div>

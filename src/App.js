@@ -35,6 +35,7 @@ import { authenticationActions, cartActions } from "./store";
 import cartService from "./services/cart";
 import AdminOrderHistory from "./pages/admin/adminOrderHistory";
 import AdminOrderDetails from "./pages/admin/adminOrderDetails";
+import OrderTracking from "./pages/user/orderTracking";
 
 const App = () => {
   const authen = useSelector((state) => state.authentication);
@@ -100,26 +101,29 @@ const App = () => {
         <Route path="/signup">
           <SignUp />
         </Route>
-        <Route exact path="/user/:userId">
-          <Account />
+        <Route path="/user/order-history/:orderId/tracking">
+          <OrderTracking />
         </Route>
-        <Route path="/user/:userId/order-history/:orderId">
+        <Route path="/user/order-history/:orderId">
           <OrderDetails />
         </Route>
-        <Route path="/user/:userId/order-history">
+        <Route path="/user/order-history">
           <OrderHistory />
         </Route>
-        <Route path="/user/:userId/notification">
+        <Route path="/user/notification">
           <NotificationHistory />
         </Route>
-        <Route path="/user/:userId/favorite-products">
+        <Route path="/user/favorite-products">
           <FavoriteProducts />
         </Route>
-        <Route path="/user/:userId/address">
+        <Route path="/user/address">
           <DeliveryAddress />
         </Route>
-        <Route path="/user/:userId/reviews">
+        <Route path="/user/reviews">
           <ReviewHistory />
+        </Route>
+        <Route path="/user/:userId">
+          <Account />
         </Route>
         <Route path="/admin/products/new">
           <NewProduct />

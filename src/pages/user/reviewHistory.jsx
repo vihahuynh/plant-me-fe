@@ -1,15 +1,15 @@
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { reviewsFilterOptions, reviewsSortOptions } from "../../data";
 
 import UserLeftMenu from "../../components/layout/userLetfMenu/userLeftMenu";
-import UserReviewItem from "./../../components/reviews/userReviewItem"
+import UserReviewItem from "./../../components/reviews/userReviewItem";
 import Wrapper from "../../components/layout/wrapper";
 import FilterDrawer from "./../../components/UI/drawers/filterDrawer";
 import SortDrawer from "./../../components/UI/drawers/sortDrawer";
-import Arrow from "./../../components/UI/arrow"
-import ProductToReview from "./../../components/reviews/productToReview"
+import Arrow from "./../../components/UI/arrow";
+import ProductToReview from "./../../components/reviews/productToReview";
 import Pagination from "../../components/UI/pagination";
 
 import reviewService from "../../services/review";
@@ -23,17 +23,19 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const ReviewHistory = () => {
-  const [page, setPage] = useState(1)
-  const [allReviews, setAllReviews] = useState([])
-  const [filterReviews, setFilterReviews] = useState([])
+  const [page, setPage] = useState(1);
+  const [allReviews, setAllReviews] = useState([]);
+  const [filterReviews, setFilterReviews] = useState([]);
   const [reviews, setReviews] = useState([]);
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState([]);
 
-  const userId = useParams().userId;
   const authen = useSelector((state) => state.authentication);
-  const history = useHistory()
-  const queries = history.location.search.slice(1)
-  const otherQueries = queries.split("&").filter(q => !q.includes("skip") && !q.includes("limit")).join("&")
+  const history = useHistory();
+  const queries = history.location.search.slice(1);
+  const otherQueries = queries
+    .split("&")
+    .filter((q) => !q.includes("skip") && !q.includes("limit"))
+    .join("&");
 
   const settings = {
     className: "center",
@@ -49,7 +51,10 @@ const ReviewHistory = () => {
     const fetchData = async () => {
       try {
         if (!authen?.user) return;
-        const reviewsData = await reviewService.getAll(`user=${authen?.user?.id}`, authen?.user?.token);
+        const reviewsData = await reviewService.getAll(
+          `user=${authen?.user?.id}`,
+          authen?.user?.token
+        );
         setAllReviews(reviewsData.data);
       } catch (err) {
         console.log(err);
@@ -62,7 +67,10 @@ const ReviewHistory = () => {
     const fetchData = async () => {
       try {
         if (!authen?.user) return;
-        const reviewsData = await reviewService.getAll(`user=${authen?.user?.id}&${otherQueries}`, authen?.user?.token);
+        const reviewsData = await reviewService.getAll(
+          `user=${authen?.user?.id}&${otherQueries}`,
+          authen?.user?.token
+        );
         setFilterReviews(reviewsData.data);
       } catch (err) {
         console.log(err);
@@ -75,7 +83,10 @@ const ReviewHistory = () => {
     const fetchData = async () => {
       try {
         if (!authen?.user) return;
-        const reviewsData = await reviewService.getAll(`user=${authen?.user?.id}&${queries}`, authen?.user?.token);
+        const reviewsData = await reviewService.getAll(
+          `user=${authen?.user?.id}&${queries}`,
+          authen?.user?.token
+        );
         setReviews(reviewsData.data);
       } catch (err) {
         console.log(err);
@@ -115,7 +126,7 @@ const ReviewHistory = () => {
     fetchData();
   }, [authen?.user, allReviews, reviews]);
 
-  if (authen.user?.id !== userId) return <p>Permission denied</p>;
+  if (!authen.user?.id) return <p>Permission denied</p>;
   if (!filterReviews) return <p>No review found</p>;
 
   return (
@@ -158,7 +169,13 @@ const ReviewHistory = () => {
                     <UserReviewItem key={review.id} item={review} />
                   ))}
                 </ul>
-                <Pagination page={page} setPage={setPage} totalPages={Math.ceil(filterReviews.length / 2)} itemsPerPage={2} theme="white" />
+                <Pagination
+                  page={page}
+                  setPage={setPage}
+                  totalPages={Math.ceil(filterReviews.length / 2)}
+                  itemsPerPage={2}
+                  theme="white"
+                />
               </>
             ) : (
               <p>No review found</p>

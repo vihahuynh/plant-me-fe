@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import Order from "../../components/order/order";
@@ -16,43 +16,51 @@ import { ordersFilterOptions, ordersSortOptions } from "../../data";
 import styles from "./orderHistory.module.scss";
 
 const OrderHistory = () => {
-  const [page, setPage] = useState(1)
-  const [filterOrders, setFilterOrders] = useState([])
+  const [page, setPage] = useState(1);
+  const [filterOrders, setFilterOrders] = useState([]);
   const [orders, setOrders] = useState([]);
 
-  const userId = useParams().userId;
   const authen = useSelector((state) => state.authentication);
-  const history = useHistory()
-  const queries = history.location.search.slice(1)
-  const otherQueries = queries.split("&").filter(q => !q.includes("skip") && !q.includes("limit")).join("&")
+  const history = useHistory();
+  const queries = history.location.search.slice(1);
+  const otherQueries = queries
+    .split("&")
+    .filter((q) => !q.includes("skip") && !q.includes("limit"))
+    .join("&");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (!authen?.user) return;
-        const ordersData = await orderService.getAll(`user=${authen?.user?.id}&${otherQueries}`, authen?.user?.token);
+        const ordersData = await orderService.getAll(
+          `user=${authen?.user?.id}&${otherQueries}`,
+          authen?.user?.token
+        );
         setFilterOrders(ordersData.data);
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
-  }, [userId, authen, otherQueries]);
+  }, [authen, otherQueries]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (!authen?.user) return;
-        const ordersData = await orderService.getAll(`user=${authen?.user?.id}&${queries}`, authen?.user?.token);
+        const ordersData = await orderService.getAll(
+          `user=${authen?.user?.id}&${queries}`,
+          authen?.user?.token
+        );
         setOrders(ordersData.data);
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
-  }, [userId, authen, queries]);
+  }, [authen, queries]);
 
-  if (authen.user?.id !== userId) return <p>Permission denied</p>;
+  if (!authen.user?.id) return <p>Permission denied</p>;
   if (!orders) return <p>No order found</p>;
 
   return (
@@ -76,10 +84,20 @@ const OrderHistory = () => {
               <SearchBar />
               <ul className={styles.ordersList}>
                 {orders.map((order) => (
-                  <Order key={order.id} order={order} userId={userId} />
+                  <Order
+                    key={order.id}
+                    order={order}
+                    userId={authen?.user?.id}
+                  />
                 ))}
               </ul>
-              <Pagination page={page} setPage={setPage} totalPages={Math.ceil(filterOrders.length / 2)} itemsPerPage={2} theme="white" />
+              <Pagination
+                page={page}
+                setPage={setPage}
+                totalPages={Math.ceil(filterOrders.length / 2)}
+                itemsPerPage={2}
+                theme="white"
+              />
             </>
           ) : (
             <p>No order found</p>
@@ -87,7 +105,6 @@ const OrderHistory = () => {
         </div>
       </div>
     </Wrapper>
-
   );
 };
 

@@ -1,7 +1,5 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import productService from "../../services/product";
 
 import Products from "./../../components/products/products";
@@ -13,7 +11,6 @@ import UserLeftMenu from "../../components/layout/userLetfMenu/userLeftMenu";
 const FavoriteProducts = () => {
   const authen = useSelector((state) => state.authentication);
   const [products, setProducts] = useState([]);
-  const { userId } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,7 +31,7 @@ const FavoriteProducts = () => {
   }, [authen?.user?.likedProducts]);
 
   if (!authen) return <p>Permission denied</p>;
-  if (authen?.user?.id !== userId) return <p>Permission denied</p>;
+  if (!authen?.user?.id) return <p>Permission denied</p>;
 
   return (
     <Wrapper>

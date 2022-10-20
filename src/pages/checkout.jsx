@@ -110,9 +110,7 @@ const Checkout = () => {
         };
         await stockService.update(stockToUpdate.id, stockToUpdate);
       }
-      history.push(
-        `/user/${authen?.user?.id}/order-history/${returnedOrder.data.id}`
-      );
+      history.push(`/user/order-history/${returnedOrder.data.id}`);
     } catch (err) {
       console.log(err);
     }
