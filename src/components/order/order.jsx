@@ -1,4 +1,3 @@
-import OrderItem from "./orderItem";
 import LinkButton from "../UI/buttons/linkbutton";
 
 import styles from "./order.module.scss";
@@ -8,6 +7,7 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { MdOutlinePayment } from "react-icons/md";
 import { FiPackage } from "react-icons/fi";
 import { AiOutlineFileDone } from "react-icons/ai";
+import OrderList from "./orderList";
 
 const getStatusIcon = (status) => {
   switch (status) {
@@ -37,11 +37,7 @@ const Order = ({ order, userId }) => {
         {statusIcon}
         <p>{order.status}</p>
       </div>
-      <ul>
-        {order?.cart?.map((orderItem) => (
-          <OrderItem key={`${orderItem.id}-${orderItem.color}-${orderItem.size}`} order={orderItem} />
-        ))}
-      </ul>
+      <OrderList order={order} />
       <div className={styles.orderFooter}>
         <p className={styles.orderPaymentBox}>
           Total payment:{" "}

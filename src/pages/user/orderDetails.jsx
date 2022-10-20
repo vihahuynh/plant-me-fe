@@ -61,7 +61,7 @@ const OrderDetails = () => {
     fetchData();
   }, [orderId, authen]);
 
-  if (authen.user?.id !== userId) return <p>Permission denied</p>;
+  if (authen.user?.id !== userId || order.user !== userId) return <p>Permission denied</p>;
   if (!order) return <p>No order found</p>;
 
   return (

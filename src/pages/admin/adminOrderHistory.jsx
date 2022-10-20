@@ -14,6 +14,7 @@ import orderService from "../../services/order";
 import { ordersFilterOptions, ordersSortOptions } from "../../data";
 
 import styles from "./adminOrderHistory.module.scss";
+import AdminOrder from "../../components/order/adminOrder";
 
 const AdminOrderHistory = () => {
   const [page, setPage] = useState(1)
@@ -56,7 +57,6 @@ const AdminOrderHistory = () => {
   return (
     <Wrapper>
       <div className={styles.main}>
-        <UserLeftMenu />
         <div className={styles.container}>
           <div className={styles.header}>
             <h2>Order history</h2>
@@ -74,7 +74,7 @@ const AdminOrderHistory = () => {
               <SearchBar />
               <ul className={styles.ordersList}>
                 {orders.map((order) => (
-                  <Order key={order.id} order={order} userId={authen?.user?.id} />
+                  <AdminOrder key={order.id} order={order} userId={authen?.user?.id} />
                 ))}
               </ul>
               <Pagination page={page} setPage={setPage} totalPages={Math.ceil(filterOrders.length / 2)} itemsPerPage={2} theme="white" />

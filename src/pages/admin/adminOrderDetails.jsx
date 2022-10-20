@@ -3,9 +3,7 @@ import ReactDOM from "react-dom";
 import Moment from "react-moment";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import UserLeftMenu from "../../components/layout/userLetfMenu/userLeftMenu";
-import OrderDetailsItem from "../../components/order/orderDetailsItem";
-import Button from "../../components/UI/buttons/button";
+import AdminOrderDetailsItem from "../../components/order/adminOrderDetailsItem";
 import Wrapper from "../../components/layout/wrapper";
 import Modal from "../../components/UI/modal";
 
@@ -18,9 +16,8 @@ const AdminOrderDetails = () => {
   const authen = useSelector((state) => state.authentication);
   const [order, setOrder] = useState(null);
   const [isOpenCancelModal, setIsOpenCancelModal] = useState(false);
-  const { userId, orderId } = useParams();
+  const { orderId } = useParams();
 
-  const onOpenCancelModal = () => setIsOpenCancelModal(true);
   const onCloseCancelModal = () => setIsOpenCancelModal(false);
 
   const onCancelOrder = async () => {
@@ -61,13 +58,12 @@ const AdminOrderDetails = () => {
     fetchData();
   }, [orderId, authen]);
 
-  if (authen.user?.id !== userId) return <p>Permission denied</p>;
+  if (!authen.user?.isAdmin) return <p>Permission denied</p>;
   if (!order) return <p>No order found</p>;
 
   return (
     <Wrapper>
       <div className={styles.main}>
-        <UserLeftMenu />
         <div className={styles.orderDetails}>
           <div className={styles.orderDetailsHeader}>
             <h4>
@@ -126,7 +122,7 @@ const AdminOrderDetails = () => {
             </div>
             <ul className={styles.orderList}>
               {order.cart.map((item) => (
-                <OrderDetailsItem key={item.id} order={item} />
+                <AdminOrderDetailsItem key={item.id} order={item} />
               ))}
             </ul>
             <div className={styles.summary}>
@@ -155,18 +151,6 @@ const AdminOrderDetails = () => {
                   &#x20ab;
                 </span>
               </p>
-              {(order.status === "Waiting for payment" ||
-                order.status === "Confirm") && (
-                  <div className={styles.cancelBtn}>
-                    <Button
-                      text="Cancel order"
-                      size="small"
-                      borderRadius="square"
-                      theme="red"
-                      onClick={onOpenCancelModal}
-                    />
-                  </div>
-                )}
             </div>
           </div>
         </div>
