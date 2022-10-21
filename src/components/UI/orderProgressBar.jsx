@@ -1,28 +1,35 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
+import styles from "./orderProgressBar.module.scss"
 
-import { orderProgress } from "./../../data";
-// const steps = [
-//   "Select master blaster campaign settings",
-//   "Create an ad group",
-//   "Create an ad",
-// ];
+const steps = [
+  {
+    id: 1,
+    label: 'Select campaign settings',
+    time: '2021-02-01'
+  },
+  {
+    id: 2,
+    label: 'Create an ad group',
+    time: '2021-02-01'
+  },
+  {
+    id: 3,
+    label: 'Create an ad',
+    time: '2021-02-01'
+  },
+];
 
 const OrderProgressBar = () => {
   return (
-    <Box sx={{ width: "100%" }}>
-      <Stepper activeStep={1} alternativeLabel>
-        {orderProgress.map((label) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-    </Box>
+    <ul className={styles.stepList}>
+      {steps.map(step =>
+        <li key={step.id} className={styles.stepItem}>
+          <p className={styles.stepTitle}>{step.label}</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing eles, sapiente veniam quasi quod deleniti delectus neque.</p>
+          <p>{step.time}</p>
+        </li>
+      )}
+    </ul>
   );
-};
+}
 
-export default OrderProgressBar;
+export default OrderProgressBar

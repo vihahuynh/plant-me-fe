@@ -4,7 +4,7 @@ import { BiUserCircle } from "react-icons/bi/index";
 import { BiCartAlt } from "react-icons/bi/index";
 
 import Logo from "../../UI/logo";
-import SearchBar from "../../UI/inputs/searchBar";
+// import SearchBar from "../../UI/inputs/searchBar";
 import LinkButton from "../../UI/buttons/linkbutton";
 import NavigationItem from "./navigationItem";
 
@@ -33,13 +33,13 @@ const Navigation = () => {
         <ul className={styles.navList}>
           <NavigationItem url="" title="Home" />
           <NavigationItem url="shop" title="Shop" />
-          <NavigationItem url="blogs" title="Blog" />
+          {/* <NavigationItem url="blogs" title="Blog" /> */}
           <NavigationItem url="about" title="About Us" />
           <NavigationItem url="contact" title="Contact" />
         </ul>
       </div>
       <div className={styles.subNav}>
-        <SearchBar />
+        {/* <SearchBar /> */}
         <div className={styles.subNav}>
           <Link to="/cart" className={styles.cart}>
             <BiCartAlt className={styles.icon} />
