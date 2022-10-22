@@ -47,15 +47,30 @@
   .contact {
     margin-right: 2rem;
     list-style: none;
+  }
 
-    li {
-      transform: rotate(-90deg);
-      font-size: $default-font-size;
-      color: $color-grey;
+  .contactItem {
+    transform: rotate(-90deg);
+    font-size: $default-font-size;
+    color: $color-grey;
+    cursor: pointer;
+    transition: all 0.3s;
 
-      &:not(:first-child) {
-        margin-top: 8rem;
-      }
+    &:not(:first-child) {
+      margin-top: 8rem;
     }
+
+    &:hover {
+      transform: rotate(-90deg) scale(1.15);
+    }
+  }
+}
+
+.discoverBtn {
+  transition: all 0.3s;
+  box-shadow: 0 1rem 2rem rgba($color-grey-dark, 0.2);
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0.5rem 1rem rgba($color-grey-dark, 0.2);
   }
 }

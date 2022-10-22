@@ -13,13 +13,18 @@ const Header = () => {
           <p>The best time to plant a tree was 20 years ago</p>
           <p>The second best time is today</p>
         </div>
-        <LinkButton text="Discover" size="medium" url="/shop" />
+        <LinkButton
+          className={styles.discoverBtn}
+          text="Discover"
+          size="large"
+          url="/shop"
+        />
       </div>
       <img src="/images/header-img.png" alt="large-snake-plant" />
       <ul className={styles.contact}>
-        <li>Instagram</li>
-        <li>Facebook</li>
-        <li>Twitter</li>
+        <li className={styles.contactItem}>Instagram</li>
+        <li className={styles.contactItem}>Facebook</li>
+        <li className={styles.contactItem}>Twitter</li>
       </ul>
     </section>
   );

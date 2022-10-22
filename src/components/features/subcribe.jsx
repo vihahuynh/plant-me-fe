@@ -5,20 +5,26 @@ import Button from "../UI/buttons/button";
 import LinkButton from "../UI/buttons/linkbutton";
 
 import styles from "./subcribe.module.scss";
-let delay
+let delay;
 const Subcribe = () => {
-  const authen = useSelector(state => state.authentication)
-  const dispatch = useDispatch()
+  const authen = useSelector((state) => state.authentication);
+  const dispatch = useDispatch();
 
   const onSubscribe = async () => {
-    clearTimeout(delay)
+    clearTimeout(delay);
     if (authen?.user?.token) {
-      await userService.subscribe(true, authen?.user?.token)
-      dispatch(authenticationActions.update({ user: { ...authen.user, subscribed: true } }))
-      dispatch(alertActions.updateMessage({ message: "Thank you for subscribing!" }))
-      delay = setTimeout(() => dispatch(alertActions.clear()), 3000)
+      await userService.subscribe(true, authen?.user?.token);
+      dispatch(
+        authenticationActions.update({
+          user: { ...authen.user, subscribed: true },
+        })
+      );
+      dispatch(
+        alertActions.updateMessage({ message: "Thank you for subscribing!" })
+      );
+      delay = setTimeout(() => dispatch(alertActions.clear()), 3000);
     }
-  }
+  };
 
   if (!authen?.user)
     return (
@@ -31,7 +37,7 @@ const Subcribe = () => {
           <LinkButton
             url="/signup"
             text="Join us"
-            size="large"
+            size="medium"
             className={styles.buttonCustom}
           />
         </div>
@@ -46,10 +52,12 @@ const Subcribe = () => {
       <div className={styles.container}>
         <div>
           <p>Subcribes for offers, care tips</p>
-          <p>& get many <span>more promotions</span></p>
+          <p>
+            & get many <span>more promotions</span>
+          </p>
           <Button
             text="SUBSCRIBES"
-            size="large"
+            size="medium"
             className={styles.buttonCustom}
             onClick={onSubscribe}
           />

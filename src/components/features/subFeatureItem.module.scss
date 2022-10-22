@@ -3,10 +3,11 @@
 .container {
   display: flex;
   align-items: center;
+  transition: all 0.3s;
 
   .imgContainer {
     img {
-      height: 10rem;
+      height: 8rem;
     }
   }
 
@@ -18,5 +19,9 @@
   .desc {
     font-size: $tiny-font-size;
     color: $color-grey;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
   }
 }
