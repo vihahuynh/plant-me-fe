@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import Order from "../../components/order/order";
@@ -108,4 +108,4 @@ const OrderHistory = () => {
   );
 };
 
-export default OrderHistory;
+export default withRouter(OrderHistory);

@@ -1,4 +1,4 @@
-import { useHistory } from "react-router-dom";
+import { useHistory, withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { reviewsFilterOptions, reviewsSortOptions } from "../../data";
@@ -187,4 +187,4 @@ const ReviewHistory = () => {
   );
 };
 
-export default ReviewHistory;
+export default withRouter(ReviewHistory);

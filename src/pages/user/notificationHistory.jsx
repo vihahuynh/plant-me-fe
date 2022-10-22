@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, withRouter } from "react-router-dom";
 
 import Wrapper from "./../../components/layout/wrapper";
 import UserLeftMenu from "../../components/layout/userLetfMenu/userLeftMenu";
@@ -103,4 +103,4 @@ const NotificationHistory = () => {
   );
 };
 
-export default NotificationHistory;
+export default withRouter(NotificationHistory);

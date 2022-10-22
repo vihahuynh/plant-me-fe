@@ -318,8 +318,9 @@ export const plantsFilterOptions = [
     subOptions: typeOfPlantsList.map((item, index) => {
       return {
         id: index,
-        text: item,
-        query: `typeOfPlants=${item}`,
+        text: item.text,
+        value: item.value,
+        query: `typeOfPlants=${item.value}`,
       };
     }),
   },
@@ -330,8 +331,9 @@ export const plantsFilterOptions = [
     subOptions: whereToGrowList.map((item, index) => {
       return {
         id: index,
-        text: item,
-        query: `whereToGrow=${item}`,
+        text: item.text,
+        value: item.value,
+        query: `whereToGrow=${item.value}`,
       };
     }),
   },
@@ -342,8 +344,9 @@ export const plantsFilterOptions = [
     subOptions: lightList.map((item, index) => {
       return {
         id: index,
-        text: item,
-        query: `light=${item}`,
+        text: item.text,
+        value: item.value,
+        query: `light=${item.value}`,
       };
     }),
   },
@@ -354,8 +357,9 @@ export const plantsFilterOptions = [
     subOptions: idealLocationList.map((item, index) => {
       return {
         id: index,
-        text: item,
-        query: `idealLocation=${item}`,
+        text: item.text,
+        value: item.value,
+        query: `idealLocation=${item.value}`,
       };
     }),
   },
@@ -366,8 +370,9 @@ export const plantsFilterOptions = [
     subOptions: wateringList.map((item, index) => {
       return {
         id: index,
-        text: item,
-        query: `watering=${item}`,
+        text: item.text,
+        value: item.value,
+        query: `watering=${item.value}`,
       };
     }),
   },

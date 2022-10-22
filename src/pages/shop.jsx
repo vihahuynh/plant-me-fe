@@ -12,6 +12,8 @@ import { plantsFilterOptions, plantsSortOptions } from "../data";
 import styles from "./shop.module.scss";
 import { useHistory, withRouter } from "react-router-dom";
 
+console.log("plantsFilterOptions: ", plantsFilterOptions);
+
 const Shop = () => {
   const [products, setProducts] = useState([]);
   const [filterProducts, setFilterProducts] = useState([]);

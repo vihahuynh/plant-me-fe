@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import Wrapper from "../../components/layout/wrapper";
@@ -78,7 +78,7 @@ const AdminOrderHistory = () => {
           </div>
           {orders.length ? (
             <>
-              <SearchBar />
+              <SearchBar borderRadius="square" />
               <ul className={styles.ordersList}>
                 {orders.map((order) => (
                   <AdminOrder
@@ -105,4 +105,4 @@ const AdminOrderHistory = () => {
   );
 };
 
-export default AdminOrderHistory;
+export default withRouter(AdminOrderHistory);
