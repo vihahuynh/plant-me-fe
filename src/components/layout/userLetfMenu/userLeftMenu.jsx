@@ -14,7 +14,8 @@ import { BsBellFill } from "react-icons/bs";
 
 const UserLeftMenu = () => {
   const authen = useSelector((state) => state.authentication);
-  const path = useHistory().location.pathname.split("/").slice(-1)[0];
+  const path = useHistory().location.pathname.split("/")[2];
+  console.log("path: ", path);
   const imgSrc = authen?.user?.avatarUrl || "/images/default-avatar.png";
 
   return (
@@ -22,7 +23,7 @@ const UserLeftMenu = () => {
       <img className={styles.avatarImg} src={imgSrc} alt="user-avatar" />
       <h3>{authen?.user?.username}</h3>
       <ul className={styles.list}>
-        <li className={`${styles.item} ${path === "" ? styles.active : ""}`}>
+        <li className={`${styles.item} ${path === "me" ? styles.active : ""}`}>
           <Link to="/user/me">
             <FaUserAlt className={styles.icon} />
             Account info

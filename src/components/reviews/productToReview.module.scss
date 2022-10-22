@@ -3,12 +3,12 @@
 .productBox {
   width: 90%;
   display: flex;
-  column-gap: 3rem;
+  column-gap: 2rem;
 
   background-color: white;
-  border-radius: 1rem;
+  border-radius: 3px;
   padding: 2rem;
-  margin: 2rem;
+  margin: 1rem;
 
   cursor: pointer;
 }
@@ -16,17 +16,18 @@
 .productBoxSmall {
   width: 90%;
   display: flex;
-  column-gap: 3rem;
+  column-gap: 2rem;
 }
 
 .productBoxLeft {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
 
   h5 {
     color: $color-primary;
     font-size: $default-font-size;
+    margin-bottom: 0 !important;
   }
 }
 
@@ -35,5 +36,5 @@
 }
 
 .rating {
-  font-size: 4rem !important;
+  font-size: 3rem !important;
 }

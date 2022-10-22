@@ -81,7 +81,7 @@ const OrderHistory = () => {
           </div>
           {orders.length ? (
             <>
-              <SearchBar />
+              <SearchBar borderRadius="square" />
               <ul className={styles.ordersList}>
                 {orders.map((order) => (
                   <Order

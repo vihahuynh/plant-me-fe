@@ -55,7 +55,9 @@ const NotificationItem = ({ item, setNotification }) => {
       className={styles.notiItem}
       style={{ backgroundColor: item.isRead ? "#eaedf3" : "#fff" }}
     >
-      <Moment format="YYYY-MM-DD">{item.createdAt}</Moment>
+      <Moment className={styles.notiTime} format="YYYY-MM-DD hh:mm:ss">
+        {item.createdAt}
+      </Moment>
       {getIcon(item.type)}
       <p className={styles.notiContent}>{item.content}</p>
       <div className={styles.btnGroup}>

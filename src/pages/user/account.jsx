@@ -135,8 +135,8 @@ const Account = () => {
                   {isEditAvatar ? (
                     <>
                       <Avatar
-                        width={390}
-                        height={295}
+                        width={200}
+                        height={200}
                         onCrop={onCrop}
                         onClose={onClose}
                         onBeforeFileLoad={onBeforeFileLoad}
@@ -235,7 +235,8 @@ const Account = () => {
                 </div>
                 <div className={styles.buttonGroup}>
                   <Button
-                    className={isSubmitting ? styles.submittingBtn : ""}
+                    // className={isSubmitting ? styles.submittingBtn : ""}
+                    disabled={isSubmitting}
                     type="submit"
                     text="Update"
                     size="medium"

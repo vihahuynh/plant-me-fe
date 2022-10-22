@@ -1,16 +1,16 @@
 @import "./../../../variable.scss";
 
 .container {
-  width: 30rem;
+  width: 18rem;
   border-radius: 3px;
-  font-size: $default-font-size;
+  font-size: 1.2rem;
   flex-shrink: 0;
   height: 200%;
-  padding: 3rem 0;
+  padding: 2rem 0;
 
   h3 {
-    margin-left: 4rem;
-    margin-bottom: 2rem;
+    margin-left: 2rem;
+    margin-bottom: 1.5rem;
     color: $color-primary;
   }
 }
@@ -22,17 +22,18 @@
 .item {
   a {
     display: flex;
-    padding: 1.2rem 4rem;
+    padding: 0.8rem 2rem;
+    margin: 2px 0;
   }
 
   border-radius: 3px;
   color: $color-primary;
 
   .icon {
-    height: 2.5rem;
-    width: 2.5rem;
+    height: 1.8rem;
+    width: 1.8rem;
     color: $color-primary;
-    margin-right: 2rem;
+    margin-right: 1rem;
   }
 }
 

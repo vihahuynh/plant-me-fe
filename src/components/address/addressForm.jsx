@@ -235,7 +235,7 @@ const AddressForm = ({ address, onCancel, setAddresses }) => {
                 className={isSubmitting ? styles.submittingBtn : ""}
                 type="submit"
                 text="Cancel"
-                size="medium"
+                size="small"
                 borderRadius="square"
                 theme="light"
                 onClick={onCancel}
@@ -244,7 +244,7 @@ const AddressForm = ({ address, onCancel, setAddresses }) => {
                 className={isSubmitting ? styles.submittingBtn : ""}
                 type="submit"
                 text={address ? "Update" : "Save"}
-                size="medium"
+                size="small"
                 borderRadius="square"
               />
             </div>

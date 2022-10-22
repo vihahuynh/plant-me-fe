@@ -95,13 +95,13 @@ const ReviewForm = ({ onSave, onCancel, rating }) => {
               <Button
                 type="submit"
                 text="Save"
-                size="medium"
+                size="small"
                 borderRadius="square"
               />
               <Button
                 theme="light"
                 text="Cancel"
-                size="medium"
+                size="small"
                 borderRadius="square"
                 onClick={onCancel}
               />
