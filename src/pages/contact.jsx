@@ -1,5 +1,6 @@
 import Wrapper from "../components/layout/wrapper";
 import { Formik } from "formik";
+import Button from "./../components/UI/buttons/button";
 
 import styles from "./contact.module.scss";
 
@@ -96,13 +97,12 @@ const Contact = () => {
                     {errors.comment && touched.comment && errors.comment}
                   </p>
                 </div>
-                <button
+                <Button
                   type="submit"
                   disabled={isSubmitting}
                   className={styles.btn}
-                >
-                  Submit
-                </button>
+                  text="Submit"
+                />
               </form>
             )}
           </Formik>
