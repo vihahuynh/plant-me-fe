@@ -13,6 +13,7 @@ import orderService from "../../services/order";
 
 import styles from "./orderDetails.module.scss";
 import stockService from "../../services/stock";
+import LinkButton from "../../components/UI/buttons/linkbutton";
 
 const OrderDetails = () => {
   const authen = useSelector((state) => state.authentication);
@@ -173,6 +174,12 @@ const OrderDetails = () => {
               )}
             </div>
           </div>
+          <LinkButton
+            className={styles.viewDetailsBtn}
+            text="Traking order"
+            borderRadius="square"
+            url={`/user/order-history/tracking/${order.id}`}
+          />
         </div>
       </div>
       {ReactDOM.createPortal(
