@@ -11,6 +11,7 @@
   padding: 0 1rem 1rem;
   margin: 1rem;
   position: relative;
+  transition: all 0.3s;
 
   .buttonCustom {
     cursor: pointer;
@@ -50,6 +51,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 4;
 
     .icon {
       height: 2rem;
@@ -70,6 +72,7 @@
 
     img {
       width: 14vw;
+      transition: transform 0.3s;
     }
   }
 
@@ -80,10 +83,14 @@
     align-items: center;
 
     p {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       color: $color-grey-dark;
       font-weight: 600;
       text-align: center;
     }
+  }
+
+  &:hover .imgContainer img {
+    transform: scale(1.12);
   }
 }
