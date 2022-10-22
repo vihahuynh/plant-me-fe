@@ -5,9 +5,17 @@ import {
   AiOutlinePlusCircle,
 } from "react-icons/ai/index";
 
-const QuantityInput = ({ quantity, onChange, disabled = false }) => {
+const QuantityInput = ({
+  quantity,
+  onChange,
+  size = "medium",
+  disabled = false,
+}) => {
+  let containerClassName;
+  if (size === "medium") containerClassName = styles.quantityContainer;
+  else containerClassName = styles.quantitySmallContainer;
   return (
-    <div className={`${styles.quantityContainer} ${disabled ? styles.disabled : ""}`}>
+    <div className={`${containerClassName} ${disabled ? styles.disabled : ""}`}>
       <span onClick={() => onChange(+quantity - 1)}>
         <AiOutlineMinusCircle className={styles.icon} />
       </span>

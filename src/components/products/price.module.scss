@@ -4,6 +4,33 @@
   margin: 0.5rem 0;
 
   span {
+    font-size: 1rem;
+
+    &:not(:last-child) {
+      margin-right: 0.8rem;
+    }
+  }
+
+  .price {
+    color: $color-grey;
+    text-decoration: line-through;
+  }
+
+  .priceNet {
+    color: $color-primary;
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
+
+  .salePercent {
+    color: palevioletred;
+  }
+}
+
+.priceMediumContainer {
+  margin: 0.5rem 0;
+
+  span {
     font-size: 1.1rem;
 
     &:not(:last-child) {
@@ -18,7 +45,7 @@
 
   .priceNet {
     color: $color-primary;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 600;
   }
 
@@ -27,7 +54,7 @@
   }
 }
 
-.priceBigContainer {
+.priceLargeContainer {
   margin: 2rem 0;
 
   span {

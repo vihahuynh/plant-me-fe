@@ -6,12 +6,12 @@
   align-items: center;
   justify-content: flex-end;
   border-bottom: 1px solid $color-grey-light;
-  column-gap: 5rem;
+  column-gap: 2rem;
   padding: 1rem 0;
   position: relative;
 
   img {
-    width: 10rem;
+    width: 8rem;
   }
 
   .quantity,
@@ -21,13 +21,18 @@
   }
 
   .itemInfo {
-    // width: 35%;
-    gap: 1rem;
     margin-right: auto;
+
+    img {
+      margin-right: 1rem;
+    }
 
     p {
       font-weight: 500;
-      // width: 50%;
+    }
+
+    .itemBuyInfo {
+      width: 50%;
     }
 
     .color {
@@ -43,7 +48,7 @@
 
   .quantity {
     width: 55%;
-    gap: 3rem;
+    gap: 2rem;
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
@@ -57,8 +62,9 @@
   }
 
   .icon {
-    height: 3rem;
-    width: 3rem;
+    flex-shrink: 0;
+    height: 2rem;
+    width: 2rem;
     color: darkred;
     cursor: pointer;
   }

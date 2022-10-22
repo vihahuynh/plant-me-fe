@@ -1,14 +1,15 @@
 import styles from "./price.module.scss";
 
-const Price = ({ price, salePercent, size = "small" }) => {
+const Price = ({ price, salePercent, size = "medium" }) => {
   const netPrice = Math.round(price - (price * salePercent) / 100);
 
+  let className;
+  if (size === "medium") className = styles.priceMediumContainer;
+  else if (size === "small") className = styles.priceSmallContainer;
+  else className = styles.priceLargeContainer;
+
   return (
-    <div
-      className={
-        size === "small" ? styles.priceSmallContainer : styles.priceBigContainer
-      }
-    >
+    <div className={className}>
       {!!salePercent ? (
         <>
           <span className={styles.price}>{price}.000 &#x20ab;</span>

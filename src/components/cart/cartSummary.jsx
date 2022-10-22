@@ -121,7 +121,7 @@ const CartSummary = ({ title, onClick, disabled = false }) => {
       <Button
         borderRadius="square"
         text={title}
-        size="large"
+        size="medium"
         className={styles.checkoutBtn}
         onClick={() => {
           if (!disabled) onClick();

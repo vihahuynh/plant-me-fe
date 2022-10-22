@@ -68,7 +68,11 @@ const CartItem = ({
     ).unwrap();
     if (!checkoutItem.isCheckout && checkoutAllItems) {
       await dispatch(
-        toggleCheckoutAll({ cart: updatedCart, value: false, token: authen?.user?.token })
+        toggleCheckoutAll({
+          cart: updatedCart,
+          value: false,
+          token: authen?.user?.token,
+        })
       ).unwrap();
     }
   };
@@ -120,7 +124,7 @@ const CartItem = ({
             />
           )}
           <img src={item.image} alt={item.name} />
-          <div>
+          <div className={styles.itemBuyInfo}>
             <p>{item.title}</p>
             <div>Size: {item.size}</div>
             <div>
@@ -133,7 +137,11 @@ const CartItem = ({
           </div>
         </div>
         <div className={styles.quantity}>
-          <Price price={item.price} salePercent={item.salePercent} />
+          <Price
+            price={item.price}
+            salePercent={item.salePercent}
+            size="small"
+          />
           <div>
             {stock?.quantity <= 0 && (
               <p className={styles.availableQuantity}>Out of stock</p>
@@ -152,6 +160,7 @@ const CartItem = ({
               quantity={item.quantity.toString()}
               onChange={onUpdateQuantity}
               disabled={!stock?.quantity}
+              size="small"
             />
           </div>
           <div className={styles.totalPrice}>
