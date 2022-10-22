@@ -1,61 +1,60 @@
 @import "./../../variable.scss";
 
 .stepList {
-    display: flex;
-    flex-direction: column-reverse;
-    list-style: none;
-    font-size: $default-font-size;
-    padding-left: 10rem;
+  display: flex;
+  flex-direction: column-reverse;
+  list-style: none;
+  font-size: 1.4rem;
+  padding-left: 2rem;
 }
 
 .stepItem {
-    position: relative;
-    margin: 0 3rem;
-    padding: 1rem 0;
-    border-bottom: 1px solid $color-primary-light;
-    color: lightgrey;
+  position: relative;
+  margin: 0 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid $color-primary-light;
+  color: $color-grey;
 
-    &::before {
-        content: "";
-        position: absolute;
-        left: -4.2rem;
-        // left: 1.1rem;
-        top: 0;
-        height: 100%;
-        width: 2px;
-        background-color: $color-primary-light;
+  &::before {
+    content: "";
+    position: absolute;
+    left: -2.2rem;
+    // left: 1.1rem;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background-color: $color-primary-light;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: -3.1rem;
+    top: 0;
+    width: 1.6rem;
+    height: 1.6rem;
+    background-color: $color-primary-light;
+    z-index: 1;
+    border: 2px solid $color-primary-light;
+    border-radius: 50%;
+  }
+
+  &:last-child {
+    .stepTitle,
+    p {
+      color: $color-grey-dark;
     }
+  }
 
-    &::after {
-        content: "";
-        position: absolute;
-        left: -5.6rem;
-        top: 0;
-        width: 2.4rem;
-        height: 2.4rem;
-        background-color: $color-primary-light;
-        z-index: 1;
-        border: 2px solid $color-primary-light;
-        border-radius: 50%;
-    }
+  &:last-child::after {
+    left: -3.5rem;
+    width: 1.8rem;
+    height: 1.8rem;
+    background-color: $color-primary;
+    border: 5px solid $color-primary-light;
+  }
 
-    &:last-child {
-
-        .stepTitle,
-        p {
-            color: $color-grey;
-        }
-    }
-
-    &:last-child::after {
-        left: -6rem;
-        width: 2.4rem;
-        height: 2.4rem;
-        background-color: $color-primary;
-        border: 8px solid $color-primary-light;
-    }
-
-    .stepTitle {
-        font-weight: 600;
-    }
+  .stepTitle {
+    font-weight: 600;
+  }
 }
