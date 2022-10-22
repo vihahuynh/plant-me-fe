@@ -62,6 +62,7 @@ const ProductTable = () => {
                     size="small"
                     borderRadius="square"
                     theme="light"
+                    url={`/admin/products/${product.id}`}
                   />
                   <Button
                     text="Delete"

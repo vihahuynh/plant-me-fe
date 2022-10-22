@@ -29,13 +29,14 @@ const Modal = ({
           <div className={styles.buttonGroup}>
             <Button
               text={actionText}
-              size="medium"
+              size="small"
               borderRadius="square"
               onClick={onConfirm}
             />
             <Button
+              theme="light"
               text="Cancel"
-              size="medium"
+              size="small"
               borderRadius="square"
               onClick={onCancel}
             />

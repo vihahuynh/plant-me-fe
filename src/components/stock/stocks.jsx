@@ -123,7 +123,7 @@ const Stocks = ({ product }) => {
           isOpen={openConfirmModal}
           size="small"
           title="Delete stock"
-          message="Are you sure you want to delete this stock"
+          message="Are you sure you want to delete this stock?"
           actionText="Delete"
           onConfirm={() => onDeleteStock(currentStock.id)}
           onCancel={onCloseConfirmModal}

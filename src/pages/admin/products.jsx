@@ -1,7 +1,12 @@
-import ProductTable from "../../components/products/productsTable"
+import Wrapper from "../../components/layout/wrapper";
+import ProductTable from "../../components/products/productsTable";
 
 const AdminProducts = () => {
-    return <ProductTable />
-}
+  return (
+    <Wrapper>
+      <ProductTable />
+    </Wrapper>
+  );
+};
 
-export default AdminProducts
+export default AdminProducts;

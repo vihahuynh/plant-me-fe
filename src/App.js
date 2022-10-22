@@ -21,6 +21,7 @@ import PasswordReset from "./pages/passwordReset";
 // admin page
 import NewProduct from "./pages/admin/newProduct";
 import AdminProducts from "./pages/admin/products";
+import UpdateProduct from "./pages/admin/updateProduct";
 // user page
 import OrderHistory from "./pages/user/orderHistory";
 import OrderDetails from "./pages/user/orderDetails";
@@ -28,7 +29,6 @@ import NotificationHistory from "./pages/user/notificationHistory";
 import FavoriteProducts from "./pages/user/favoriteProducts";
 import ReviewHistory from "./pages/user/reviewHistory";
 import Account from "./pages/user/account";
-import UpdateProductForm from "./components/products/productUpdateForm";
 import DeliveryAddress from "./pages/user/deliveryAddress";
 
 import { authenticationActions, cartActions } from "./store";
@@ -138,7 +138,7 @@ const App = () => {
           <AdminProducts />
         </Route>
         <Route path="/admin/products/:id">
-          <UpdateProductForm />
+          <UpdateProduct />
         </Route>
         <Route exact path="/password-reset">
           <SendPasswordResetLink />

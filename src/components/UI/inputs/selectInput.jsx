@@ -59,7 +59,7 @@ const SelectInput = ({
   }
   return (
     <div className={styles.container}>
-      <div className={styles.optionBoxClassNames} onClick={toggleOpenDataList}>
+      <div className={optionBoxClassNames} onClick={toggleOpenDataList}>
         {currentOption?.length ? (
           <p className={styles.chosenText}>
             {currentOption?.map((op) => op.text)?.join(", ")}
