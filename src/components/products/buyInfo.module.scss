@@ -1,24 +1,24 @@
 @import "./../../variable.scss";
 
 .title {
-  font-size: 3rem;
+  font-size: 2.5rem;
   text-transform: uppercase;
   color: $color-primary;
 }
 
 .statisticContainer {
-  font-size: $default-font-size;
+  font-size: 1.2rem;
   margin-top: 1rem;
 
   .statistic {
     color: $color-grey;
 
     &:not(:first-child) {
-      padding-left: 2rem;
+      padding-left: 1.5rem;
     }
 
     &:not(:last-child) {
-      padding-right: 2rem;
+      padding-right: 1.5rem;
       border-right: 1px solid $color-grey-light;
     }
   }
@@ -31,8 +31,8 @@
 
   .optionTitle {
     color: $color-primary;
-    font-size: $small-title-font-size;
-    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
   }
 
   .optionList {
@@ -42,16 +42,16 @@
 
   .sizeItem {
     color: $color-primary;
-    font-size: 1.4rem;
+    font-size: $default-font-size;
     border: 1px solid $color-grey-light;
     border-radius: 3px;
-    padding: 1rem 3rem;
+    padding: 0.5rem 2rem;
     text-transform: capitalize;
     transition: all 0.3s;
     cursor: pointer;
 
     &:not(:last-child) {
-      margin-right: 1.5rem;
+      margin-right: 1rem;
     }
   }
 
@@ -61,21 +61,21 @@
   }
 
   .colorItem {
-    height: 2.5rem;
-    width: 2.5rem;
+    height: 2rem;
+    width: 2rem;
     border-radius: 10rem;
-    outline-offset: 5px;
+    outline-offset: 4px;
     transition: all 0.3s;
     margin-top: 0.5rem;
     cursor: pointer;
 
     &:not(:last-child) {
-      margin-right: 2.5rem;
+      margin-right: 2rem;
     }
   }
 
   .colorItem.active {
-    outline: 1px solid $color-grey-dark  !important;
+    outline: 1px solid $color-grey-dark !important;
   }
 }
 
@@ -85,15 +85,16 @@
 }
 
 .unavailable {
-  background-color: $color-grey-light  !important;
+  background-color: $color-grey-light !important;
   color: lightgray !important;
   // border-color: $color-grey-dark  !important;
   cursor: not-allowed !important;
 }
 
 .quantityAvailable {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   color: $color-grey;
-  margin-bottom: 1.5rem;
-  color: palevioletred
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  color: palevioletred;
 }

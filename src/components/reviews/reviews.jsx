@@ -14,14 +14,17 @@ import reviewService from "../../services/review";
 import { reviewsSortOptions, reviewsFilterOptions } from "./../../data";
 
 const Reviews = ({ productId }) => {
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(1);
   const [allReviews, setAllReviews] = useState([]);
-  const [filterReviews, setFilterReviews] = useState([])
+  const [filterReviews, setFilterReviews] = useState([]);
   const [reviews, setReviews] = useState([]);
 
   const history = useHistory();
   const queries = history.location.search.slice(1);
-  const otherQueries = queries.split("&").filter(q => !q.includes("skip") && !q.includes("limit")).join("&")
+  const otherQueries = queries
+    .split("&")
+    .filter((q) => !q.includes("skip") && !q.includes("limit"))
+    .join("&");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,7 +36,9 @@ const Reviews = ({ productId }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const reviewsData = await reviewService.getAll(`product=${productId}&${otherQueries}`);
+      const reviewsData = await reviewService.getAll(
+        `product=${productId}&${otherQueries}`
+      );
       setFilterReviews(reviewsData.data);
     };
     fetchData();
@@ -42,7 +47,7 @@ const Reviews = ({ productId }) => {
   useEffect(() => {
     const fetchData = async () => {
       const reviewsData = await reviewService.getAll(
-        `product=${productId}&${queries}`,
+        `product=${productId}&${queries}`
       );
       setReviews(reviewsData.data);
     };
@@ -65,7 +70,7 @@ const Reviews = ({ productId }) => {
 
   return (
     <div className={styles.container}>
-      <h2>Reviews</h2>
+      <h3>Reviews</h3>
       <div className={styles.summary}>
         <div className={styles.ratingStatistics}>
           <span className={styles.average}>
@@ -99,16 +104,19 @@ const Reviews = ({ productId }) => {
           </div>
         )}
       </div>
-      {!!reviews.length &&
+      {!!reviews.length && (
         <>
-          {
-            reviews.map((review) => (
-              <ReviewItem key={review.id} review={review} />
-            ))
-          }
-          < Pagination page={page} setPage={setPage} totalPages={Math.ceil(filterReviews.length / 2)} itemsPerPage={2} />
+          {reviews.map((review) => (
+            <ReviewItem key={review.id} review={review} />
+          ))}
+          <Pagination
+            page={page}
+            setPage={setPage}
+            totalPages={Math.ceil(filterReviews.length / 2)}
+            itemsPerPage={2}
+          />
         </>
-      }
+      )}
     </div>
   );
 };

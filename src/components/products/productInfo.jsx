@@ -3,14 +3,9 @@ import Accordion from "../UI/accordion";
 import styles from "./productInfo.module.scss";
 
 import { CgArrowLongRight } from "react-icons/cg/index";
-import {
-  TbSun,
-  TbTree,
-  TbDroplet,
-  TbGrowth,
-} from "react-icons/tb/index";
+import { TbSun, TbTree, TbDroplet, TbGrowth } from "react-icons/tb/index";
 
-import { HiOutlineSparkles } from "react-icons/hi"
+import { HiOutlineSparkles } from "react-icons/hi";
 
 import { plantNotes } from "../../data";
 
@@ -30,7 +25,7 @@ const ProductInfo = ({ product }) => {
       </Accordion>
       <Accordion title="Living Condition">
         <div className={styles.livingConditions}>
-          {!!product?.watering &&
+          {!!product?.watering && (
             <div className={styles.condition} key="Watering">
               <TbDroplet className={styles.icon} />
               <div>
@@ -38,8 +33,8 @@ const ProductInfo = ({ product }) => {
                 <p>{product.watering}</p>
               </div>
             </div>
-          }
-          {!!product?.light &&
+          )}
+          {!!product?.light && (
             <div className={styles.condition} key="light">
               <TbSun className={styles.icon} />
               <div>
@@ -47,8 +42,8 @@ const ProductInfo = ({ product }) => {
                 <p>{product?.light}</p>
               </div>
             </div>
-          }
-          {!!product?.idealLocation?.length &&
+          )}
+          {!!product?.idealLocation?.length && (
             <div className={styles.condition} key="ideal-location">
               <TbTree className={styles.icon} />
               <div>
@@ -56,8 +51,8 @@ const ProductInfo = ({ product }) => {
                 <p>{product?.idealLocation?.join(", ")}</p>
               </div>
             </div>
-          }
-          {!!product?.whereToGrow?.length &&
+          )}
+          {!!product?.whereToGrow?.length && (
             <div className={styles.condition} key="where-to-grow">
               <TbGrowth className={styles.icon} />
               <div>
@@ -65,8 +60,8 @@ const ProductInfo = ({ product }) => {
                 <p>{product?.whereToGrow?.join(", ")}</p>
               </div>
             </div>
-          }
-          {!!product?.specialFeatures?.length &&
+          )}
+          {!!product?.specialFeatures?.length && (
             <div className={styles.condition} key="special-features">
               <HiOutlineSparkles className={styles.icon} />
               <div>
@@ -74,7 +69,7 @@ const ProductInfo = ({ product }) => {
                 <p>{product?.specialFeatures?.join(", ")}</p>
               </div>
             </div>
-          }
+          )}
         </div>
       </Accordion>
       <Accordion title="Plant care">

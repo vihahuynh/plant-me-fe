@@ -7,7 +7,7 @@ import Cart from "./../components/cart/cart";
 
 import styles from "./cart.module.scss";
 import CartSummary from "../components/cart/cartSummary";
-import LinkButton from "../components/UI/buttons/linkbutton";
+import InfoBox from "../components/UI/infoBox";
 
 import { alertActions, cartActions } from "./../store";
 import cartService from "../services/cart";
@@ -93,18 +93,7 @@ const CartPage = () => {
           />
         </div>
       ) : (
-        <div className={styles.container}>
-          <div className={styles.infoBox}>
-            <img src="./images/logo.png" alt="" />
-            <p>No items found</p>
-            <LinkButton
-              text="Back to Shopping"
-              size="medium"
-              url="/shop"
-              className={styles.btn}
-            />
-          </div>
-        </div>
+        <InfoBox text="No items found" btnText="Back to shopping" url="/shop" />
       )}
     </Wrapper>
   );

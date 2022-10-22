@@ -1,7 +1,7 @@
 @import "./../../variable.scss";
 
 .container {
-  height: 60vh;
+  height: 65vh;
   overflow-y: scroll;
 
   &::-webkit-scrollbar {
@@ -11,7 +11,7 @@
 
 .description {
   color: $color-grey;
-  margin: 2rem;
+  margin: 1rem;
 
   .about {
     margin-bottom: 1rem;
@@ -40,7 +40,7 @@
 .commonProblems,
 .livingConditions,
 .decorTips {
-  margin: 2rem;
+  margin: 1rem;
   color: $color-grey;
 
   .plantCareTip,
