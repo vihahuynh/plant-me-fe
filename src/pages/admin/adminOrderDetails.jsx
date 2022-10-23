@@ -68,15 +68,24 @@ const AdminOrderDetails = () => {
           <div className={styles.orderDetailsHeader}>
             <h4>Order: #{order.id}</h4>
             <p>
-              Order date: <Moment format="YYYY-MM-DD">{order.createdAt}</Moment>
+              Order date:{" "}
+              <Moment format="YYYY-MM-DD hh:mm:ss">{order.createdAt}</Moment>
             </p>
           </div>
           <div>
-            <h5>Notification: </h5>
+            <h5>Status</h5>
+            <p>{order.progress?.at(-1)?.title}</p>
+            <p>{order.progress?.at(-1)?.description}</p>
+            <Moment format="YYYY-MM-DD hh:mm:ss">
+              {order.progress?.at(-1)?.createdAt}
+            </Moment>
+          </div>
+          <div>
+            <h5>Notification</h5>
             <ul className={styles.notiList}>
               {order?.notification?.map((noti) => (
                 <li key={noti.id} className={styles.notiItem}>
-                  <Moment format="YYYY-MM-DD">{noti.createdAt}</Moment>
+                  <Moment format="YYYY-MM-DD hh:mm:ss">{noti.createdAt}</Moment>
                   <p>{noti.content}</p>
                 </li>
               ))}

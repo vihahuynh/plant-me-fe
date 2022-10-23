@@ -77,7 +77,8 @@ const OrderDetails = () => {
               Order: #{order.id} - <span>{order.status}</span>
             </h4>
             <p>
-              Order date: <Moment format="YYYY-MM-DD">{order.createdAt}</Moment>
+              Order date:{" "}
+              <Moment format="YYYY-MM-DD hh:mm:ss">{order.createdAt}</Moment>
             </p>
           </div>
           <div>
@@ -85,7 +86,7 @@ const OrderDetails = () => {
             <ul className={styles.notiList}>
               {order?.notification?.map((noti) => (
                 <li key={noti.id} className={styles.notiItem}>
-                  <Moment format="YYYY-MM-DD">{noti.createdAt}</Moment>
+                  <Moment format="YYYY-MM-DD hh:mm:ss">{noti.createdAt}</Moment>
                   <p>{noti.content}</p>
                 </li>
               ))}

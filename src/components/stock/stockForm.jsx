@@ -63,123 +63,121 @@ const StockForm = ({ stock, productId, onCancel, setStocks }) => {
   };
 
   return (
-    <div>
-      <div className={styles.formContainer}>
-        <Formik
-          initialValues={
-            stock || {
-              color: currentColor,
-              size: currentSize.text,
-              quantity: stock?.quantity || 1,
-            }
+    <div className={styles.formContainer}>
+      <Formik
+        initialValues={
+          stock || {
+            color: currentColor,
+            size: currentSize.text,
+            quantity: stock?.quantity || 1,
           }
-          validate={(values) => {
-            const errors = {};
-            if (!values.color.length) {
-              errors.color = "Colors is required";
-            }
-            if (!values.size) {
-              errors.size = "Size is required";
-            }
-            if (!values.quantity) {
-              errors.quantity = "Quantity is required";
-            } else if (values.quantity < 0) {
-              errors.quantity = "Invalid quantity";
-            }
-            return errors;
-          }}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              if (stock?.id ? onUpdateStock(values) : onAddNewStock(values))
-                setSubmitting(false);
-            }, 400);
-          }}
-        >
-          {({
-            values,
-            errors,
-            touched,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            isSubmitting,
-          }) => (
-            <form onSubmit={handleSubmit} className={styles.form}>
-              <div className={`${styles.inputContainer} ${styles.size}`}>
-                <label>Size</label>
-                <SelectInput
-                  listData={[
-                    {
-                      text: "XS",
-                      value: "XS",
-                    },
-                    {
-                      text: "S",
-                      value: "S",
-                    },
-                    {
-                      text: "M",
-                      value: "M",
-                    },
-                    {
-                      text: "L",
-                      value: "L",
-                    },
-                    {
-                      text: "XL",
-                      value: "XL",
-                    },
-                  ]}
-                  currentOption={currentSize}
-                  setCurrentOption={setCurrentSize}
-                  theme="light"
-                />
-                <p className={styles.errors}>
-                  {errors.size && touched.size && errors.size}
-                </p>
-              </div>
-              <div className={`${styles.inputContainer} ${styles.quantity}`}>
-                <label>Quantity</label>
-                <input
-                  id="quantity"
-                  type="text"
-                  name="quantity"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.quantity}
-                  placeholder="Quantity"
-                />
-                <p className={styles.errors}>
-                  {errors.quantity && touched.quantity && errors.quantity}
-                </p>
-              </div>
-              <div className={`${styles.inputContainer} ${styles.colors}`}>
-                <label>Color</label>
-                <SketchPicker
-                  disableAlpha={true}
-                  color={currentColor}
-                  onChangeComplete={(color, _) => setCurrentColor(color.hex)}
-                />
-              </div>
-              <div className={styles.btnGroup}>
-                <Button
-                  text="Save"
-                  size="small"
-                  borderRadius="square"
-                  disabled={isSubmitting}
-                />
-                <Button
-                  text="Cancel"
-                  size="small"
-                  borderRadius="square"
-                  theme="light"
-                  onClick={onCancel}
-                />
-              </div>
-            </form>
-          )}
-        </Formik>
-      </div>
+        }
+        validate={(values) => {
+          const errors = {};
+          if (!values.color.length) {
+            errors.color = "Colors is required";
+          }
+          if (!values.size) {
+            errors.size = "Size is required";
+          }
+          if (!values.quantity) {
+            errors.quantity = "Quantity is required";
+          } else if (values.quantity < 0) {
+            errors.quantity = "Invalid quantity";
+          }
+          return errors;
+        }}
+        onSubmit={(values, { setSubmitting }) => {
+          setTimeout(() => {
+            if (stock?.id ? onUpdateStock(values) : onAddNewStock(values))
+              setSubmitting(false);
+          }, 400);
+        }}
+      >
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+        }) => (
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <div className={`${styles.inputContainer} ${styles.size}`}>
+              <label>Size</label>
+              <SelectInput
+                listData={[
+                  {
+                    text: "XS",
+                    value: "XS",
+                  },
+                  {
+                    text: "S",
+                    value: "S",
+                  },
+                  {
+                    text: "M",
+                    value: "M",
+                  },
+                  {
+                    text: "L",
+                    value: "L",
+                  },
+                  {
+                    text: "XL",
+                    value: "XL",
+                  },
+                ]}
+                currentOption={currentSize}
+                setCurrentOption={setCurrentSize}
+                theme="light"
+              />
+              <p className={styles.errors}>
+                {errors.size && touched.size && errors.size}
+              </p>
+            </div>
+            <div className={`${styles.inputContainer} ${styles.quantity}`}>
+              <label>Quantity</label>
+              <input
+                id="quantity"
+                type="text"
+                name="quantity"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.quantity}
+                placeholder="Quantity"
+              />
+              <p className={styles.errors}>
+                {errors.quantity && touched.quantity && errors.quantity}
+              </p>
+            </div>
+            <div className={`${styles.inputContainer} ${styles.colors}`}>
+              <label>Color</label>
+              <SketchPicker
+                disableAlpha={true}
+                color={currentColor}
+                onChangeComplete={(color, _) => setCurrentColor(color.hex)}
+              />
+            </div>
+            <div className={styles.btnGroup}>
+              <Button
+                text="Save"
+                size="small"
+                borderRadius="square"
+                disabled={isSubmitting}
+              />
+              <Button
+                text="Cancel"
+                size="small"
+                borderRadius="square"
+                theme="light"
+                onClick={onCancel}
+              />
+            </div>
+          </form>
+        )}
+      </Formik>
     </div>
   );
 };
