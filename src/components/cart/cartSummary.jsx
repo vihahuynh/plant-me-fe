@@ -52,9 +52,11 @@ const CartSummary = ({ title, onClick, disabled = false }) => {
           address.ward.value,
           weight
         );
+        console.log("data: ", data.data);
         setDeliveryCharges(Math.ceil(data.data.data.total / 1000));
       } catch (err) {
         console.log(err);
+        setDeliveryCharges(30);
       }
     };
 

@@ -52,7 +52,7 @@ const ChangeDeliveryAddress = () => {
               : a
           )
       );
-      history.push("/cart");
+      history.goBack();
     } catch (err) {
       console.log(err);
     }

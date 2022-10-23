@@ -6,6 +6,7 @@ import Wrapper from "../components/layout/wrapper";
 import Cart from "../components/cart/cart";
 import CartSummary from "../components/cart/cartSummary";
 import LinkButton from "../components/UI/buttons/linkbutton";
+import RadioInput from "../components/UI/inputs/radioInput";
 
 import { clearCheckoutItems } from "../store/cartSlice";
 
@@ -16,6 +17,7 @@ import addressService from "../services/address";
 import orderService from "../services/order";
 
 import _ from "lodash";
+import BankCard from "../components/UI/bankCard";
 
 const Checkout = () => {
   const cart = useSelector((state) => state.cart);
@@ -26,6 +28,7 @@ const Checkout = () => {
 
   const [address, setAddress] = useState();
   const [deliveryCharges, setDeliveryCharges] = useState(0);
+  const [paymentMethod, setPaymentMethod] = useState("COD");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -80,10 +83,23 @@ const Checkout = () => {
         address: `${address.address}, ${address.ward.text}, ${address.district.text}, ${address.province.text}`,
         phoneNumber: address.phoneNumber,
         receiverName: address.name,
-        paymentMethod: "COD",
-        status: "Waiting for payment",
-        estimatedDeliveryDate: Date.now(),
-        deliveryMethod: "Giao hàng nhanh",
+        paymentMethod,
+        status:
+          paymentMethod === "COD"
+            ? "Waiting for confirmation"
+            : "Waiting for payment",
+        progress: [
+          paymentMethod === "COD"
+            ? {
+                title: "Waiting for confirmation",
+                description: "Waiting for Plantme's confirmation",
+              }
+            : {
+                title: "Waiting for payment",
+              },
+        ],
+        // estimatedDeliveryDate: Date.now(),
+        deliveryMethod: "Giao hang nhanh",
         deliveryCharges,
         user: authen?.user?.id,
         totalDiscount: _.sum(items.map((i) => i.discount * i.quantity)),
@@ -120,7 +136,57 @@ const Checkout = () => {
     <Wrapper>
       {!!cart.items.length ? (
         <div className={styles.container}>
-          <Cart isShowCheckBox={false} />
+          <div>
+            <Cart isShowCheckBox={false} />
+            <div className={styles.deliveryMethodBox}>
+              <h5>Delivery method</h5>
+              <div className={styles.deliveryMethod}>
+                <img src="./images/ghn-logo.png" alt="ghn-logo" />
+                <p>Delivery by Giao hanh nhanh</p>
+              </div>
+            </div>
+            <div className={styles.paymentMethodBox}>
+              <h5>Choose payment method</h5>
+              <div className={styles.radioGroup}>
+                <RadioInput
+                  key="COD"
+                  name="paymentMethod"
+                  value="COD"
+                  label="Cash on delivery"
+                  onChange={() => {
+                    setPaymentMethod("COD");
+                  }}
+                  checked={paymentMethod === "COD" ? true : false}
+                />
+                <RadioInput
+                  key="Bank transfer"
+                  name="paymentMethod"
+                  value="Bank transfer"
+                  label="Bank Transfer"
+                  onChange={() => {
+                    setPaymentMethod("Bank transfer");
+                  }}
+                  checked={paymentMethod === "Bank transfer" ? true : false}
+                />
+              </div>
+              <div
+                className={`${styles.bankList} ${
+                  paymentMethod === "Bank transfer" ? styles.active : ""
+                }`}
+              >
+                <p>
+                  Bank transfer content:{" "}
+                  {address?.name?.replaceAll(" ", "")?.toUpperCase()}
+                  {address?.phoneNumber?.slice(6, 10)}
+                </p>
+                {["./images/bidv-logo.png", "./images/msb-logo.png"].map(
+                  (bank) => (
+                    <BankCard key={bank} bankLogo={bank} />
+                  )
+                )}
+              </div>
+            </div>
+          </div>
           <CartSummary title="ORDER" onClick={onCheckout} />
         </div>
       ) : (
