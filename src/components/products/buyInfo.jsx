@@ -237,3 +237,4 @@ const BuyInfo = ({ product }) => {
 };
 
 export default BuyInfo;
+

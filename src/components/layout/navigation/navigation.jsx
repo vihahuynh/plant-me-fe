@@ -28,6 +28,9 @@ const Navigation = () => {
 
   return (
     <nav className={styles.nav}>
+      <div className={styles.mobileNav}>
+        <span></span>
+      </div>
       <div className={styles.mainNav}>
         <Logo />
         <ul className={styles.navList}>

@@ -91,10 +91,63 @@
   }
 }
 
-@media only screen and (max-width: 68.75em) {
+.mobileNav {
+  cursor: pointer;
+  position: absolute;
+  right: 3rem;
+  top: 4vh;
 
-  .navList,
-  .subNav {
+  &:hover span::after {
+    top: 1.2rem
+  }
+
+  &:hover span::before {
+    top: -1.2rem
+  }
+
+  span {
+    position: relative;
+    background-color: $color-grey-dark;
+    display: inline-block;
+    height: 3px;
+    width: 3.5rem;
+
+    &::after,
+    &::before {
+      content: "";
+      display: inline-block;
+      background-color: $color-grey-dark;
+      height: 3px;
+      width: 3.5rem;
+      transition: all .3s;
+      position: absolute;
+    }
+
+    &::before {
+      top: -1rem
+    }
+
+    &::after {
+      top: 1rem
+    }
+  }
+}
+
+@media only screen and (max-width: 68.75em) {
+  .nav {
+    padding: 0 3rem;
+  }
+
+  // .navList,
+  // .subNav {
+  //   display: none;
+  // }
+}
+
+@media only screen and (max-width: 50em) {
+
+  .subNav,
+  .navList {
     display: none;
   }
 }
