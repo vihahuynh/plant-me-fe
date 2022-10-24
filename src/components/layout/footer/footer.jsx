@@ -12,12 +12,14 @@ const Footer = () => {
   return (
     <footer>
       <div className={styles.container}>
-        <div>
-          <Logo />
-          <p>plantme.com is a popular e-commerce</p>
-          <p>site exclusively for plant and plant care.</p>
-          <p>We provide the best for plants</p>
-          <p>and also provide best services.</p>
+        <div className={styles.footerLeft}>
+          <div >
+            <Logo />
+            <p>plantme.com is a popular e-commerce</p>
+            <p>site exclusively for plant and plant care.</p>
+            <p>We provide the best for plants</p>
+            <p>and also provide best services.</p>
+          </div>
           <div className={styles.iconContainer}>
             <a href="/">
               <BsTwitter className={styles.icon} />
@@ -30,9 +32,11 @@ const Footer = () => {
             </a>
           </div>
         </div>
-        <UsefulLinks title="Help" links={helpLinks} />
-        <UsefulLinks title="Store" links={categoryLinks} />
-        <UsefulLinks title="Support" links={supportLinks} />
+        <div className={styles.usefulLinksContainer}>
+          <UsefulLinks title="Help" links={helpLinks} />
+          <UsefulLinks title="Store" links={categoryLinks} />
+          <UsefulLinks title="Support" links={supportLinks} />
+        </div>
       </div>
       <Copyright />
     </footer>

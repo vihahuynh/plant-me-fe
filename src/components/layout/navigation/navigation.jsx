@@ -28,7 +28,7 @@ const Navigation = () => {
 
   return (
     <nav className={styles.nav}>
-      <div className={styles.subNav}>
+      <div className={styles.mainNav}>
         <Logo />
         <ul className={styles.navList}>
           <NavigationItem url="" title="Home" />

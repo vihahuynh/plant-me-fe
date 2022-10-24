@@ -21,6 +21,7 @@
   display: flex;
 }
 
+.mainNav,
 .subNav {
   display: flex;
   align-items: center;
@@ -87,5 +88,13 @@
       background-color: $color-primary-light;
       color: $color-primary;
     }
+  }
+}
+
+@media only screen and (max-width: 68.75em) {
+
+  .navList,
+  .subNav {
+    display: none;
   }
 }

@@ -11,6 +11,12 @@
     color: $color-grey;
   }
 
+  .usefulLinksContainer {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+  }
+
   .iconContainer {
     margin-top: 2rem;
 
@@ -30,5 +36,35 @@
         }
       }
     }
+  }
+}
+
+@media only screen and (max-width: 56.25em) {
+  .container {
+    padding: 3rem 5rem;
+  }
+}
+
+@media only screen and (max-width: 43.75em) {
+  .container {
+    flex-direction: column;
+    row-gap: 3rem;
+
+    .usefulLinksContainer {
+      width: 100%;
+    }
+
+    .footerLeft {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+}
+
+@media only screen and (max-width: 30em) {
+  .container {
+    padding: 2rem 3rem;
   }
 }
