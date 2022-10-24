@@ -7,6 +7,7 @@
   .firstGrid,
   .secondGrid,
   .thridGrid {
+    cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -36,6 +37,7 @@
       height: 70vh;
       transition: all 0.3s;
     }
+
     &:hover img {
       transform: scale(1.1);
     }
@@ -50,6 +52,7 @@
       height: 25vh;
       transition: all 0.3s;
     }
+
     &:hover img {
       transform: scale(1.15);
     }

@@ -14,8 +14,6 @@ import axios from "axios";
 //   return axios.get(`${baseUrl}d/${code}?depth=2`);
 // };
 
-console.log("meow: ", process.env.REACT_APP_GHN_TOKEN);
-
 const baseUrl = "https://online-gateway.ghn.vn";
 
 const getProvinces = () => {

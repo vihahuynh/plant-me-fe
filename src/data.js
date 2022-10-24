@@ -257,8 +257,8 @@ export const typeOfPlantsList = [
     value: "Air Plant",
   },
   {
-    text: "Cacti & Succulents",
-    value: "Cacti & Succulents",
+    text: "Cacti and Succulents",
+    value: "Cacti and Succulents",
   },
   {
     text: "Climbers",

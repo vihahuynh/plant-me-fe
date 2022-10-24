@@ -36,55 +36,59 @@ const BuyInfo = ({ product }) => {
   };
 
   const onAddToCart = async () => {
-    clearTimeout(delay);
-    if (!color || !size) {
+    try {
+      clearTimeout(delay);
+      if (!color || !size) {
+        dispatch(
+          alertActions.updateMessage({
+            message: "Please choose color and size!",
+            type: "warning",
+          })
+        );
+        delay = setTimeout(() => dispatch(alertActions.clear()), 3000);
+        return;
+      }
+      if (
+        quantity > availableQuantity ||
+        !availableColors.includes(color) ||
+        !availableSizes.includes(size)
+      ) {
+        const message = availableQuantity
+          ? `Only ${availableQuantity} products available!`
+          : "Out of stock";
+        dispatch(alertActions.updateMessage({ message, type: "warning" }));
+        delay = setTimeout(() => dispatch(alertActions.clear()), 3000);
+        return;
+      }
+      const cartItem = {
+        product: product.id,
+        title: product.title,
+        price: product.price,
+        salePercent: product.salePercent,
+        image:
+          product.images.find((img) => img.includes("eye")) || product.images[0],
+        discount: Math.round((product.price * product.salePercent) / 100),
+        color,
+        size,
+        quantity,
+        deliveryCharges: 10,
+        isCheckout: false,
+        stock: product.stocks.find((s) => s.color === color && s.size === size)
+          ?.id,
+      };
+      await dispatch(
+        addItem({ cart, item: cartItem, token: authen?.user?.token })
+      ).unwrap();
       dispatch(
         alertActions.updateMessage({
-          message: "Please choose color and size!",
-          type: "warning",
+          message: "Added to cart",
+          type: "info",
         })
       );
       delay = setTimeout(() => dispatch(alertActions.clear()), 3000);
-      return;
+    } catch (err) {
+      console.log(err)
     }
-    if (
-      quantity > availableQuantity ||
-      !availableColors.includes(color) ||
-      !availableSizes.includes(size)
-    ) {
-      const message = availableQuantity
-        ? `Only ${availableQuantity} products available!`
-        : "Out of stock";
-      dispatch(alertActions.updateMessage({ message, type: "warning" }));
-      delay = setTimeout(() => dispatch(alertActions.clear()), 3000);
-      return;
-    }
-    const cartItem = {
-      product: product.id,
-      title: product.title,
-      price: product.price,
-      salePercent: product.salePercent,
-      image:
-        product.images.find((img) => img.includes("eye")) || product.images[0],
-      discount: Math.round((product.price * product.salePercent) / 100),
-      color,
-      size,
-      quantity,
-      deliveryCharges: 10,
-      isCheckout: false,
-      stock: product.stocks.find((s) => s.color === color && s.size === size)
-        ?.id,
-    };
-    await dispatch(
-      addItem({ cart, item: cartItem, token: authen?.user?.token })
-    ).unwrap();
-    dispatch(
-      alertActions.updateMessage({
-        message: "Added to cart",
-        type: "info",
-      })
-    );
-    delay = setTimeout(() => dispatch(alertActions.clear()), 3000);
   };
 
   const rating = product?.reviews.reduce((averageRating, review) => {
@@ -155,9 +159,8 @@ const BuyInfo = ({ product }) => {
           <p className={styles.optionTitle}>Size</p>
           <ul className={styles.optionList}>
             {allSizes?.map((s) => {
-              const sizeClassNames = `${styles.sizeItem} ${
-                size === s ? styles.active : ""
-              } ${!availableSizes.includes(s) ? styles.unavailable : ""}`;
+              const sizeClassNames = `${styles.sizeItem} ${size === s ? styles.active : ""
+                } ${!availableSizes.includes(s) ? styles.unavailable : ""}`;
               return (
                 <li
                   className={sizeClassNames}
