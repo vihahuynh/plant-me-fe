@@ -43,3 +43,27 @@
     width: 20%;
   }
 }
+
+@media only screen and (max-width: 50em) {
+  .container {
+    margin: 4rem 0rem 0;
+
+    p {
+      font-size: 2rem;
+    }
+
+    img {
+      width: 20%;
+    }
+  }
+}
+
+@media only screen and (max-width: 30em) {
+  .container {
+    p {
+      font-size: 1.6rem;
+    }
+
+    padding: 2rem 3rem 2rem 5rem;
+  }
+}

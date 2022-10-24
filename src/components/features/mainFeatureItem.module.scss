@@ -6,7 +6,7 @@
   padding: 1.6rem;
   background-color: white;
   text-align: center;
-  width: 24vw;
+  width: 32%;
   transition: all 0.3s ease;
 
   &:hover {
@@ -24,5 +24,15 @@
     color: $color-grey;
     font-size: $default-font-size;
     font-weight: 400;
+  }
+}
+
+@media only screen and (max-width: 50em) {
+  .container {
+    width: 100%;
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
   }
 }
