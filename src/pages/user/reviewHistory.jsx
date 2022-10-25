@@ -40,11 +40,27 @@ const ReviewHistory = () => {
   const settings = {
     className: "center",
     arrow: true,
-    slidesToShow: products.length < 2 ? products.length : 2,
-    slidesToScroll: products.length < 2 ? products.length : 2,
+    slidesToShow: 3,
+    slidesToScroll: 3,
     speed: 500,
     nextArrow: <Arrow type="prev" />,
     prevArrow: <Arrow type="next" />,
+    responsive: [
+      {
+        breakpoint: 1400,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        }
+      },
+      {
+        breakpoint: 1000,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
   };
 
   useEffect(() => {

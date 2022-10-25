@@ -51,4 +51,24 @@
 
 .itemPrice {
   margin-left: auto;
+  width: 28%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+@media only screen and (max-width: 37.25em) {
+  .item {
+    column-gap: 1.5rem;
+  }
+
+  .itemImg {
+    width: 6rem;
+  }
+
+  .quantity {
+    width: 2rem;
+    height: 2rem;
+    font-size: 10px;
+  }
 }

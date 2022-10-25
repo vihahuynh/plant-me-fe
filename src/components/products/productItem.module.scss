@@ -2,7 +2,7 @@
 
 .productContainer {
   cursor: pointer;
-  width: 19vw;
+  width: 28rem;
   border-radius: 2rem;
   display: flex;
   flex-direction: column;
@@ -62,8 +62,8 @@
 
   .imgContainer {
     padding: 1rem;
-    width: 19vw;
-    min-height: 45vh;
+    width: 28rem;
+    min-height: 40rem;
     border-radius: 2rem;
     background-color: $color-primary-light;
     display: flex;
@@ -71,7 +71,7 @@
     align-items: center;
 
     img {
-      width: 14vw;
+      width: 23rem;
       transition: transform 0.3s;
     }
   }

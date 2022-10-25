@@ -5,6 +5,14 @@
   display: flex;
   column-gap: 4rem;
   background-color: $color-primary-light;
+
+  @media only screen and (max-width: 56.25rem) {
+    padding: 5rem;
+  }
+
+  @media only screen and (max-width: 37.25em) {
+    padding: 0;
+  }
 }
 
 .container {

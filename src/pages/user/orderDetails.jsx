@@ -93,29 +93,33 @@ const OrderDetails = () => {
             </ul>
           </div>
           <div className={styles.boxes}>
-            <h5 className={styles.subHeader}>Address</h5>
-            <h5 className={styles.subHeader}>Delivery Method</h5>
-            <h5 className={styles.subHeader}>Payment Method</h5>
-          </div>
-          <div className={styles.boxes}>
             <div className={styles.box}>
-              <p className={styles.boldText}>{order.receiverName}</p>
-              <p>Address: {order.address}</p>
-              <p>Phone number: {order.phoneNumber}</p>
+              <h5 className={styles.subHeader}>Address</h5>
+              <div className={styles.content}>
+                <p className={styles.boldText}>{order.receiverName}</p>
+                <p>Address: {order.address}</p>
+                <p>Phone number: {order.phoneNumber}</p>
+              </div>
             </div>
             <div className={styles.box}>
-              <p>
-                Estimated delivery date:{" "}
-                <Moment format="YYYY-MM-DD">
-                  {order.estimatedDeliveryDate}
-                </Moment>
-              </p>
-              <p>{order.deliveryMethod}</p>
-              <p>Delivery charges: {order.deliveryCharges}.000 &#x20ab;</p>
+              <h5 className={styles.subHeader}>Delivery Method</h5>
+              <div className={styles.content}>
+                <p>
+                  Estimated delivery date:{" "}
+                  <Moment format="YYYY-MM-DD">
+                    {order.estimatedDeliveryDate}
+                  </Moment>
+                </p>
+                <p>{order.deliveryMethod}</p>
+                <p>Delivery charges: {order.deliveryCharges}.000 &#x20ab;</p>
+              </div>
             </div>
             <div className={styles.box}>
-              <p>{order.paymentMethod}</p>
-              <p className={styles.paymentStatus}>{order.paymentStatus}</p>
+              <h5 className={styles.subHeader}>Payment Method</h5>
+              <div className={styles.content}>
+                <p>{order.paymentMethod}</p>
+                <p className={styles.paymentStatus}>{order.paymentStatus}</p>
+              </div>
             </div>
           </div>
           <div>
@@ -163,16 +167,16 @@ const OrderDetails = () => {
               </p>
               {(order.status === "Waiting for payment" ||
                 order.status === "Confirm") && (
-                <div className={styles.cancelBtn}>
-                  <Button
-                    text="Cancel order"
-                    size="small"
-                    borderRadius="square"
-                    theme="red"
-                    onClick={onOpenCancelModal}
-                  />
-                </div>
-              )}
+                  <div className={styles.cancelBtn}>
+                    <Button
+                      text="Cancel order"
+                      size="small"
+                      borderRadius="square"
+                      theme="red"
+                      onClick={onOpenCancelModal}
+                    />
+                  </div>
+                )}
             </div>
           </div>
           <LinkButton
