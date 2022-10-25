@@ -146,3 +146,35 @@
     margin-bottom: 2rem;
   }
 }
+
+@media only screen and (max-width: 68.75em) {
+  .container {
+    .url {
+      top: 4rem
+    }
+
+    .formContainer {
+      .form {
+        width: 50vw;
+
+        input {
+          width: 50vw;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 37.25em) {
+  .container {
+    .formContainer {
+      .form {
+        width: 80vw;
+
+        input {
+          width: 80vw;
+        }
+      }
+    }
+  }
+}
