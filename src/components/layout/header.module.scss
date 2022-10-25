@@ -81,7 +81,6 @@
   .container {
     img {
       height: 65vh;
-      margin-right: 0rem;
     }
   }
 }
@@ -100,26 +99,30 @@
 
     img {
       height: 50vh;
-      margin-right: 0rem;
+      border-radius: 3rem;
     }
   }
 }
 
 @media only screen and (max-width: 68.75em) {
   .container {
+    position: relative;
     padding: 4rem;
-    height: 100vh;
-    flex-direction: column;
-
-    // img {
-    //   order: 0;
-    // }
+    img {
+      height: 45vh;
+      margin-right: 0;
+    }
 
     .descriptionContainer {
       align-items: center;
+      margin-right: 0;
     }
 
     .contact {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
       column-gap: 6rem;
     }
@@ -145,9 +148,16 @@
   }
 }
 
-@media only screen and (max-width: 30em) {
+@media only screen and (max-width: 50em) {
   .container {
+    flex-direction: column;
     height: auto;
+
+    img {
+      margin: 2rem 0;
+      width: 70%;
+      height: auto;
+    }
 
     .descriptionContainer {
       h1 {
@@ -156,10 +166,32 @@
       }
     }
 
-    img {
-      margin: 2rem 0;
-      width: 80vw;
-      height: auto;
+    .contact {
+      margin-top: 1rem;
+      position: relative;
+      bottom: auto;
+      left: auto;
+      transform: translateX(0);
+      order: 0;
     }
   }
 }
+
+// @media only screen and (max-width: 30em) {
+//   .container {
+//     height: auto;
+
+//     .descriptionContainer {
+//       h1 {
+//         font-size: 3rem;
+//         line-height: 4rem;
+//       }
+//     }
+
+//     img {
+//       margin: 2rem 0;
+//       width: 80vw;
+//       height: auto;
+//     }
+//   }
+// }
