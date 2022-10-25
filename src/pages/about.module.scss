@@ -9,12 +9,14 @@
     p {
       font-size: 1.6rem;
       color: $color-primary;
+
       &:not(:last-child) {
         margin-bottom: 1rem;
       }
     }
   }
 }
+
 .headerImg {
   width: 60%;
 }
@@ -66,4 +68,39 @@
 
 .people {
   background-color: $color-grey-light;
+}
+
+@media only screen and (max-width: 56.25em) {
+  .container {
+    section {
+      padding: 4rem 10rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 56.25em) {
+
+  .actions,
+  .mission {
+    flex-direction: column-reverse;
+    row-gap: 4rem;
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 37.25em) {
+  .container {
+    section {
+      padding: 4rem 5rem;
+    }
+  }
+
+  .introduce {
+    img {
+      width: 100%;
+    }
+  }
 }
