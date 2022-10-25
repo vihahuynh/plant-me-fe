@@ -55,3 +55,9 @@
   border-radius: 50%;
   border: 2px solid $color-primary;
 }
+
+@media only screen and (max-width: 43.75em) {
+  .container {
+    display: none;
+  }
+}

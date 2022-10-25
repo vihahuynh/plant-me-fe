@@ -60,3 +60,33 @@
   color: lightyellow;
   background-color: orange;
 }
+
+@media only screen and (max-width:81.25em) {
+  .notiItem {
+    padding: 1rem
+  }
+
+  .notiTime {
+    width: 12rem;
+  }
+
+  .btnGroup {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+  }
+}
+
+@media only screen and (max-width: 62.5em) {
+  .notiItem {
+    flex-direction: column;
+    padding: 1rem 2rem;
+    row-gap: 1rem;
+  }
+
+  .btnGroup {
+    flex-direction: row;
+    column-gap: 1rem;
+  }
+}
