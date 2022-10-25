@@ -117,3 +117,17 @@
 .viewDetailsBtn {
   margin-top: 1rem;
 }
+
+@media only screen and (max-width: 62.5em) {
+  .main {
+    padding: 5rem;
+  }
+  .trackingInfo {
+    flex-direction: column;
+    row-gap: 1rem;
+  }
+  .itemListContainer,
+  .orderTracking {
+    width: 100%;
+  }
+}

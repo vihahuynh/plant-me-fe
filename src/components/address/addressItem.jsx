@@ -42,6 +42,23 @@ const AddressItem = ({
 
   return (
     <li className={styles.addressItem}>
+      <div className={styles.addressHeader}>
+        <p>{address.name.toUpperCase()}</p>
+        {address.isDefault && (
+          <div className={styles.defaultAddress}>
+            <CgCheckO className={styles.icon} />
+            {defaultText}
+          </div>
+        )}
+      </div>
+      <p>
+        <span>Address: </span>
+        {fullAddress}
+      </p>
+      <p>
+        <span>Phone number: </span>
+        {address.phoneNumber}
+      </p>
       <div className={styles.btnGroup}>
         {(!address.isDefault || isShowAll === true) && (
           <Button
@@ -69,23 +86,6 @@ const AddressItem = ({
           />
         )}
       </div>
-      <div className={styles.addressHeader}>
-        <p>{address.name.toUpperCase()}</p>
-        {address.isDefault && (
-          <div className={styles.defaultAddress}>
-            <CgCheckO className={styles.icon} />
-            {defaultText}
-          </div>
-        )}
-      </div>
-      <p>
-        <span>Address: </span>
-        {fullAddress}
-      </p>
-      <p>
-        <span>Phone number: </span>
-        {address.phoneNumber}
-      </p>
       {ReactDOM.createPortal(
         <Modal isOpen={showEditForm} size="medium" showButtonGroup={false}>
           <h5>Update address</h5>

@@ -36,3 +36,12 @@
 .unActive {
   background-color: $color-grey-light;
 }
+
+@media only screen and (max-width: 37.25em) {
+  .btnGroup {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin-top: 1rem;
+  }
+}

@@ -17,3 +17,15 @@
   font-size: $default-font-size;
   color: $color-grey-dark;
 }
+
+@media only screen and (max-width: 56.25em) {
+  .main {
+    padding: 5rem;
+  }
+}
+
+@media only screen and (max-width: 37.25em) {
+  .main {
+    padding: 2rem;
+  }
+}
