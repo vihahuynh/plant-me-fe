@@ -193,16 +193,19 @@
   column-gap: 6rem;
 }
 
-
 @media only screen and (max-width: 56.25em) {
   .main {
     padding: 3rem 5rem;
   }
 }
 
-
 @media only screen and (max-width: 31.75em) {
   .main {
     padding: 1rem 3rem;
+  }
+  .avatarBox {
+    flex-direction: column-reverse;
+    row-gap: 2rem;
+    width: 100%;
   }
 }
