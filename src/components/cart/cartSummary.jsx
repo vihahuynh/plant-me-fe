@@ -67,9 +67,9 @@ const CartSummary = ({ title, onClick, disabled = false }) => {
     .filter((item) => item.isCheckout)
     .reduce(
       (total, item) =>
-        (total +=
-          (item.price - Math.round((item.salePercent * item.price) / 100)) *
-          item.quantity),
+      (total +=
+        (item.price - Math.round((item.salePercent * item.price) / 100)) *
+        item.quantity),
       0
     );
 
@@ -79,45 +79,47 @@ const CartSummary = ({ title, onClick, disabled = false }) => {
 
   return (
     <div className={styles.summary}>
-      <div className={styles.delivery}>
-        <LinkButton
-          url="/cart/change-delivery-address"
-          text={address ? "Change" : "Add"}
-          size="small"
-          className={styles.change}
-        />
-        <h5>Delivery to</h5>
-        {address ? (
-          <>
-            <div className={styles.userInfo}>
-              <p>{address?.name}</p>
-              <p>{address?.phoneNumber}</p>
-            </div>
-            <p className={styles.address}>{fullAddress}</p>
-          </>
-        ) : (
-          <></>
-        )}
-      </div>
-      <div className={styles.orderSummary}>
-        <h5>Order Summary</h5>
-        <div className={styles.subTotal}>
-          <p className={styles.summarySubTitle}>Subtotal</p>
-          {subTotal ? <p>{subTotal}.000 &#x20ab;</p> : <p>0 &#x20ab;</p>}
-        </div>
-        <div className={styles.shipping}>
-          <p className={styles.summarySubTitle}>Shipping</p>
-          <p>{deliveryCharges ? `${deliveryCharges}.000` : 0} &#x20ab;</p>
-        </div>
-        <div className={styles.total}>
-          <p className={styles.summarySubTitle}>Total</p>
-          {subTotal ? (
-            <p className={styles.totalPrice}>
-              {subTotal + deliveryCharges}.000 &#x20ab;
-            </p>
+      <div className={styles.summaryTop}>
+        <div className={styles.delivery}>
+          <LinkButton
+            url="/cart/change-delivery-address"
+            text={address ? "Change" : "Add"}
+            size="small"
+            className={styles.change}
+          />
+          <h5>Delivery to</h5>
+          {address ? (
+            <>
+              <div className={styles.userInfo}>
+                <p>{address?.name}</p>
+                <p>{address?.phoneNumber}</p>
+              </div>
+              <p className={styles.address}>{fullAddress}</p>
+            </>
           ) : (
-            <p className={styles.totalPrice}>0 &#x20ab;</p>
+            <></>
           )}
+        </div>
+        <div className={styles.orderSummary}>
+          <h5>Order Summary</h5>
+          <div className={styles.subTotal}>
+            <p className={styles.summarySubTitle}>Subtotal</p>
+            {subTotal ? <p>{subTotal}.000 &#x20ab;</p> : <p>0 &#x20ab;</p>}
+          </div>
+          <div className={styles.shipping}>
+            <p className={styles.summarySubTitle}>Shipping</p>
+            <p>{deliveryCharges ? `${deliveryCharges}.000` : 0} &#x20ab;</p>
+          </div>
+          <div className={styles.total}>
+            <p className={styles.summarySubTitle}>Total</p>
+            {subTotal ? (
+              <p className={styles.totalPrice}>
+                {subTotal + deliveryCharges}.000 &#x20ab;
+              </p>
+            ) : (
+              <p className={styles.totalPrice}>0 &#x20ab;</p>
+            )}
+          </div>
         </div>
       </div>
       <Button

@@ -75,3 +75,33 @@
   color: palevioletred;
   margin-bottom: 1rem;
 }
+
+@media only screen and (max-width: 50em) {
+  .container {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .itemInfo {
+      .itemBuyInfo {
+        width: 100%
+      }
+    }
+
+    .quantity {
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+
+    .icon {
+      position: absolute;
+      top: 4rem;
+      right: 0;
+      flex-shrink: 0;
+      height: 2rem;
+      width: 2rem;
+      color: darkred;
+      cursor: pointer;
+    }
+  }
+}
