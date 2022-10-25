@@ -8,7 +8,7 @@
 }
 
 .orderDetails {
-  width: 200%;
+  width: 100%;
   color: $color-grey;
   font-size: $default-font-size;
 
@@ -37,7 +37,7 @@
 
   p {
     font-size: $default-font-size;
-    margin-left: auto;
+    // margin-left: auto;
     margin-right: 1rem;
   }
 }
@@ -160,9 +160,8 @@
   }
 
   .orderDetails {
-
     h5 {
-      font-size: 1.4rem
+      font-size: 1.4rem;
     }
   }
 }
@@ -177,15 +176,15 @@
   }
 }
 
-@media only screen and (max-width: 37.25em) {
+@media only screen and (max-width: 46.87em) {
   .main {
-    padding: 2rem
+    padding: 2rem;
   }
 
   .boxes {
     .box {
       p:not(:last-child) {
-        margin-bottom: .5rem;
+        margin-bottom: 0.5rem;
       }
     }
 
@@ -196,5 +195,13 @@
 
   .orderTableHeader {
     display: none;
+  }
+}
+
+@media only screen and (max-width: 37.25em) {
+  .orderDetails {
+    h4 {
+      font-size: 1.6rem;
+    }
   }
 }
