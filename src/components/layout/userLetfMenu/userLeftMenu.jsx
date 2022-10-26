@@ -15,7 +15,6 @@ import { BsBellFill } from "react-icons/bs";
 const UserLeftMenu = () => {
   const authen = useSelector((state) => state.authentication);
   const path = useHistory().location.pathname.split("/")[2];
-  console.log("path: ", path);
   const imgSrc = authen?.user?.avatarUrl || "/images/default-avatar.png";
 
   return (
@@ -30,9 +29,8 @@ const UserLeftMenu = () => {
           </Link>
         </li>
         <li
-          className={`${styles.item} ${
-            path === "order-history" ? styles.active : ""
-          }`}
+          className={`${styles.item} ${path === "order-history" ? styles.active : ""
+            }`}
         >
           <Link to="/user/order-history">
             <FaShoppingCart className={styles.icon} />
@@ -40,9 +38,8 @@ const UserLeftMenu = () => {
           </Link>
         </li>
         <li
-          className={`${styles.item} ${
-            path === "reviews" ? styles.active : ""
-          }`}
+          className={`${styles.item} ${path === "reviews" ? styles.active : ""
+            }`}
         >
           <Link to="/user/reviews">
             <FaStarHalfAlt className={styles.icon} />
@@ -50,9 +47,8 @@ const UserLeftMenu = () => {
           </Link>
         </li>
         <li
-          className={`${styles.item} ${
-            path === "notification" ? styles.active : ""
-          }`}
+          className={`${styles.item} ${path === "notification" ? styles.active : ""
+            }`}
         >
           <Link to="/user/notification">
             <BsBellFill className={styles.icon} />
@@ -60,9 +56,8 @@ const UserLeftMenu = () => {
           </Link>
         </li>
         <li
-          className={`${styles.item} ${
-            path === "address" ? styles.active : ""
-          }`}
+          className={`${styles.item} ${path === "address" ? styles.active : ""
+            }`}
         >
           <Link to="/user/address">
             <FaAddressBook className={styles.icon} />
@@ -70,9 +65,8 @@ const UserLeftMenu = () => {
           </Link>
         </li>
         <li
-          className={`${styles.item} ${
-            path === "favorite-products" ? styles.active : ""
-          }`}
+          className={`${styles.item} ${path === "favorite-products" ? styles.active : ""
+            }`}
         >
           <Link to="/user/favorite-products">
             <FaHeart className={styles.icon} />

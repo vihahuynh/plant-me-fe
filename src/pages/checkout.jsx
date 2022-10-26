@@ -91,14 +91,13 @@ const Checkout = () => {
         progress: [
           paymentMethod === "COD"
             ? {
-                title: "Waiting for confirmation",
-                description: "Waiting for Plantme's confirmation",
-              }
+              title: "Waiting for confirmation",
+              description: "Waiting for Plantme's confirmation",
+            }
             : {
-                title: "Waiting for payment",
-              },
+              title: "Waiting for payment",
+            },
         ],
-        // estimatedDeliveryDate: Date.now(),
         deliveryMethod: "Giao hang nhanh",
         deliveryCharges,
         user: authen?.user?.id,
@@ -170,9 +169,8 @@ const Checkout = () => {
                 />
               </div>
               <div
-                className={`${styles.bankList} ${
-                  paymentMethod === "Bank transfer" ? styles.active : ""
-                }`}
+                className={`${styles.bankList} ${paymentMethod === "Bank transfer" ? styles.active : ""
+                  }`}
               >
                 <p>
                   Bank transfer content:{" "}

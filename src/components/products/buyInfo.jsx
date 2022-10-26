@@ -71,7 +71,6 @@ const BuyInfo = ({ product }) => {
         color,
         size,
         quantity,
-        deliveryCharges: 10,
         isCheckout: false,
         stock: product.stocks.find((s) => s.color === color && s.size === size)
           ?.id,

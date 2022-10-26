@@ -1,4 +1,5 @@
 import LinkButton from "../UI/buttons/linkbutton";
+import OrderList from "./orderList";
 
 import styles from "./order.module.scss";
 
@@ -7,7 +8,6 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { MdOutlinePayment } from "react-icons/md";
 import { FiPackage } from "react-icons/fi";
 import { AiOutlineFileDone } from "react-icons/ai";
-import OrderList from "./orderList";
 
 const getStatusIcon = (status) => {
   switch (status) {
@@ -46,12 +46,6 @@ const Order = ({ order }) => {
           </span>
         </p>
         <div className={styles.orderBtnGroup}>
-          <LinkButton
-            text="Buy again"
-            size="small"
-            borderRadius="square"
-            theme="light"
-          />
           <LinkButton
             text="View details"
             size="small"

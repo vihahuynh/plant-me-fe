@@ -4,11 +4,11 @@ const OrderItem = ({ order }) => {
   return (
     <li className={styles.item}>
       <div className={styles.imgContainer}>
-        <img className={styles.itemImg} src={order.image} alt="" />
+        <img className={styles.itemImg} src={order.image} alt="product-img" />
         <span className={styles.quantity}>x{order.quantity}</span>
       </div>
       <div>
-        <p className={styles.itemTitle}>{order.title}</p>
+        <a href={`/products/${order.product}`} className={styles.itemTitle}>{order.title}</a>
         <div>Size: {order.size}</div>
         <div>
           Color:
