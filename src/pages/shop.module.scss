@@ -1,7 +1,7 @@
 .btnContainers {
     position: absolute;
     top: 2rem;
-    right: 14rem;
+    right: 10rem;
 
     .btn {
         display: inline-block;
@@ -10,4 +10,26 @@
 
 .container {
     margin: 8rem 10rem;
+}
+
+@media only screen and (max-width: 56.25em) {
+    .container {
+        margin: 5rem;
+    }
+
+    .btnContainers {
+        top: 0rem;
+        right: 5rem;
+    }
+}
+
+@media only screen and (max-width: 37.25em) {
+    .container {
+        margin: 4rem 2rem;
+    }
+
+    .btnContainers {
+        top: -1.5rem;
+        right: 2rem;
+    }
 }
