@@ -52,13 +52,15 @@ const ProductItem = ({ product }) => {
 
   return (
     <div className={styles.productContainer}>
-      <div className={styles.iconContainer}>
-        {!wasLiked ? (
-          <BsSuitHeart className={styles.icon} onClick={onLike} />
-        ) : (
-          <BsSuitHeartFill className={styles.icon} onClick={onUnlike} />
-        )}
-      </div>
+      {!!authen?.user?.token && (
+        <div className={styles.iconContainer}>
+          {!wasLiked ? (
+            <BsSuitHeart className={styles.icon} onClick={onLike} />
+          ) : (
+            <BsSuitHeartFill className={styles.icon} onClick={onUnlike} />
+          )}
+        </div>
+      )}
       <div className={styles.imgContainer}>
         <img src={imageUrl} alt={product.name} onClick={goToDetailsPage} />
       </div>

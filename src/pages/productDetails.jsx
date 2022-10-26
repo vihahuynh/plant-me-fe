@@ -9,6 +9,7 @@ import BuyInfo from "../components/products/buyInfo";
 import Reviews from "../components/reviews/reviews";
 import ProductInfo from "../components/products/productInfo";
 import Features from "../components/features/features";
+
 import productService from "../services/product";
 
 const ProductDetails = () => {
@@ -43,10 +44,6 @@ const ProductDetails = () => {
         <div className={styles.details}>
           <ProductInfo product={product} />
         </div>
-        {/* <div className={styles.similarProducts}>
-          <h2>Frequently Bought Together</h2>
-          <Products />
-        </div> */}
 
         <div className={styles.reviews}>
           <Reviews productId={product.id} />

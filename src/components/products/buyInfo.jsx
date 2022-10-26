@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import ReactDOM from "react-dom";
 
 import Rating from "@mui/material/Rating";
-import Price from "./price";
 import styles from "./buyInfo.module.scss";
-import Button from "../UI/buttons/button";
 
+import Price from "./price";
+import Button from "../UI/buttons/button";
 import QuantityInput from "../UI/inputs/quantityInput";
+import Modal from "../UI/modal";
+import SignInForm from "../UI/signInForm";
+
 import { addItem } from "../../store/cartSlice";
 import { alertActions } from "./../../store";
 
@@ -15,6 +19,8 @@ let delay;
 const BuyInfo = ({ product }) => {
   const cart = useSelector((state) => state.cart);
   const authen = useSelector((state) => state.authentication);
+
+  const [openModal, setOpenModal] = useState(false);
 
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState(null);
@@ -38,6 +44,10 @@ const BuyInfo = ({ product }) => {
   const onAddToCart = async () => {
     try {
       clearTimeout(delay);
+      if (!authen?.user?.token) {
+        setOpenModal(true);
+        return;
+      }
       if (!color || !size) {
         dispatch(
           alertActions.updateMessage({
@@ -66,7 +76,8 @@ const BuyInfo = ({ product }) => {
         price: product.price,
         salePercent: product.salePercent,
         image:
-          product.images.find((img) => img.includes("eye")) || product.images[0],
+          product.images.find((img) => img.includes("eye")) ||
+          product.images[0],
         discount: Math.round((product.price * product.salePercent) / 100),
         color,
         size,
@@ -86,7 +97,7 @@ const BuyInfo = ({ product }) => {
       );
       delay = setTimeout(() => dispatch(alertActions.clear()), 3000);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   };
 
@@ -158,8 +169,9 @@ const BuyInfo = ({ product }) => {
           <p className={styles.optionTitle}>Size</p>
           <ul className={styles.optionList}>
             {allSizes?.map((s) => {
-              const sizeClassNames = `${styles.sizeItem} ${size === s ? styles.active : ""
-                } ${!availableSizes.includes(s) ? styles.unavailable : ""}`;
+              const sizeClassNames = `${styles.sizeItem} ${
+                size === s ? styles.active : ""
+              } ${!availableSizes.includes(s) ? styles.unavailable : ""}`;
               return (
                 <li
                   className={sizeClassNames}
@@ -231,9 +243,14 @@ const BuyInfo = ({ product }) => {
           onClick={onAddToCart}
         />
       </div>
+      {ReactDOM.createPortal(
+        <Modal isOpen={openModal} size="medium" showButtonGroup={false}>
+          <SignInForm setOpenModal={setOpenModal} />
+        </Modal>,
+        document.getElementById("overlay-root")
+      )}
     </>
   );
 };
 
 export default BuyInfo;
-

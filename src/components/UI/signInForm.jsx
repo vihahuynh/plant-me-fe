@@ -1,16 +1,15 @@
-import React from "react";
-import { Formik } from "formik";
-import { Link, useHistory } from "react-router-dom";
-import loginService from "../services/login";
-import { authenticationActions } from "./../store/index";
-
-import styles from "./signIn.module.scss";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-const SignIn = () => {
+import { Formik } from "formik";
+import { Link } from "react-router-dom";
+import loginService from "../../services/login";
+import { authenticationActions } from "../../store";
+
+import styles from "./signInForm.module.scss";
+
+const SignInForm = ({ setOpenModal }) => {
   const [error, setError] = useState("");
-  const history = useHistory();
   const dispatch = useDispatch();
 
   const onLogin = async (values) => {
@@ -24,7 +23,6 @@ const SignIn = () => {
         })
       );
       dispatch(authenticationActions.login({ user: result.data }));
-      history.push("/");
     } catch (err) {
       const errorMessage = err?.response?.data?.err;
       setError(errorMessage || "Some thing went wrong!");
@@ -32,10 +30,9 @@ const SignIn = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <img src="/images/blog-3.png" alt="plant-care" />
+    <div className={styles.smallContainer}>
       <div className={styles.formContainer}>
-        <h2>Sign In</h2>
+        <h2>Sign in</h2>
         <a className={styles.url} href="/signup">
           Do not have an account?
         </a>
@@ -121,4 +118,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignInForm;
