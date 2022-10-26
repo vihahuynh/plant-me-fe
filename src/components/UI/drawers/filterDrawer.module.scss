@@ -23,7 +23,7 @@
 
 .container {
   background-color: $color-primary-light;
-  width: 25vw;
+  width: 32rem;
   height: 100vh;
   font-size: 1.4rem;
   position: relative;
@@ -121,6 +121,25 @@
     li.curOption {
       background-color: $color-primary;
       color: $color-primary-light;
+    }
+  }
+}
+
+
+@media only screen and (max-width: 37.5em) {
+  .container {
+    width: 28rem;
+  }
+
+  .buttonText {
+    display: none;
+  }
+
+  .drawerBtn {
+    padding: 0.7rem 1.4rem;
+
+    .icon {
+      margin-right: 0;
     }
   }
 }

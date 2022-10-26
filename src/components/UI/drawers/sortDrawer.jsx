@@ -31,7 +31,7 @@ const SortDrawer = ({ sortOptions }) => {
     <>
       <button onClick={() => setOpen(true)} className={styles.drawerBtn}>
         <TbArrowsSort className={styles.icon} />
-        Sort
+        <span className={styles.buttonText}>Filters</span>
       </button>
       <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
         <div className={styles.container}>

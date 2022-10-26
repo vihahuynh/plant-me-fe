@@ -21,7 +21,7 @@ const FilterDrawer = ({ filterOptions }) => {
   return (
     <>
       <button onClick={() => setOpen(true)} className={styles.drawerBtn}>
-        <TbFilter className={styles.icon} /> Filters
+        <TbFilter className={styles.icon} /><span className={styles.buttonText}>Filters</span>
       </button>
       <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
         <div className={styles.container}>
