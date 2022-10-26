@@ -29,7 +29,7 @@ const getStatusIcon = (status) => {
   }
 };
 
-const AdminOrder = ({ order, userId }) => {
+const AdminOrder = ({ order }) => {
   const statusIcon = getStatusIcon(order.status);
 
   return (

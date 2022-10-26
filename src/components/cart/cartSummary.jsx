@@ -108,7 +108,7 @@ const CartSummary = ({ title, onClick, disabled = false }) => {
           </div>
           <div className={styles.shipping}>
             <p className={styles.summarySubTitle}>Shipping</p>
-            <p>{deliveryCharges ? `${deliveryCharges}.000` : 0} &#x20ab;</p>
+            <p>{deliveryCharges & subTotal ? `${deliveryCharges}.000` : 0} &#x20ab;</p>
           </div>
           <div className={styles.total}>
             <p className={styles.summarySubTitle}>Total</p>
