@@ -150,7 +150,7 @@
 @media only screen and (max-width: 68.75em) {
   .container {
     .url {
-      top: 4rem
+      top: 4rem;
     }
 
     .formContainer {
@@ -162,6 +162,10 @@
         }
       }
     }
+  }
+
+  .infoBox {
+    width: 60%;
   }
 }
 
@@ -176,5 +180,9 @@
         }
       }
     }
+  }
+
+  .infoBox {
+    width: 90%;
   }
 }
