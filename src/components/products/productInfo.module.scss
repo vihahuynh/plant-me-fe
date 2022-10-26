@@ -54,6 +54,7 @@
 
   .plantCareTip,
   .decorTip {
+
     h4,
     p {
       display: inline;
@@ -76,4 +77,12 @@ h4 {
   color: $color-primary;
   height: 2.5rem;
   width: 2.5rem;
+}
+
+
+@media only screen and (max-width: 75em) {
+  .container {
+    margin: 2rem 0;
+    height: auto;
+  }
 }

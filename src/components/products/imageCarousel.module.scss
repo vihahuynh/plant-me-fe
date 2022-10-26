@@ -6,7 +6,7 @@
 }
 
 .slider-wrapper {
-  width: 20vw;
+  width: 40rem;
 }
 
 .nextArrow,
@@ -39,10 +39,32 @@
 }
 
 .thumbnail-slider-wrap {
-  width: 5vw;
+  width: 10rem;
   margin-right: 2rem;
 
   img {
     border: 2px solid $color-primary;
+  }
+}
+
+@media only screen and (max-width: 75em) {
+  .container {
+    height: auto;
+  }
+
+  .slider-wrapper {
+    width: 32rem;
+  }
+}
+
+@media only screen and (max-width: 56.25em) {
+  .slider-wrapper {
+    width: 30rem;
+  }
+}
+
+@media only screen and (max-width: 25em) {
+  .slider-wrapper {
+    width: 25rem;
   }
 }

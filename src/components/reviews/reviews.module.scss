@@ -64,3 +64,21 @@
     }
   }
 }
+
+@media only screen and (max-width: 37.25em) {
+  .container {
+    .summary {
+      .ratingStatistics {
+        .averageStars {
+          font-size: 2.5rem;
+        }
+
+        .count {
+          li {
+            gap: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
