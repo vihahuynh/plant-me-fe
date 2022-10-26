@@ -44,7 +44,6 @@ const ProductDetails = () => {
         <div className={styles.details}>
           <ProductInfo product={product} />
         </div>
-
         <div className={styles.reviews}>
           <Reviews productId={product.id} />
         </div>
