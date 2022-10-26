@@ -56,6 +56,34 @@
   display: none;
 }
 
+
+.productBoxSmall {
+  width: 90%;
+  display: flex;
+  column-gap: 2rem;
+}
+
+.productBoxLeft {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h5 {
+    color: $color-primary;
+    font-size: $default-font-size;
+    margin-bottom: 0 !important;
+  }
+}
+
+.productImg {
+  width: 8rem;
+}
+
+.rating {
+  font-size: 3rem !important;
+}
+
+
 @media only screen and (max-width: 62.5em) {
   .product {
     margin-left: 0;

@@ -1,17 +1,59 @@
 import { useState, useEffect } from "react"
+import ReactDOM from "react-dom"
 import { useDispatch, useSelector } from "react-redux";
 
 import Button from "./../UI/buttons/button"
+import Modal from "./../UI/modal"
+import ReviewForm from "./../reviews/reviewForm"
+import { Rating } from "@mui/material";
+
 import { addItem } from "./../../store/cartSlice"
 import stockSerice from "../../services/stock";
+import reviewService from "../../services/review";
 
 import styles from "./orderDetailsItem.module.scss";
 
 const OrderDetailsItem = ({ order }) => {
   const [stock, setStock] = useState()
+  const [rating, setRating] = useState(0);
+  const [openModal, setOpenModal] = useState(false);
+
+  const onCloseModal = () => setOpenModal(false);
+  const onOpenModal = () => setOpenModal(true);
   const cart = useSelector(state => state.cart)
   const authen = useSelector(state => state.authentication)
   const dispatch = useDispatch()
+
+  const onAddNewReview = async (values) => {
+    try {
+      const newReview = {
+        ...values,
+        rating: rating,
+        productId: order.product,
+        createdBy: authen?.user?.id,
+      };
+      delete newReview.images;
+
+      const formData = new FormData();
+      for (const singleFile of values.images) {
+        formData.append("images", singleFile);
+      }
+      formData.append("obj", JSON.stringify(newReview));
+      await reviewService.create(
+        formData,
+        authen?.user?.token
+      );
+      setRating(0);
+    } catch (error) {
+      console.log(error);
+    }
+    onCloseModal();
+  };
+
+  const onCancel = () => {
+    onCloseModal();
+    setRating(0);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,6 +112,7 @@ const OrderDetailsItem = ({ order }) => {
           size="small"
           borderRadius="square"
           theme="light"
+          onClick={onOpenModal}
         />
         <Button
           text="Buy again"
@@ -79,6 +122,36 @@ const OrderDetailsItem = ({ order }) => {
           onClick={onBuyAgain}
         />
       </div>
+      {ReactDOM.createPortal(
+        <Modal isOpen={openModal} size="large" showButtonGroup={false}>
+          <h5>Enter your review</h5>
+          <div className={styles.productBoxSmall}>
+            <img
+              className={styles.productImg}
+              src={order.image}
+              alt="plant"
+            />
+            <div className={styles.productBoxLeft}>
+              <h5>{order.title}</h5>
+              <Rating
+                className={styles.rating}
+                name="read-only"
+                value={rating}
+                onChange={(_, newValue) => {
+                  setRating(newValue);
+                  onOpenModal();
+                }}
+              />
+            </div>
+          </div>
+          <ReviewForm
+            onSave={onAddNewReview}
+            onCancel={onCancel}
+            rating={rating}
+          />
+        </Modal>,
+        document.getElementById("overlay-root")
+      )}
     </li>
   );
 };
