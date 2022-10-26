@@ -103,7 +103,7 @@
   cursor: pointer;
   position: absolute;
   right: 2rem;
-  top: 3vh;
+  top: 2vh;
 
   &:hover .mobileMenu {
     display: block;
@@ -152,7 +152,7 @@
 }
 
 @media only screen and (max-width: 56.25em) {
-  .container {
+  .nav {
     height: 8vh
   }
 
@@ -163,5 +163,15 @@
   .subNav,
   .navList {
     display: none;
+  }
+}
+
+@media only screen and (max-width: 37.25em) {
+  .nav {
+    height: 6vh
+  }
+
+  .mobileNav {
+    top: 1vh;
   }
 }
