@@ -55,3 +55,31 @@
 .small {
   width: 30%;
 }
+
+@media only screen and (max-width: 68.75em) {
+  .large {
+    width: 70%;
+  }
+
+  .medium {
+    width: 70%;
+  }
+
+  .small {
+    width: 50%;
+  }
+}
+
+@media only screen and (max-width: 37.25em) {
+  .large {
+    width: 90%;
+  }
+
+  .medium {
+    width: 90%;
+  }
+
+  .small {
+    width: 80%;
+  }
+}

@@ -166,17 +166,17 @@ const OrderDetails = () => {
                 </span>
               </p>
               {(order.status === "Waiting for payment" ||
-                order.status === "Confirm") && (
-                <div className={styles.cancelBtn}>
-                  <Button
-                    text="Cancel order"
-                    size="small"
-                    borderRadius="square"
-                    theme="red"
-                    onClick={onOpenCancelModal}
-                  />
-                </div>
-              )}
+                order.status === "Waiting for confirmation") && (
+                  <div className={styles.cancelBtn}>
+                    <Button
+                      text="Cancel order"
+                      size="small"
+                      borderRadius="square"
+                      theme="red"
+                      onClick={onOpenCancelModal}
+                    />
+                  </div>
+                )}
             </div>
           </div>
           <LinkButton
