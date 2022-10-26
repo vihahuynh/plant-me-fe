@@ -30,6 +30,21 @@
   }
 }
 
+.userNavItem,
+.mobileNavItem {
+
+  background-color: $color-primary;
+  color: $color-primary-light;
+  transition: all 0.3s;
+  padding: 1rem 3rem 1rem 2rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-primary-light;
+    color: $color-primary;
+  }
+}
+
 @media only screen and (max-width: 56.25em) {
   .navItem {
     margin-right: 2.5rem;

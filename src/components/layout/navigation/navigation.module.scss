@@ -67,10 +67,12 @@
   }
 }
 
-.userMenu {
+.userMenu,
+.mobileMenu {
+  background-color: $color-primary-light;
   box-shadow: 1rem 1rem 1.5rem rgba(0, 0, 0, 0.2);
   display: none;
-  width: 17.5rem;
+  width: 20rem;
   position: absolute;
   top: 3.5rem;
   right: -7rem;
@@ -91,11 +93,21 @@
   }
 }
 
+.mobileMenu {
+  right: -1rem;
+}
+
 .mobileNav {
+  display: none;
+  padding: 1rem;
   cursor: pointer;
   position: absolute;
-  right: 3rem;
-  top: 4vh;
+  right: 2rem;
+  top: 3vh;
+
+  &:hover .mobileMenu {
+    display: block;
+  }
 
   &:hover span::after {
     top: 1.2rem
@@ -109,7 +121,7 @@
     position: relative;
     background-color: $color-grey-dark;
     display: inline-block;
-    height: 3px;
+    height: 2px;
     width: 3.5rem;
 
     &::after,
@@ -117,7 +129,7 @@
       content: "";
       display: inline-block;
       background-color: $color-grey-dark;
-      height: 3px;
+      height: 2px;
       width: 3.5rem;
       transition: all .3s;
       position: absolute;
@@ -137,14 +149,16 @@
   .nav {
     padding: 0 3rem;
   }
-
-  // .navList,
-  // .subNav {
-  //   display: none;
-  // }
 }
 
-@media only screen and (max-width: 50em) {
+@media only screen and (max-width: 56.25em) {
+  .container {
+    height: 8vh
+  }
+
+  .mobileNav {
+    display: block;
+  }
 
   .subNav,
   .navList {

@@ -30,6 +30,18 @@ const Navigation = () => {
     <nav className={styles.nav}>
       <div className={styles.mobileNav}>
         <span></span>
+        <ul className={styles.mobileMenu}>
+          <NavigationItem url="/" title="Home" type="mobile" />
+          <NavigationItem url="shop" title="Shop" type="mobile" />
+          <NavigationItem url="user/me" title="Account info" type="mobile" />
+          <NavigationItem url="user/order-history" title="My orders" type="mobile" />
+          <NavigationItem url="user/review" title="My reviews" type="mobile" />
+          <NavigationItem url="user/notification" title="My notification" type="mobile" />
+          <NavigationItem url="user/favorite-products" title="Favorite products" type="mobile" />
+          <NavigationItem url="user/address" title="Delivery addresses" type="mobile" />
+          <NavigationItem url="about" title="About Us" type="mobile" />
+          <NavigationItem url="contact" title="Contact" type="mobile" />
+        </ul>
       </div>
       <div className={styles.mainNav}>
         <Logo />
@@ -52,21 +64,12 @@ const Navigation = () => {
             <div className={styles.userMenuBox}>
               <BiUserCircle className={styles.icon} />
               <ul className={styles.userMenu}>
-                <li>
-                  <Link to="/user/me">Account info</Link>
-                </li>
-                <li>
-                  <Link to="/user/order-history">Orders</Link>
-                </li>
-                <li>
-                  <Link to="/user/reviews">Reviews</Link>
-                </li>
-                <li>
-                  <Link to="/user/notification">Notification</Link>
-                </li>
-                <li>
-                  <Link to="/user/favorite-products">Favorite products</Link>
-                </li>
+                <NavigationItem url="user/me" title="Account info" type="user" />
+                <NavigationItem url="user/order-history" title="Orders" type="user" />
+                <NavigationItem url="user/reviews" title="Reviews" type="user" />
+                <NavigationItem url="user/notification" title="Notification" type="user" />
+                <NavigationItem url="user/favorite-products" title="Favorite products" type="user" />
+                <NavigationItem url="user/address" title="Delivery addresses" type="user" />
                 <li onClick={logout}>Log out</li>
               </ul>
             </div>
