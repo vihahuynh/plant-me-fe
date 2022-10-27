@@ -62,7 +62,11 @@ const NotificationHistory = () => {
   }, [authen, queries]);
 
   if (!authen?.user?.id)
-    return <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
+    return (
+      <Wrapper>
+        <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
+      </Wrapper>
+    );
 
   return (
     <Wrapper>
@@ -78,7 +82,7 @@ const NotificationHistory = () => {
               <FilterDrawer filterOptions={notificationFilterOptions} />
             </div>
           </div>
-          {!!notification.length && (
+          {!!notification.length ? (
             <>
               <ul className={styles.notiList}>
                 {notification.map((item) => (
@@ -98,6 +102,8 @@ const NotificationHistory = () => {
                 theme="white"
               />
             </>
+          ) : (
+            <p className={styles.infoText}>No notification</p>
           )}
         </div>
       </div>

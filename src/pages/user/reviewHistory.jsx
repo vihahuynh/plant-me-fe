@@ -101,7 +101,7 @@ const ReviewHistory = () => {
       try {
         if (!authen?.user) return;
         const reviewsData = await reviewService.getAll(
-          `user=${authen?.user?.id}&${queries}`,
+          `createdBy=${authen?.user?.id}&${queries}`,
           authen?.user?.token
         );
         setReviews(reviewsData.data);
@@ -117,7 +117,10 @@ const ReviewHistory = () => {
     const fetchData = async () => {
       try {
         if (authen?.user) {
-          const ordersData = await orderService.getAll([], authen?.user?.token);
+          const ordersData = await orderService.getAll(
+            `user=${authen?.user?.id}`,
+            authen?.user?.token
+          );
           const productsNeedToReview = ordersData.data.reduce(
             (result, order) => {
               order.cart.forEach((p) => {
@@ -144,11 +147,15 @@ const ReviewHistory = () => {
   }, [authen?.user, allReviews, reviews]);
 
   if (!authen.user?.id)
-    return <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
-  if (!filterReviews)
     return (
-      <InfoBox text="No order found" btnText="Back to home page" url="/" />
+      <Wrapper>
+        <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
+      </Wrapper>
     );
+  // if (!filterReviews)
+  //   return (
+  //     <InfoBox text="No review found" btnText="Back to home page" url="/" />
+  //   );
 
   return (
     <Wrapper>
@@ -169,7 +176,7 @@ const ReviewHistory = () => {
               </Slider>
             </div>
           ) : (
-            <p>No product to review</p>
+            <p className={styles.infoText}>No product to review</p>
           )}
           <div className={styles.allReviews}>
             <h3>My Reviews</h3>
@@ -199,7 +206,7 @@ const ReviewHistory = () => {
                 />
               </>
             ) : (
-              <p>No review found</p>
+              <p className={styles.infoText}>No review found</p>
             )}
           </div>
         </div>

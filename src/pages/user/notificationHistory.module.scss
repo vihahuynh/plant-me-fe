@@ -28,12 +28,16 @@
   }
 }
 
+.infoText {
+  font-size: $default-font-size;
+  color: $color-grey-dark;
+}
+
 @media only screen and (max-width: 56.25em) {
   .main {
     padding: 3rem 5rem;
   }
 }
-
 
 @media only screen and (max-width: 31.75em) {
   .main {

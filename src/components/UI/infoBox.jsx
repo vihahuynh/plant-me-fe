@@ -1,11 +1,14 @@
 import styles from "./infoBox.module.scss";
 import LinkButton from "./buttons/linkbutton";
 
-const InfoBox = ({ text, btnText, url }) => {
+const InfoBox = ({ text, btnText, url, theme = "primary" }) => {
+  const classNames = theme
+    ? `${styles.infoBox} ${styles[theme]}`
+    : `${styles.infoBox} ${styles[theme]}`;
   return (
     <div className={styles.container}>
-      <div className={styles.infoBox}>
-        <img src="./images/logo.png" alt="" />
+      <div className={classNames}>
+        <img src="./images/logo.png" alt="logo" />
         <p>{text}</p>
         <LinkButton
           text={btnText}

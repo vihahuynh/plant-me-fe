@@ -67,7 +67,9 @@ const OrderDetails = () => {
     return <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
 
   if (!order)
-    <InfoBox text="No order found" btnText="Back to home page" url="/" />;
+    return (
+      <InfoBox text="No order found" btnText="Back to home page" url="/" />
+    );
 
   return (
     <Wrapper>

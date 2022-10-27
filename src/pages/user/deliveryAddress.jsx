@@ -56,7 +56,11 @@ const DeliveryAddress = () => {
   }, [authen?.user?.token]);
 
   if (!authen?.user?.id)
-    return <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
+    return (
+      <Wrapper>
+        <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
+      </Wrapper>
+    );
 
   return (
     <Wrapper>

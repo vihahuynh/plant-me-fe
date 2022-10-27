@@ -62,10 +62,10 @@ const OrderHistory = () => {
   }, [authen, queries]);
 
   if (!authen.user?.id)
-    return <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
-  if (!orders)
     return (
-      <InfoBox text="No order found" btnText="Back to home page" url="/" />
+      <Wrapper>
+        <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
+      </Wrapper>
     );
 
   return (
@@ -105,7 +105,11 @@ const OrderHistory = () => {
               />
             </>
           ) : (
-            <p>No order found</p>
+            <InfoBox
+              text="No order found"
+              btnText="Back to home page"
+              url="/"
+            />
           )}
         </div>
       </div>

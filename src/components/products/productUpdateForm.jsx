@@ -85,7 +85,6 @@ const UpdateProductForm = () => {
         return { text: item, value: item };
       }) || []
     );
-    // setLivingConditions(product?.livingConditions || []);
     setCommonProblems(product?.commonProblems || []);
     setDecorTips(product?.decorTips || []);
     setPlantCare(product?.plantCare || []);
@@ -132,7 +131,9 @@ const UpdateProductForm = () => {
   };
 
   if (!product)
-    <InfoBox text="No product found" btnText="Back to home page" url="/" />;
+    return (
+      <InfoBox text="No product found" btnText="Back to home page" url="/" />
+    );
   return (
     <>
       <div className={styles.formContainer}>

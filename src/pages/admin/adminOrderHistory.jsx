@@ -62,7 +62,9 @@ const AdminOrderHistory = () => {
   if (!authen.user?.isAdmin)
     return <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
   if (!orders)
-    <InfoBox text="No order found" btnText="Back to home page" url="/" />;
+    return (
+      <InfoBox text="No order found" btnText="Back to home page" url="/" />
+    );
 
   return (
     <Wrapper>
@@ -100,7 +102,11 @@ const AdminOrderHistory = () => {
               />
             </>
           ) : (
-            <p>No order found</p>
+            <InfoBox
+              text="No order found"
+              btnText="Back to home page"
+              url="/"
+            />
           )}
         </div>
       </div>

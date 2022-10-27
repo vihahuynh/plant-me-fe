@@ -1,5 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import ReactDOM from "react-dom";
+
+import { Formik } from "formik";
+import Avatar from "react-avatar-edit";
 
 import styles from "./account.module.scss";
 
@@ -8,22 +12,20 @@ import UserLeftMenu from "./../../components/layout/userLetfMenu/userLeftMenu";
 import Button from "./../../components/UI/buttons/button";
 import RadioInput from "../../components/UI/inputs/radioInput";
 import InfoBox from "../../components/UI/infoBox";
+import Modal from "../../components/UI/modal";
+import SignInForm from "../../components/UI/signInForm";
 
 import { TbEdit } from "react-icons/tb/index";
 
 import userService from "./../../services/user";
-import { authenticationActions } from "./../../store";
-import { alertActions } from "../../store";
-
-import Avatar from "react-avatar-edit";
-import { Formik } from "formik";
-import { useEffect } from "react";
+import { authenticationActions, alertActions } from "./../../store";
 
 let delay;
 
 const Account = () => {
   const dispatch = useDispatch();
   const [isEditAvatar, setIsEditAvatar] = useState(false);
+  const [openModal, setOpenModal] = useState(true);
   const authen = useSelector((state) => state.authentication);
   const image = authen?.user?.avatarUrl || "/images/default-avatar.png";
   const [previewImg, setPreviewImg] = useState(null);
@@ -43,7 +45,7 @@ const Account = () => {
 
   const onSaveAccount = async (values) => {
     try {
-      let account = { ...values };
+      let account = { ...values, username: authen?.user?.username };
       if (previewImg) {
         account.avatarUrl = previewImg;
       }
@@ -69,8 +71,17 @@ const Account = () => {
       delay = setTimeout(() => {
         dispatch(alertActions.clear());
       }, 3000);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
+      if (
+        err?.response?.data?.error === "token expired" ||
+        err?.response?.data?.error === "invalid token" ||
+        err?.message === "token expired"
+      ) {
+        localStorage.removeItem("loggedUser");
+        dispatch(authenticationActions.logout());
+        setOpenModal(true);
+      }
     }
   };
 
@@ -79,7 +90,29 @@ const Account = () => {
   }, [authen?.user?.gender]);
 
   if (!authen?.user)
-    return <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
+    return (
+      <Wrapper>
+        <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />
+        {ReactDOM.createPortal(
+          <Modal
+            isOpen={openModal}
+            size="medium"
+            showButtonGroup={false}
+            onCancel={() => setOpenModal(false)}
+          >
+            <SignInForm
+              title={
+                authen?.user?.token
+                  ? "Token expired, please sign in again"
+                  : "Please sign in to continue"
+              }
+              setOpenModal={setOpenModal}
+            />
+          </Modal>,
+          document.getElementById("overlay-root")
+        )}
+      </Wrapper>
+    );
 
   return (
     <Wrapper>
@@ -237,7 +270,6 @@ const Account = () => {
                 </div>
                 <div className={styles.buttonGroup}>
                   <Button
-                    // className={isSubmitting ? styles.submittingBtn : ""}
                     disabled={isSubmitting}
                     type="submit"
                     text="Update"
@@ -250,6 +282,24 @@ const Account = () => {
           </Formik>
         </div>
       </div>
+      {ReactDOM.createPortal(
+        <Modal
+          isOpen={openModal}
+          size="medium"
+          showButtonGroup={false}
+          onCancel={() => setOpenModal(false)}
+        >
+          <SignInForm
+            title={
+              authen?.user?.token
+                ? "Token expired, please sign in again"
+                : "Please sign in to continue"
+            }
+            setOpenModal={setOpenModal}
+          />
+        </Modal>,
+        document.getElementById("overlay-root")
+      )}
     </Wrapper>
   );
 };

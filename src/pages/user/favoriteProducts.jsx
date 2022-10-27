@@ -31,10 +31,12 @@ const FavoriteProducts = () => {
     fetchData();
   }, [authen?.user?.likedProducts]);
 
-  if (!authen)
-    return <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
-  if (!authen?.user?.id)
-    return <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
+  if (!authen?.user?.token)
+    return (
+      <Wrapper>
+        <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />
+      </Wrapper>
+    );
 
   return (
     <Wrapper>
@@ -42,7 +44,11 @@ const FavoriteProducts = () => {
         <UserLeftMenu />
         <div>
           <h2>My favorite products</h2>
-          <Products products={products} />
+          {products.length ? (
+            <Products products={products} />
+          ) : (
+            <p className={styles.infoText}>No favorite product found</p>
+          )}
         </div>
       </div>
     </Wrapper>
