@@ -160,11 +160,11 @@ const UpdateProductForm = () => {
             }
             return errors;
           }}
-          onSubmit={(values, { setSubmitting }) => {
+          onSubmit={async (values, { setSubmitting }) => {
+            await onUpdateProduct(values);
             setTimeout(() => {
-              onUpdateProduct(values);
               setSubmitting(false);
-            }, 400);
+            }, 500);
           }}
         >
           {({

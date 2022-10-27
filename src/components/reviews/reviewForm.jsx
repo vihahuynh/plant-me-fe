@@ -25,8 +25,8 @@ const ReviewForm = ({ onSave, onCancel, rating }) => {
           }
           return errors;
         }}
-        onSubmit={(values, { setSubmitting }) => {
-          onSave(values);
+        onSubmit={async (values, { setSubmitting }) => {
+          await onSave(values);
           setTimeout(() => {
             setSubmitting(false);
             values = {
@@ -97,6 +97,7 @@ const ReviewForm = ({ onSave, onCancel, rating }) => {
                 text="Save"
                 size="small"
                 borderRadius="square"
+                disabled={isSubmitting}
               />
               <Button
                 theme="light"

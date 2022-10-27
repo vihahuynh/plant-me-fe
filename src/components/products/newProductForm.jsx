@@ -111,11 +111,11 @@ const NewProductForm = () => {
           }
           return errors;
         }}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={async (values, { setSubmitting }) => {
+          await onAddNewProduct(values);
           setTimeout(() => {
-            onAddNewProduct(values);
             setSubmitting(false);
-          }, 400);
+          }, 500);
         }}
       >
         {({

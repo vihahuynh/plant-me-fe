@@ -15,7 +15,8 @@ const Modal = ({
 }) => {
   const modalClassNames = `${styles.modal} ${styles[size]}`;
   return (
-    <div className={isOpen ? styles.layout : styles.hidden}>
+    <div className={isOpen ? styles.container : styles.hidden}>
+      <div className={styles.layout} onClick={onCancel} />
       <div className={modalClassNames}>
         {children ? (
           <>{children}</>

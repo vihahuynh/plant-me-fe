@@ -68,8 +68,8 @@ const SignUp = () => {
 
             return errors;
           }}
-          onSubmit={(values, { setSubmitting }) => {
-            onCreateUser(values);
+          onSubmit={async (values, { setSubmitting }) => {
+            await onCreateUser(values);
             setTimeout(() => {
               setSubmitting(false);
             }, 500);

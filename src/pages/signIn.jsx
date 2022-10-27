@@ -54,8 +54,8 @@ const SignIn = () => {
             }
             return errors;
           }}
-          onSubmit={(values, { setSubmitting }) => {
-            onLogin(values);
+          onSubmit={async (values, { setSubmitting }) => {
+            await onLogin(values);
             setTimeout(() => {
               setSubmitting(false);
             }, 500);

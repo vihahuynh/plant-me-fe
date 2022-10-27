@@ -87,11 +87,11 @@ const StockForm = ({ stock, productId, onCancel, setStocks }) => {
           }
           return errors;
         }}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            if (stock?.id ? onUpdateStock(values) : onAddNewStock(values))
+        onSubmit={async (values, { setSubmitting }) => {
+          if (stock?.id ? await onUpdateStock(values) : await onAddNewStock(values))
+            setTimeout(() => {
               setSubmitting(false);
-          }, 400);
+            }, 400);
         }}
       >
         {({

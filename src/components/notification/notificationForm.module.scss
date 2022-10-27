@@ -77,6 +77,7 @@
       background-color: white;
       font-family: "Poppins", sans-serif;
       font-size: $default-font-size;
+      transition: all .3s;
 
       &:active,
       &:hover {
@@ -133,6 +134,7 @@
     }
   }
 }
+
 .btnGroup {
   display: flex;
   column-gap: 1rem;

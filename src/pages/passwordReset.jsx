@@ -48,8 +48,8 @@ const PasswordReset = () => {
 
             return errors;
           }}
-          onSubmit={(values, { setSubmitting }) => {
-            onChangeEmail(values);
+          onSubmit={async (values, { setSubmitting }) => {
+            await onChangeEmail(values);
             setTimeout(() => {
               setSubmitting(false);
             }, 500);

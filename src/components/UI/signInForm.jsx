@@ -27,6 +27,7 @@ const SignInForm = ({ setOpenModal }) => {
       const errorMessage = err?.response?.data?.err;
       setError(errorMessage || "Some thing went wrong!");
     }
+    setOpenModal(false)
   };
 
   return (
@@ -51,8 +52,8 @@ const SignInForm = ({ setOpenModal }) => {
             }
             return errors;
           }}
-          onSubmit={(values, { setSubmitting }) => {
-            onLogin(values);
+          onSubmit={async (values, { setSubmitting }) => {
+            await onLogin(values);
             setTimeout(() => {
               setSubmitting(false);
             }, 500);

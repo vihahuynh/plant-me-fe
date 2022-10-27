@@ -2,6 +2,7 @@
 
 .formContainer {
   position: relative;
+
   h2 {
     color: $color-primary;
   }
@@ -32,6 +33,7 @@
       color: $color-grey;
       font-family: "Poppins", sans-serif;
       font-size: $default-font-size;
+      transition: all .3s;
 
       &:active,
       &:hover {

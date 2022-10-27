@@ -169,9 +169,8 @@ const BuyInfo = ({ product }) => {
           <p className={styles.optionTitle}>Size</p>
           <ul className={styles.optionList}>
             {allSizes?.map((s) => {
-              const sizeClassNames = `${styles.sizeItem} ${
-                size === s ? styles.active : ""
-              } ${!availableSizes.includes(s) ? styles.unavailable : ""}`;
+              const sizeClassNames = `${styles.sizeItem} ${size === s ? styles.active : ""
+                } ${!availableSizes.includes(s) ? styles.unavailable : ""}`;
               return (
                 <li
                   className={sizeClassNames}
@@ -244,7 +243,7 @@ const BuyInfo = ({ product }) => {
         />
       </div>
       {ReactDOM.createPortal(
-        <Modal isOpen={openModal} size="medium" showButtonGroup={false}>
+        <Modal isOpen={openModal} size="medium" showButtonGroup={false} onCancel={() => setOpenModal(false)}>
           <SignInForm setOpenModal={setOpenModal} />
         </Modal>,
         document.getElementById("overlay-root")

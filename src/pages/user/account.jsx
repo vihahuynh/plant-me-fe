@@ -114,9 +114,9 @@ const Account = () => {
               }
               return errors;
             }}
-            onSubmit={(values, { setSubmitting }) => {
+            onSubmit={async (values, { setSubmitting }) => {
+              await onSaveAccount(values);
               setTimeout(() => {
-                onSaveAccount(values);
                 setSubmitting(false);
               }, 400);
             }}

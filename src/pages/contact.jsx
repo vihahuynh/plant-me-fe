@@ -3,8 +3,25 @@ import { Formik } from "formik";
 import Button from "./../components/UI/buttons/button";
 
 import styles from "./contact.module.scss";
+import emailService from "../services/email";
+import { alertActions } from "../store";
+import { useDispatch } from "react-redux";
+
+let delay
 
 const Contact = () => {
+  const dispatch = useDispatch()
+  const onSendEmail = async (values) => {
+    try {
+      clearTimeout(delay)
+      await emailService.sendEmail(values)
+      dispatch(alertActions.updateMessage({ message: "Sent email successfully!" }))
+      delay = setTimeout(() => dispatch(alertActions.clear()), 4000)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
     <Wrapper>
       <div className={styles.contactBox}>
@@ -25,7 +42,7 @@ const Contact = () => {
         </ul>
         <div className={styles.formContainer}>
           <Formik
-            initialValues={{ email: "", name: "", comment: "" }}
+            initialValues={{ email: "", name: "", content: "" }}
             validate={(values) => {
               const errors = {};
               if (!values.email) {
@@ -35,16 +52,15 @@ const Contact = () => {
               ) {
                 errors.email = "Invalid email address";
               }
-
               if (!values.name) errors.name = "Name is required";
-              if (!values.comment) errors.comment = "Comment is required";
+              if (!values.content) errors.content = "Content is required";
               return errors;
             }}
-            onSubmit={(values, { setSubmitting }) => {
+            onSubmit={async (values, { setSubmitting }) => {
+              await onSendEmail(values)
               setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
                 setSubmitting(false);
-              }, 400);
+              }, 500);
             }}
           >
             {({
@@ -87,14 +103,14 @@ const Contact = () => {
                   <textarea
                     rows={6}
                     type="text"
-                    name="comment"
+                    name="content"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.comment}
-                    placeholder="Comment"
+                    value={values.content}
+                    placeholder="Content"
                   />
                   <p className={styles.errors}>
-                    {errors.comment && touched.comment && errors.comment}
+                    {errors.content && touched.content && errors.content}
                   </p>
                 </div>
                 <Button

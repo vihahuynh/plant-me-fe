@@ -78,6 +78,7 @@
       background-color: white;
       font-family: "Poppins", sans-serif;
       font-size: $default-font-size;
+      transition: all .3s;
 
       &:active,
       &:hover {

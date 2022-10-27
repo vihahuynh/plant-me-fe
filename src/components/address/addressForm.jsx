@@ -130,10 +130,10 @@ const AddressForm = ({ address, onCancel, setAddresses }) => {
           }
           return errors;
         }}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={async (values, { setSubmitting }) => {
+          if (address) await onUpdateAddress(address?.id, values);
+          else await onAddNewAddress(values);
           setTimeout(() => {
-            if (address) onUpdateAddress(address?.id, values);
-            else onAddNewAddress(values);
             setSubmitting(false);
           }, 400);
         }}
@@ -246,6 +246,7 @@ const AddressForm = ({ address, onCancel, setAddresses }) => {
                 text={address ? "Update" : "Save"}
                 size="small"
                 borderRadius="square"
+                disabled={isSubmitting}
               />
             </div>
           </form>
