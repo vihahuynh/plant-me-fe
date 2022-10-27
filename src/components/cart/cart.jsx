@@ -7,8 +7,9 @@ import styles from "./cart.module.scss";
 import CartItem from "./cartItem";
 import CheckBox from "../UI/inputs/checkBox";
 import Modal from "../UI/modal";
+import SignInForm from "../UI/signInForm";
 
-import { alertActions } from "../../store";
+import { alertActions, authenticationActions } from "../../store";
 import { updateItem, toggleCheckoutAll, clear } from "../../store/cartSlice";
 
 import { TbTrash } from "react-icons/tb/index";
@@ -20,6 +21,7 @@ const Cart = ({ isShowCheckBox = true }) => {
   const cart = useSelector((state) => state.cart);
   const authen = useSelector((state) => state.authentication);
   const [openModal, setOpenModal] = useState(false);
+  const [openSignInModal, setOpenSignInModal] = useState(false)
   const [disabledItem, setDisabledItems] = useState([]);
 
   const onCloseModal = () => setOpenModal(false);
@@ -58,41 +60,59 @@ const Cart = ({ isShowCheckBox = true }) => {
   }, [dispatch, cart, authen?.user?.token]);
 
   const onSelectAllItems = async () => {
-    const isCheckout = !cart.checkoutAllItems;
-    const cartToUpdate = {
-      ...cart,
-      items: cart.items.map((i) => {
-        return {
-          ...i,
-          isCheckout: disabledItem.includes(i._id) ? false : isCheckout,
-        };
-      }),
-      checkoutAllItems: isCheckout,
-    };
+    try {
+      const isCheckout = !cart.checkoutAllItems;
+      const cartToUpdate = {
+        ...cart,
+        items: cart.items.map((i) => {
+          return {
+            ...i,
+            isCheckout: disabledItem.includes(i._id) ? false : isCheckout,
+          };
+        }),
+        checkoutAllItems: isCheckout,
+      };
 
-    await Promise.all(
-      cart.items.map(async (item) => {
-        const cartItem = {
-          ...item,
-          netPrice: Math.round(
-            item.price - (item.price * item.salePercent) / 100
-          ),
-          isCheckout: disabledItem.includes(item._id) ? false : isCheckout,
-        };
-        await dispatch(
-          updateItem({
-            cart: cartToUpdate,
-            item: cartItem,
-            token: authen?.user?.token,
-          })
-        ).unwrap();
-      })
-    );
+      await Promise.all(
+        cart.items.map(async (item) => {
+          const cartItem = {
+            ...item,
+            netPrice: Math.round(
+              item.price - (item.price * item.salePercent) / 100
+            ),
+            isCheckout: disabledItem.includes(item._id) ? false : isCheckout,
+          };
+          await dispatch(
+            updateItem({
+              cart: cartToUpdate,
+              item: cartItem,
+              token: authen?.user?.token,
+            })
+          ).unwrap();
+        })
+      );
+    } catch (err) {
+      console.log(err);
+      if (err?.response?.data?.error === "token expired" || err?.response?.data?.error === "invalid token" || err?.message === "token expired") {
+        localStorage.removeItem("loggedUser");
+        dispatch(authenticationActions.logout());
+        setOpenSignInModal(true)
+      }
+    }
   };
 
   const onDeleteCheckedItems = async () => {
-    await dispatch(clear({ cart, token: authen?.user?.token })).unwrap();
-    setOpenModal(false);
+    try {
+      await dispatch(clear({ cart, token: authen?.user?.token })).unwrap();
+      setOpenModal(false);
+    } catch (err) {
+      console.log(err);
+      if (err?.response?.data?.error === "token expired" || err?.response?.data?.error === "invalid token" || err?.message === "token expired") {
+        localStorage.removeItem("loggedUser");
+        dispatch(authenticationActions.logout());
+        setOpenSignInModal(true)
+      }
+    }
   };
 
   const showItems = isShowCheckBox
@@ -137,6 +157,12 @@ const Cart = ({ isShowCheckBox = true }) => {
           />
         ))}
       </div>
+      {ReactDOM.createPortal(
+        <Modal isOpen={openSignInModal} size="medium" showButtonGroup={false} onCancel={() => setOpenSignInModal(false)}>
+          <SignInForm title={authen?.user?.token ? "Token expired, please sign in again" : "Please sign in to continue"} setOpenModal={setOpenSignInModal} />
+        </Modal>,
+        document.getElementById("overlay-root")
+      )}
     </>
   );
 };

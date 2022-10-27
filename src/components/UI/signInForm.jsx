@@ -8,7 +8,7 @@ import { authenticationActions } from "../../store";
 
 import styles from "./signInForm.module.scss";
 
-const SignInForm = ({ setOpenModal }) => {
+const SignInForm = ({ title, setOpenModal }) => {
   const [error, setError] = useState("");
   const dispatch = useDispatch();
 
@@ -33,7 +33,7 @@ const SignInForm = ({ setOpenModal }) => {
   return (
     <div className={styles.smallContainer}>
       <div className={styles.formContainer}>
-        <h2>Sign in</h2>
+        <h5>{title}</h5>
         <a className={styles.url} href="/signup">
           Do not have an account?
         </a>

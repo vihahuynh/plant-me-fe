@@ -54,29 +54,32 @@ const Navigation = () => {
         </ul>
       </div>
       <div className={styles.subNav}>
-        {/* <SearchBar /> */}
         <div className={styles.subNav}>
-          <Link to="/cart" className={styles.cart}>
-            <BiCartAlt className={styles.icon} />
-            <span className={styles.quantity}>{cartQuantity}</span>
-          </Link>
+
           {authen.isLoggedIn ? (
-            <div className={styles.userMenuBox}>
-              <BiUserCircle className={styles.icon} />
-              <ul className={styles.userMenu}>
-                <NavigationItem url="user/me" title="Account info" type="user" />
-                <NavigationItem url="user/order-history" title="Orders" type="user" />
-                <NavigationItem url="user/reviews" title="Reviews" type="user" />
-                <NavigationItem url="user/notification" title="Notification" type="user" />
-                <NavigationItem url="user/favorite-products" title="Favorite products" type="user" />
-                <NavigationItem url="user/address" title="Delivery addresses" type="user" />
-                <li onClick={logout}>Log out</li>
-              </ul>
-            </div>
+            <>
+              <Link to="/cart" className={styles.cart}>
+                <BiCartAlt className={styles.icon} />
+                <span className={styles.quantity}>{cartQuantity}</span>
+              </Link>
+              <div className={styles.userMenuBox}>
+
+                <BiUserCircle className={styles.icon} />
+                <ul className={styles.userMenu}>
+                  <NavigationItem url="user/me" title="Account info" type="user" />
+                  <NavigationItem url="user/order-history" title="Orders" type="user" />
+                  <NavigationItem url="user/reviews" title="Reviews" type="user" />
+                  <NavigationItem url="user/notification" title="Notification" type="user" />
+                  <NavigationItem url="user/favorite-products" title="Favorite products" type="user" />
+                  <NavigationItem url="user/address" title="Delivery addresses" type="user" />
+                  <li onClick={logout}>Log out</li>
+                </ul>
+              </div>
+            </>
           ) : (
             <>
               <LinkButton
-                url="/signin"
+                url="signin"
                 text="Sign in"
                 size="small"
                 borderRadius="square"

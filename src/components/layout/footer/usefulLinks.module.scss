@@ -17,6 +17,11 @@
         color: $color-grey;
         text-decoration: none;
         font-size: $tiny-font-size;
+        transition: all .3s;
+      }
+
+      a:hover {
+        text-decoration: underline;
       }
     }
   }

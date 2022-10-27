@@ -1,9 +1,16 @@
-import styles from "./productItem.module.scss";
-import Price from "./price";
+import ReactDOM from "react-dom"
+import { useState } from "react"
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { authenticationActions } from "../../store";
+
 import { BsSuitHeart, BsSuitHeartFill } from "react-icons/bs/index";
+
+import styles from "./productItem.module.scss";
+import Price from "./price";
+import SignInForm from "../UI/signInForm";
+import Modal from "../UI/modal";
+
+import { authenticationActions } from "../../store";
 import userService from "../../services/user";
 
 const ProductItem = ({ product }) => {
@@ -11,6 +18,7 @@ const ProductItem = ({ product }) => {
   const history = useHistory();
   const authen = useSelector((state) => state.authentication);
   const wasLiked = authen?.user?.likedProducts?.includes(product.id);
+  const [openModal, setOpenModal] = useState(false)
 
   const onLike = async () => {
     try {
@@ -23,7 +31,11 @@ const ProductItem = ({ product }) => {
       await userService.update(currentUser.id, currentUser, currentUser.token);
       dispatch(authenticationActions.update({ user: currentUser }));
     } catch (err) {
-      console.log(err);
+      if (err?.response?.data?.error === "token expired") {
+        localStorage.removeItem("loggedUser");
+        dispatch(authenticationActions.logout());
+        setOpenModal(true)
+      }
     }
   };
 
@@ -39,6 +51,11 @@ const ProductItem = ({ product }) => {
       dispatch(authenticationActions.update({ user: currentUser }));
     } catch (err) {
       console.log(err);
+      if (err?.response?.data?.error === "token expired") {
+        localStorage.removeItem("loggedUser");
+        dispatch(authenticationActions.logout());
+        setOpenModal(true)
+      }
     }
   };
   const goToDetailsPage = () => {
@@ -68,6 +85,12 @@ const ProductItem = ({ product }) => {
         <p>{product.title}</p>
         <Price price={product.price} salePercent={product.salePercent} />
       </div>
+      {ReactDOM.createPortal(
+        <Modal isOpen={openModal} size="medium" showButtonGroup={false} onCancel={() => setOpenModal(false)}>
+          <SignInForm setOpenModal={setOpenModal} />
+        </Modal>,
+        document.getElementById("overlay-root")
+      )}
     </div>
   );
 };

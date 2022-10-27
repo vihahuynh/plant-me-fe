@@ -12,7 +12,7 @@ import Modal from "../UI/modal";
 import SignInForm from "../UI/signInForm";
 
 import { addItem } from "../../store/cartSlice";
-import { alertActions } from "./../../store";
+import { alertActions, authenticationActions } from "./../../store";
 
 let delay;
 
@@ -98,6 +98,11 @@ const BuyInfo = ({ product }) => {
       delay = setTimeout(() => dispatch(alertActions.clear()), 3000);
     } catch (err) {
       console.log(err);
+      if (err?.response?.data?.error === "token expired" || err?.response?.data?.error === "invalid token" || err?.message === "token expired") {
+        localStorage.removeItem("loggedUser");
+        dispatch(authenticationActions.logout());
+        setOpenModal(true)
+      }
     }
   };
 
@@ -244,7 +249,7 @@ const BuyInfo = ({ product }) => {
       </div>
       {ReactDOM.createPortal(
         <Modal isOpen={openModal} size="medium" showButtonGroup={false} onCancel={() => setOpenModal(false)}>
-          <SignInForm setOpenModal={setOpenModal} />
+          <SignInForm title={authen?.user?.token ? "Token expired, please sign in again" : "Please sign in to continue"} setOpenModal={setOpenModal} />
         </Modal>,
         document.getElementById("overlay-root")
       )}

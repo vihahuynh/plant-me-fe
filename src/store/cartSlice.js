@@ -70,82 +70,123 @@ const cartSlice = createSlice({
 export const addItem = createAsyncThunk(
   'cart/addItem',
   async ({ cart, item, token }) => {
-    const cartToUpdate = { ...cart, checkoutAllItems: false }
-    const foundItem = cartToUpdate.items.find(
-      (i) => i.stock === item.stock
-    );
-
-    if (foundItem) {
-      const updateItem = {
-        ...item,
-        quantity: foundItem.quantity + item.quantity,
-      };
-      cartToUpdate.items = cartToUpdate.items.map((i) =>
-        i.stock === item.stock
-          ? updateItem
-          : i
+    try {
+      const cartToUpdate = { ...cart, checkoutAllItems: false }
+      const foundItem = cartToUpdate.items.find(
+        (i) => i.stock === item.stock
       );
-    } else {
-      cartToUpdate.quantity = cartToUpdate.quantity + 1;
-      cartToUpdate.items = cartToUpdate.items.concat(item);
+
+      if (foundItem) {
+        const updateItem = {
+          ...item,
+          quantity: foundItem.quantity + item.quantity,
+        };
+        cartToUpdate.items = cartToUpdate.items.map((i) =>
+          i.stock === item.stock
+            ? updateItem
+            : i
+        );
+      } else {
+        cartToUpdate.quantity = cartToUpdate.quantity + 1;
+        cartToUpdate.items = cartToUpdate.items.concat(item);
+      }
+      const updatedCart = await cartService.update(cart.id, cartToUpdate, token)
+      return updatedCart.data
+    } catch (err) {
+      console.log(err)
+      if (err?.response?.data?.error === "token expired" || err?.response?.data?.error === "invalid token") {
+        throw new Error("token expired")
+      }
     }
-    const updatedCart = await cartService.update(cart.id, cartToUpdate, token)
-    return updatedCart.data
   }
 )
 
 export const removeItem = createAsyncThunk('cart/removeItem', async ({ cart, item, token }) => {
-  const cartToUpdate = { ...cart }
-  const foundItem = cartToUpdate.items.find(
-    (i) => i.stock === item.stock
-  );
-  if (foundItem) {
-    cartToUpdate.quantity = cartToUpdate.quantity - 1;
-    cartToUpdate.items = cartToUpdate.items.filter(
-      (i) => i.stock !== item.stock
+  try {
+    const cartToUpdate = { ...cart }
+    const foundItem = cartToUpdate.items.find(
+      (i) => i.stock === item.stock
     );
+    if (foundItem) {
+      cartToUpdate.quantity = cartToUpdate.quantity - 1;
+      cartToUpdate.items = cartToUpdate.items.filter(
+        (i) => i.stock !== item.stock
+      );
+    }
+    const updatedCart = await cartService.update(cart.id, cartToUpdate, token)
+    return updatedCart.data
+  } catch (err) {
+    console.log(err)
+    if (err?.response?.data?.error === "token expired" || err?.response?.data?.error === "invalid token") {
+      throw new Error("token expired")
+    }
   }
-  const updatedCart = await cartService.update(cart.id, cartToUpdate, token)
-  return updatedCart.data
 })
 
 export const updateItem = createAsyncThunk('cart/updateItem', async ({ cart, item, token }) => {
-  const cartToUpdate = { ...cart }
-  const foundItem = cartToUpdate.items.find(
-    (i) => i.stock === item.stock
-  );
-  if (foundItem) {
-    cartToUpdate.items = cartToUpdate.items.map((i) => i.stock === item.stock
-      ? item
-      : i
+  try {
+    const cartToUpdate = { ...cart }
+    const foundItem = cartToUpdate.items.find(
+      (i) => i.stock === item.stock
     );
+    if (foundItem) {
+      cartToUpdate.items = cartToUpdate.items.map((i) => i.stock === item.stock
+        ? item
+        : i
+      );
+    }
+    const updatedCart = await cartService.update(cart.id, cartToUpdate, token)
+    return updatedCart.data
+  } catch (err) {
+    console.log(err)
+    if (err?.response?.data?.error === "token expired" || err?.response?.data?.error === "invalid token") {
+      throw new Error("token expired")
+    }
   }
-  const updatedCart = await cartService.update(cart.id, cartToUpdate, token)
-  return updatedCart.data
 })
 
 export const toggleCheckoutAll = createAsyncThunk('cart/toggleCheckoutAll', async ({ cart, value, token }) => {
-  const updatedCart = await cartService.update(cart.id, { ...cart, checkoutAllItems: value }, token)
-  return updatedCart.data
+  try {
+    const updatedCart = await cartService.update(cart.id, { ...cart, checkoutAllItems: value }, token)
+    return updatedCart.data
+  } catch (err) {
+    console.log(err)
+    if (err?.response?.data?.error === "token expired" || err?.response?.data?.error === "invalid token") {
+      throw new Error("token expired")
+    }
+  }
 })
 
 export const clearCheckoutItems = createAsyncThunk('cart/clearCheckoutItems', async ({ cart, token }) => {
-  const cartToUpdate = { ...cart, checkoutAllItems: false }
-  cartToUpdate.items = cartToUpdate.items.filter((i) => !i.isCheckout);
-  cartToUpdate.quantity = cartToUpdate.items.length;
-  const updatedCart = await cartService.update(cart.id, cartToUpdate, token)
-  return updatedCart.data
+  try {
+    const cartToUpdate = { ...cart, checkoutAllItems: false }
+    cartToUpdate.items = cartToUpdate.items.filter((i) => !i.isCheckout);
+    cartToUpdate.quantity = cartToUpdate.items.length;
+    const updatedCart = await cartService.update(cart.id, cartToUpdate, token)
+    return updatedCart.data
+  } catch (err) {
+    console.log(err)
+    if (err?.response?.data?.error === "token expired" || err?.response?.data?.error === "invalid token") {
+      throw new Error("token expired")
+    }
+  }
 })
 
 export const clear = createAsyncThunk('cart/clear', async ({ cart, token }) => {
-  const cartToUpdate = {
-    ...cart,
-    items: [],
-    quantity: 0,
-    checkoutAllItems: false
+  try {
+    const cartToUpdate = {
+      ...cart,
+      items: [],
+      quantity: 0,
+      checkoutAllItems: false
+    }
+    const updatedCart = await cartService.update(cart.id, cartToUpdate, token)
+    return updatedCart.data
+  } catch (err) {
+    if (err?.response?.data?.error === "token expired" || err?.response?.data?.error === "invalid token") {
+      throw new Error("token expired")
+    }
   }
-  const updatedCart = await cartService.update(cart.id, cartToUpdate, token)
-  return updatedCart.data
 })
 
 export default cartSlice;

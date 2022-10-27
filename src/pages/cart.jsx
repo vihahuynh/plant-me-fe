@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ReactDOM from "react-dom"
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
@@ -8,8 +9,10 @@ import Cart from "./../components/cart/cart";
 import styles from "./cart.module.scss";
 import CartSummary from "../components/cart/cartSummary";
 import InfoBox from "../components/UI/infoBox";
+import Modal from "../components/UI/modal";
+import SignInForm from "../components/UI/signInForm";
 
-import { alertActions, cartActions } from "./../store";
+import { alertActions, cartActions, authenticationActions } from "./../store";
 import cartService from "../services/cart";
 import stockSerice from "../services/stock";
 import { updateItem } from "../store/cartSlice";
@@ -20,6 +23,7 @@ const CartPage = () => {
   const cart = useSelector((state) => state.cart);
   const authen = useSelector((state) => state.authentication);
   const [isLoading, setIsLoading] = useState(false);
+  const [openModal, setOpenModal] = useState(false)
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -76,6 +80,11 @@ const CartPage = () => {
       }
     } catch (err) {
       console.log(err);
+      if (err?.response?.data?.error === "token expired" || err?.response?.data?.error === "invalid token" || err?.message === "token expired") {
+        localStorage.removeItem("loggedUser");
+        dispatch(authenticationActions.logout());
+        setOpenModal(true)
+      }
     } finally {
       setIsLoading(false);
     }
@@ -94,6 +103,12 @@ const CartPage = () => {
         </div>
       ) : (
         <InfoBox text="No items found" btnText="Back to shopping" url="/shop" />
+      )}
+      {ReactDOM.createPortal(
+        <Modal isOpen={openModal} size="medium" showButtonGroup={false} onCancel={() => setOpenModal(false)}>
+          <SignInForm title={authen?.user?.token ? "Token expired, please sign in again" : "Please sign in to continue"} setOpenModal={setOpenModal} />
+        </Modal>,
+        document.getElementById("overlay-root")
       )}
     </Wrapper>
   );

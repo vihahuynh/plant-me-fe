@@ -93,9 +93,11 @@
 .url {
   font-size: $default-font-size;
   color: $color-primary;
-  position: absolute;
-  top: 1rem;
-  right: 0rem;
+  // position: absolute;
+  // top: 1rem;
+  // right: 0rem;
+  display: inline-block;
+  margin-bottom: 2rem;
   text-decoration: underline;
   text-underline-offset: 4px;
 }
