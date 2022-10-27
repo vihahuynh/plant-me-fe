@@ -3,6 +3,7 @@ import Button from "../../components/UI/buttons/button";
 import Wrapper from "../../components/layout/wrapper";
 import UserLeftMenu from "../../components/layout/userLetfMenu/userLeftMenu";
 import AddressForm from "../../components/address/addressForm";
+import InfoBox from "../../components/UI/infoBox";
 
 import styles from "./deliveryAddress.module.scss";
 import { useSelector } from "react-redux";
@@ -54,7 +55,8 @@ const DeliveryAddress = () => {
     if (authen?.user?.token) fetchData();
   }, [authen?.user?.token]);
 
-  if (!authen?.user?.id) return <p>Permission denied</p>;
+  if (!authen?.user?.id)
+    return <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
 
   return (
     <Wrapper>

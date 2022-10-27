@@ -6,6 +6,7 @@ import Moment from "react-moment";
 import Wrapper from "../../components/layout/wrapper";
 import OrderProgressBar from "./../../components/UI/orderProgressBar";
 import UserLeftMenu from "./../../components/layout/userLetfMenu/userLeftMenu";
+import InfoBox from "../../components/UI/infoBox";
 
 import orderService from "./../../services/order";
 
@@ -25,8 +26,12 @@ const OrderTracking = () => {
     fetchData();
   }, [orderId, authen?.user?.token]);
 
-  if (!order) return <p>No order found</p>;
-  if (order?.user !== authen?.user?.id) return <p>Permission denied</p>;
+  if (!order)
+    return (
+      <InfoBox text="No order found" btnText="Back to home page" url="/" />
+    );
+  if (order?.user !== authen?.user?.id)
+    return <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
 
   return (
     <Wrapper>

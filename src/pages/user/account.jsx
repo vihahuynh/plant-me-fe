@@ -7,6 +7,7 @@ import Wrapper from "./../../components/layout/wrapper";
 import UserLeftMenu from "./../../components/layout/userLetfMenu/userLeftMenu";
 import Button from "./../../components/UI/buttons/button";
 import RadioInput from "../../components/UI/inputs/radioInput";
+import InfoBox from "../../components/UI/infoBox";
 
 import { TbEdit } from "react-icons/tb/index";
 
@@ -77,7 +78,8 @@ const Account = () => {
     setGender(authen?.user?.gender);
   }, [authen?.user?.gender]);
 
-  if (!authen?.user) return <p>Permission denied</p>;
+  if (!authen?.user)
+    return <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
 
   return (
     <Wrapper>

@@ -4,6 +4,7 @@ import productService from "../../services/product";
 
 import Products from "./../../components/products/products";
 import Wrapper from "../../components/layout/wrapper";
+import InfoBox from "../../components/UI/infoBox";
 
 import styles from "./favoriteProducts.module.scss";
 import UserLeftMenu from "../../components/layout/userLetfMenu/userLeftMenu";
@@ -30,8 +31,10 @@ const FavoriteProducts = () => {
     fetchData();
   }, [authen?.user?.likedProducts]);
 
-  if (!authen) return <p>Permission denied</p>;
-  if (!authen?.user?.id) return <p>Permission denied</p>;
+  if (!authen)
+    return <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
+  if (!authen?.user?.id)
+    return <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
 
   return (
     <Wrapper>

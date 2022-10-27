@@ -11,6 +11,7 @@ import SortDrawer from "./../../components/UI/drawers/sortDrawer";
 import Arrow from "./../../components/UI/arrow";
 import ProductToReview from "./../../components/reviews/productToReview";
 import Pagination from "../../components/UI/pagination";
+import InfoBox from "../../components/UI/infoBox";
 
 import reviewService from "../../services/review";
 import orderService from "../../services/order";
@@ -51,16 +52,16 @@ const ReviewHistory = () => {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-        }
+        },
       },
       {
         breakpoint: 1000,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   useEffect(() => {
@@ -142,8 +143,12 @@ const ReviewHistory = () => {
     fetchData();
   }, [authen?.user, allReviews, reviews]);
 
-  if (!authen.user?.id) return <p>Permission denied</p>;
-  if (!filterReviews) return <p>No review found</p>;
+  if (!authen.user?.id)
+    return <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
+  if (!filterReviews)
+    return (
+      <InfoBox text="No order found" btnText="Back to home page" url="/" />
+    );
 
   return (
     <Wrapper>

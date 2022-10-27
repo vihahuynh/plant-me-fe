@@ -8,6 +8,7 @@ import productService from "../../services/product";
 import InputGroup from "../UI/inputs/inputGroup/inputGroup";
 import Stocks from "../stock/stocks";
 import SelectInput from "../UI/inputs/selectInput";
+import InfoBox from "../UI/infoBox";
 
 import { MdCancel } from "react-icons/md";
 
@@ -130,7 +131,8 @@ const UpdateProductForm = () => {
     }
   };
 
-  if (!product) return <p>No product found</p>;
+  if (!product)
+    <InfoBox text="No product found" btnText="Back to home page" url="/" />;
   return (
     <>
       <div className={styles.formContainer}>

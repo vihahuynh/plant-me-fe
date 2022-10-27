@@ -7,6 +7,7 @@ import SearchBar from "../../components/UI/inputs/searchBar";
 import FilterDrawer from "../../components/UI/drawers/filterDrawer";
 import SortDrawer from "../../components/UI/drawers/sortDrawer";
 import Pagination from "../../components/UI/pagination";
+import InfoBox from "../../components/UI/infoBox";
 
 import orderService from "../../services/order";
 import { ordersFilterOptions, ordersSortOptions } from "../../data";
@@ -58,8 +59,10 @@ const AdminOrderHistory = () => {
     fetchData();
   }, [authen, queries]);
 
-  if (!authen.user?.isAdmin) return <p>Permission denied</p>;
-  if (!orders) return <p>No order found</p>;
+  if (!authen.user?.isAdmin)
+    return <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
+  if (!orders)
+    <InfoBox text="No order found" btnText="Back to home page" url="/" />;
 
   return (
     <Wrapper>

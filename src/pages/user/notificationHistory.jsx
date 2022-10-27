@@ -9,6 +9,7 @@ import NotificationItem from "./../../components/notification/notificationItem";
 import FilterDrawer from "../../components/UI/drawers/filterDrawer";
 import SortDrawer from "../../components/UI/drawers/sortDrawer";
 import Pagination from "../../components/UI/pagination";
+import InfoBox from "../../components/UI/infoBox";
 
 import {
   notificationFilterOptions,
@@ -60,7 +61,8 @@ const NotificationHistory = () => {
     fetchData();
   }, [authen, queries]);
 
-  if (!authen?.user?.id) return <p>Permission denied</p>;
+  if (!authen?.user?.id)
+    return <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
 
   return (
     <Wrapper>

@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import AdminOrderDetailsItem from "../../components/order/adminOrderDetailsItem";
 import Wrapper from "../../components/layout/wrapper";
 import Modal from "../../components/UI/modal";
+import InfoBox from "../../components/UI/infoBox";
 
 import orderService from "../../services/order";
 
@@ -58,8 +59,12 @@ const AdminOrderDetails = () => {
     fetchData();
   }, [orderId, authen]);
 
-  if (!authen.user?.isAdmin) return <p>Permission denied</p>;
-  if (!order) return <p>No order found</p>;
+  if (!authen.user?.isAdmin)
+    return <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
+  if (!order)
+    return (
+      <InfoBox text="No order found" btnText="Back to home page" url="/" />
+    );
 
   return (
     <Wrapper>

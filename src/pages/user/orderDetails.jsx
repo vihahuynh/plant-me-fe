@@ -8,6 +8,7 @@ import OrderDetailsItem from "../../components/order/orderDetailsItem";
 import Button from "./../../components/UI/buttons/button";
 import Wrapper from "./../../components/layout/wrapper";
 import Modal from "./../../components/UI/modal";
+import InfoBox from "../../components/UI/infoBox";
 
 import orderService from "../../services/order";
 
@@ -63,7 +64,7 @@ const OrderDetails = () => {
   }, [orderId, authen]);
 
   if (!authen?.user?.id || order?.user !== authen?.user?.id)
-    return <p>Permission denied</p>;
+    return <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
 
   if (!order) return <p>No order found</p>;
 
@@ -167,16 +168,16 @@ const OrderDetails = () => {
               </p>
               {(order.status === "Waiting for payment" ||
                 order.status === "Waiting for confirmation") && (
-                  <div className={styles.cancelBtn}>
-                    <Button
-                      text="Cancel order"
-                      size="small"
-                      borderRadius="square"
-                      theme="red"
-                      onClick={onOpenCancelModal}
-                    />
-                  </div>
-                )}
+                <div className={styles.cancelBtn}>
+                  <Button
+                    text="Cancel order"
+                    size="small"
+                    borderRadius="square"
+                    theme="red"
+                    onClick={onOpenCancelModal}
+                  />
+                </div>
+              )}
             </div>
           </div>
           <LinkButton
