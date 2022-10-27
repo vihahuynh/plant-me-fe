@@ -66,7 +66,8 @@ const OrderDetails = () => {
   if (!authen?.user?.id || order?.user !== authen?.user?.id)
     return <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
 
-  if (!order) return <p>No order found</p>;
+  if (!order)
+    <InfoBox text="No order found" btnText="Back to home page" url="/" />;
 
   return (
     <Wrapper>
