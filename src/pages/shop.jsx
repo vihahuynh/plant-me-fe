@@ -4,6 +4,7 @@ import Products from "../components/products/products";
 import Pagination from "../components/UI/pagination";
 import SortDrawer from "../components/UI/drawers/sortDrawer";
 import FilterDrawer from "../components/UI/drawers/filterDrawer";
+import InfoBox from "../components/UI/infoBox";
 
 import productService from "../services/product";
 
@@ -60,12 +61,20 @@ const Shop = () => {
         </div>
       </div>
       <div className={styles.container}>
-        <Products products={products} />
+        {products.length ? (
+          <Products products={products} />
+        ) : (
+          <InfoBox
+            text="No product found"
+            btnText="Remove all filters"
+            url="/shop"
+          />
+        )}
         <Pagination
           page={page}
           setPage={setPage}
-          totalPages={Math.ceil(filterProducts.length / 2)}
-          itemsPerPage={2}
+          totalPages={Math.ceil(filterProducts.length / 12)}
+          itemsPerPage={12}
         />
       </div>
     </Wrapper>

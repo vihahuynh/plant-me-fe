@@ -1,28 +1,29 @@
-import { useState, useEffect } from "react"
-import ReactDOM from "react-dom"
+import { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
-import Button from "./../UI/buttons/button"
-import Modal from "./../UI/modal"
-import ReviewForm from "./../reviews/reviewForm"
+import Button from "./../UI/buttons/button";
+import Modal from "./../UI/modal";
+import ReviewForm from "./../reviews/reviewForm";
 import { Rating } from "@mui/material";
 
-import { addItem } from "./../../store/cartSlice"
+import { addItem } from "./../../store/cartSlice";
 import stockSerice from "../../services/stock";
 import reviewService from "../../services/review";
 
 import styles from "./orderDetailsItem.module.scss";
 
 const OrderDetailsItem = ({ order }) => {
-  const [stock, setStock] = useState()
+  const [stock, setStock] = useState();
   const [rating, setRating] = useState(0);
   const [openModal, setOpenModal] = useState(false);
 
   const onCloseModal = () => setOpenModal(false);
   const onOpenModal = () => setOpenModal(true);
-  const cart = useSelector(state => state.cart)
-  const authen = useSelector(state => state.authentication)
-  const dispatch = useDispatch()
+  const cart = useSelector((state) => state.cart);
+  const authen = useSelector((state) => state.authentication);
+  const dispatch = useDispatch();
 
   const onAddNewReview = async (values) => {
     try {
@@ -39,10 +40,7 @@ const OrderDetailsItem = ({ order }) => {
         formData.append("images", singleFile);
       }
       formData.append("obj", JSON.stringify(newReview));
-      await reviewService.create(
-        formData,
-        authen?.user?.token
-      );
+      await reviewService.create(formData, authen?.user?.token);
       setRating(0);
     } catch (error) {
       console.log(error);
@@ -57,27 +55,40 @@ const OrderDetailsItem = ({ order }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const stockData = await stockSerice.getAll(`color=${order.color.replace("#", "%23")}&size=${order.size}&product=${order.product}`)
-      setStock(stockData.data?.[0])
-    }
-    if (order) fetchData()
-  }, [order])
+      const stockData = await stockSerice.getAll(
+        `color=${order.color.replace("#", "%23")}&size=${order.size}&product=${
+          order.product
+        }`
+      );
+      setStock(stockData.data?.[0]);
+    };
+    if (order) fetchData();
+  }, [order]);
 
   const onBuyAgain = async () => {
-    const cartItem = { ...order, isCheckout: false, stock: stock.id }
-    delete cartItem._id
+    const cartItem = { ...order, isCheckout: false, stock: stock.id };
+    delete cartItem._id;
     await dispatch(
       addItem({ cart, item: cartItem, token: authen?.user?.token })
     ).unwrap();
-  }
+  };
 
   return (
     <li className={styles.order}>
       <div>
         <div className={styles.product}>
-          <img className={styles.productImg} src={order.image} alt="product-img" />
+          <img
+            className={styles.productImg}
+            src={order.image}
+            alt="product-img"
+          />
           <div>
-            <a href={`/products/${order.product}`} className={styles.boldTitle}>{order.title}</a>
+            <Link
+              to={`/products/${order.product}`}
+              className={styles.boldTitle}
+            >
+              {order.title}
+            </Link>
             <p>ID: #{order.id}</p>
             <div>Size: {order.size}</div>
             <div>
@@ -126,11 +137,7 @@ const OrderDetailsItem = ({ order }) => {
         <Modal isOpen={openModal} size="large" showButtonGroup={false}>
           <h5>Enter your review</h5>
           <div className={styles.productBoxSmall}>
-            <img
-              className={styles.productImg}
-              src={order.image}
-              alt="plant"
-            />
+            <img className={styles.productImg} src={order.image} alt="plant" />
             <div className={styles.productBoxLeft}>
               <h5>{order.title}</h5>
               <Rating

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Formik } from "formik";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import userService from "../services/user";
 
 import styles from "./signIn.module.scss";
@@ -29,7 +29,9 @@ const SignUp = () => {
       <img src="/images/blog-2.png" alt="plant-care" />
       <div className={styles.formContainer}>
         <h2>Sign Up</h2>
-        <a className={styles.url} href="/signin">Already have an account?</a>
+        <Link className={styles.url} to="/signin">
+          Already have an account?
+        </Link>
         <p className={styles.bigError}>{!!error && error}</p>
         <Formik
           initialValues={{

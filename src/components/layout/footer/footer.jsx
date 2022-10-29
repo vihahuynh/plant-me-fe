@@ -4,6 +4,7 @@ import Logo from "../../UI/logo";
 
 import { BsFacebook, BsTwitter } from "react-icons/bs/index";
 import { RiInstagramFill } from "react-icons/ri/index";
+import { Link } from "react-router-dom";
 
 import styles from "./footer.module.scss";
 import Copyright from "./copyright";
@@ -13,23 +14,23 @@ const Footer = () => {
     <footer>
       <div className={styles.container}>
         <div className={styles.footerLeft}>
-          <div >
+          <div>
             <Logo />
-            <p>plantme.com is a popular e-commerce</p>
+            <p>plantme.com is Link popular e-commerce</p>
             <p>site exclusively for plant and plant care.</p>
             <p>We provide the best for plants</p>
             <p>and also provide best services.</p>
           </div>
           <div className={styles.iconContainer}>
-            <a href="/">
+            <Link to="/">
               <BsTwitter className={styles.icon} />
-            </a>
-            <a href="/">
+            </Link>
+            <Link to="/">
               <BsFacebook className={styles.icon} />
-            </a>
-            <a href="/">
+            </Link>
+            <Link to="/">
               <RiInstagramFill className={styles.icon} />
-            </a>
+            </Link>
           </div>
         </div>
         <div className={styles.usefulLinksContainer}>

@@ -249,6 +249,10 @@ export const specialFeaturesList = [
     text: "Pet friendly",
     value: "Pet friendly",
   },
+  {
+    text: "Popular",
+    value: "Popular",
+  },
 ];
 
 export const typeOfPlantsList = [
@@ -373,6 +377,19 @@ export const plantsFilterOptions = [
         text: item.text,
         value: item.value,
         query: `watering=${item.value}`,
+      };
+    }),
+  },
+  {
+    id: 6,
+    text: "Special Features",
+    type: "checkbox",
+    subOptions: specialFeaturesList.map((item, index) => {
+      return {
+        id: index,
+        text: item.text,
+        value: item.value,
+        query: `specialFeatures=${item.value}`,
       };
     }),
   },

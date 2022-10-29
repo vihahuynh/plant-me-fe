@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "http://localhost:3001/api/users";
+const baseUrl = "/api/users";
 
 const create = (newObject) => {
   return axios.post(baseUrl, newObject);
@@ -16,8 +16,12 @@ const update = (id, updateObject, token) => {
 };
 
 const subscribe = (subscribed, token) => {
-  return axios.patch(`${baseUrl}/me/subscribe`, { subscribed }, { headers: { Authorization: `bearer ${token}` } })
-}
+  return axios.patch(
+    `${baseUrl}/me/subscribe`,
+    { subscribed },
+    { headers: { Authorization: `bearer ${token}` } }
+  );
+};
 
 const userService = { getAll, create, update, subscribe };
 export default userService;

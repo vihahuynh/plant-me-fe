@@ -97,8 +97,8 @@ const NotificationHistory = () => {
               <Pagination
                 page={page}
                 setPage={setPage}
-                totalPages={Math.ceil(filterNotification.length / 2)}
-                itemsPerPage={2}
+                totalPages={Math.ceil(filterNotification.length / 10)}
+                itemsPerPage={10}
                 theme="white"
               />
             </>

@@ -35,8 +35,9 @@ const Pagination = ({
   useEffect(() => {
     if (!queries.includes("skip") && !queries.includes("limit")) {
       history.push({
-        search: `skip=${(page - 1) * itemsPerPage}&limit=${itemsPerPage}${otherQueries ? `&${otherQueries}` : ""
-          }`,
+        search: `skip=${(page - 1) * itemsPerPage}&limit=${itemsPerPage}${
+          otherQueries ? `&${otherQueries}` : ""
+        }`,
       });
     }
   }, [queries, history, itemsPerPage, page, otherQueries]);
@@ -45,8 +46,9 @@ const Pagination = ({
     setPage((curPage) => {
       const newPage = curPage + 1 >= totalPages ? totalPages : curPage + 1;
       history.push({
-        search: `skip=${(newPage - 1) * itemsPerPage}&limit=${itemsPerPage}${otherQueries ? `&${otherQueries}` : ""
-          }`,
+        search: `skip=${(newPage - 1) * itemsPerPage}&limit=${itemsPerPage}${
+          otherQueries ? `&${otherQueries}` : ""
+        }`,
       });
       return newPage;
     });
@@ -56,8 +58,9 @@ const Pagination = ({
     setPage((curPage) => {
       const newPage = curPage === 1 ? 1 : curPage - 1;
       history.push({
-        search: `skip=${(newPage - 1) * itemsPerPage}&limit=${itemsPerPage}${otherQueries ? `&${otherQueries}` : ""
-          }`,
+        search: `skip=${(newPage - 1) * itemsPerPage}&limit=${itemsPerPage}${
+          otherQueries ? `&${otherQueries}` : ""
+        }`,
       });
       return newPage;
     });
@@ -66,8 +69,9 @@ const Pagination = ({
   const onSelectPage = (value) => {
     setPage(value);
     history.push({
-      search: `skip=${(value - 1) * itemsPerPage}&limit=${itemsPerPage}${otherQueries ? `&${otherQueries}` : ""
-        }`,
+      search: `skip=${(value - 1) * itemsPerPage}&limit=${itemsPerPage}${
+        otherQueries ? `&${otherQueries}` : ""
+      }`,
     });
   };
 
@@ -78,7 +82,7 @@ const Pagination = ({
       start = end - 4;
     }
     if (totalPages < 5) {
-      return Array.from({ length: totalPages }, (_, i) => i + 1)
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
     }
     return Array.from({ length: 5 }, (_, i) => i + start);
   };

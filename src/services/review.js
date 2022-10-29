@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:3001/api/reviews";
+const baseUrl = "/api/reviews";
 
 const getAll = (query) => {
   return axios.get(`${baseUrl}?${query}`);

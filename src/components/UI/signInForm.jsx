@@ -27,16 +27,16 @@ const SignInForm = ({ title, setOpenModal }) => {
       const errorMessage = err?.response?.data?.err;
       setError(errorMessage || "Some thing went wrong!");
     }
-    setOpenModal(false)
+    setOpenModal(false);
   };
 
   return (
     <div className={styles.smallContainer}>
       <div className={styles.formContainer}>
         <h5>{title}</h5>
-        <a className={styles.url} href="/signup">
+        <Link className={styles.url} to="/signup">
           Do not have an account?
-        </a>
+        </Link>
         <p className={styles.bigError}>{!!error && error}</p>
         <Formik
           initialValues={{ loginData: "", password: "" }}

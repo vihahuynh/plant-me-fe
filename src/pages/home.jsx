@@ -1,21 +1,34 @@
+import { useEffect, useState } from "react";
+
 import Header from "../components/layout/header";
-// import Products from "../components/products/products";
 import Features from "../components/features/features";
-// import Blogs from "../components/blogs/blogs";
 import Categories from "../components/categories/categories";
 import Wrapper from "../components/layout/wrapper";
+import Products from "../components/products/products";
 
-import styles from "./home.module.scss"
+import styles from "./home.module.scss";
+import productService from "../services/product";
 
 const Home = () => {
-  // const [popolarProducts, setPopularProducts] = useState([])
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const productsData = await productService.getAll(
+        `specialFeatures=Popular`
+      );
+      setProducts(productsData.data.slice(0, 4));
+    };
+    fetchData();
+  }, []);
+
   return (
     <Wrapper>
       <Header />
       <div className={styles.container}>
         <section>
           <h2>Popular Products</h2>
-          {/* <Products products={popolarProducts} /> */}
+          <Products products={products} />
         </section>
         <section>
           <h2>Shop By Categories</h2>
@@ -25,10 +38,6 @@ const Home = () => {
           <h2>Why People Choose Us?</h2>
           <Features />
         </section>
-        {/* <section>
-          <h2>Read Our Blogs</h2>
-          <Blogs />
-        </section> */}
       </div>
     </Wrapper>
   );

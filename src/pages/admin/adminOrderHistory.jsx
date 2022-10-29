@@ -96,8 +96,8 @@ const AdminOrderHistory = () => {
               <Pagination
                 page={page}
                 setPage={setPage}
-                totalPages={Math.ceil(filterOrders.length / 2)}
-                itemsPerPage={2}
+                totalPages={Math.ceil(filterOrders.length / 10)}
+                itemsPerPage={10}
                 theme="white"
               />
             </>

@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Home from "./pages/home";
-import Blogs from "./pages/blogs";
+// import Blogs from "./pages/blogs";
 import About from "./pages/about";
 import Contact from "./pages/contact";
 import Shop from "./pages/shop";
@@ -74,17 +74,8 @@ const App = () => {
         <Route path="/about">
           <About />
         </Route>
-        <Route path="/products/:id">
-          <ProductDetails />
-        </Route>
         <Route path="/shop">
           <Shop />
-        </Route>
-        <Route exact path="/cart">
-          <CartPage />
-        </Route>
-        <Route path="/cart/change-delivery-address">
-          <ChangeDeliveryAddress />
         </Route>
         <Route path="/checkout">
           <Checkout />
@@ -92,14 +83,20 @@ const App = () => {
         <Route path="/contact">
           <Contact />
         </Route>
-        <Route path="/blogs">
-          <Blogs />
-        </Route>
         <Route path="/signin">
           <SignIn />
         </Route>
         <Route path="/signup">
           <SignUp />
+        </Route>
+        <Route exact path="/cart">
+          <CartPage />
+        </Route>
+        <Route path="/cart/change-delivery-address">
+          <ChangeDeliveryAddress />
+        </Route>
+        <Route path="/products/:id">
+          <ProductDetails />
         </Route>
         <Route path="/user/order-history/tracking/:orderId">
           <OrderTracking />

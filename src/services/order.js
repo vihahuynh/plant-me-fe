@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "http://localhost:3001/api/orders";
+const baseUrl = "/api/orders";
 
 const getAll = (query, token) => {
   return axios.get(`${baseUrl}?${query}`, {

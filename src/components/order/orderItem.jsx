@@ -1,4 +1,5 @@
 import styles from "./orderItem.module.scss";
+import { Link } from "react-router-dom";
 
 const OrderItem = ({ order }) => {
   return (
@@ -8,7 +9,9 @@ const OrderItem = ({ order }) => {
         <span className={styles.quantity}>x{order.quantity}</span>
       </div>
       <div>
-        <a href={`/products/${order.product}`} className={styles.itemTitle}>{order.title}</a>
+        <Link to={`/products/${order.product}`} className={styles.itemTitle}>
+          {order.title}
+        </Link>
         <div>Size: {order.size}</div>
         <div>
           Color:

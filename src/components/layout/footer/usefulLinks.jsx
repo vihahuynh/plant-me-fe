@@ -1,4 +1,5 @@
 import styles from "./usefulLinks.module.scss";
+import { Link } from "react-router-dom";
 
 const UsefulLinks = ({ title, links }) => {
   return (
@@ -7,7 +8,7 @@ const UsefulLinks = ({ title, links }) => {
       <ul className={styles.linkList}>
         {links.map((l) => (
           <li key={l.id} className={styles.linkItem}>
-            <a href={l.url}>{l.text}</a>
+            <Link to={l.url}>{l.text}</Link>
           </li>
         ))}
       </ul>

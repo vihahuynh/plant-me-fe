@@ -70,68 +70,66 @@ const Navigation = () => {
         </ul>
       </div>
       <div className={styles.subNav}>
-        <div className={styles.subNav}>
-          {authen.isLoggedIn ? (
-            <>
-              <Link to="/cart" className={styles.cart}>
-                <BiCartAlt className={styles.icon} />
-                <span className={styles.quantity}>{cartQuantity}</span>
-              </Link>
-              <div className={styles.userMenuBox}>
-                <BiUserCircle className={styles.icon} />
-                <ul className={styles.userMenu}>
-                  <NavigationItem
-                    url="/user/me"
-                    title="Account info"
-                    type="user"
-                  />
-                  <NavigationItem
-                    url="/user/order-history"
-                    title="Orders"
-                    type="user"
-                  />
-                  <NavigationItem
-                    url="/user/reviews"
-                    title="Reviews"
-                    type="user"
-                  />
-                  <NavigationItem
-                    url="/user/notification"
-                    title="Notification"
-                    type="user"
-                  />
-                  <NavigationItem
-                    url="/user/favorite-products"
-                    title="Favorite products"
-                    type="user"
-                  />
-                  <NavigationItem
-                    url="/user/address"
-                    title="Delivery addresses"
-                    type="user"
-                  />
-                  <li onClick={logout}>Log out</li>
-                </ul>
-              </div>
-            </>
-          ) : (
-            <>
-              <LinkButton
-                url="/signin"
-                text="Sign in"
-                size="small"
-                borderRadius="square"
-              />
-              <LinkButton
-                url="/signup"
-                text="Sign up"
-                size="small"
-                theme="light"
-                borderRadius="square"
-              />
-            </>
-          )}
-        </div>
+        {authen.isLoggedIn ? (
+          <>
+            <Link to="/cart" className={styles.cart}>
+              <BiCartAlt className={styles.icon} />
+              <span className={styles.quantity}>{cartQuantity}</span>
+            </Link>
+            <div className={styles.userMenuBox}>
+              <BiUserCircle className={styles.icon} />
+              <ul className={styles.userMenu}>
+                <NavigationItem
+                  url="/user/me"
+                  title="Account info"
+                  type="user"
+                />
+                <NavigationItem
+                  url="/user/order-history"
+                  title="Orders"
+                  type="user"
+                />
+                <NavigationItem
+                  url="/user/reviews"
+                  title="Reviews"
+                  type="user"
+                />
+                <NavigationItem
+                  url="/user/notification"
+                  title="Notification"
+                  type="user"
+                />
+                <NavigationItem
+                  url="/user/favorite-products"
+                  title="Favorite products"
+                  type="user"
+                />
+                <NavigationItem
+                  url="/user/address"
+                  title="Delivery addresses"
+                  type="user"
+                />
+                <li onClick={logout}>Log out</li>
+              </ul>
+            </div>
+          </>
+        ) : (
+          <>
+            <LinkButton
+              url="/signin"
+              text="Sign in"
+              size="small"
+              borderRadius="square"
+            />
+            <LinkButton
+              url="/signup"
+              text="Sign up"
+              size="small"
+              theme="light"
+              borderRadius="square"
+            />
+          </>
+        )}
       </div>
     </nav>
   );

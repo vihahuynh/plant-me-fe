@@ -1,4 +1,5 @@
 import styles from "./linkButton.module.scss";
+import { Link } from "react-router-dom";
 
 const LinkButton = ({
   text,
@@ -12,9 +13,9 @@ const LinkButton = ({
     styles[borderRadius]
   } ${className || ""} ${styles[theme]}`;
   return (
-    <a className={buttonClassName} href={url}>
+    <Link className={buttonClassName} to={url}>
       {text}
-    </a>
+    </Link>
   );
 };
 

@@ -1,11 +1,11 @@
 import axios from "axios";
 // import jwt from "jsonwebtoken"
 
-const baseUrl = 'http://localhost:3001/api/login'
+const baseUrl = "/api/login";
 
 const login = (data) => {
-    return axios.post(baseUrl, data)
-}
+  return axios.post(baseUrl, data);
+};
 
 // const isExpiredToken = (token) => {
 //     const decodedToken = jwt.decode(token, { complete: true })
@@ -17,6 +17,6 @@ const login = (data) => {
 //     return false
 // }
 
-const loginService = { login }
+const loginService = { login };
 
-export default loginService
+export default loginService;

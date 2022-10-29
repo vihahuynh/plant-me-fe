@@ -36,9 +36,9 @@ const SignIn = () => {
       <img src="/images/blog-3.png" alt="plant-care" />
       <div className={styles.formContainer}>
         <h2>Sign In</h2>
-        <a className={styles.url} href="/signup">
+        <Link className={styles.url} to="/signup">
           Do not have an account?
-        </a>
+        </Link>
         <p className={styles.bigError}>{!!error && error}</p>
         <Formik
           initialValues={{ loginData: "", password: "" }}

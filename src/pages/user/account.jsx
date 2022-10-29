@@ -25,7 +25,7 @@ let delay;
 const Account = () => {
   const dispatch = useDispatch();
   const [isEditAvatar, setIsEditAvatar] = useState(false);
-  const [openModal, setOpenModal] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
   const authen = useSelector((state) => state.authentication);
   const image = authen?.user?.avatarUrl || "/images/default-avatar.png";
   const [previewImg, setPreviewImg] = useState(null);
@@ -48,6 +48,8 @@ const Account = () => {
       let account = { ...values, username: authen?.user?.username };
       if (previewImg) {
         account.avatarUrl = previewImg;
+      } else {
+        account.avatarUrl = authen?.user?.avatarUrl;
       }
 
       const updatedAccount = await userService.update(
