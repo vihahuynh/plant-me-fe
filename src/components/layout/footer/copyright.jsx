@@ -13,7 +13,7 @@ const Copyright = () => {
         </ul>
 
       </div>
-      <p>Image and product information taken from website <a href="https://www.ugaoo.com">https://www.ugaoo.com/</a> (for learning purposes only)</p>
+      <p>Image and product information taken from website <a href="https://www.ugaoo.com">https://www.ugaoo.com</a> (for learning purposes only)</p>
     </div>
   );
 };
