@@ -105,11 +105,7 @@ const OrderHistory = () => {
               />
             </>
           ) : (
-            <InfoBox
-              text="No order found"
-              btnText="Back to home page"
-              url="/"
-            />
+            <p className={styles.infoText}>No order found</p>
           )}
         </div>
       </div>

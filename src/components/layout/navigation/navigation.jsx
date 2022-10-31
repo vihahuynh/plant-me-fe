@@ -33,30 +33,48 @@ const Navigation = () => {
         <ul className={styles.mobileMenu}>
           <NavigationItem url="/" title="Home" type="mobile" />
           <NavigationItem url="/shop" title="Shop" type="mobile" />
-          <NavigationItem url="/user/me" title="Account info" type="mobile" />
-          <NavigationItem
-            url="/user/order-history"
-            title="My orders"
-            type="mobile"
-          />
-          <NavigationItem url="/user/review" title="My reviews" type="mobile" />
-          <NavigationItem
-            url="/user/notification"
-            title="My notification"
-            type="mobile"
-          />
-          <NavigationItem
-            url="/user/favorite-products"
-            title="Favorite products"
-            type="mobile"
-          />
-          <NavigationItem
-            url="/user/address"
-            title="Delivery addresses"
-            type="mobile"
-          />
           <NavigationItem url="/about" title="About Us" type="mobile" />
           <NavigationItem url="/contact" title="Contact" type="mobile" />
+          {authen?.user?.token ?
+            <>
+              <NavigationItem url="/user/me" title="Account info" type="mobile" />
+              <NavigationItem
+                url="/user/order-history"
+                title="My orders"
+                type="mobile"
+              />
+              <NavigationItem url="/user/review" title="My reviews" type="mobile" />
+              <NavigationItem
+                url="/user/notification"
+                title="My notification"
+                type="mobile"
+              />
+              <NavigationItem
+                url="/user/favorite-products"
+                title="Favorite products"
+                type="mobile"
+              />
+              <NavigationItem
+                url="/user/address"
+                title="Delivery addresses"
+                type="mobile"
+              />
+              <li onClick={logout}>Log out</li>
+            </>
+            : <>
+              <NavigationItem
+                url="/signin"
+                title="Sign In"
+                type="mobile"
+              />
+              <NavigationItem
+                url="/signup"
+                title="Sign Up"
+                type="mobile"
+              />
+            </>
+          }
+
         </ul>
       </div>
       <div className={styles.mainNav}>
