@@ -60,10 +60,14 @@ const AdminOrderDetails = () => {
   }, [orderId, authen]);
 
   if (!authen.user?.isAdmin)
-    return <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
+    <Wrapper>
+      <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />
+    </Wrapper>
   if (!order)
     return (
-      <InfoBox text="No order found" btnText="Back to home page" url="/" />
+      <Wrapper>
+        <InfoBox text="No order found" btnText="Back to home page" url="/" />
+      </Wrapper>
     );
 
   return (
