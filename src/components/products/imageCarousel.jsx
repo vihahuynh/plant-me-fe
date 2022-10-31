@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 
 import Slider from "react-slick";
 
@@ -7,12 +8,19 @@ import "slick-carousel/slick/slick-theme.css";
 import styles from "./imageCarousel.module.scss";
 
 import Arrow from "../UI/arrow";
+import Modal from "../UI/modal";
 
 const ImageCarousel = ({ images }) => {
+  const [openModal, setOpenModal] = useState(false)
+  const [curImg, setCurImg] = useState("")
+
   const [nav1, setNav1] = useState(null);
   const [nav2, setNav2] = useState(null);
   const [slider1, setSlider1] = useState(null);
   const [slider2, setSlider2] = useState(null);
+
+  const onOpenModal = () => setOpenModal(true)
+  const onCloseModal = () => setOpenModal(false)
 
   useEffect(() => {
     setNav1(slider1);
@@ -69,14 +77,29 @@ const ImageCarousel = ({ images }) => {
           {images.map((img) => (
             <div className={styles["slick-img"]} key={img}>
               <img
-                className={styles["slick-slide-image"]}
+                className={`${styles["slick-slide-image"]} ${styles.largeImg}`}
                 src={img}
                 alt="plant"
+                onClick={() => {
+                  onOpenModal()
+                  setCurImg(img)
+                }}
               />
             </div>
           ))}
         </Slider>
       </div>
+      {ReactDOM.createPortal(
+        <Modal isOpen={openModal} size="full" showButtonGroup={false} onCancel={onCloseModal}>
+          <img
+            className={styles.imageModal}
+            src={curImg}
+            alt="plant"
+          />
+          <span className={styles.closeBtn}></span>
+        </Modal>,
+        document.getElementById("overlay-root")
+      )}
     </div>
   );
 };

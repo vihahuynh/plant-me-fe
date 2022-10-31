@@ -47,6 +47,40 @@
   }
 }
 
+.imageModal {
+  height: 90vh;
+}
+
+.largeImg {
+  cursor: -moz-zoom-in;
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
+}
+
+.closeBtn {
+  display: inline-block;
+  position: absolute;
+  height: 5rem;
+  width: 5rem;
+  top: 2rem;
+  right: 2rem;
+  // background-color: #fff;
+  // border-radius: 50%;
+  // box-shadow: 0 .5rem 1.5rem rgba($color-grey-dark, .2);
+
+  &::after,
+  &::before {
+    display: block;
+    content: "";
+    height: 5px;
+    width: 3rem;
+    color: red;
+    position: absolute;
+    top: 1rem;
+    z-index: 10000;
+  }
+}
+
 @media only screen and (max-width: 75em) {
   .container {
     height: auto;
@@ -60,6 +94,11 @@
 @media only screen and (max-width: 56.25em) {
   .slider-wrapper {
     width: 30rem;
+  }
+
+  .imageModal {
+    height: auto;
+    width: 70vw;
   }
 }
 
