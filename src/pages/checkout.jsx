@@ -18,6 +18,9 @@ import orderService from "../services/order";
 
 import _ from "lodash";
 import BankCard from "../components/UI/bankCard";
+import { alertActions } from "../store";
+
+let delay
 
 const Checkout = () => {
   const cart = useSelector((state) => state.cart);
@@ -69,6 +72,7 @@ const Checkout = () => {
         );
         setDeliveryCharges(Math.ceil(data.data.data.total / 1000));
       } catch (err) {
+        setDeliveryCharges(30)
         console.log(err);
       }
     };
@@ -78,6 +82,12 @@ const Checkout = () => {
 
   const onCheckout = async () => {
     try {
+      if (!address) {
+        clearTimeout(delay)
+        dispatch(alertActions.updateMessage({ type: "error", message: "Please provide the delivery address!" }))
+        delay = setTimeout(() => dispatch(alertActions.clear()), 4000)
+        return
+      }
       const orderData = {
         cart: items,
         address: `${address.address}, ${address.ward.text}, ${address.district.text}, ${address.province.text}`,
@@ -100,6 +110,7 @@ const Checkout = () => {
         ],
         deliveryMethod: "Giao hang nhanh",
         deliveryCharges,
+        estimatedDeliveryDate: new Date(new Date().setDate(new Date().getDate() + 7)),
         user: authen?.user?.id,
         totalDiscount: _.sum(items.map((i) => i.discount * i.quantity)),
         totalPayment:
