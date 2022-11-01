@@ -196,6 +196,10 @@ export const wateringList = [
     text: "Twice a week",
     value: "Twice a week",
   },
+  {
+    text: "Once in two weeks",
+    value: "Once in two weeks"
+  }
 ];
 
 export const lightList = [
