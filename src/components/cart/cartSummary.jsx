@@ -68,7 +68,7 @@ const CartSummary = ({ title, onClick, disabled = false }) => {
     .reduce(
       (total, item) =>
       (total +=
-        (item.price - Math.round((item.salePercent * item.price) / 100)) *
+        Math.round((item.price - (item.salePercent * item.price) / 100)) *
         item.quantity),
       0
     );

@@ -83,7 +83,7 @@ const ProductItem = ({ product }) => {
       </div>
       <div className={styles.productDetails}>
         <p>{product.title}</p>
-        <Price price={product.price} salePercent={product.salePercent} />
+        <Price price={product.price} salePercent={product.salePercent} range={true} />
       </div>
       {ReactDOM.createPortal(
         <Modal isOpen={openModal} size="medium" showButtonGroup={false} onCancel={() => setOpenModal(false)}>

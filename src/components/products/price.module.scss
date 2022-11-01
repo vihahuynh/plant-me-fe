@@ -80,3 +80,18 @@
     color: palevioletred;
   }
 }
+
+.range {
+  display: flex;
+  flex-direction: column;
+  row-gap: .3px;
+  align-items: center;
+  justify-content: center;
+}
+
+.subInfo {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}

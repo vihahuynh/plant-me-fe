@@ -2,6 +2,8 @@ import styles from "./orderItem.module.scss";
 import { Link } from "react-router-dom";
 
 const OrderItem = ({ order }) => {
+  const salePercent = order.salePercent || 0
+  const netPrice = Math.round(order.price - (order.price * salePercent / 100))
   return (
     <li className={styles.item}>
       <div className={styles.imgContainer}>
@@ -22,7 +24,7 @@ const OrderItem = ({ order }) => {
         </div>
       </div>
       <p className={styles.itemPrice}>
-        {order.price * order.quantity}.000 &#x20ab;
+        {netPrice * order.quantity}.000 &#x20ab;
       </p>
     </li>
   );

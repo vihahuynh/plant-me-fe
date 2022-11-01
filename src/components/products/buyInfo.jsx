@@ -14,6 +14,22 @@ import SignInForm from "../UI/signInForm";
 import { addItem } from "../../store/cartSlice";
 import { alertActions, authenticationActions } from "./../../store";
 
+const getPrice = (price, size) => {
+  switch (size) {
+    case "XS":
+      return Math.round(price / 100 * 70)
+    case "S":
+      return Math.round(price / 100 * 85)
+    case "M":
+      return price
+    case "L":
+      return Math.round(price / 100 * 115)
+    case "XL":
+      return Math.round(price / 100 * 130)
+    default: return price
+  }
+}
+
 let delay;
 
 const BuyInfo = ({ product }) => {
@@ -26,6 +42,7 @@ const BuyInfo = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState(null);
   const [color, setColor] = useState(null);
+  const [price, setPrice] = useState(0)
 
   const allColors = [...new Set(product?.stocks?.map((s) => s.color))];
   const allSizes = [...new Set(product?.stocks?.map((s) => s.size))];
@@ -74,12 +91,12 @@ const BuyInfo = ({ product }) => {
       const cartItem = {
         product: product.id,
         title: product.title,
-        price: product.price,
+        price: price,
         salePercent: product.salePercent,
         image:
           product.images.find((img) => img.includes("eye")) ||
           product.images[0],
-        discount: Math.round((product.price * product.salePercent) / 100),
+        discount: Math.round((price * product.salePercent) / 100),
         color,
         size,
         quantity,
@@ -144,6 +161,7 @@ const BuyInfo = ({ product }) => {
         ?.quantity - quantityInCart ?? 0
     );
     setSize(inputSize);
+    setPrice(getPrice(product.price, inputSize))
   };
 
   const sold = product?.stocks.reduce((result, stock) => {
@@ -165,9 +183,10 @@ const BuyInfo = ({ product }) => {
           <span className={styles.statistic}>Sold: {sold}</span>
         </div>
         <Price
-          price={product.price}
+          price={price ? price : product.price}
           salePercent={product.salePercent}
           size="big"
+          range={!size}
         />
       </div>
       <div>
