@@ -212,6 +212,10 @@ export const lightList = [
     value: "Direct sunlight",
   },
   {
+    text: "Medium light",
+    value: "Medium light",
+  },
+  {
     text: "Low light",
     value: "Low light",
   },

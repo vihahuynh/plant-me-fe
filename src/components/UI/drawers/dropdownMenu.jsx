@@ -31,7 +31,7 @@ const DropdownMenu = ({ item }) => {
     }
     newQueries = newQueries.filter((q) => q !== "");
     history.push({
-      search: `?skip=0&limit=2&${newQueries.join("&")}`,
+      search: `?skip=0&limit=12&${newQueries.join("&")}`,
     });
   };
 

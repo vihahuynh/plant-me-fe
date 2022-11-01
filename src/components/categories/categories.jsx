@@ -5,7 +5,7 @@ const Categories = () => {
   return (
     <div className={styles.grid}>
       <Link
-        to="/shop?skip=0&limit=2&typeOfPlants=Cacti%20and%20Succulents"
+        to="/shop?skip=0&limit=12&typeOfPlants=Cacti%20and%20Succulents"
         className={styles.firstGrid}
       >
         <div>
@@ -15,7 +15,7 @@ const Categories = () => {
         <img src="/images/castus.png" alt="castus" />
       </Link>
       <Link
-        to="/shop?skip=0&limit=2&whereToGrow=Outdoor%20Shade&whereToGrow=Outdoor%20Sunny"
+        to="/shop?skip=0&limit=12&whereToGrow=Outdoor%20Shade&whereToGrow=Outdoor%20Sunny"
         className={styles.secondGrid}
       >
         <h5>Outdoor Plants</h5>
@@ -25,7 +25,7 @@ const Categories = () => {
         />
       </Link>
       <Link
-        to="/shop?skip=0&limit=2&whereToGrow=Indoor"
+        to="/shop?skip=0&limit=12&whereToGrow=Indoor"
         className={styles.thridGrid}
       >
         <h5>Indoor Plants</h5>
