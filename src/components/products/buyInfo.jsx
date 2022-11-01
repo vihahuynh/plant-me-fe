@@ -21,6 +21,7 @@ const BuyInfo = ({ product }) => {
   const authen = useSelector((state) => state.authentication);
 
   const [openModal, setOpenModal] = useState(false);
+  const [openLightGuideModal, setOpenLightGuideModal] = useState(false)
 
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState(null);
@@ -247,9 +248,21 @@ const BuyInfo = ({ product }) => {
           onClick={onAddToCart}
         />
       </div>
+      <p className={styles.viewLightGuide} onClick={() => setOpenLightGuideModal(true)}>view light guide</p>
       {ReactDOM.createPortal(
         <Modal isOpen={openModal} size="medium" showButtonGroup={false} onCancel={() => setOpenModal(false)}>
           <SignInForm title={authen?.user?.token ? "Token expired, please sign in again" : "Please sign in to continue"} setOpenModal={setOpenModal} />
+        </Modal>,
+        document.getElementById("overlay-root")
+      )}
+      {ReactDOM.createPortal(
+        <Modal isOpen={openLightGuideModal} size="full" showButtonGroup={false} onCancel={() => setOpenLightGuideModal(false)}>
+          <img
+            className={styles.imageModal}
+            src="/images/view-light-guide.png"
+            alt="light-guide"
+          />
+          <span className={styles.closeBtn}></span>
         </Modal>,
         document.getElementById("overlay-root")
       )}

@@ -4,7 +4,6 @@ import { BiUserCircle } from "react-icons/bi/index";
 import { BiCartAlt } from "react-icons/bi/index";
 
 import Logo from "../../UI/logo";
-// import SearchBar from "../../UI/inputs/searchBar";
 import LinkButton from "../../UI/buttons/linkbutton";
 import NavigationItem from "./navigationItem";
 
@@ -33,6 +32,7 @@ const Navigation = () => {
         <ul className={styles.mobileMenu}>
           <NavigationItem url="/" title="Home" type="mobile" />
           <NavigationItem url="/shop" title="Shop" type="mobile" />
+          <NavigationItem url="/cart" title="Cart" type="mobile" />
           <NavigationItem url="/about" title="About Us" type="mobile" />
           <NavigationItem url="/contact" title="Contact" type="mobile" />
           {authen?.user?.token ?

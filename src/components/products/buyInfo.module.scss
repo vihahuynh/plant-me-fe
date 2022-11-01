@@ -98,3 +98,30 @@
   margin-bottom: 0.5rem;
   color: palevioletred;
 }
+
+.viewLightGuide {
+  margin-top: 2rem;
+  font-size: $default-font-size;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  color: $color-primary-dark;
+  cursor: pointer;
+}
+
+.imageModal {
+  width: 60vw;
+}
+
+@media only screen and (max-width: 56.25em) {
+  .imageModal {
+    width: 75vw;
+  }
+}
+
+@media only screen and (max-width: 37.25em) {
+  .imageModal {
+    width: 90vw;
+  }
+}
