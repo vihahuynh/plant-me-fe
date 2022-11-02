@@ -31,10 +31,11 @@
   }
 }
 
-.deliveryMethodBox {
+.deliveryAddressBox {
   margin-top: 3rem;
 }
 
+.deliveryAddressBox,
 .deliveryMethodBox,
 .paymentMethodBox {
   background-color: $color-primary-light;

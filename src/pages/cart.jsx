@@ -12,7 +12,7 @@ import InfoBox from "../components/UI/infoBox";
 import Modal from "../components/UI/modal";
 import SignInForm from "../components/UI/signInForm";
 
-import { alertActions, cartActions, authenticationActions } from "./../store";
+import { alertActions, cartActions } from "./../store";
 import cartService from "../services/cart";
 import stockSerice from "../services/stock";
 import { updateItem } from "../store/cartSlice";
@@ -27,9 +27,60 @@ const CartPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const onCheckoutNoAuth = async () => {
+    setIsLoading(true);
+    try {
+      if (!cart?.items?.find((item) => item.isCheckout)) {
+        clearTimeout(delay);
+        dispatch(
+          alertActions.updateMessage({
+            message: "Please select at least one item to checkout",
+            type: "warning",
+          })
+        );
+        delay = setTimeout(() => {
+          dispatch(alertActions.clear());
+        }, 4000);
+      } else {
+        let allowCheckout = true;
+        for (let item of cart?.items) {
+          const stockData = await stockSerice.get(item.stock);
+          if (stockData?.data?.quantity < item.quantity) {
+            allowCheckout = false;
+            const cartItem = { ...item, isCheckout: false };
+            dispatch(cartActions.updateItem({ item: cartItem }))
+          }
+        }
+        if (!allowCheckout) {
+          clearTimeout(delay);
+          dispatch(
+            alertActions.updateMessage({
+              message: "Some products do not have enough quantity",
+              type: "warning",
+            })
+          );
+          delay = setTimeout(() => {
+            dispatch(alertActions.clear());
+          }, 4000);
+        } else {
+          history.push("/checkout");
+        }
+      }
+    } catch (err) {
+      console.log(err)
+    }
+    finally {
+      setIsLoading(false)
+    }
+  }
+
   const onCheckout = async () => {
     setIsLoading(true);
     try {
+      if (!authen?.user?.token) {
+        onCheckoutNoAuth()
+        return
+      }
       if (!cart?.items?.find((item) => item.isCheckout)) {
         clearTimeout(delay);
         dispatch(
@@ -80,11 +131,12 @@ const CartPage = () => {
       }
     } catch (err) {
       console.log(err);
-      if (err?.response?.data?.error === "token expired" || err?.response?.data?.error === "invalid token" || err?.message === "token expired") {
-        localStorage.removeItem("loggedUser");
-        dispatch(authenticationActions.logout());
-        setOpenModal(true)
-      }
+      onCheckoutNoAuth()
+      // if (err?.response?.data?.error === "token expired" || err?.response?.data?.error === "invalid token" || err?.message === "token expired") {
+      //   localStorage.removeItem("loggedUser");
+      //   dispatch(authenticationActions.logout());
+      //   setOpenModal(true)
+      // }
     } finally {
       setIsLoading(false);
     }

@@ -7,6 +7,7 @@ import Cart from "../components/cart/cart";
 import CartSummary from "../components/cart/cartSummary";
 import LinkButton from "../components/UI/buttons/linkbutton";
 import RadioInput from "../components/UI/inputs/radioInput";
+import AddressForm from "../components/address/addressForm"
 
 import { clearCheckoutItems } from "../store/cartSlice";
 
@@ -148,6 +149,22 @@ const Checkout = () => {
         <div className={styles.container}>
           <div>
             <Cart isShowCheckBox={false} />
+            {!authen?.user?.token &&
+              <>
+                <AddressForm showCancel={false} setAddress={setAddress} />
+                <div className={styles.deliveryAddressBox}>
+                  <h5>Delivery address</h5>
+                  {!!address?.address ?
+                    <>
+                      <p>Name: {address?.name}</p>
+                      <p>Phone number: {address?.phoneNumber}</p>
+                      <p>Address: {address?.address}, {address?.ward?.text}, {address?.district?.text}, {address?.province?.text}</p>
+                    </>
+                    : <p>No address provide</p>
+                  }
+                </div>
+              </>
+            }
             <div className={styles.deliveryMethodBox}>
               <h5>Delivery method</h5>
               <div className={styles.deliveryMethod}>

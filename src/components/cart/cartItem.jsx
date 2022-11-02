@@ -16,6 +16,7 @@ import {
 } from "../../store/cartSlice";
 
 import stockService from "./../../services/stock";
+import { cartActions } from "../../store";
 
 const CartItem = ({
   item,
@@ -52,28 +53,57 @@ const CartItem = ({
   }, [stock, item, setDisabledItems]);
 
   const onRemoveItem = async () => {
-    await dispatch(
-      removeItem({ cart, item, token: authen?.user?.token })
-    ).unwrap();
+    if (!authen?.user?.token) {
+      dispatch(cartActions.removeItem({ item }))
+      return
+    }
+    try {
+      await dispatch(
+        removeItem({ cart, item, token: authen?.user?.token })
+      ).unwrap();
+    } catch (err) {
+      console.log(err)
+    }
   };
 
-  const onCheckout = async () => {
+  const onCheckoutNoAuth = () => {
     const checkoutItem = {
       ...item,
       netPrice: Math.round(item.price - (item.price * item.salePercent) / 100),
       isCheckout: !item.isCheckout,
     };
-    const updatedCart = await dispatch(
-      updateItem({ cart, item: checkoutItem, token: authen?.user?.token })
-    ).unwrap();
+    dispatch(cartActions.updateItem({ item: checkoutItem }))
     if (!checkoutItem.isCheckout && checkoutAllItems) {
-      await dispatch(
-        toggleCheckoutAll({
-          cart: updatedCart,
-          value: false,
-          token: authen?.user?.token,
-        })
+      dispatch(cartActions.toggleCheckoutAll({ value: false }))
+    }
+  }
+
+  const onCheckout = async () => {
+    try {
+      if (!authen?.user?.token) {
+        onCheckoutNoAuth()
+        return
+      }
+      const checkoutItem = {
+        ...item,
+        netPrice: Math.round(item.price - (item.price * item.salePercent) / 100),
+        isCheckout: !item.isCheckout,
+      };
+      const updatedCart = await dispatch(
+        updateItem({ cart, item: checkoutItem, token: authen?.user?.token })
       ).unwrap();
+      if (!checkoutItem.isCheckout && checkoutAllItems) {
+        await dispatch(
+          toggleCheckoutAll({
+            cart: updatedCart,
+            value: false,
+            token: authen?.user?.token,
+          })
+        ).unwrap();
+      }
+    } catch (err) {
+      console.log(err)
+      onCheckoutNoAuth()
     }
   };
 
@@ -84,6 +114,10 @@ const CartItem = ({
         cartItem.quantity = +quan;
       } else {
         cartItem.quantity = stock.quantity;
+      }
+      if (!authen?.user?.token) {
+        dispatch(cartActions.updateItem({ item: cartItem }))
+        return
       }
       await dispatch(
         updateItem({ cart, item: cartItem, token: authen?.user?.token })

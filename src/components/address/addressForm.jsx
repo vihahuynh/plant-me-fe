@@ -9,7 +9,7 @@ import SelectInput from "../UI/inputs/selectInput";
 import addressService from "../../services/address";
 import locationService from "../../services/location";
 
-const AddressForm = ({ address, onCancel, setAddresses }) => {
+const AddressForm = ({ address, showCancel = true, onCancel, setAddresses, setAddress }) => {
   const authen = useSelector((state) => state.authentication);
   const [provinces, setProvinces] = useState([]);
   const [curProvince, setCurProvince] = useState();
@@ -56,8 +56,21 @@ const AddressForm = ({ address, onCancel, setAddresses }) => {
     if (curDistrict?.value) fetchData();
   }, [curDistrict]);
 
+  const onAddNewAddressNoAuth = (values) => {
+    setAddress({
+      ...values,
+      province: curProvince,
+      district: curDistrict,
+      ward: curWard
+    })
+  }
+
   const onAddNewAddress = async (values) => {
     try {
+      if (!authen?.user?.token) {
+        onAddNewAddressNoAuth()
+        return
+      }
       const address = {
         ...values,
         province: curProvince,
@@ -231,7 +244,7 @@ const AddressForm = ({ address, onCancel, setAddresses }) => {
             )}
 
             <div className={styles.formBtnGroup}>
-              <Button
+              {showCancel && <Button
                 className={isSubmitting ? styles.submittingBtn : ""}
                 type="submit"
                 text="Cancel"
@@ -239,7 +252,7 @@ const AddressForm = ({ address, onCancel, setAddresses }) => {
                 borderRadius="square"
                 theme="light"
                 onClick={onCancel}
-              />
+              />}
               <Button
                 className={isSubmitting ? styles.submittingBtn : ""}
                 type="submit"

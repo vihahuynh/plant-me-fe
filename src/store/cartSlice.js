@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import cartService from "./../services/cart"
 
 const initCartState = {
@@ -20,6 +20,58 @@ const cartSlice = createSlice({
       state.id = id
       state.user = user
       state.quantity = quantity
+    },
+
+    addItem(state, action) {
+      const { item } = action.payload
+      const foundItem = current(state).items.find(
+        (i) => i.stock === item.stock
+      );
+      if (foundItem) {
+        const updateItem = {
+          ...item,
+          quantity: foundItem.quantity + item.quantity,
+        };
+        state.items = current(state).items.map((i) =>
+          i.stock === item.stock
+            ? updateItem
+            : i
+        );
+      } else {
+        state.quantity = current(state).quantity + 1;
+        state.items = current(state).items.concat(item);
+      }
+    },
+
+    removeItem(state, action) {
+      const { item } = action.payload
+      // const cartToUpdate = { ...cart }
+      const foundItem = current(state).items.find(
+        (i) => i.stock === item.stock
+      );
+      if (foundItem) {
+        state.quantity = current(state).quantity - 1;
+        state.items = current(state).items.filter(
+          (i) => i.stock !== item.stock
+        );
+      }
+    },
+
+    updateItem(state, action) {
+      const { item } = action.payload
+      const foundItem = current(state).items.find(
+        (i) => i.stock === item.stock
+      );
+      if (foundItem) {
+        state.items = current(state).items.map((i) => i.stock === item.stock
+          ? item
+          : i
+        );
+      }
+    },
+
+    toggleCheckoutAll(state, action) {
+      state.checkoutAllItems = action.payload.value
     },
 
     clear(state) {

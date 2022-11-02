@@ -80,26 +80,28 @@ const CartSummary = ({ title, onClick, disabled = false }) => {
   return (
     <div className={styles.summary}>
       <div className={styles.summaryTop}>
-        <div className={styles.delivery}>
-          <LinkButton
-            url="/cart/change-delivery-address"
-            text={address ? "Change" : "Add"}
-            size="small"
-            className={styles.change}
-          />
-          <h5>Delivery to</h5>
-          {address ? (
-            <>
-              <div className={styles.userInfo}>
-                <p>{address?.name}</p>
-                <p>{address?.phoneNumber}</p>
-              </div>
-              <p className={styles.address}>{fullAddress}</p>
-            </>
-          ) : (
-            <></>
-          )}
-        </div>
+        {!!authen?.user?.token &&
+          <div className={styles.delivery}>
+            <LinkButton
+              url="/cart/change-delivery-address"
+              text={address ? "Change" : "Add"}
+              size="small"
+              className={styles.change}
+            />
+            <h5>Delivery to</h5>
+            {address ? (
+              <>
+                <div className={styles.userInfo}>
+                  <p>{address?.name}</p>
+                  <p>{address?.phoneNumber}</p>
+                </div>
+                <p className={styles.address}>{fullAddress}</p>
+              </>
+            ) : (
+              <></>
+            )}
+          </div>
+        }
         <div className={styles.orderSummary}>
           <h5>Order Summary</h5>
           <div className={styles.subTotal}>

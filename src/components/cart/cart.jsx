@@ -9,7 +9,7 @@ import CheckBox from "../UI/inputs/checkBox";
 import Modal from "../UI/modal";
 import SignInForm from "../UI/signInForm";
 
-import { alertActions, authenticationActions } from "../../store";
+import { alertActions, authenticationActions, cartActions } from "../../store";
 import { updateItem, toggleCheckoutAll, clear } from "../../store/cartSlice";
 
 import { TbTrash } from "react-icons/tb/index";
@@ -43,8 +43,16 @@ const Cart = ({ isShowCheckBox = true }) => {
   };
 
   useEffect(() => {
+    const updateCartNoAuth = () => {
+      dispatch(cartActions.toggleCheckoutAll({ value: true }))
+    }
+
     const updateCart = async () => {
       try {
+        if (!authen?.user?.token) {
+          updateCartNoAuth()
+          return
+        }
         await dispatch(
           toggleCheckoutAll({ cart, value: true, token: authen?.user?.token })
         ).unwrap();
@@ -59,8 +67,41 @@ const Cart = ({ isShowCheckBox = true }) => {
     }
   }, [dispatch, cart, authen?.user?.token]);
 
+  const onSelectAllItemsNoAuth = () => {
+    const isCheckout = !cart.checkoutAllItems;
+    // const cartToUpdate = {
+    //   ...cart,
+    //   items: cart.items.map((i) => {
+    //     return {
+    //       ...i,
+    //       isCheckout: disabledItem.includes(i._id) ? false : isCheckout,
+    //     };
+    //   }),
+    //   checkoutAllItems: isCheckout,
+    // };
+
+    dispatch(cartActions.toggleCheckoutAll({ value: isCheckout }))
+
+    for (let item of cart.items) {
+      const cartItem = {
+        ...item,
+        netPrice: Math.round(
+          item.price - (item.price * item.salePercent) / 100
+        ),
+        isCheckout: disabledItem.includes(item._id) ? false : isCheckout,
+      };
+      dispatch(cartActions.updateItem({ item: cartItem }))
+    }
+  }
+
   const onSelectAllItems = async () => {
     try {
+      // check authen
+      if (!authen?.user?.token) {
+        onSelectAllItemsNoAuth()
+        return
+      }
+
       const isCheckout = !cart.checkoutAllItems;
       const cartToUpdate = {
         ...cart,
@@ -93,16 +134,21 @@ const Cart = ({ isShowCheckBox = true }) => {
       );
     } catch (err) {
       console.log(err);
-      if (err?.response?.data?.error === "token expired" || err?.response?.data?.error === "invalid token" || err?.message === "token expired") {
-        localStorage.removeItem("loggedUser");
-        dispatch(authenticationActions.logout());
-        setOpenSignInModal(true)
-      }
+      onSelectAllItemsNoAuth()
+      // if (err?.response?.data?.error === "token expired" || err?.response?.data?.error === "invalid token" || err?.message === "token expired") {
+      //   localStorage.removeItem("loggedUser");
+      //   dispatch(authenticationActions.logout());
+      //   setOpenSignInModal(true)
+      // }
     }
   };
 
   const onDeleteCheckedItems = async () => {
     try {
+      if (!authen?.user?.token) {
+        dispatch(cartActions.clear())
+        return
+      }
       await dispatch(clear({ cart, token: authen?.user?.token })).unwrap();
       setOpenModal(false);
     } catch (err) {

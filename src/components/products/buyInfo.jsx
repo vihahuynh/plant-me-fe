@@ -12,7 +12,7 @@ import Modal from "../UI/modal";
 import SignInForm from "../UI/signInForm";
 
 import { addItem } from "../../store/cartSlice";
-import { alertActions, authenticationActions } from "./../../store";
+import { alertActions, cartActions } from "./../../store";
 
 const getPrice = (price, size) => {
   switch (size) {
@@ -59,11 +59,63 @@ const BuyInfo = ({ product }) => {
     else setQuantity(availableQuantity);
   };
 
+  const onAddToCartNoAuth = () => {
+    if (!color || !size) {
+      dispatch(
+        alertActions.updateMessage({
+          message: "Please choose color and size!",
+          type: "warning",
+        })
+      );
+      delay = setTimeout(() => dispatch(alertActions.clear()), 3000);
+      return;
+    }
+    if (
+      quantity > availableQuantity ||
+      !availableColors.includes(color) ||
+      !availableSizes.includes(size)
+    ) {
+      const message = availableQuantity
+        ? `Only ${availableQuantity} products available!`
+        : "Out of stock";
+      dispatch(alertActions.updateMessage({ message, type: "warning" }));
+      delay = setTimeout(() => dispatch(alertActions.clear()), 3000);
+      return;
+    }
+    const cartItem = {
+      product: product.id,
+      title: product.title,
+      price: price,
+      salePercent: product.salePercent,
+      image:
+        product.images.find((img) => img.includes("eye")) ||
+        product.images[0],
+      discount: Math.round((price * product.salePercent) / 100),
+      color,
+      size,
+      quantity,
+      isCheckout: false,
+      stock: product.stocks.find((s) => s.color === color && s.size === size)
+        ?.id,
+    };
+    dispatch(cartActions.addItem({ item: cartItem }))
+    // await dispatch(
+    //   addItem({ cart, item: cartItem, token: authen?.user?.token })
+    // ).unwrap();
+    dispatch(
+      alertActions.updateMessage({
+        message: "Added to cart",
+        type: "info",
+      })
+    );
+    delay = setTimeout(() => dispatch(alertActions.clear()), 3000);
+  }
+
   const onAddToCart = async () => {
     try {
       clearTimeout(delay);
       if (!authen?.user?.token) {
-        setOpenModal(true);
+        onAddToCartNoAuth()
         return;
       }
       if (!color || !size) {
@@ -116,11 +168,12 @@ const BuyInfo = ({ product }) => {
       delay = setTimeout(() => dispatch(alertActions.clear()), 3000);
     } catch (err) {
       console.log(err);
-      if (err?.response?.data?.error === "token expired" || err?.response?.data?.error === "invalid token" || err?.message === "token expired") {
-        localStorage.removeItem("loggedUser");
-        dispatch(authenticationActions.logout());
-        setOpenModal(true)
-      }
+      onAddToCartNoAuth()
+      // if (err?.response?.data?.error === "token expired" || err?.response?.data?.error === "invalid token" || err?.message === "token expired") {
+      //   localStorage.removeItem("loggedUser");
+      //   dispatch(authenticationActions.logout());
+      //   setOpenModal(true)
+      // }
     }
   };
 

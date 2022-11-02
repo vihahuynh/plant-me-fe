@@ -9,7 +9,7 @@ import NavigationItem from "./navigationItem";
 
 import { Link, useHistory } from "react-router-dom";
 
-import { authenticationActions } from "../../../store";
+import { authenticationActions, cartActions } from "../../../store";
 
 import styles from "./navigation.module.scss";
 
@@ -22,6 +22,7 @@ const Navigation = () => {
   const logout = () => {
     localStorage.removeItem("loggedUser");
     dispatch(authenticationActions.logout());
+    dispatch(cartActions.clear())
     history.push("/");
   };
 
@@ -88,12 +89,12 @@ const Navigation = () => {
         </ul>
       </div>
       <div className={styles.subNav}>
+        <Link to="/cart" className={styles.cart}>
+          <BiCartAlt className={styles.icon} />
+          <span className={styles.quantity}>{cartQuantity}</span>
+        </Link>
         {authen.isLoggedIn ? (
           <>
-            <Link to="/cart" className={styles.cart}>
-              <BiCartAlt className={styles.icon} />
-              <span className={styles.quantity}>{cartQuantity}</span>
-            </Link>
             <div className={styles.userMenuBox}>
               <BiUserCircle className={styles.icon} />
               <ul className={styles.userMenu}>
