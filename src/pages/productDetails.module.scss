@@ -3,7 +3,7 @@
 .container {
   padding: 4rem 15rem;
   display: grid;
-  grid-template-columns: 1.2fr 1.2fr 1.5fr;
+  grid-template-columns: 1.1fr 1.3fr 1.5fr;
   row-gap: 3rem;
   column-gap: 2rem;
   // background-color: $color-primary-light;
@@ -86,15 +86,13 @@
       grid-column: 1 / -1;
     }
   }
-
 }
 
 @media only screen and (max-width: 56.25em) {
   .container {
-    padding: 3rem 5rem
+    padding: 3rem 5rem;
   }
 }
-
 
 @media only screen and (max-width: 50em) {
   .container {
