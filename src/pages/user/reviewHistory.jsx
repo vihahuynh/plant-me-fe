@@ -41,8 +41,8 @@ const ReviewHistory = () => {
   const settings = {
     className: "center",
     arrow: true,
-    slidesToShow: 3,
-    slidesToScroll: 3,
+    slidesToShow: products.length > 0 && products.length < 3 ? products.length : 3,
+    slidesToScroll: 1,
     speed: 500,
     nextArrow: <Arrow type="prev" />,
     prevArrow: <Arrow type="next" />,
