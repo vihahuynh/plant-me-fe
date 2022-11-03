@@ -118,13 +118,15 @@ const OrderDetailsItem = ({ order }) => {
         {order.price * order.quantity - order.discount}.000 &#x20ab;
       </div>
       <div className={styles.orderBtnGroup}>
-        <Button
-          text="Write review"
-          size="small"
-          borderRadius="square"
-          theme="light"
-          onClick={onOpenModal}
-        />
+        {!authen?.user?.token && (
+          <Button
+            text="Write review"
+            size="small"
+            borderRadius="square"
+            theme="light"
+            onClick={onOpenModal}
+          />
+        )}
         <Button
           text="Buy again"
           size="small"
