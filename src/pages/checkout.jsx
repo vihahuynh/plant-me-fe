@@ -16,10 +16,11 @@ import stockService from "../services/stock";
 import locationService from "../services/location";
 import addressService from "../services/address";
 import orderService from "../services/order";
+import guestOrderService from "../services/guestOrder";
 
 import _ from "lodash";
 import BankCard from "../components/UI/bankCard";
-import { alertActions } from "../store";
+import { alertActions, cartActions } from "../store";
 
 let delay
 
@@ -80,6 +81,65 @@ const Checkout = () => {
 
     if (address) getDeliveryCharges();
   }, [address, cart]);
+
+  const onCheckoutNoAuth = async () => {
+    try {
+      if (!address) {
+        clearTimeout(delay)
+        dispatch(alertActions.updateMessage({ type: "error", message: "Please provide the delivery address!" }))
+        delay = setTimeout(() => dispatch(alertActions.clear()), 4000)
+        return
+      }
+      const orderData = {
+        cart: items,
+        address: `${address.address}, ${address.ward.text}, ${address.district.text}, ${address.province.text}`,
+        phoneNumber: address.phoneNumber,
+        receiverName: address.name,
+        email: address.email,
+        paymentMethod,
+        status:
+          paymentMethod === "COD"
+            ? "Waiting for confirmation"
+            : "Waiting for payment",
+        progress: [
+          paymentMethod === "COD"
+            ? {
+              title: "Waiting for confirmation",
+              description: "Waiting for Plantme's confirmation",
+            }
+            : {
+              title: "Waiting for payment",
+            },
+        ],
+        deliveryMethod: "Giao hang nhanh",
+        deliveryCharges,
+        estimatedDeliveryDate: new Date(new Date().setDate(new Date().getDate() + 7)),
+        totalDiscount: _.sum(items.map((i) => i.discount * i.quantity)),
+        totalPayment:
+          _.sum(items.map((i) => i.price * i.quantity)) +
+          deliveryCharges -
+          _.sum(items.map((i) => i.discount * i.quantity)),
+      };
+
+      const returnedOrder = await guestOrderService.create(
+        orderData
+      );
+      dispatch(cartActions.clearCheckoutItems())
+
+      for (let item of items) {
+        const stock = await stockService.get(item.stock);
+        const stockToUpdate = {
+          ...stock.data,
+          quantity: stock.data?.quantity - item.quantity,
+          sold: stock.data?.sold + item.quantity,
+        };
+        await stockService.update(stockToUpdate.id, stockToUpdate);
+      }
+      history.push(`/orders/view/${returnedOrder.data.id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   const onCheckout = async () => {
     try {
@@ -156,9 +216,10 @@ const Checkout = () => {
                   <h5>Delivery address</h5>
                   {!!address?.address ?
                     <>
-                      <p>Name: {address?.name}</p>
-                      <p>Phone number: {address?.phoneNumber}</p>
-                      <p>Address: {address?.address}, {address?.ward?.text}, {address?.district?.text}, {address?.province?.text}</p>
+                      <p><span>Name:</span>{address?.name}</p>
+                      <p><span>Phone number:</span>{address?.phoneNumber}</p>
+                      <p><span>Email:</span>{address?.email}</p>
+                      <p><span>Address:</span>{address?.address}, {address?.ward?.text}, {address?.district?.text}, {address?.province?.text}</p>
                     </>
                     : <p>No address provide</p>
                   }
@@ -213,7 +274,7 @@ const Checkout = () => {
               </div>
             </div>
           </div>
-          <CartSummary title="ORDER" onClick={onCheckout} />
+          <CartSummary title="ORDER" onClick={authen?.user?.token ? onCheckout : onCheckoutNoAuth} />
         </div>
       ) : (
         <div className={styles.container}>

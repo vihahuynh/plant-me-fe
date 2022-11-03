@@ -6,6 +6,7 @@
   display: flex;
   align-items: flex-start;
   column-gap: 3rem;
+  min-height: 70vh;
 
   h5 {
     font-size: 1.6rem;
@@ -122,10 +123,12 @@
   .main {
     padding: 5rem;
   }
+
   .trackingInfo {
     flex-direction: column;
     row-gap: 1rem;
   }
+
   .itemListContainer,
   .orderTracking {
     width: 100%;

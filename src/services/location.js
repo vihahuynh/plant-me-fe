@@ -42,7 +42,7 @@ const getDeliveryCharge = (districtID, wardID, weight) => {
     headers: { Token: process.env.REACT_APP_GHN_TOKEN },
     params: {
       from_district_id: fromDistrictID,
-      service_id: 53321, // Standard
+      service_id: 53320, // Standard
       service_type_id: 2,
       to_district_id: districtID,
       to_ward_code: wardID,

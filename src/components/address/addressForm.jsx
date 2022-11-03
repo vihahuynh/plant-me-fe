@@ -61,14 +61,14 @@ const AddressForm = ({ address, showCancel = true, onCancel, setAddresses, setAd
       ...values,
       province: curProvince,
       district: curDistrict,
-      ward: curWard
+      ward: curWard,
     })
   }
 
   const onAddNewAddress = async (values) => {
     try {
       if (!authen?.user?.token) {
-        onAddNewAddressNoAuth()
+        onAddNewAddressNoAuth(values)
         return
       }
       const address = {
@@ -119,6 +119,7 @@ const AddressForm = ({ address, showCancel = true, onCancel, setAddresses, setAd
           name: address?.name || "",
           phoneNumber: address?.phoneNumber || "",
           address: address?.address || "",
+          email: ""
         }}
         validate={(values) => {
           const errors = {};
@@ -140,6 +141,15 @@ const AddressForm = ({ address, showCancel = true, onCancel, setAddresses, setAd
 
           if (!values.address) {
             errors.address = "Address is required";
+          }
+          if (!authen?.user?.token) {
+            if (!values.email) {
+              errors.email = "Email address is required";
+            } else if (
+              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+            ) {
+              errors.email = "Invalid email address";
+            }
           }
           return errors;
         }}
@@ -191,6 +201,24 @@ const AddressForm = ({ address, showCancel = true, onCancel, setAddresses, setAd
                   errors.phoneNumber}
               </p>
             </div>
+            {!authen?.user?.token &&
+              <div className={styles.inputContainer}>
+                <input
+                  id="email"
+                  type="text"
+                  name="email"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.email}
+                  placeholder="Email"
+                />
+                <p className={styles.errors}>
+                  {errors.email &&
+                    touched.email &&
+                    errors.email}
+                </p>
+              </div>
+            }
 
             <div className={`${styles.inputContainer} ${styles.location}`}>
               <SelectInput

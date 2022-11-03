@@ -74,6 +74,11 @@ const cartSlice = createSlice({
       state.checkoutAllItems = action.payload.value
     },
 
+    clearCheckoutItems(state) {
+      state.items = current(state).items.filter((i) => !i.isCheckout);
+      state.quantity = current(state).items.length;
+    },
+
     clear(state) {
       state.items = []
       state.quantity = 0

@@ -18,10 +18,17 @@ import Checkout from "./pages/checkout";
 import SendPasswordResetLink from "./pages/sendPasswordResetLink";
 import PasswordReset from "./pages/passwordReset";
 
+// guest
+import GuestOrder from "./pages/guestOrder";
+import GuestOrderTracking from "./pages/guestOrderTracking";
+
 // admin page
 import NewProduct from "./pages/admin/newProduct";
 import AdminProducts from "./pages/admin/products";
 import UpdateProduct from "./pages/admin/updateProduct";
+import AdminOrderHistory from "./pages/admin/adminOrderHistory";
+import AdminOrderDetails from "./pages/admin/adminOrderDetails";
+
 // user page
 import OrderHistory from "./pages/user/orderHistory";
 import OrderDetails from "./pages/user/orderDetails";
@@ -30,12 +37,10 @@ import FavoriteProducts from "./pages/user/favoriteProducts";
 import ReviewHistory from "./pages/user/reviewHistory";
 import Account from "./pages/user/account";
 import DeliveryAddress from "./pages/user/deliveryAddress";
+import OrderTracking from "./pages/user/orderTracking";
 
 import { authenticationActions, cartActions } from "./store";
 import cartService from "./services/cart";
-import AdminOrderHistory from "./pages/admin/adminOrderHistory";
-import AdminOrderDetails from "./pages/admin/adminOrderDetails";
-import OrderTracking from "./pages/user/orderTracking";
 
 const App = () => {
   const authen = useSelector((state) => state.authentication);
@@ -121,6 +126,12 @@ const App = () => {
         </Route>
         <Route path="/user/me">
           <Account />
+        </Route>
+        <Route path="/orders/view/:orderId">
+          <GuestOrder />
+        </Route>
+        <Route path="/orders/tracking/:orderId">
+          <GuestOrderTracking />
         </Route>
         <Route path="/admin/products/new">
           <NewProduct />
