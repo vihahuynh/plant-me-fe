@@ -103,7 +103,11 @@ const CartSummary = ({ title, onClick, disabled = false }) => {
           </div>
         }
         <div className={styles.orderSummary}>
-          <h5>Order Summary</h5>
+          <h5>
+            Order Summary
+            {!cart.items.some(item => item.isCheckout) && <p className={styles.infoText}>(No products selected)</p>}
+          </h5>
+          
           <div className={styles.subTotal}>
             <p className={styles.summarySubTitle}>Subtotal</p>
             {subTotal ? <p>{subTotal}.000 &#x20ab;</p> : <p>0 &#x20ab;</p>}

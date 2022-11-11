@@ -9,17 +9,19 @@ import Button from "./../../components/UI/buttons/button";
 import Wrapper from "./../../components/layout/wrapper";
 import Modal from "./../../components/UI/modal";
 import InfoBox from "../../components/UI/infoBox";
+import LinkButton from "../../components/UI/buttons/linkbutton";
+import Loading from "../../components/UI/loading";
 
 import orderService from "../../services/order";
 
 import styles from "./orderDetails.module.scss";
 import stockService from "../../services/stock";
-import LinkButton from "../../components/UI/buttons/linkbutton";
 
 const OrderDetails = () => {
   const authen = useSelector((state) => state.authentication);
   const [order, setOrder] = useState(null);
   const [isOpenCancelModal, setIsOpenCancelModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(true)
   const { orderId } = useParams();
 
   const onOpenCancelModal = () => setIsOpenCancelModal(true);
@@ -58,18 +60,28 @@ const OrderDetails = () => {
         setOrder(orderData.data);
       } catch (err) {
         console.log(err);
+      }finally {
+        setTimeout(() => setIsLoading(false), 0)
       }
     };
     fetchData();
   }, [orderId, authen]);
 
+  if (isLoading) {
+    return <Wrapper>
+      <Loading/>
+    </Wrapper>
+  }
+
   if (!authen?.user?.id || order?.user !== authen?.user?.id)
-    return <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
+  return <Wrapper>
+     <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />
+  </Wrapper>;
 
   if (!order)
-    return (
+    return <Wrapper>
       <InfoBox text="No order found" btnText="Back to home page" url="/" />
-    );
+    </Wrapper>
 
   return (
     <Wrapper>

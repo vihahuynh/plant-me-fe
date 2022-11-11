@@ -10,6 +10,7 @@ import SortDrawer from "./../../components/UI/drawers/sortDrawer";
 import UserLeftMenu from "../../components/layout/userLetfMenu/userLeftMenu";
 import Pagination from "../../components/UI/pagination";
 import InfoBox from "../../components/UI/infoBox";
+import Loading from "../../components/UI/loading";
 
 import orderService from "../../services/order";
 import { ordersFilterOptions, ordersSortOptions } from "../../data";
@@ -20,6 +21,7 @@ const OrderHistory = () => {
   const [page, setPage] = useState(1);
   const [filterOrders, setFilterOrders] = useState([]);
   const [orders, setOrders] = useState([]);
+  const [isLoading, setIsLoading] = useState(true)
 
   const authen = useSelector((state) => state.authentication);
   const history = useHistory();
@@ -56,6 +58,8 @@ const OrderHistory = () => {
         setOrders(ordersData.data);
       } catch (err) {
         console.log(err);
+      }finally {
+        setTimeout(() => setIsLoading(false), 300)
       }
     };
     fetchData();
@@ -67,6 +71,11 @@ const OrderHistory = () => {
         <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
       </Wrapper>
     );
+
+    if (isLoading) 
+    return <Wrapper>
+      <Loading/>
+    </Wrapper>
 
   return (
     <Wrapper>

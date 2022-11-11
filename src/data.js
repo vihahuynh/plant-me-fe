@@ -589,24 +589,28 @@ export const ordersFilterOptions = [
         text: "Waiting for payment",
         query: "status=Waiting for payment",
       },
-
       {
         id: 2,
+        text: "Waiting for confirmation",
+        query: "status=Waiting for confirmation"
+      },
+      {
+        id: 3,
         text: "Packed",
         query: "status=Packed",
       },
       {
-        id: 3,
+        id: 4,
         text: "In transit",
         query: "status=In Transit",
       },
       {
-        id: 4,
+        id: 5,
         text: "Delivered",
         query: "status=Delivered",
       },
       {
-        id: 5,
+        id: 6,
         text: "Cancelled",
         query: "status=Cancelled",
       },

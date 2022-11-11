@@ -7,31 +7,46 @@ import Wrapper from "../../components/layout/wrapper";
 import OrderProgressBar from "./../../components/UI/orderProgressBar";
 import UserLeftMenu from "./../../components/layout/userLetfMenu/userLeftMenu";
 import InfoBox from "../../components/UI/infoBox";
+import LinkButton from "../../components/UI/buttons/linkbutton";
+import Loading from "../../components/UI/loading";
+
 
 import orderService from "./../../services/order";
 
 import styles from "./orderTracking.module.scss";
-import LinkButton from "../../components/UI/buttons/linkbutton";
-
 const OrderTracking = () => {
   const { orderId } = useParams();
   const authen = useSelector((state) => state.authentication);
   const [order, setOrder] = useState();
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
+     try {
       const orderData = await orderService.get(orderId, authen?.user?.token);
       setOrder(orderData.data);
+     }catch(err) {
+      console.log(err)
+     }finally {
+      setTimeout(() => setIsLoading(false), 0)
+     }
     };
     fetchData();
   }, [orderId, authen?.user?.token]);
 
-  if (!order)
-    return (
-      <InfoBox text="No order found" btnText="Back to home page" url="/" />
-    );
+if (isLoading) 
+  return <Wrapper>
+    <Loading></Loading>
+  </Wrapper>
+ 
   if (order?.user !== authen?.user?.id)
-    return <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
+    return <Wrapper>
+      <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />
+    </Wrapper>
+    if (!order)
+    return <Wrapper>
+       <InfoBox text="No order found" btnText="Back to home page" url="/" />
+    </Wrapper>
 
   return (
     <Wrapper>

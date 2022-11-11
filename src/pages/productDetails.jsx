@@ -9,12 +9,15 @@ import BuyInfo from "../components/products/buyInfo";
 import Reviews from "../components/reviews/reviews";
 import ProductInfo from "../components/products/productInfo";
 import Features from "../components/features/features";
+import Loading from "../components/UI/loading";
+import InfoBox from "../components/UI/infoBox";
 
 import productService from "../services/product";
 
 const ProductDetails = () => {
   const params = useParams();
   const { id } = params;
+  const [isLoading, setIsLoading] = useState(true)
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
@@ -24,14 +27,24 @@ const ProductDetails = () => {
         setProduct(returnProduct?.data);
       } catch (err) {
         console.log(err);
+      }finally{
+        setTimeout(() => {setIsLoading(false)}, 300)
       }
     };
     fetchProduct();
   }, [id]);
 
+ if (isLoading) 
+  return <Wrapper>
+    <Loading/>
+  </Wrapper>
+
   if (!product) {
-    return <div>Product not found</div>;
+    return <Wrapper>
+      <InfoBox text="No item found" btnText="Back to shopping" url="/shop"/>
+    </Wrapper>
   }
+
   return (
     <Wrapper>
       <div className={styles.container}>

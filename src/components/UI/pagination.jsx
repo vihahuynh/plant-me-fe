@@ -89,6 +89,9 @@ const Pagination = ({
 
   const pages = showPages();
 
+  if (totalPages <= 1) {
+    return <></>
+  } 
   return (
     <div className={styles.container}>
       <div className={styles.pagesContainer}>

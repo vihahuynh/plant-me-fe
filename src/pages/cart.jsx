@@ -150,7 +150,7 @@ const CartPage = () => {
           <CartSummary
             title="CHECKOUT"
             onClick={onCheckout}
-            disabled={isLoading}
+            disabled={isLoading || !cart.items.some(item => item.isCheckout)}
           />
         </div>
       ) : (

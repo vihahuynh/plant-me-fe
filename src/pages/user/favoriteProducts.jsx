@@ -5,13 +5,15 @@ import productService from "../../services/product";
 import Products from "./../../components/products/products";
 import Wrapper from "../../components/layout/wrapper";
 import InfoBox from "../../components/UI/infoBox";
+import UserLeftMenu from "../../components/layout/userLetfMenu/userLeftMenu";
+import Loading from "../../components/UI/loading";
 
 import styles from "./favoriteProducts.module.scss";
-import UserLeftMenu from "../../components/layout/userLetfMenu/userLeftMenu";
 
 const FavoriteProducts = () => {
   const authen = useSelector((state) => state.authentication);
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,10 +28,17 @@ const FavoriteProducts = () => {
         setProducts(productsData.filter((p) => !!p).map((p) => p.data));
       } catch (err) {
         console.log(err);
+      }finally {
+        setTimeout(() => setIsLoading(false), 0)
       }
     };
     fetchData();
   }, [authen?.user?.likedProducts]);
+
+  if (isLoading) 
+    return <Wrapper>
+      <Loading/>
+    </Wrapper>
 
   if (!authen?.user?.token)
     return (

@@ -79,6 +79,13 @@
   }
 }
 
+.infoText {
+  color: orange;
+  margin-bottom: 1rem;
+  font-size: $default-font-size;
+  font-weight: 400;
+}
+
 @media only screen and (max-width: 75em) {
   .summary {
     width: 26rem;

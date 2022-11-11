@@ -12,6 +12,7 @@ import Arrow from "./../../components/UI/arrow";
 import ProductToReview from "./../../components/reviews/productToReview";
 import Pagination from "../../components/UI/pagination";
 import InfoBox from "../../components/UI/infoBox";
+import Loading from "../../components/UI/loading";
 
 import reviewService from "../../services/review";
 import orderService from "../../services/order";
@@ -29,6 +30,7 @@ const ReviewHistory = () => {
   const [filterReviews, setFilterReviews] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true)
 
   const authen = useSelector((state) => state.authentication);
   const history = useHistory();
@@ -75,6 +77,8 @@ const ReviewHistory = () => {
         setAllReviews(reviewsData.data);
       } catch (err) {
         console.log(err);
+      }finally {
+        setTimeout(() => setIsLoading(false), 0)
       }
     };
     fetchData();
@@ -146,16 +150,17 @@ const ReviewHistory = () => {
     fetchData();
   }, [authen?.user, allReviews, reviews]);
 
+  if (isLoading) 
+    return <Wrapper>
+      <Loading/>
+    </Wrapper>  
+
   if (!authen.user?.id)
     return (
       <Wrapper>
         <InfoBox text="Permission denied" btnText="Sign In" url="/signin" />;
       </Wrapper>
     );
-  // if (!filterReviews)
-  //   return (
-  //     <InfoBox text="No review found" btnText="Back to home page" url="/" />
-  //   );
 
   return (
     <Wrapper>

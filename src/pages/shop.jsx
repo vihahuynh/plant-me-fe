@@ -4,7 +4,6 @@ import Products from "../components/products/products";
 import Pagination from "../components/UI/pagination";
 import SortDrawer from "../components/UI/drawers/sortDrawer";
 import FilterDrawer from "../components/UI/drawers/filterDrawer";
-import InfoBox from "../components/UI/infoBox";
 
 import productService from "../services/product";
 
@@ -12,8 +11,10 @@ import { plantsFilterOptions, plantsSortOptions } from "../data";
 
 import styles from "./shop.module.scss";
 import { useHistory, withRouter } from "react-router-dom";
+import Loading from "../components/UI/loading";
 
 const Shop = () => {
+  const [isLoading, setIsLoading] = useState(true)
   const [products, setProducts] = useState([]);
   const [filterProducts, setFilterProducts] = useState([]);
   const [page, setPage] = useState(1);
@@ -45,10 +46,18 @@ const Shop = () => {
         }
       } catch (err) {
         console.log(err);
+      }finally {
+        setTimeout(() => setIsLoading(false), 100)
       }
     };
     fetchData();
   }, [queries]);
+
+  if (isLoading) {
+    return <Wrapper>
+      <Loading/>
+    </Wrapper>
+  }
 
   return (
     <Wrapper>
@@ -61,15 +70,7 @@ const Shop = () => {
         </div>
       </div>
       <div className={styles.container}>
-        {products.length ? (
-          <Products products={products} />
-        ) : (
-          <InfoBox
-            text="No product found"
-            btnText="Remove all filters"
-            url="/shop"
-          />
-        )}
+        <Products products={products} />
         <Pagination
           page={page}
           setPage={setPage}
