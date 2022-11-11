@@ -102,12 +102,11 @@
       flex-direction: row;
     }
 
-    .summaryTop>* {
-      width: 50%;
+    .summaryTop > * {
+      width: 100%;
     }
   }
 }
-
 
 @media only screen and (max-width: 31.25em) {
   .summary {
@@ -115,8 +114,8 @@
       flex-direction: column;
     }
 
-    .summaryTop>* {
-      width: 100%;
-    }
+    // .summaryTop > * {
+    //   width: 100%;
+    // }
   }
 }

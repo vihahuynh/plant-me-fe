@@ -2,7 +2,7 @@
 
 .container {
   position: absolute;
-  top: -10vh;
+  top: -8rem;
 
   img {
     width: 100vw;
@@ -50,7 +50,7 @@
       color: $color-grey;
       font-family: "Poppins", sans-serif;
       font-size: $default-font-size;
-      transition: all .3s;
+      transition: all 0.3s;
 
       &:active,
       &:hover {
@@ -167,6 +167,12 @@
 
   .infoBox {
     width: 60%;
+  }
+}
+
+@media only screen and (max-width: 56.25em) {
+  .container {
+    top: -6rem;
   }
 }
 
