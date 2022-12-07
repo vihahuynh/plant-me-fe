@@ -1,0 +1,25 @@
+@import "./../variable.scss";
+
+// html {
+
+// }
+
+.container {
+  background-color: $color-primary-light;
+  display: flex;
+  margin: 0 10rem 10rem 10rem;
+  padding: 10rem;
+  align-items: center;
+  justify-content: center;
+  column-gap: 4rem;
+}
+
+.logo {
+  height: 35vh;
+}
+
+.message {
+  font-size: 6rem;
+  color: $color-primary;
+  text-transform: uppercase;
+}

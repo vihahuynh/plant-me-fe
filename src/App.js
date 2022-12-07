@@ -17,6 +17,7 @@ import ChangeDeliveryAddress from "./pages/changeDeliveryAddress";
 import Checkout from "./pages/checkout";
 import SendPasswordResetLink from "./pages/sendPasswordResetLink";
 import PasswordReset from "./pages/passwordReset";
+import NotFoundPage from "./pages/notFound";
 
 // guest
 import GuestOrder from "./pages/guestOrder";
@@ -153,6 +154,9 @@ const App = () => {
         </Route>
         <Route path="/password-reset/:userId/:token">
           <PasswordReset />
+        </Route>
+        <Route path="*">
+          <NotFoundPage />
         </Route>
       </Switch>
     </Router>
